@@ -1,0 +1,28 @@
+{
+  "name": "my-next-blog",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/css": "^11.10.6",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@notionhq/client": "^2.2.4",
+    "dotenv": "^16.0.3",
+    "eslint": "8.38.0",
+    "eslint-config-next": "13.3.0",
+    "fs": "^0.0.1-security",
+    "next": "13.3.0",
+    "notion-to-md": "^2.5.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-lottie-player": "^1.5.4",
+    "react-transition-group": "^4.4.5",
+    "sass": "^1.62.0"
+  }
+}
