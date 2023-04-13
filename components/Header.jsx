@@ -12,7 +12,7 @@ const Header = () => {
     setIsCSR(true);
   }, []);
 
-  const [themeMode, setThemeMode] = useState(window.localStorage.getItem("theme") ?? "dark");
+  const [themeMode, setThemeMode] = useState(window.localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
     document.body.dataset.theme = themeMode;
@@ -76,7 +76,7 @@ const Header = () => {
 
 const Base = styled.header`
   position: sticky;
-  padding: 10px 2rem;
+  padding: 1rem 2rem;
   top: 0;
   left: 0;
   right: 0;

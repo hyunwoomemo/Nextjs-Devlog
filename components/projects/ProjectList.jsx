@@ -31,9 +31,10 @@ const ProjectList = ({ data }) => {
         const tags = project.properties.Tags.multi_select;
         const start = project.properties.WorkPeriod?.date?.start;
         const end = project.properties.WorkPeriod?.date?.end;
+        const id = project.id;
 
         return (
-          <Project key={project.id}>
+          <Project href={`/projects/${id}`} key={project.id}>
             <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} />
             <Wrapper>
               <Title>{title}</Title>
@@ -66,7 +67,7 @@ const Base = styled.div`
   }
 `;
 
-const Project = styled.div`
+const Project = styled(Link)`
   display: flex;
   flex-direction: column;
   width: 100%;
