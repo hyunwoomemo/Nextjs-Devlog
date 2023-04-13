@@ -68,7 +68,7 @@ const Header = () => {
       <Modal isOpen={isOpen} onClose={handleClose}>
         <ModalBody>
           <Link href="/">홈</Link>
-          <Link href="">블로그</Link>
+          <Link href="/blog">블로그</Link>
           <Link href="/projects">프로젝트</Link>
           <Link href="">about</Link>
         </ModalBody>
