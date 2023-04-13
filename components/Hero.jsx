@@ -8,7 +8,7 @@ const Hero = () => {
       <Wrapper>
         <Text>
           <H1>안녕하세요, 이현우입니다.</H1>
-          <H2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, reiciendis?</H2>
+          <H2>좀 더 나은 개발자가 되기 위해서 항상 노력하고 있습니다</H2>
           <MoreBtn>더 보러가기</MoreBtn>
         </Text>
         <Lottie>
@@ -21,7 +21,6 @@ const Hero = () => {
 
 const Base = styled.div`
   margin-top: 5rem;
-  min-height: 600px;
   height: 100%;
   display: flex;
 
@@ -67,13 +66,15 @@ const H1 = styled.h1`
 `;
 const H2 = styled.h2`
   color: slategray;
+  line-height: 20px;
+  word-break: keep-all;
   @media (max-width: 768px) {
     text-align: center;
   }
 
   @media (max-width: 768px) {
     width: 60%;
-    font-size: 16px;
+    font-size: 14px;
   }
 `;
 

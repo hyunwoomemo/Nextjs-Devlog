@@ -1,20 +1,28 @@
 import { css } from "@emotion/css";
 import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "./Modal";
 import Link from "next/link";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [themeMode, setThemeMode] = useState("dark");
 
-  const handleTheme = () => {
-    setThemeMode(themeMode === "dark" ? "light" : "dark");
-  };
+  const [isCSR, setIsCSR] = useState(false);
+  useEffect(() => {
+    setIsCSR(true);
+  }, []);
+
+  const [themeMode, setThemeMode] = useState(window.localStorage.getItem("theme") ?? "dark");
 
   useEffect(() => {
     document.body.dataset.theme = themeMode;
+    window.localStorage.setItem("theme", themeMode);
   }, [themeMode]);
+
+  const handleTheme = () => {
+    window.localStorage.setItem("theme", themeMode === "dark" ? "light" : "dark");
+    setThemeMode(themeMode === "dark" ? "light" : "dark");
+  };
 
   const handleClose = () => {
     setIsOpen(false);
@@ -68,7 +76,7 @@ const Header = () => {
 
 const Base = styled.header`
   position: sticky;
-  padding: 2rem;
+  padding: 10px 2rem;
   top: 0;
   left: 0;
   right: 0;

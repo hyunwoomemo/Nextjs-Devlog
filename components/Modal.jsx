@@ -23,6 +23,7 @@ const Dim = styled.div`
   bottom: 0;
   left: 0;
   background-color: var(--dim-background);
+  backdrop-filter: blur(2px);
 `;
 
 const Container = styled.div`

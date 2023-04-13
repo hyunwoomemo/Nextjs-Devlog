@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import styled from "@emotion/styled";
 import Footer from "./Footer";
