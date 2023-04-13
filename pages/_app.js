@@ -47,7 +47,7 @@ export default function App({ Component, pageProps }) {
 }
 
 const Loading = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 999;
   width: 100px;
   height: 100px;
