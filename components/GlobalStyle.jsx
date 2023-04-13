@@ -18,7 +18,7 @@ const defaultStyle = css`
     body {
       --text-color: #000;
       --main-background: #fff;
-      --footer-background: #b4bec8;
+      --footer-background: #c7c7c7;
       --dim-background: rgba(0, 0, 0, 0.5);
       --project-item-background: #ececec;
       --tag-background: #ddddd1;

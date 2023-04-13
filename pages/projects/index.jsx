@@ -1,11 +1,9 @@
 import Layout from "@/components/Layout";
 import ProjectList from "@/components/projects/ProjectList";
-import { TOKEN, DATABASE_ID } from "@/config";
+import { TOKEN, PROJECT_DATABASE_ID } from "@/config";
 import styled from "@emotion/styled";
 
 const index = ({ projects }) => {
-  console.log(TOKEN);
-  console.log(projects);
   return (
     <Layout>
       <Title>진행한 프로젝트</Title>
@@ -40,7 +38,7 @@ export async function getServerSideProps() {
     }),
   };
 
-  const res = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, options);
+  const res = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
 
   const projects = await res.json();
 
@@ -49,8 +47,6 @@ export async function getServerSideProps() {
   console.log(`projectNames : ${projectNames}`);
 
   return {
-    props: { projects }, // will be passed to the page component as props
-    // getStaticProps() 메소드를 사용한다면 revalidate 로 데이터 변경시 갱신가능!
-    // revalidate: 1 // 데이터 변경이 있으면 갱신 1초 마다
+    props: { projects },
   };
 }

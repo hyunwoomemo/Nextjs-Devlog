@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "./Header";
 import styled from "@emotion/styled";
 import Footer from "./Footer";
+import LoadingContext from "@/context/LoadingContext";
 
 const Layout = ({ children }) => {
+  const { loading } = useContext(LoadingContext);
   return (
-    <Base>
+    <Base loading={loading}>
       <Header />
       <Children>{children}</Children>
       <Footer />
@@ -18,6 +20,8 @@ const Base = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  opacity: ${({ loading }) => (loading ? "0.5" : "1")};
 `;
 
 const Children = styled.div`

@@ -1,4 +1,3 @@
-export const DATABASE_ID = process.env.NEXT_PUBLIC_NOTION_DB_ID
+export const PROJECT_DATABASE_ID = process.env.NEXT_PUBLIC_NOTION_PROJECT_DB_ID
+export const POST_DATABASE_ID = process.env.NEXT_PUBLIC_NOTION_BLOG_POST_DB_ID
 export const TOKEN = process.env.NEXT_PUBLIC_NOTION_TOKEN
-
-console.log(TOKEN, DATABASE_ID);

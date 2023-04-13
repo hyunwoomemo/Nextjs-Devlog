@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import React, { useContext, useEffect, useState } from "react";
 import Modal from "./Modal";
 import Link from "next/link";
+import ThemeContext from "@/context/ThemeContext";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,7 @@ const Header = () => {
     setIsCSR(true);
   }, []);
 
-  const [themeMode, setThemeMode] = useState(typeof window === "object" ? window.localStorage.getItem("theme") : "dark");
+  const { themeMode, setThemeMode } = useContext(ThemeContext);
 
   useEffect(() => {
     if (typeof window === "object") {
@@ -35,7 +36,7 @@ const Header = () => {
         <Title>Hyunwoomemo</Title>
         <LinkWrapper>
           <Link href="/">홈</Link>
-          <Link href="">블로그</Link>
+          <Link href="/blog">블로그</Link>
           <Link href="/projects">프로젝트</Link>
           <Link href="">about</Link>
         </LinkWrapper>
@@ -49,7 +50,7 @@ const Header = () => {
           </svg>
         </Hambuger>
         <ThemeToggleBtn dark={themeMode === "dark"} onClick={handleTheme}>
-          {themeMode === "dark" ? (
+          {(typeof window === "object" ? window.localStorage.getItem("theme") : themeMode) === "dark" ? (
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
               <path
                 fillRule="evenodd"
