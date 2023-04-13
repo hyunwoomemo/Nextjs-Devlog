@@ -33,7 +33,7 @@ const Header = () => {
   return (
     <Base>
       <Wrapper>
-        <Title>Hyunwoomemo</Title>
+        <Title href="/">Hyunwoomemo</Title>
         <LinkWrapper>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
@@ -98,7 +98,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Title = styled.h1`
+const Title = styled(Link)`
   margin-right: auto;
   font-size: 30px;
 

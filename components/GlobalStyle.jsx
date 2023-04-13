@@ -22,6 +22,9 @@ const defaultStyle = css`
       --dim-background: rgba(0, 0, 0, 0.5);
       --project-item-background: #ececec;
       --tag-background: #ddddd1;
+      --code-bgc: #ececec;
+      --code-text: tomato;
+      --blockquote-bgc: #dddddd;
     }
     body[data-theme="dark"] {
       --text-color: #ffffff;
@@ -30,6 +33,9 @@ const defaultStyle = css`
       --dim-background: rgba(255, 255, 255, 0.2);
       --project-item-background: #272626;
       --tag-background: #585853;
+      --code-bgc: #2b2b2b;
+      --code-text: tomato;
+      --blockquote-bgc: #1a1b17;
     }
   }
 

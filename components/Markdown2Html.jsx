@@ -6,6 +6,8 @@ const Markdown2Html = ({ html }) => {
 };
 
 const Base = styled.div`
+  padding: 2rem;
+
   .code-lang-tag {
     position: absolute;
     top: 1rem;
@@ -23,9 +25,6 @@ const Base = styled.div`
     width: 30px;
     height: 30px;
     cursor: pointer;
-    /* background-image: url("https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1580049395/noticon/mpvpeudrt9udql1rtjav.jpg");
-    background-position: center center;
-    background-size: cover; */
 
     &:after {
       content: "Copy";
@@ -41,11 +40,17 @@ const Base = styled.div`
     }
   }
 
+  p > code {
+    padding: 3px 5px;
+    background-color: var(--code-bgc);
+    color: var(--code-text);
+    border-radius: 5px;
+  }
+
   pre {
     padding-top: 4rem;
   }
 
-  padding: 2rem;
   p {
     padding: 3px 0;
   }
@@ -61,7 +66,7 @@ const Base = styled.div`
   * + h1,
   * + h2,
   * + h3 {
-    margin-top: 80px;
+    margin-top: 50px;
   }
 
   hr + h1,
@@ -85,9 +90,10 @@ const Base = styled.div`
   // Adjust Quotation Element Style
   blockquote {
     margin: 30px 0;
-    padding: 0 15px;
     font-weight: 800;
-    border-left: 3px solid var(--basic-text-color);
+    background-color: var(--blockquote-bgc);
+    padding: 1rem;
+    border-radius: 5px;
   }
 
   // Adjust List Element Style
@@ -110,34 +116,9 @@ const Base = styled.div`
     text-decoration: underline;
   }
 
-  // Adjust Code Style
-  /* pre[class*="language-"] {
-    margin: 30px 0;
-    padding: 15px;
-    font-size: 15px;
-
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 3px;
-    }
-  } */
-
   strong {
     color: tomato;
   }
-
-  /* code[class*="language-"],
-  pre[class*="language-"] {
-    tab-size: 2;
-  }
-
-  code {
-    padding: 3px 5px;
-    background-color: var(--code-bgc);
-    border-radius: 5px;
-    font-weight: bold;
-    font-family: "LINESeedKR-Bd";
-  } */
 
   img {
     border-radius: 15px;
