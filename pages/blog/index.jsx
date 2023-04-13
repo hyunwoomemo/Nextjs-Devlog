@@ -26,7 +26,7 @@ export async function getServerSideProps() {
       sorts: [
         {
           property: "createdDate",
-          direction: "ascending",
+          direction: "descending",
         },
       ],
 

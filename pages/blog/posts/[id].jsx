@@ -38,7 +38,7 @@ export async function getStaticPaths() {
       sorts: [
         {
           property: "createdDate",
-          direction: "ascending",
+          direction: "descending",
         },
       ],
       page_size: 100,
@@ -89,7 +89,7 @@ export async function getStaticProps({ params }) {
       sorts: [
         {
           property: "createdDate",
-          direction: "ascending",
+          direction: "descending",
         },
       ],
 
