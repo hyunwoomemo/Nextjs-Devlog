@@ -90,6 +90,10 @@ const Wrapper = styled.div`
 const Title = styled.h1`
   margin-right: auto;
   font-size: 30px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const LinkWrapper = styled.ul`

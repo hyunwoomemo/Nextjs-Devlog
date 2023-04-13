@@ -60,11 +60,20 @@ const Text = styled.div`
 
 const H1 = styled.h1`
   font-size: 36px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 `;
 const H2 = styled.h2`
   color: slategray;
   @media (max-width: 768px) {
     text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    width: 60%;
+    font-size: 16px;
   }
 `;
 
@@ -77,6 +86,7 @@ const MoreBtn = styled.div`
 
   @media (max-width: 768px) {
     align-self: center;
+    font-size: 14px;
   }
 `;
 
