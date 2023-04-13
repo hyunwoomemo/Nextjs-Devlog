@@ -12,12 +12,14 @@ const Header = () => {
     setIsCSR(true);
   }, []);
 
-  const [themeMode, setThemeMode] = useState(window.localStorage.getItem("theme") || "dark");
+  const [themeMode, setThemeMode] = useState(typeof window === "object" ? window.localStorage.getItem("theme") : "dark");
 
   useEffect(() => {
-    document.body.dataset.theme = themeMode;
-    window.localStorage.setItem("theme", themeMode);
-  }, [themeMode]);
+    if (typeof window === "object") {
+      document.body.dataset.theme = themeMode;
+      window.localStorage.setItem("theme", themeMode);
+    }
+  }, [themeMode, isCSR]);
 
   const handleTheme = () => {
     window.localStorage.setItem("theme", themeMode === "dark" ? "light" : "dark");
