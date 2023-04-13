@@ -123,7 +123,12 @@ const Title = styled.h1`
   font-weight: bold;
 `;
 
-const Desc = styled.h2``;
+const Desc = styled.h2`
+  color: gray;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
 
 const Period = styled.span``;
 

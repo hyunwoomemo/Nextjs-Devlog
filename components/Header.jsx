@@ -83,7 +83,8 @@ const Base = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
+  z-index: 999;
 
   @media (min-width: 1280px) {
     max-width: 1280px;

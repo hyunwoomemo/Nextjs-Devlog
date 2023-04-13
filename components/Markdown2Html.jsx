@@ -2,32 +2,36 @@ import React from "react";
 import styled from "@emotion/styled";
 
 const Markdown2Html = ({ html }) => {
-  return <Base dangerouslySetInnerHTML={{ __html: html }}></Base>;
+  return (
+    <>
+      <Base dangerouslySetInnerHTML={{ __html: html }}></Base>
+    </>
+  );
 };
 
 const Base = styled.div`
   padding: 2rem;
+  line-height: 30px;
 
   .code-lang-tag {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: #9f9f9f;
+    top: 5px;
+    left: 10px;
+    font-size: 14px;
     color: #fff;
   }
 
   .code-copy-block {
     position: absolute;
-    top: 1rem;
+    top: 0;
     right: 1rem;
     width: 30px;
     height: 30px;
+
     cursor: pointer;
 
     &:after {
-      content: "Copy";
+      content: "copy";
       position: absolute;
       top: 50%;
       left: 50%;
@@ -49,10 +53,22 @@ const Base = styled.div`
 
   pre {
     padding-top: 4rem;
+    position: relative;
+
+    &:after {
+      position: absolute;
+      content: "";
+      height: 30px;
+      top: 0;
+
+      left: 0;
+      width: 100%;
+      background-color: #525252;
+    }
   }
 
   p {
-    padding: 3px 0;
+    padding: 10px 0;
   }
 
   // Adjust Heading Element Style
@@ -117,7 +133,6 @@ const Base = styled.div`
   }
 
   strong {
-    color: tomato;
   }
 
   img {
@@ -129,7 +144,6 @@ const Base = styled.div`
   details {
     border-radius: 10px;
     margin: 2rem 0;
-    /*     color: #fff; */
 
     &[open] {
       summary {
@@ -149,7 +163,6 @@ const Base = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    color: #fff;
 
     cursor: pointer;
     &::marker {

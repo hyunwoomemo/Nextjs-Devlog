@@ -25,10 +25,11 @@ export async function getServerSideProps() {
     body: JSON.stringify({
       sorts: [
         {
-          property: "createDate",
+          property: "createdDate",
           direction: "ascending",
         },
       ],
+
       page_size: 100,
     }),
   };

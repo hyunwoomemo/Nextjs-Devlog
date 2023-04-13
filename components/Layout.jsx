@@ -7,7 +7,7 @@ import LoadingContext from "@/context/LoadingContext";
 const Layout = ({ children }) => {
   const { loading } = useContext(LoadingContext);
   return (
-    <Base loading={loading}>
+    <Base loading={loading.toString()}>
       <Header />
       <Children>{children}</Children>
       <Footer />
@@ -21,7 +21,7 @@ const Base = styled.div`
   display: flex;
   flex-direction: column;
 
-  opacity: ${({ loading }) => (loading ? "0.5" : "1")};
+  opacity: ${({ loading }) => (loading === "true" ? "0.5" : "1")};
 `;
 
 const Children = styled.div`

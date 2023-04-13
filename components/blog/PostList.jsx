@@ -1,10 +1,12 @@
 import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 import styled from "@emotion/styled";
+import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const PostList = ({ data }) => {
+  console.log(data);
   return (
     <Base>
       {data.results?.map((post) => {
@@ -12,8 +14,7 @@ const PostList = ({ data }) => {
         const summary = post.properties.summary.rich_text[0]?.plain_text;
         const imgSrc = post.cover?.file?.url || post.cover?.external.url;
         const tags = post.properties.tags.multi_select;
-        const start = post.properties.WorkPeriod?.date?.start;
-        const end = post.properties.WorkPeriod?.date?.end;
+        const createdDate = post.created_time;
         const id = post.id;
 
         return (
@@ -38,6 +39,7 @@ const PostList = ({ data }) => {
                   );
                 })}
               </Tags>
+              <CreatedDate>{dayjs(new Date(createdDate)).format("YYYY-MM-DD HH:mm")}</CreatedDate>
             </Wrapper>
           </Post>
         );
@@ -67,19 +69,14 @@ const Post = styled(Link)`
   width: 100%;
   padding: 1rem;
   border-radius: 10px;
-  align-items: center;
   background-color: var(--post-item-background);
   transition: all 0.3s;
+
+  margin: 0 auto;
 
   &:hover {
     transform: scale(1.05);
   }
-`;
-
-const ImageItem = styled(Image)`
-  border-radius: 5px 5px 0 0;
-  object-fit: cover;
-  width: 100%;
 
   @media (max-width: 768px) {
     max-width: 400px;
@@ -92,20 +89,49 @@ const ImageItem = styled(Image)`
   }
 `;
 
+const ImageItem = styled(Image)`
+  border-radius: 5px 5px 0 0;
+  object-fit: cover;
+  width: 100%;
+`;
+
 const Wrapper = styled.div`
   padding: 2rem 0;
   display: flex;
   flex-direction: column;
-  align-self: flex-start;
   gap: 1rem;
+  width: 100%;
 `;
 
 const Title = styled.h1`
   font-size: 20px;
   font-weight: bold;
+  position: relative;
+  align-self: flex-start;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 5px;
+    background-color: greenyellow;
+    border-radius: 5px;
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s;
+  }
+
+  &:hover:after {
+    width: 100%;
+  }
 `;
 
-const Summary = styled.h2``;
+const Summary = styled.h2`
+  color: gray;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
 
 const Period = styled.span``;
 
@@ -117,6 +143,12 @@ const Tags = styled.ul`
     font-size: 12px;
     padding: 5px;
     border-radius: 5px;
+  }
+`;
+
+const CreatedDate = styled.p`
+  @media (max-width: 768px) {
+    font-size: 14px;
   }
 `;
 
