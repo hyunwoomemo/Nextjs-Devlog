@@ -54,6 +54,7 @@ const Base = styled.div`
   pre {
     padding-top: 4rem;
     position: relative;
+    white-space: pre-wrap;
 
     &:after {
       position: absolute;

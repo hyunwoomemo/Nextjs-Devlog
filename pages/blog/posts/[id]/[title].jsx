@@ -19,51 +19,20 @@ import markdownToc from "markdown-toc";
 import Link from "next/link";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings/lib";
+import Toc from "@/components/Toc";
 
 const PostItem = ({ html_text, posts, toc }) => {
   console.log(toc);
   return (
     <Layout>
       <PostHeader data={posts}></PostHeader>
-      <Toc>
-        <TocTitle>✍🏻 Table Of Contents</TocTitle>
-        <TocWrapper>
-          {toc.json.map((t) => {
-            return (
-              <Link href={`#${t.slug}`} key={t.i} style={{ paddingLeft: t.lvl === 1 ? 0 : t.lvl * 10 }}>
-                {t.content}
-              </Link>
-            );
-          })}
-        </TocWrapper>
-      </Toc>
+      <Toc toc={toc}></Toc>
       <Markdown2Html html={html_text} />
     </Layout>
   );
 };
 
 export default PostItem;
-
-const Toc = styled.div`
-  padding: 2rem;
-`;
-
-const TocTitle = styled.h1`
-  font-size: 20px;
-  padding: 1rem 2rem;
-  background-color: var(--toc-title-bgc);
-  border-radius: 5px 5px 0 0;
-`;
-
-const TocWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem 2rem;
-  background-color: var(--toc-bgc);
-  color: gray;
-  border-radius: 0 0 5px 5px;
-`;
 
 export async function getStaticPaths() {
   const options = {
