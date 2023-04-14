@@ -1,17 +1,29 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 
 const Toc = ({ toc }) => {
+  /* useEffect(() => {
+    // 서버에서는 window 객체가 존재하지 않으므로 클라이언트에서만 실행합니다.
+    if (typeof window !== "undefined") {
+      scroll.scrollTo({
+        smooth: true,
+        duration: 100,
+        offset: 500, // 헤더의 높이만큼 빼줍니다.
+      });
+    }
+  }, []); */
+
   return (
     <Base>
       <TocTitle>✍🏻 Table Of Contents</TocTitle>
       <TocWrapper>
         {toc.json.map((t) => {
           return (
-            <Link href={`#${t.slug}`} key={t.i} style={{ paddingLeft: t.lvl === 1 ? 0 : t.lvl * 10 }}>
+            <ScrollLink smooth={true} offset={-70} duration={500} to={`${t.slug}`} key={t.i} style={{ paddingLeft: t.lvl === 1 ? 0 : t.lvl * 10 }}>
               {t.content}
-            </Link>
+            </ScrollLink>
           );
         })}
       </TocWrapper>

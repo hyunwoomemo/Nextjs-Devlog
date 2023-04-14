@@ -189,10 +189,10 @@ const defaultStyle = css`
     }
   }
 
-  *,
+  /* *,
   html {
     scroll-behavior: smooth !important;
-  }
+  } */
 
   body {
     font-family: "TheJamsil5Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",

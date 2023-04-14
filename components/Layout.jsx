@@ -20,6 +20,7 @@ const Base = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  scroll-margin-top: 5rem;
 
   opacity: ${({ loading }) => (loading === "true" ? "0.5" : "1")};
 `;
