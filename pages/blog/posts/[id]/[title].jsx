@@ -26,7 +26,7 @@ const PostItem = ({ html_text, posts, toc }) => {
   return (
     <Layout>
       <PostHeader data={posts}></PostHeader>
-      <Toc toc={toc}></Toc>
+      {toc.json.length > 0 ? <Toc toc={toc}></Toc> : undefined}
       <Markdown2Html html={html_text} />
     </Layout>
   );

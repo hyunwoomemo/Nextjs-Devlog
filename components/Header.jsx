@@ -83,10 +83,11 @@ const Base = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  backdrop-filter: blur(5px);
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
+  background-color: var(--main-background);
+  z-index: 2;
 `;
 
 const Wrapper = styled.div`
