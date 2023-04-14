@@ -9,23 +9,61 @@ import { unified } from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
 import html from "rehype-stringify";
+import remark from "remark";
 
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import PostHeader from "@/components/blog/PostHeader";
+import { useRouter } from "next/router";
+import markdownToc from "markdown-toc";
+import Link from "next/link";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings/lib";
 
-const PostItem = ({ html_text, posts }) => {
-  console.log(html_text);
-  console.log(posts);
+const PostItem = ({ html_text, posts, toc }) => {
+  console.log(toc);
   return (
     <Layout>
       <PostHeader data={posts}></PostHeader>
+      <Toc>
+        <TocTitle>✍🏻 Table Of Contents</TocTitle>
+        <TocWrapper>
+          {toc.json.map((t) => {
+            return (
+              <Link href={`#${t.slug}`} key={t.i} style={{ paddingLeft: t.lvl === 1 ? 0 : t.lvl * 10 }}>
+                {t.content}
+              </Link>
+            );
+          })}
+        </TocWrapper>
+      </Toc>
       <Markdown2Html html={html_text} />
     </Layout>
   );
 };
 
 export default PostItem;
+
+const Toc = styled.div`
+  padding: 2rem;
+`;
+
+const TocTitle = styled.h1`
+  font-size: 20px;
+  padding: 1rem 2rem;
+  background-color: var(--toc-title-bgc);
+  border-radius: 5px 5px 0 0;
+`;
+
+const TocWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background-color: var(--toc-bgc);
+  color: gray;
+  border-radius: 0 0 5px 5px;
+`;
 
 export async function getStaticPaths() {
   const options = {
@@ -68,6 +106,13 @@ export async function getStaticProps({ params }) {
   const mdblocks = await n2m.pageToMarkdown(params.id);
   const mdString = n2m.toMarkdownString(mdblocks);
 
+  const toc = markdownToc(mdString, {
+    filter: (header, depth) => {
+      return depth === 2 || depth === 3;
+    },
+    maxdepth: 3,
+  });
+
   const html_text = unified()
     .use(markdown)
     .use(require("unified-remark-prismjs"), {
@@ -76,6 +121,8 @@ export async function getStaticProps({ params }) {
       plugins: ["autolinker", "show-invisibles", "data-uri-highlight", "diff-highlight", "inline-color", "line-numbers", "command-line", "treeview"],
     })
     .use(remark2rehype)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings, ["prepend"])
     .use(html)
     .processSync(mdString).value;
 
@@ -104,6 +151,6 @@ export async function getStaticProps({ params }) {
   const posts = await res.json();
 
   return {
-    props: { html_text, posts }, // will be passed to the page component as props
+    props: { html_text, posts, toc }, // will be passed to the page component as props
   };
 }
