@@ -107,6 +107,10 @@ const Title = styled.h1`
   position: relative;
   align-self: flex-start;
 
+  @media (min-width: 769px) {
+    line-height: 30px;
+  }
+
   &:after {
     content: "";
     position: absolute;
