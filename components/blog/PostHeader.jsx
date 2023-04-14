@@ -66,7 +66,7 @@ const ImageItem = styled(Image)`
   height: 100%;
   width: 100%;
   max-height: 300px;
-  opacity: 0.3;
+  opacity: 0.1;
   position: absolute;
 
   @media (min-width: 769px) {
