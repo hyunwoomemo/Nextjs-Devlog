@@ -151,6 +151,6 @@ export async function getStaticProps({ params }) {
   const posts = await res.json();
 
   return {
-    props: { html_text, posts, toc }, // will be passed to the page component as props
+    props: { html_text: JSON.stringify(html_text), posts, toc }, // will be passed to the page component as props
   };
 }
