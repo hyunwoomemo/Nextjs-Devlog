@@ -10,7 +10,7 @@ const PostHeader = ({ data }) => {
   const router = useRouter();
   const filterData = data.results.filter((v) => v.id === router.query.id);
 
-  const category = filterData[0].properties.category.select.name;
+  const category = filterData[0].properties.category.select?.name;
   const title = filterData[0].properties.이름.title[0].plain_text;
   const summary = filterData[0].properties.summary.rich_text[0]?.plain_text;
   const imgSrc = filterData[0].cover?.file?.url || filterData[0].cover?.external.url;
@@ -66,11 +66,12 @@ const ImageItem = styled(Image)`
   height: 100%;
   width: 100%;
   max-height: 300px;
-  opacity: 0.1;
+  opacity: 0.3;
   position: absolute;
 
   @media (min-width: 769px) {
     width: 30%;
+    opacity: 0.5;
   }
 `;
 

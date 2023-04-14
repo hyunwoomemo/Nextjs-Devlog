@@ -86,7 +86,6 @@ const Project = styled(Link)`
   padding: 1rem;
   border-radius: 10px;
   align-items: center;
-  background-color: var(--project-item-background);
   transition: all 0.3s;
 
   &:hover {

@@ -10,6 +10,7 @@ const PostList = ({ data }) => {
   return (
     <Base>
       {data.results?.map((post) => {
+        const category = post.properties.category.select?.name;
         const title = post.properties.이름.title[0].plain_text;
         const summary = post.properties.summary.rich_text[0]?.plain_text;
         const imgSrc = post.cover?.file?.url || post.cover?.external.url;
@@ -18,9 +19,10 @@ const PostList = ({ data }) => {
         const id = post.id;
 
         return (
-          <Post href={`/blog/posts/${id}`} key={post.id}>
+          <Post href={`/blog/posts/${id}/${title.toString().toLowerCase().replace(/%20/g, "-")}`} key={post.id}>
             <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} />
             <Wrapper>
+              <Category>{category}</Category>
               <Title>{title}</Title>
               <Summary>{summary}</Summary>
               <Tags>
@@ -99,6 +101,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+`;
+
+const Category = styled.p`
+  color: gray;
 `;
 
 const Title = styled.h1`

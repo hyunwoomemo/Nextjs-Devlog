@@ -79,6 +79,7 @@ const Base = styled.div`
   h3 {
     font-weight: 800;
     margin-bottom: 30px;
+    text-shadow: 1px 1px 1px #b2b2b2;
   }
 
   * + h1,
@@ -120,6 +121,10 @@ const Base = styled.div`
     margin-left: 20px;
     padding: 30px 0;
     list-style: unset;
+  }
+
+  li {
+    line-height: 30px;
   }
 
   // Adjust Horizontal Rule style

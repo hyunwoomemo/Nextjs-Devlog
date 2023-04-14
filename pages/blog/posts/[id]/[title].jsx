@@ -15,6 +15,8 @@ import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import PostHeader from "@/components/blog/PostHeader";
 
 const PostItem = ({ html_text, posts }) => {
+  console.log(html_text);
+  console.log(posts);
   return (
     <Layout>
       <PostHeader data={posts}></PostHeader>
@@ -49,7 +51,7 @@ export async function getStaticPaths() {
   const dbs = await res.json();
 
   const paths = dbs.results.map((db) => ({
-    params: { id: db.id },
+    params: { id: db.id, title: db.properties.이름.title[0].plain_text.toString().toLowerCase().replace(/%20/g, "-") },
   }));
 
   return { paths, fallback: false };
