@@ -84,13 +84,15 @@ const Base = styled.header`
   left: 0;
   right: 0;
   backdrop-filter: blur(5px);
-  z-index: 999;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
 
-  @media (min-width: 1280px) {
+  /* @media (min-width: 1280px) {
     max-width: 1280px;
     width: 100%;
     margin: 0 auto;
-  }
+  } */
 `;
 
 const Wrapper = styled.div`

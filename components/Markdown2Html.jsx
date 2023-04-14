@@ -11,7 +11,7 @@ const Markdown2Html = ({ html }) => {
 
 const Base = styled.div`
   padding: 2rem;
-  line-height: 30px;
+  color: var(--post-text);
 
   .code-lang-tag {
     position: absolute;
@@ -69,6 +69,8 @@ const Base = styled.div`
 
   p {
     padding: 10px 0;
+    line-height: 40px;
+    font-size: 18px;
   }
 
   // Adjust Heading Element Style
@@ -192,7 +194,6 @@ const Base = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
-    padding: 60px 20px;
     line-height: 1.6;
     font-size: 14px;
 

@@ -25,6 +25,7 @@ const defaultStyle = css`
       --code-bgc: #ececec;
       --code-text: tomato;
       --blockquote-bgc: #dddddd;
+      --post-text: #111111;
     }
     body[data-theme="dark"] {
       --text-color: #ffffff;
@@ -36,6 +37,7 @@ const defaultStyle = css`
       --code-bgc: #2b2b2b;
       --code-text: tomato;
       --blockquote-bgc: #1a1b17;
+      --post-text: #e7e7e7;
     }
   }
 

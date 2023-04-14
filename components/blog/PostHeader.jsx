@@ -10,6 +10,7 @@ const PostHeader = ({ data }) => {
   const router = useRouter();
   const filterData = data.results.filter((v) => v.id === router.query.id);
 
+  const category = filterData[0].properties.category.select.name;
   const title = filterData[0].properties.이름.title[0].plain_text;
   const summary = filterData[0].properties.summary.rich_text[0]?.plain_text;
   const imgSrc = filterData[0].cover?.file?.url || filterData[0].cover?.external.url;
@@ -21,6 +22,7 @@ const PostHeader = ({ data }) => {
       <Wrapper>
         <ImageItem src={imgSrc} alt="cover img" width="150" height="150" quality={100} />
         <Contents>
+          <Category>{category}</Category>
           <Title>{title}</Title>
           <Tags>
             {tags.map((tag) => {
@@ -57,13 +59,19 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
+const Category = styled.p``;
+
 const ImageItem = styled(Image)`
   right: 0;
-  width: 30%;
   height: 100%;
+  width: 100%;
   max-height: 300px;
-  opacity: 0.3;
+  opacity: 0.1;
   position: absolute;
+
+  @media (min-width: 769px) {
+    width: 30%;
+  }
 `;
 
 const Contents = styled.div`
@@ -80,6 +88,7 @@ const Title = styled.h1`
 
 const Tags = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 
   li {

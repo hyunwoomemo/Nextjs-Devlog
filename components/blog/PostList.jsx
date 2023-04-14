@@ -66,8 +66,6 @@ const Base = styled.div`
 const Post = styled(Link)`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  padding: 1rem;
   border-radius: 10px;
   background-color: var(--post-item-background);
   transition: all 0.3s;
@@ -138,6 +136,7 @@ const Period = styled.span``;
 const Tags = styled.ul`
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 
   li {
     font-size: 12px;

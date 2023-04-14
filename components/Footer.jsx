@@ -28,10 +28,9 @@ const Base = styled.footer`
 const Wrapper = styled.div`
   display: flex;
   padding: 2rem;
-  @media (min-width: 1280px) {
-    max-width: 1280px;
-    margin: 0 auto;
-  }
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
     flex-direction: column;
