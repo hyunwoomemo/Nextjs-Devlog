@@ -54,7 +54,6 @@ const Base = styled.div`
   pre {
     padding-top: 4rem;
     position: relative;
-    white-space: pre-wrap;
 
     &:after {
       position: absolute;
@@ -122,6 +121,7 @@ const Base = styled.div`
     margin-left: 20px;
     padding: 30px 0;
     list-style: unset;
+    font-size: 16px;
   }
 
   li {
@@ -225,18 +225,22 @@ const Base = styled.div`
   }
 
   table {
-    margin: 1rem 0;
-    background-color: var(--table-bgc);
-
-    th {
-      background-color: var(--th-bgc);
-      font-weight: bold;
-      color: var(--table-th-color);
+    border: 1px solid #fff;
+    text-align: center;
+    > thead {
+      border-bottom: 1px solid #fff;
     }
+
+    tr > th:first-of-type,
+    tr > td:first-of-type {
+      border-right: 1px solid #fff;
+    }
+
+    th,
     td {
-      background-color: var(--td-bgc);
-      text-align: center;
-      color: var(--table-td-color);
+      border-bottom: 1px solid #fff;
+      padding: 1rem;
+      vertical-align: middle;
     }
   }
 `;

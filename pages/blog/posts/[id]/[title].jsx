@@ -9,17 +9,14 @@ import { unified } from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
 import html from "rehype-stringify";
-import remark from "remark";
 
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import PostHeader from "@/components/blog/PostHeader";
-import { useRouter } from "next/router";
 import markdownToc from "markdown-toc";
-import Link from "next/link";
 import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings/lib";
 import Toc from "@/components/Toc";
+import remarkGfm from "remark-gfm";
 
 const PostItem = ({ html_text, posts, toc }) => {
   console.log(toc);
@@ -84,6 +81,7 @@ export async function getStaticProps({ params }) {
 
   const html_text = unified()
     .use(markdown)
+    .use(remarkGfm)
     .use(require("unified-remark-prismjs"), {
       showLanguage: true, // show language tag
       enableCopy: true,
