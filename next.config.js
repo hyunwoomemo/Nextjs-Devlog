@@ -24,6 +24,7 @@ module.exports = withPlugins(
       {
         pwa: {
           dest: "public",
+          swSrc: 'public/sw.js'
         },
       },
     ],

@@ -6,21 +6,24 @@ import '@/styles/modal.scss'
 import styled from '@emotion/styled'
 import { Router } from 'next/router'
 import { useEffect, useState } from 'react'
+import { register, unregister } from 'react-scroll/modules/mixins/scroller'
 
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   const [themeMode, setThemeMode] = useState(typeof window === "object" ? window.localStorage.getItem("theme") : "dark");
 
+  const router = useRouter();
+
 
   useEffect(() => {
     const start = () => {
       setLoading(true);
-      console.log('start')
     };
-    const end = () => {
+    const end = (url) => {
       setLoading(false);
-      console.log('end')
+      unregister()
+      register('/sw.js', { scope: '/' })
     };
 
 
@@ -33,7 +36,7 @@ export default function App({ Component, pageProps }) {
       Router.events.off("routeChangeComplete", end);
       Router.events.off("routeChangeError", end);
     };
-  })
+  }, [router])
 
   return (
     <ThemeContext.Provider value={{ themeMode, setThemeMode }}>

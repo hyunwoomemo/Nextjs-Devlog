@@ -19,6 +19,7 @@ export default function Document() {
         />
         <link rel="apple-touch-icon" href="public/icons/icon-192x192.png"></link>
         <meta name="msapplication-TileColor" content="#1976d2"></meta>
+        <meta name='theme-color' content='#1976d2'></meta>
       </Head>
       <body>
         <div id="portal"></div>

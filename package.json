@@ -45,6 +45,7 @@
     "sass": "^1.62.0",
     "tls": "^0.0.1",
     "unified": "^10.1.2",
-    "unified-remark-prismjs": "^1.1.6"
+    "unified-remark-prismjs": "^1.1.6",
+    "workbox": "^0.0.0"
   }
 }

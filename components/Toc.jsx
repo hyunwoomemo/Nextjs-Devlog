@@ -44,6 +44,10 @@ const TocWrapper = styled.div`
   color: gray;
   border-radius: 0 0 5px 5px;
   font-size: 14px;
+
+  > a {
+    cursor: pointer;
+  }
 `;
 
 export default Toc;
