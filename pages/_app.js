@@ -6,7 +6,7 @@ import '@/styles/modal.scss'
 import styled from '@emotion/styled'
 import { Router, useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import * as serviceWorker from '@/public/sw';
+import * as serviceWorker from '@/public/service-worker';
 import { register, unregister } from 'next-offline/runtime'
 
 export default function App({ Component, pageProps }) {
@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
     const end = (url) => {
       setLoading(false);
       unregister();
-      register('/sw.js', { scope: '/' })
+      register('./public/service-work.js', { scope: '/' })
     };
 
 

@@ -26,10 +26,9 @@ module.exports = withPlugins(
           dest: "public",
           register: true,
           skipWaiting: true,
-          swSrc: 'public/sw.js'
         },
         workboxOpts: {
-          swDest: 'public/sw.js',
+          swDest: 'public/service-worker.js',
           runtimeCaching: [
             {
               urlPattern: /^https?.*/,
