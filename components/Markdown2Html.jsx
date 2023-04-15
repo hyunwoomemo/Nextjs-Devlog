@@ -225,23 +225,32 @@ const Base = styled.div`
   }
 
   table {
-    max-width: 100%;
-    border: 1px solid #fff;
+    border: 1px solid var(--text-color);
     text-align: center;
+    padding: 10px;
+
+    tr {
+    }
     > thead {
-      border-bottom: 1px solid #fff;
+      border-bottom: 1px solid var(--text-color);
     }
 
     tr > th:first-of-type,
     tr > td:first-of-type {
-      border-right: 1px solid #fff;
+      border-right: 1px solid var(--text-color);
     }
 
     th,
     td {
-      border-bottom: 1px solid #fff;
-      padding: 1rem;
+      border-bottom: 1px solid var(--text-color);
       vertical-align: middle;
+    }
+  }
+
+  p {
+    > a {
+      word-wrap: break-word;
+      font-size: 16px;
     }
   }
 `;
