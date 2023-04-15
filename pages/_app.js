@@ -4,9 +4,8 @@ import ThemeContext from '@/context/ThemeContext'
 import '@/styles/globals.css'
 import '@/styles/modal.scss'
 import styled from '@emotion/styled'
-import { Router } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { register, unregister } from 'react-scroll/modules/mixins/scroller'
 
 
 export default function App({ Component, pageProps }) {
