@@ -225,6 +225,7 @@ const Base = styled.div`
   }
 
   table {
+    max-width: 100%;
     border: 1px solid #fff;
     text-align: center;
     > thead {
