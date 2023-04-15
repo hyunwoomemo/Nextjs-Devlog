@@ -107,8 +107,7 @@ export async function getStaticProps({ params }) {
           direction: "descending",
         },
       ],
-
-      page_size: 5,
+      page_size: 100,
     }),
   };
 
