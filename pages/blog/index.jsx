@@ -18,7 +18,7 @@ export async function getStaticProps() {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Notion-Version": "2022-02-22",
+      "Notion-Version": "2022-06-28",
       "Content-Type": "application/json",
       Authorization: `Bearer ${TOKEN}`,
     },
