@@ -24,24 +24,6 @@ module.exports = withPlugins(
       {
         pwa: {
           dest: "public",
-          register: true,
-          skipWaiting: true,
-        },
-        workboxOpts: {
-          swDest: 'public/service-worker.js',
-          runtimeCaching: [
-            {
-              urlPattern: /^https?.*/,
-              handler: 'NetworkFirst',
-              options: {
-                cacheName: 'offlineCache',
-                expiration: {
-                  maxEntries: 200,
-                  maxAgeSeconds: 60 * 60 * 24 * 7,
-                },
-              },
-            },
-          ],
         },
       },
     ],

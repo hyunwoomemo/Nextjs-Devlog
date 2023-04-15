@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
     const end = (url) => {
       setLoading(false);
       unregister();
-      register('./public/service-work.js', { scope: '/' })
+      register('/service-work.js', { scope: '/' })
     };
 
 
@@ -40,22 +40,19 @@ export default function App({ Component, pageProps }) {
   }, [router])
 
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        serviceWorker.register({
-          onUpdate: () => {
-            const answer = window.confirm(
-              '새로운 버전의 앱이 있습니다. 업데이트 하시겠습니까?'
-            );
-            if (answer === true) {
-              window.location.reload();
-            }
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/service-work.js").then(
+          function (registration) {
+            console.log("Service Worker registration successful with scope: ", registration.scope);
           },
-          scope: '/',
-        });
+          function (err) {
+            console.log("Service Worker registration failed: ", err);
+          }
+        );
       });
     }
-  }, [router.route]);
+  }, [])
 
 
   return (
