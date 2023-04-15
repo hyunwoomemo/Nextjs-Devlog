@@ -28,6 +28,22 @@ module.exports = withPlugins(
           skipWaiting: true,
           swSrc: 'public/sw.js'
         },
+        workboxOpts: {
+          swDest: 'public/sw.js',
+          runtimeCaching: [
+            {
+              urlPattern: /^https?.*/,
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'offlineCache',
+                expiration: {
+                  maxEntries: 200,
+                  maxAgeSeconds: 60 * 60 * 24 * 7,
+                },
+              },
+            },
+          ],
+        },
       },
     ],
     // 추가 플러그인 작성

@@ -6,11 +6,13 @@ import '@/styles/modal.scss'
 import styled from '@emotion/styled'
 import { Router, useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-
+import * as serviceWorker from '@/public/sw';
+import { register, unregister } from 'next-offline/runtime'
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   const [themeMode, setThemeMode] = useState(typeof window === "object" ? window.localStorage.getItem("theme") : "dark");
+
 
   const router = useRouter();
 
@@ -21,7 +23,7 @@ export default function App({ Component, pageProps }) {
     };
     const end = (url) => {
       setLoading(false);
-      unregister()
+      unregister();
       register('/sw.js', { scope: '/' })
     };
 
@@ -36,6 +38,25 @@ export default function App({ Component, pageProps }) {
       Router.events.off("routeChangeError", end);
     };
   }, [router])
+
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        serviceWorker.register({
+          onUpdate: () => {
+            const answer = window.confirm(
+              '새로운 버전의 앱이 있습니다. 업데이트 하시겠습니까?'
+            );
+            if (answer === true) {
+              window.location.reload();
+            }
+          },
+          scope: '/',
+        });
+      });
+    }
+  }, [router.route]);
+
 
   return (
     <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
