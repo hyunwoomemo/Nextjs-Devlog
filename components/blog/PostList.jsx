@@ -6,7 +6,6 @@ import Link from "next/link";
 import React from "react";
 
 const PostList = ({ data }) => {
-  console.log(data);
   return (
     <Base>
       {data.results?.map((post) => {

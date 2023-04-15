@@ -3,12 +3,14 @@ import Header from "./Header";
 import styled from "@emotion/styled";
 import Footer from "./Footer";
 import LoadingContext from "@/context/LoadingContext";
+import BreadCrumb from "./BreadCrumb";
 
 const Layout = ({ children }) => {
   const { loading } = useContext(LoadingContext);
   return (
     <Base loading={loading.toString()}>
       <Header />
+      <BreadCrumb />
       <Children>{children}</Children>
       <Footer />
     </Base>
@@ -21,7 +23,6 @@ const Base = styled.div`
   display: flex;
   flex-direction: column;
   scroll-margin-top: 5rem;
-
   opacity: ${({ loading }) => (loading === "true" ? "0.5" : "1")};
 `;
 

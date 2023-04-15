@@ -108,7 +108,7 @@ export async function getStaticProps({ params }) {
         },
       ],
 
-      page_size: 100,
+      page_size: 5,
     }),
   };
 
