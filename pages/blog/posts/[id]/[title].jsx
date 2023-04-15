@@ -1,7 +1,6 @@
 import Layout from "@/components/Layout";
 import Markdown2Html from "@/components/Markdown2Html";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
-import styled from "@emotion/styled";
 import { Client } from "@notionhq/client/build/src";
 import { NotionToMarkdown } from "notion-to-md/build";
 import React from "react";
@@ -19,6 +18,7 @@ import Toc from "@/components/Toc";
 import remarkGfm from "remark-gfm";
 
 const PostItem = ({ html_text, posts, toc }) => {
+  console.log(posts);
   console.log(toc);
   return (
     <Layout>

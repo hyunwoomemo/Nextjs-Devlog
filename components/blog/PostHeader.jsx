@@ -9,13 +9,14 @@ import React, { useRef } from "react";
 const PostHeader = ({ data }) => {
   const router = useRouter();
   const filterData = data.results.filter((v) => v.id === router.query.id);
+  console.log(filterData[0]);
 
-  const category = filterData[0].properties.category.select?.name;
-  const title = filterData[0].properties.이름.title[0].plain_text;
-  const summary = filterData[0].properties.summary.rich_text[0]?.plain_text;
-  const imgSrc = filterData[0].cover?.file?.url || filterData[0].cover?.external.url;
-  const tags = filterData[0].properties.tags.multi_select;
-  const createdDate = filterData[0].created_time;
+  const category = filterData[0]?.properties.category.select?.name;
+  const title = filterData[0]?.properties.이름.title[0].plain_text;
+  const summary = filterData[0]?.properties.summary.rich_text[0]?.plain_text;
+  const imgSrc = filterData[0]?.cover?.file?.url || filterData[0].cover?.external.url;
+  const tags = filterData[0]?.properties.tags.multi_select;
+  const createdDate = filterData[0]?.created_time;
 
   return (
     <Base>
