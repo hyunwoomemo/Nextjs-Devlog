@@ -8,8 +8,7 @@ import React, { useRef } from "react";
 
 const PostHeader = ({ data }) => {
   const router = useRouter();
-  const filterData = data.results.filter((v) => v.id === router.query.id);
-  console.log(filterData[0]);
+  const filterData = data?.results.filter((v) => v.id === router.query.id);
 
   const category = filterData[0].properties.category.select?.name;
   const title = filterData[0].properties.이름.title[0].plain_text;
