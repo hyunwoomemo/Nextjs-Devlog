@@ -2,17 +2,36 @@ import { POST_DATABASE_ID, TOKEN } from "@/config";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import Modal from "./Modal";
 
-const BreadCrumb = () => {
+const BreadCrumb = ({ data }) => {
+  console.log(data);
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  const filterData = data?.results.map((v) => v.properties.category.select.name).filter((v1, i, arr) => arr.indexOf(v1) === i);
+  console.log(filterData);
 
   return (
     <Base style={{ display: router.pathname === "/" ? "none" : "block" }}>
       <BreadCrumbWrapper>
         <BreadCrumbItem href="/">home</BreadCrumbItem>
-        <BreadCrumbItem href={router.pathname}>{router.pathname.replace("/", "")}</BreadCrumbItem>
-        <BreadCrumbItem href="/blog">{router.pathname.replace("/", "")}</BreadCrumbItem>
+        <BreadCrumbItem href={router.pathname.indexOf("blog") > -1 ? "/blog" : "/projects"}>{router.pathname.indexOf("blog") > -1 ? "blog" : "projects"}</BreadCrumbItem>
+        <BreadCrumbModalItem href="/blog" onClick={() => setIsOpen(true)}>
+          전체 게시글
+        </BreadCrumbModalItem>
+        <Modal isOpen={isOpen} onClose={handleClose} position="center">
+          <ModalBody>
+            {filterData?.map((d, i) => {
+              return <li key={i}>{d}</li>;
+            })}
+          </ModalBody>
+        </Modal>
       </BreadCrumbWrapper>
     </Base>
   );
@@ -35,10 +54,10 @@ const BreadCrumbItem = styled(Link)`
     content: "/";
     margin-left: 1rem;
   }
-
-  &:last-of-type:after {
-    content: "";
-  }
 `;
+
+const BreadCrumbModalItem = styled.div``;
+
+const ModalBody = styled.div``;
 
 export default BreadCrumb;

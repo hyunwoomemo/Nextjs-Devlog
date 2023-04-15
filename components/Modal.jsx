@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { createPortal } from "react-dom";
 import { CSSTransition } from "react-transition-group";
+import { css } from "@emotion/css";
 
 const Overlay = styled.div`
   position: fixed;
@@ -29,14 +30,27 @@ const Dim = styled.div`
 const Container = styled.div`
   position: absolute;
   width: 50vw;
-  height: 100%;
   background-color: var(--main-background);
-  right: 0;
   padding: 2rem;
+  height: 50%;
+
+  ${({ position }) =>
+    position == "right"
+      ? css`
+          right: 0;
+          height: 100%;
+        `
+      : css`
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 50%;
+        `}
 `;
 
-const Modal = ({ children, onClose, isOpen, selector = "#portal" }) => {
+const Modal = ({ children, onClose, isOpen, selector = "#portal", position }) => {
   const [isCSR, setIsCSR] = useState(false);
+  console.log(position);
 
   useEffect(() => {
     setIsCSR(true);
@@ -53,7 +67,19 @@ const Modal = ({ children, onClose, isOpen, selector = "#portal" }) => {
       <Portal selector={selector}>
         <Overlay>
           <Dim onClick={onClose} />
-          <Container className="container">{children}</Container>
+          <Container
+            className="container"
+            style={{
+              right: position === "right" ? 0 : undefined,
+              height: position === "right" ? "100%" : "30%",
+              top: position === "center" ? "50%" : undefined,
+              left: position === "center" ? "50%" : undefined,
+              transform: position === "center" ? "translate(-50%, -50%)" : undefined,
+              width: position === "center" ? "80%" : undefined,
+            }}
+          >
+            {children}
+          </Container>
         </Overlay>
       </Portal>
     </CSSTransition>

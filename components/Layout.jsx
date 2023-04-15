@@ -5,12 +5,12 @@ import Footer from "./Footer";
 import LoadingContext from "@/context/LoadingContext";
 import BreadCrumb from "./BreadCrumb";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, data }) => {
   const { loading } = useContext(LoadingContext);
   return (
     <Base loading={loading.toString()}>
       <Header />
-      <BreadCrumb />
+      <BreadCrumb data={data} />
       <Children>{children}</Children>
       <Footer />
     </Base>

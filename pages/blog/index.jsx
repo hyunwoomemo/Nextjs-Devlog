@@ -1,11 +1,11 @@
 import Layout from "@/components/Layout";
 import PostList from "@/components/blog/PostList";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const index = ({ posts }) => {
   return (
-    <Layout>
+    <Layout data={posts}>
       <PostList data={posts} />
     </Layout>
   );

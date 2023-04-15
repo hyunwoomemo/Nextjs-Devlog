@@ -65,7 +65,7 @@ const Header = () => {
           )}
         </ThemeToggleBtn>
       </Wrapper>
-      <Modal isOpen={isOpen} onClose={handleClose}>
+      <Modal isOpen={isOpen} onClose={handleClose} position="right">
         <ModalBody>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>

@@ -3,7 +3,7 @@ import Markdown2Html from "@/components/Markdown2Html";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
 import { Client } from "@notionhq/client/build/src";
 import { NotionToMarkdown } from "notion-to-md/build";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { unified } from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
@@ -18,10 +18,8 @@ import Toc from "@/components/Toc";
 import remarkGfm from "remark-gfm";
 
 const PostItem = ({ html_text, posts, toc }) => {
-  console.log(posts);
-  console.log(toc);
   return (
-    <Layout>
+    <Layout data={posts}>
       <PostHeader data={posts}></PostHeader>
       {toc.json.length > 0 ? <Toc toc={toc}></Toc> : undefined}
       <Markdown2Html html={html_text} />
