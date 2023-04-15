@@ -29,6 +29,10 @@ const TocTitle = styled.h1`
   padding: 1rem 2rem;
   background-color: var(--toc-title-bgc);
   border-radius: 5px 5px 0 0;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const TocWrapper = styled.div`

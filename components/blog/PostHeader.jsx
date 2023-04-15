@@ -85,6 +85,10 @@ const Contents = styled.div`
 
 const Title = styled.h1`
   font-size: 32px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 `;
 
 const Tags = styled.ul`

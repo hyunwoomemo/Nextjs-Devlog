@@ -13,7 +13,7 @@ const index = ({ posts }) => {
 
 export default index;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const options = {
     method: "POST",
     headers: {
