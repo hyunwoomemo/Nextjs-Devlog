@@ -4,9 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
-const BreadCrumb = ({ postsCategory }) => {
+const BreadCrumb = () => {
   const router = useRouter();
-  console.log(postsCategory);
 
   return (
     <Base style={{ display: router.pathname === "/" ? "none" : "block" }}>
@@ -43,35 +42,3 @@ const BreadCrumbItem = styled(Link)`
 `;
 
 export default BreadCrumb;
-
-export async function getStaticProps() {
-  const options = {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Notion-Version": "2022-02-22",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${TOKEN}`,
-    },
-    body: JSON.stringify({
-      sorts: [
-        {
-          property: "category.select.name",
-          direction: "descending",
-        },
-      ],
-
-      page_size: 100,
-    }),
-  };
-
-  const res = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
-
-  const posts = await res.json();
-
-  const postsCategory = posts.results?.map((post) => post.properties.category.select.name);
-
-  return {
-    props: { postsCategory },
-  };
-}
