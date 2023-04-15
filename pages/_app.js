@@ -6,16 +6,10 @@ import '@/styles/modal.scss'
 import styled from '@emotion/styled'
 import { Router, useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import * as serviceWorker from '@/public/service-worker';
-import { register, unregister } from 'next-offline/runtime'
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   const [themeMode, setThemeMode] = useState(typeof window === "object" ? window.localStorage.getItem("theme") : "dark");
-
-
-  const router = useRouter();
-
 
   useEffect(() => {
     const start = () => {
@@ -23,8 +17,6 @@ export default function App({ Component, pageProps }) {
     };
     const end = (url) => {
       setLoading(false);
-      unregister();
-      register('/service-work.js', { scope: '/' })
     };
 
 
@@ -37,22 +29,8 @@ export default function App({ Component, pageProps }) {
       Router.events.off("routeChangeComplete", end);
       Router.events.off("routeChangeError", end);
     };
-  }, [router])
-
-  useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", function () {
-        navigator.serviceWorker.register("/service-work.js").then(
-          function (registration) {
-            console.log("Service Worker registration successful with scope: ", registration.scope);
-          },
-          function (err) {
-            console.log("Service Worker registration failed: ", err);
-          }
-        );
-      });
-    }
   }, [])
+
 
 
   return (
