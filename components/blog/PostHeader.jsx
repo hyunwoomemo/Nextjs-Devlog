@@ -14,7 +14,7 @@ const PostHeader = ({ data }) => {
   const category = filterData[0]?.properties.category.select?.name;
   const title = filterData[0]?.properties.이름.title[0].plain_text;
   const summary = filterData[0]?.properties.summary.rich_text[0]?.plain_text;
-  const imgSrc = filterData[0]?.cover?.file?.url || filterData[0].cover?.external.url;
+  const imgSrc = filterData[0]?.cover?.file?.url || filterData[0]?.cover?.external.url;
   const tags = filterData[0]?.properties.tags.multi_select;
   const createdDate = filterData[0]?.created_time;
 
