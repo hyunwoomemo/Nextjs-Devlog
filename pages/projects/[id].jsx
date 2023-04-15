@@ -6,7 +6,6 @@ import { unified } from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
 import html from "rehype-stringify";
-import styled from "@emotion/styled";
 import Layout from "@/components/Layout";
 
 import "prismjs/themes/prism-okaidia.css";
@@ -23,8 +22,6 @@ const ProjectItem = ({ html_text }) => {
 };
 
 export default ProjectItem;
-
-const Markdown = styled.div``;
 
 export async function getStaticPaths() {
   const options = {
