@@ -8,7 +8,6 @@ import { unified } from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
 import html from "rehype-stringify";
-import { useRouter } from "next/router";
 
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
@@ -18,8 +17,7 @@ import rehypeSlug from "rehype-slug";
 import Toc from "@/components/Toc";
 import remarkGfm from "remark-gfm";
 
-const PostItem = ({ html_text, posts, toc, context }) => {
-  console.log(context);
+const PostItem = ({ html_text, posts, toc }) => {
   return (
     <Layout data={posts}>
       <PostHeader data={posts}></PostHeader>
@@ -31,7 +29,7 @@ const PostItem = ({ html_text, posts, toc, context }) => {
 
 export default PostItem;
 
-/* export async function getStaticPaths() {
+export async function getStaticPaths() {
   const options = {
     method: "POST",
     headers: {
@@ -55,13 +53,13 @@ export default PostItem;
   const dbs = await res.json();
 
   const paths = dbs.results.map((db) => ({
-    params: { id: db.id, title: db.properties.이름.title[0].plain_text.toString().toLowerCase().replace(/%20/g, "-") },
+    params: { id: db.id },
   }));
 
   return { paths, fallback: false };
-} */
+}
 
-export async function getServerSideProps(context) {
+export async function getStaticProps({ params }) {
   const notion = new Client({
     auth: TOKEN,
     notionVersion: "2022-06-28",
@@ -69,7 +67,7 @@ export async function getServerSideProps(context) {
 
   const n2m = new NotionToMarkdown({ notionClient: notion });
 
-  const mdblocks = await n2m.pageToMarkdown(context.params.id);
+  const mdblocks = await n2m.pageToMarkdown(params.id);
   const mdString = n2m.toMarkdownString(mdblocks);
 
   const toc = markdownToc(mdString, {
