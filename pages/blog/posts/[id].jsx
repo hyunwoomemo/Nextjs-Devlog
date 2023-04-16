@@ -18,7 +18,8 @@ import rehypeSlug from "rehype-slug";
 import Toc from "@/components/Toc";
 import remarkGfm from "remark-gfm";
 
-const PostItem = ({ html_text, posts, toc }) => {
+const PostItem = ({ html_text, posts, toc, context }) => {
+  console.log(context);
   return (
     <Layout data={posts}>
       <PostHeader data={posts}></PostHeader>

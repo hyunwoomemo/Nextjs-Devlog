@@ -18,7 +18,7 @@ const PostList = ({ data }) => {
         const id = post.id;
 
         return (
-          <Post href={`/blog/posts/${id}/${title.toString().toLowerCase().replace(/%20/g, "-")}`} key={post.id}>
+          <Post href={`/blog/posts/${id}`} key={post.id}>
             <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} />
             <Wrapper>
               <Category>{category}</Category>
