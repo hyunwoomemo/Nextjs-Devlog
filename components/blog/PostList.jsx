@@ -19,7 +19,7 @@ const PostList = ({ data }) => {
 
         return (
           <Post href={`/blog/posts/${id}`} key={post.id}>
-            <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} onError={(event) => (event.target.style.display = "none")} />
+            <ImageItem src={imgSrc} alt="cover image" width="300" height="150" layout="fixed" objectFit="cover" quality={100} onError={(event) => (event.target.style.display = "none")} />
             <Wrapper>
               <Category>{category}</Category>
               <Title>{title}</Title>
@@ -51,7 +51,7 @@ const PostList = ({ data }) => {
 
 const Base = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   padding: 2rem;
   gap: 2rem;
 

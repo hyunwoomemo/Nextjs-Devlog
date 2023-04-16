@@ -6,14 +6,14 @@ const ChoiceCategory = ({ category }) => {
   return (
     <Base>
       <Wrapper href="/blog/categories">
-        카테고리 | <span>{category}</span>
+        카테고리 | <span>{category || "전체"}</span>
       </Wrapper>
     </Base>
   );
 };
 
 const Base = styled.div`
-  padding: 0 2rem;
+  padding: 1rem 2rem;
   font-size: 14px;
 `;
 
