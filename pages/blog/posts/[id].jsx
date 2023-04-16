@@ -62,7 +62,6 @@ export default PostItem;
 } */
 
 export async function getServerSideProps(context) {
-  const { params } = context;
   const notion = new Client({
     auth: TOKEN,
     notionVersion: "2022-06-28",
@@ -70,7 +69,7 @@ export async function getServerSideProps(context) {
 
   const n2m = new NotionToMarkdown({ notionClient: notion });
 
-  const mdblocks = await n2m.pageToMarkdown(params.id);
+  const mdblocks = await n2m.pageToMarkdown(context.params.id);
   const mdString = n2m.toMarkdownString(mdblocks);
 
   const toc = markdownToc(mdString, {
