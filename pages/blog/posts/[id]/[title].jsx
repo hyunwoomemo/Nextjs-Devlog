@@ -59,7 +59,7 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const notion = new Client({
     auth: TOKEN,
     notionVersion: "2022-06-28",
