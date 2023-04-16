@@ -28,6 +28,7 @@ const Base = styled.div`
 `;
 
 const CategoryItem = styled(Link)`
+  box-sizing: border-box;
   display: flex;
   padding: 2rem;
   justify-content: center;
@@ -35,5 +36,10 @@ const CategoryItem = styled(Link)`
   border-radius: 10px;
   background-color: var(--categoryItem-bgc);
   white-space: nowrap;
+  max-width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 export default CategoryList;

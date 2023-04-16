@@ -14,7 +14,6 @@ const PostList = ({ data }) => {
         const summary = post.properties.summary.rich_text[0]?.plain_text;
         const imgSrc = post.cover?.file?.url || post.cover?.external.url;
         const tags = post.properties.tags.multi_select;
-        const createdDate = post.created_time;
         const id = post.id;
 
         return (
@@ -40,7 +39,6 @@ const PostList = ({ data }) => {
                   );
                 })}
               </Tags>
-              <CreatedDate>{dayjs(new Date(createdDate)).format("YYYY-MM-DD HH:mm")}</CreatedDate>
             </Wrapper>
           </Post>
         );
@@ -99,7 +97,7 @@ const ImageItem = styled(Image)`
   width: 100%;
 
   @media (max-width: 768px) {
-    height: 150px;
+    height: 100px;
   }
 `;
 
@@ -109,6 +107,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
 `;
 
 const Category = styled.p`

@@ -15,6 +15,10 @@ const ChoiceCategory = ({ category }) => {
 const Base = styled.div`
   padding: 1rem 2rem;
   font-size: 14px;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const Wrapper = styled(Link)`
