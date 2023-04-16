@@ -29,7 +29,7 @@ const PostItem = ({ html_text, posts, toc }) => {
 
 export default PostItem;
 
-/* export async function getStaticPaths() {
+export async function getStaticPaths() {
   const options = {
     method: "POST",
     headers: {
@@ -58,9 +58,10 @@ export default PostItem;
 
   return { paths, fallback: false };
 }
- */
-export async function getServerSideProps({ params }) {
-  if (!params) {
+
+
+export async function getStaticProps(context) {
+  if (!context.params) {
     return { props: { html_text: null, posts: null, toc: null } };
   }
   const notion = new Client({
@@ -70,7 +71,7 @@ export async function getServerSideProps({ params }) {
 
   const n2m = new NotionToMarkdown({ notionClient: notion });
 
-  const mdblocks = await n2m.pageToMarkdown(params.id);
+  const mdblocks = await n2m.pageToMarkdown(context.params.id);
   const mdString = n2m.toMarkdownString(mdblocks);
 
   const toc = markdownToc(mdString, {
