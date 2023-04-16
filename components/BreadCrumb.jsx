@@ -14,7 +14,7 @@ const BreadCrumb = ({ data }) => {
     setIsOpen(false);
   };
 
-  const filterData = data?.results.map((v) => v.properties.category.select.name).filter((v1, i, arr) => arr.indexOf(v1) === i);
+  const filterData = data?.results.map((v) => v.properties.category?.select?.name).filter((v1, i, arr) => arr.indexOf(v1) === i);
   console.log(filterData);
 
   return (
