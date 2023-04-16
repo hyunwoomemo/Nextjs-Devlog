@@ -28,6 +28,7 @@ const defaultStyle = css`
       --post-text: #111111;
       --toc-title-bgc: #cacaca;
       --toc-bgc: #eeeeee;
+      --categoryItem-bgc: #eee;
     }
     body[data-theme="dark"] {
       --text-color: #ffffff;
@@ -42,6 +43,7 @@ const defaultStyle = css`
       --post-text: #e7e7e7;
       --toc-title-bgc: #0a0c0d;
       --toc-bgc: #1d2125;
+      --categoryItem-bgc: #1d2125;
     }
   }
 

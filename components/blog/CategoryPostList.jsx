@@ -5,11 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const PostList = ({ data }) => {
-  console.log(data);
+const CategoryPostList = ({ data }) => {
   return (
     <Base>
-      {data.results?.map((post) => {
+      {data.map((post) => {
         const category = post.properties.category.select?.name;
         const title = post.properties.이름.title[0].plain_text;
         const summary = post.properties.summary.rich_text[0]?.plain_text;
@@ -161,4 +160,4 @@ const CreatedDate = styled.p`
   }
 `;
 
-export default PostList;
+export default CategoryPostList;
