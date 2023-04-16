@@ -29,7 +29,7 @@ const PostItem = ({ html_text, posts, toc }) => {
 
 export default PostItem;
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
   const options = {
     method: "POST",
     headers: {
@@ -58,8 +58,11 @@ export async function getStaticPaths() {
 
   return { paths, fallback: false };
 }
-
-export async function getStaticProps({ params }) {
+ */
+export async function getServerSideProps({ params }) {
+  if (!params) {
+    return { props: { html_text: null, posts: null, toc: null } };
+  }
   const notion = new Client({
     auth: TOKEN,
     notionVersion: "2022-06-28",
