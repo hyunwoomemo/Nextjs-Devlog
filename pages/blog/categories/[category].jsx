@@ -1,15 +1,18 @@
+import BreadCrumb from "@/components/BreadCrumb";
 import Layout from "@/components/Layout";
 import CategoryList from "@/components/blog/CategoryList";
 import CategoryPostList from "@/components/blog/CategoryPostList";
+import ChoiceCategory from "@/components/blog/ChoiceCategory";
 import PostList from "@/components/blog/PostList";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
 import React, { useEffect, useState } from "react";
 
-const index = ({ posts, postsCategory, filterPosts }) => {
+const index = ({ posts, filterPosts, choiceCt }) => {
   console.log(posts);
   console.log(filterPosts);
   return (
     <Layout data={posts}>
+      <ChoiceCategory category={choiceCt} />
       <CategoryPostList data={filterPosts}></CategoryPostList>
     </Layout>
   );
@@ -74,9 +77,11 @@ export async function getStaticProps(context) {
 
   const postsCategory = posts.results?.map((post) => post.properties.category.select.name).filter((v, i, arr) => arr.indexOf(v) === i);
 
+  const choiceCt = context.params.category;
+
   const filterPosts = posts.results.filter((v) => v.properties.category.select.name === context.params.category);
 
   return {
-    props: { posts, postsCategory, filterPosts },
+    props: { posts, postsCategory, filterPosts, choiceCt },
   };
 }

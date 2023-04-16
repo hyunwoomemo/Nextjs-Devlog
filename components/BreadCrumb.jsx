@@ -43,9 +43,11 @@ const BreadCrumb = ({ data }) => {
 };
 
 const Base = styled.div`
-  /* padding: 0 2rem 2rem 2rem; */
+  padding: 0 2rem;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
   font-size: 14px;
-  margin-right: auto;
 `;
 
 const BreadCrumbWrapper = styled.ul`
@@ -61,7 +63,7 @@ const BreadCrumbWrapper = styled.ul`
 `;
 
 const BreadCrumbItem = styled(Link)`
-  color: #4545a7;
+  color: var(--purple-color);
   &:after {
     content: ">";
     color: var(--text-color);

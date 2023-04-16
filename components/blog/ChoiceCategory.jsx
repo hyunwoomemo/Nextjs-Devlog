@@ -1,0 +1,33 @@
+import styled from "@emotion/styled";
+import Link from "next/link";
+import React from "react";
+
+const ChoiceCategory = ({ category }) => {
+  return (
+    <Base>
+      <Wrapper href="/blog/categories">
+        카테고리 | <span>{category}</span>
+      </Wrapper>
+    </Base>
+  );
+};
+
+const Base = styled.div`
+  padding: 0 2rem;
+  font-size: 14px;
+`;
+
+const Wrapper = styled(Link)`
+  display: inline-block;
+  border: 1px solid gray;
+  padding: 10px 14px;
+  background-color: var(--categoryItem-bgc);
+  box-shadow: 0px 0px 3px gray;
+  border-radius: 5px;
+
+  > span {
+    color: var(--purple-color);
+  }
+`;
+
+export default ChoiceCategory;

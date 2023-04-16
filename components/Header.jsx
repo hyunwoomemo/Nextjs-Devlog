@@ -7,7 +7,7 @@ import ThemeContext from "@/context/ThemeContext";
 import BreadCrumb from "./BreadCrumb";
 import { useRouter } from "next/router";
 
-const Header = ({ data }) => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -36,7 +36,7 @@ const Header = ({ data }) => {
   return (
     <Base>
       <Wrapper>
-        {router.pathname === "/" ? <Title href="/">Hyunwoomemo</Title> : <BreadCrumb data={data} />}
+        <Title href="/">Hyunwoomemo</Title>
         <LinkWrapper>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>

@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef } from "react";
+import BreadCrumb from "../BreadCrumb";
 
 const PostHeader = ({ data }) => {
   const router = useRouter();
@@ -18,33 +19,36 @@ const PostHeader = ({ data }) => {
   const createdDate = filterData[0].created_time;
 
   return (
-    <Base>
-      <Wrapper>
-        <ImageItem src={imgSrc} alt="cover img" width="150" height="150" quality={100} />
-        <Contents>
-          <Category>{category}</Category>
-          <Title>{title}</Title>
-          <Tags>
-            {tags.map((tag) => {
-              let background;
-              if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
-                background = darkThemeTagColor;
-              } else {
-                background = lightThemeTagColor;
-              }
-              const tagColor = background[tag.color];
-              return (
-                <li key={tag.id} style={{ backgroundColor: tagColor }}>
-                  {tag.name}
-                </li>
-              );
-            })}
-          </Tags>
-          <Summary>{summary}</Summary>
-          <CreatedDate>{dayjs(new Date(createdDate)).format("YYYY-MM-DD HH:mm")}</CreatedDate>
-        </Contents>
-      </Wrapper>
-    </Base>
+    <>
+      <BreadCrumb data={data} />
+      <Base>
+        <Wrapper>
+          <ImageItem src={imgSrc} alt="cover img" width="150" height="150" quality={100} />
+          <Contents>
+            <Category>{category}</Category>
+            <Title>{title}</Title>
+            <Tags>
+              {tags.map((tag) => {
+                let background;
+                if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
+                  background = darkThemeTagColor;
+                } else {
+                  background = lightThemeTagColor;
+                }
+                const tagColor = background[tag.color];
+                return (
+                  <li key={tag.id} style={{ backgroundColor: tagColor }}>
+                    {tag.name}
+                  </li>
+                );
+              })}
+            </Tags>
+            <Summary>{summary}</Summary>
+            <CreatedDate>{dayjs(new Date(createdDate)).format("YYYY-MM-DD HH:mm")}</CreatedDate>
+          </Contents>
+        </Wrapper>
+      </Base>
+    </>
   );
 };
 

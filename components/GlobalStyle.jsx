@@ -29,6 +29,7 @@ const defaultStyle = css`
       --toc-title-bgc: #cacaca;
       --toc-bgc: #eeeeee;
       --categoryItem-bgc: #eee;
+      --purple-color: #7c7cff;
     }
     body[data-theme="dark"] {
       --text-color: #ffffff;
@@ -44,6 +45,7 @@ const defaultStyle = css`
       --toc-title-bgc: #0a0c0d;
       --toc-bgc: #1d2125;
       --categoryItem-bgc: #1d2125;
+      --purple-color: #7c7cff;
     }
   }
 

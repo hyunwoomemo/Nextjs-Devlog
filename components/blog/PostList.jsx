@@ -6,7 +6,6 @@ import Link from "next/link";
 import React from "react";
 
 const PostList = ({ data }) => {
-  console.log(data);
   return (
     <Base>
       {data.results?.map((post) => {
@@ -20,7 +19,7 @@ const PostList = ({ data }) => {
 
         return (
           <Post href={`/blog/posts/${id}`} key={post.id}>
-            <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} />
+            <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} onError={(event) => (event.target.style.display = "none")} />
             <Wrapper>
               <Category>{category}</Category>
               <Title>{title}</Title>
