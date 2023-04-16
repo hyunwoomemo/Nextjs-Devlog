@@ -22,6 +22,10 @@ const Toc = ({ toc }) => {
 
 const Base = styled.div`
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const TocTitle = styled.h1`

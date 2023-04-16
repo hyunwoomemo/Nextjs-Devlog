@@ -13,6 +13,10 @@ const Base = styled.div`
   padding: 2rem;
   color: var(--post-text);
 
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+
   .code-lang-tag {
     position: absolute;
     top: 5px;

@@ -55,6 +55,9 @@ const Base = styled.div`
   padding: 2rem;
   gap: 2rem;
 
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
   @media (min-width: 769px) {
     grid-template-columns: 1fr 1fr;
   }

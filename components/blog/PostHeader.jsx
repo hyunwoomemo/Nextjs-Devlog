@@ -85,6 +85,10 @@ const Contents = styled.div`
   gap: 1rem;
   height: 100%;
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const Title = styled.h1`

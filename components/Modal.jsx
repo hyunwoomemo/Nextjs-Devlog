@@ -34,6 +34,10 @@ const Container = styled.div`
   padding: 2rem;
   height: 50%;
 
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+
   ${({ position }) =>
     position == "right"
       ? css`

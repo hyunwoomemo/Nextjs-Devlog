@@ -41,6 +41,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     gap: 3rem;
+    padding: 1rem;
   }
 `;
 

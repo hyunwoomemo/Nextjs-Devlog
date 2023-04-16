@@ -19,7 +19,7 @@ const PostList = ({ data }) => {
 
         return (
           <Post href={`/blog/posts/${id}`} key={post.id}>
-            <ImageItem src={imgSrc} alt="cover image" width="300" height="150" layout="fixed" objectFit="cover" quality={100} onError={(event) => (event.target.style.display = "none")} />
+            <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} onError={(event) => (event.target.style.display = "none")} />
             <Wrapper>
               <Category>{category}</Category>
               <Title>{title}</Title>
@@ -54,6 +54,11 @@ const Base = styled.div`
   grid-template-columns: 1fr 1fr;
   padding: 2rem;
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    gap: 1rem;
+  }
 
   @media (min-width: 769px) {
     grid-template-columns: 1fr 1fr;
@@ -92,6 +97,10 @@ const ImageItem = styled(Image)`
   border-radius: 5px 5px 0 0;
   object-fit: cover;
   width: 100%;
+
+  @media (max-width: 768px) {
+    height: 150px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -107,13 +116,15 @@ const Category = styled.p`
 `;
 
 const Title = styled.h1`
-  font-size: 20px;
+  font-size: 18px;
+  line-height: 24px;
   font-weight: bold;
   position: relative;
   align-self: flex-start;
 
   @media (min-width: 769px) {
     line-height: 30px;
+    font-size: 20px;
   }
 
   &:after {
@@ -135,6 +146,7 @@ const Title = styled.h1`
 
 const Summary = styled.h2`
   color: gray;
+  line-height: 16px;
   @media (max-width: 768px) {
     font-size: 12px;
   }
