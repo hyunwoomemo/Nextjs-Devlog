@@ -4,9 +4,12 @@ import React, { useContext, useEffect, useState } from "react";
 import Modal from "./Modal";
 import Link from "next/link";
 import ThemeContext from "@/context/ThemeContext";
+import BreadCrumb from "./BreadCrumb";
+import { useRouter } from "next/router";
 
-const Header = () => {
+const Header = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const [isCSR, setIsCSR] = useState(false);
   useEffect(() => {
@@ -33,7 +36,7 @@ const Header = () => {
   return (
     <Base>
       <Wrapper>
-        <Title href="/">Hyunwoomemo</Title>
+        {router.pathname === "/" ? <Title href="/">Hyunwoomemo</Title> : <BreadCrumb data={data} />}
         <LinkWrapper>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>

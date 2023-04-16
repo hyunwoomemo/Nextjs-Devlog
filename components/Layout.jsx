@@ -9,8 +9,7 @@ const Layout = ({ children, data }) => {
   const { loading } = useContext(LoadingContext);
   return (
     <Base loading={loading.toString()}>
-      <Header />
-      <BreadCrumb data={data} />
+      <Header data={data} />
       <Children>{children}</Children>
       <Footer />
     </Base>
