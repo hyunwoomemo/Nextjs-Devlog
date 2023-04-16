@@ -8,6 +8,7 @@ import { unified } from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
 import html from "rehype-stringify";
+import { useRouter } from "next/router";
 
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
@@ -29,7 +30,7 @@ const PostItem = ({ html_text, posts, toc }) => {
 
 export default PostItem;
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
   const options = {
     method: "POST",
     headers: {
@@ -57,9 +58,10 @@ export async function getStaticPaths() {
   }));
 
   return { paths, fallback: false };
-}
+} */
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps(context) {
+  const { params } = context;
   const notion = new Client({
     auth: TOKEN,
     notionVersion: "2022-06-28",
