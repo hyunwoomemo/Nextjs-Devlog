@@ -49,7 +49,7 @@ const PostList = ({ data }) => {
 
 const Base = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   padding: 2rem;
   gap: 2rem;
 

@@ -6,7 +6,7 @@ const ChoiceCategory = ({ category }) => {
   return (
     <Base>
       <Wrapper href="/blog/categories">
-        카테고리 | <span>{category || "전체"}</span>
+        카테고리 ∣ <span>{category || "전체"}</span>
       </Wrapper>
     </Base>
   );
@@ -22,7 +22,6 @@ const Base = styled.div`
 `;
 
 const Wrapper = styled(Link)`
-  display: inline-block;
   border: 1px solid gray;
   padding: 10px 14px;
   background-color: var(--categoryItem-bgc);

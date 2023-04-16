@@ -5,6 +5,7 @@ import React from "react";
 const CategoryList = ({ data }) => {
   return (
     <Base>
+      <CategoryItem href={"/blog"}>전체</CategoryItem>
       {data.map((v) => {
         return (
           <>

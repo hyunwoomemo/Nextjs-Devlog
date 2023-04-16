@@ -43,11 +43,15 @@ const BreadCrumb = ({ data }) => {
 };
 
 const Base = styled.div`
-  padding: 0 2rem;
+  padding: 1rem 2rem;
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
   font-size: 14px;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const BreadCrumbWrapper = styled.ul`

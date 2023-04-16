@@ -8,8 +8,6 @@ import { POST_DATABASE_ID, TOKEN } from "@/config";
 import React, { useEffect, useState } from "react";
 
 const index = ({ posts, filterPosts, choiceCt }) => {
-  console.log(posts);
-  console.log(filterPosts);
   return (
     <Layout data={posts}>
       <ChoiceCategory category={choiceCt} />
