@@ -18,7 +18,7 @@ const Title = styled.h1`
   padding: 2rem;
 `;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const options = {
     method: "POST",
     headers: {
