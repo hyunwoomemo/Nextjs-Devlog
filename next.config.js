@@ -11,7 +11,14 @@ const nextConfig = {
       's3.us-west-2.amazonaws.com'
     ],
     format: ['image/png', 'image/webp', 'image/jpeg']
-  }
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+    return config;
+  },
 }
 
 module.exports = nextConfig

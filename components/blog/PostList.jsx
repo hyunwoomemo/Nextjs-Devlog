@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import DefaultImg from "@/public/defaultImg.svg";
 
 const PostList = ({ data }) => {
   return (
@@ -16,9 +17,18 @@ const PostList = ({ data }) => {
         const tags = post.properties.tags.multi_select;
         const id = post.id;
 
+        const color = "yellow";
+
         return (
           <Post href={`/blog/posts/${id}`} key={post.id}>
-            <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} onError={(event) => (event.target.style.display = "none")} />
+            {imgSrc ? (
+              <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} />
+            ) : (
+              <SvgWrapper>
+                <SvgItem />
+              </SvgWrapper>
+            )}
+
             <Wrapper>
               <Category>{category}</Category>
               <Title>{title}</Title>
@@ -97,12 +107,27 @@ const ImageItem = styled(Image)`
   width: 100%;
 
   @media (max-width: 768px) {
-    height: 100px;
+    height: 150px;
   }
 `;
 
+const SvgWrapper = styled.div`
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    height: 150px;
+  }
+`;
+
+const SvgItem = styled(DefaultImg)``;
+
 const Wrapper = styled.div`
-  padding: 2rem 0;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -115,10 +140,14 @@ const Wrapper = styled.div`
 
 const Category = styled.p`
   color: gray;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 18px;
+  font-size: 14px;
   line-height: 24px;
   font-weight: bold;
   position: relative;
@@ -154,8 +183,6 @@ const Summary = styled.h2`
   }
 `;
 
-const Period = styled.span``;
-
 const Tags = styled.ul`
   display: flex;
   gap: 10px;
@@ -165,12 +192,10 @@ const Tags = styled.ul`
     font-size: 12px;
     padding: 5px;
     border-radius: 5px;
-  }
-`;
 
-const CreatedDate = styled.p`
-  @media (max-width: 768px) {
-    font-size: 14px;
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
   }
 `;
 
