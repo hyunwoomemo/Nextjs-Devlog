@@ -16,8 +16,6 @@ const PostList = ({ data }) => {
         const tags = post.properties.tags.multi_select;
         const id = post.id;
 
-        const color = "yellow";
-
         return (
           <Post href={`/blog/posts/${id}`} key={post.id}>
             {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <span>Hyunwoomemo&apos;s Devlog</span>}
@@ -79,9 +77,9 @@ const Post = styled(Link)`
 
   margin: 0 auto;
 
-  &:hover {
+  /* &:hover {
     transform: scale(1.05);
-  }
+  } */
 
   @media (max-width: 768px) {
     max-width: 400px;
@@ -100,11 +98,11 @@ const Post = styled(Link)`
     width: 100%;
     height: 100%;
     color: var(--text-color);
-    font-size: 12px;
+    font-size: 20px;
 
     @media (max-width: 768px) {
       height: 150px;
-      font-size: 12px;
+      font-size: 14px;
     }
 
     @media (min-width: 769px) {
@@ -160,7 +158,7 @@ const Title = styled.h1`
     content: "";
     position: absolute;
     width: 0;
-    height: 5px;
+    height: 3px;
     background-color: greenyellow;
     border-radius: 5px;
     left: 0;

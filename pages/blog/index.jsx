@@ -1,5 +1,4 @@
 import Layout from "@/components/Layout";
-import ChoiceCategory from "@/components/blog/ChoiceCategory";
 import PostList from "@/components/blog/PostList";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
 import styled from "@emotion/styled";
@@ -8,7 +7,6 @@ import React, { useEffect, useState } from "react";
 const index = ({ posts }) => {
   return (
     <Layout data={posts}>
-      <ChoiceCategory />
       <PostList data={posts} />
     </Layout>
   );

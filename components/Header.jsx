@@ -6,14 +6,31 @@ import Link from "next/link";
 import ThemeContext from "@/context/ThemeContext";
 import BreadCrumb from "./BreadCrumb";
 import { useRouter } from "next/router";
+import BackArrow from "@/public/back-arrow.svg";
+import ChoiceCategory from "./blog/ChoiceCategory";
 
-const Header = () => {
+const Header = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
+  console.log(router.pathname.indexOf("/blog"));
 
   const [isCSR, setIsCSR] = useState(false);
   useEffect(() => {
     setIsCSR(true);
+  }, []);
+
+  const title = data?.results.filter((v) => v.id === router.query.id)[0]?.properties.이름.title[0].plain_text;
+
+  const [scrollTop, setScrollTop] = useState(0);
+  useEffect(() => {
+    if (typeof window === undefined) {
+      return;
+    }
+
+    window.addEventListener("scroll", () => {
+      setScrollTop(document.documentElement.scrollTop);
+    });
   }, []);
 
   const { themeMode, setThemeMode } = useContext(ThemeContext);
@@ -33,10 +50,16 @@ const Header = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
+
   return (
     <Base>
       <Wrapper>
-        <Title href="/">Hyunwoomemo</Title>
+        {router.pathname !== "/" ? (
+          <BackIcon onClick={() => window.history.back()}>
+            <BackArrow width={20} />
+          </BackIcon>
+        ) : undefined}
+        {title ? <Title href="/">{scrollTop > 120 ? title : "hyunwoomemo"}</Title> : <Title href="/">hyunwoomemo</Title>}
         <LinkWrapper>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
@@ -68,6 +91,7 @@ const Header = () => {
           )}
         </ThemeToggleBtn>
       </Wrapper>
+      {router.pathname.indexOf("blog") > -1 ? <ChoiceCategory /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
         <ModalBody>
           <Link href="/">홈</Link>
@@ -97,18 +121,38 @@ const Base = styled.header`
   }
 `;
 
+const BackIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  > svg {
+    path {
+      fill: var(--text-color);
+    }
+  }
+`;
+
 const Wrapper = styled.div`
   display: flex;
   gap: 2rem;
   align-items: center;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 const Title = styled(Link)`
   margin-right: auto;
-  font-size: 30px;
+  font-size: 24px;
 
   @media (max-width: 768px) {
-    font-size: 20px;
+    font-size: 16px;
+    white-space: nowrap;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
