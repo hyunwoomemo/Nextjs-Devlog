@@ -27,10 +27,14 @@ const ChoiceCategory = ({ category }) => {
 
 const Base = styled.div`
   font-size: 14px;
-  margin: 1rem 0;
+  position: sticky;
+  top: 61px;
+  z-index: 2;
+  background-color: var(--main-background);
+  padding: 1rem;
 
   @media (min-width: 769px) {
-    padding: 1rem 0;
+    padding: 2rem;
   }
 `;
 

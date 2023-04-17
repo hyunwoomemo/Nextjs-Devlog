@@ -7,7 +7,6 @@ import ThemeContext from "@/context/ThemeContext";
 import BreadCrumb from "./BreadCrumb";
 import { useRouter } from "next/router";
 import BackArrow from "@/public/back-arrow.svg";
-import ChoiceCategory from "./blog/ChoiceCategory";
 
 const Header = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,7 +90,6 @@ const Header = ({ data }) => {
           )}
         </ThemeToggleBtn>
       </Wrapper>
-      {router.pathname.indexOf("blog") > -1 ? <ChoiceCategory /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
         <ModalBody>
           <Link href="/">홈</Link>
@@ -145,7 +143,7 @@ const Wrapper = styled.div`
 
 const Title = styled(Link)`
   margin-right: auto;
-  font-size: 24px;
+  font-size: 30px;
 
   @media (max-width: 768px) {
     font-size: 16px;
