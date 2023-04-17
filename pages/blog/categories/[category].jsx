@@ -9,8 +9,7 @@ import React, { useEffect, useState } from "react";
 
 const index = ({ posts, filterPosts, choiceCt }) => {
   return (
-    <Layout data={posts}>
-      <ChoiceCategory category={choiceCt} />
+    <Layout data={posts} choiceCt={choiceCt}>
       <CategoryPostList data={filterPosts}></CategoryPostList>
     </Layout>
   );

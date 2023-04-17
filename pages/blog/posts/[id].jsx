@@ -18,7 +18,6 @@ import Toc from "@/components/Toc";
 import remarkGfm from "remark-gfm";
 
 const PostItem = ({ html_text, posts, toc }) => {
-  console.log(posts);
   return (
     <Layout data={posts}>
       <PostHeader data={posts}></PostHeader>
@@ -29,7 +28,6 @@ const PostItem = ({ html_text, posts, toc }) => {
 };
 
 export default PostItem;
-
 export async function getStaticPaths() {
   const options = {
     method: "POST",

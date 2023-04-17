@@ -23,7 +23,7 @@ const PostHeader = ({ data }) => {
       <BreadCrumb data={data} />
       <Base>
         <Wrapper>
-          <ImageItem src={imgSrc} alt="cover img" width="150" height="150" quality={100} />
+          {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="150" height="100" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
           <Contents>
             <Category>{category}</Category>
             <Title>{title}</Title>
@@ -65,6 +65,23 @@ const Wrapper = styled.div`
 
 const Category = styled.p``;
 
+const DefaultImg = styled.div`
+  right: 0;
+  height: 100%;
+  width: 100%;
+  max-height: 300px;
+  opacity: 0.1;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (min-width: 769px) {
+    width: 30%;
+    opacity: 0.5;
+  }
+`;
+
 const ImageItem = styled(Image)`
   right: 0;
   height: 100%;
@@ -93,6 +110,7 @@ const Contents = styled.div`
 
 const Title = styled.h1`
   font-size: 32px;
+  padding: 2rem 0;
 
   @media (max-width: 768px) {
     font-size: 24px;

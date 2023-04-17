@@ -8,7 +8,6 @@ import React, { useEffect, useState } from "react";
 const index = ({ posts }) => {
   return (
     <Layout data={posts}>
-      <ChoiceCategory />
       <PostList data={posts} />
     </Layout>
   );
@@ -42,8 +41,6 @@ export async function getStaticProps() {
   const posts = await res.json();
 
   const postsName = posts.results?.map((post) => post.properties.이름.title[0].plain_text);
-
-  console.log(`postsName : ${postsName}`);
 
   return {
     props: { posts },

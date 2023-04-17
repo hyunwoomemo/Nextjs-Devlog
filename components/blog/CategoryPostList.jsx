@@ -19,7 +19,7 @@ const CategoryPostList = ({ data }) => {
 
         return (
           <Post href={`/blog/posts/${id}`} key={post.id}>
-            <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} />
+            {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
             <Wrapper>
               <Category>{category}</Category>
               <Title>{title}</Title>
@@ -88,6 +88,28 @@ const Post = styled(Link)`
   @media (max-width: 1200px) {
     max-width: 450px;
     width: 100%;
+  }
+`;
+
+const DefaultImg = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 20px;
+  width: 100%;
+  height: 100%;
+  color: var(--text-color);
+  font-size: 20px;
+
+  @media (max-width: 768px) {
+    height: 150px;
+    font-size: 14px;
+  }
+
+  @media (min-width: 769px) {
+    min-height: 250px;
+    min-width: 300px;
   }
 `;
 

@@ -54,7 +54,6 @@ const Container = styled.div`
 
 const Modal = ({ children, onClose, isOpen, selector = "#portal", position }) => {
   const [isCSR, setIsCSR] = useState(false);
-  console.log(position);
 
   useEffect(() => {
     setIsCSR(true);

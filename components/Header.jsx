@@ -7,12 +7,11 @@ import ThemeContext from "@/context/ThemeContext";
 import BreadCrumb from "./BreadCrumb";
 import { useRouter } from "next/router";
 import BackArrow from "@/public/back-arrow.svg";
+import ChoiceCategory from "./blog/ChoiceCategory";
 
-const Header = ({ data }) => {
+const Header = ({ data, choiceCt }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-
-  console.log(router.pathname.indexOf("/blog"));
 
   const [isCSR, setIsCSR] = useState(false);
   useEffect(() => {
@@ -58,7 +57,7 @@ const Header = ({ data }) => {
             <BackArrow width={20} />
           </BackIcon>
         ) : undefined}
-        {title ? <Title href="/">{scrollTop > 120 ? title : "hyunwoomemo"}</Title> : <Title href="/">hyunwoomemo</Title>}
+        {title ? <Title href="/">{scrollTop > 170 ? title : "hyunwoomemo"}</Title> : <Title href="/">hyunwoomemo</Title>}
         <LinkWrapper>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
@@ -90,6 +89,7 @@ const Header = ({ data }) => {
           )}
         </ThemeToggleBtn>
       </Wrapper>
+      {router.pathname.indexOf("blog") > -1 && !router.query.id ? <ChoiceCategory category={choiceCt} /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
         <ModalBody>
           <Link href="/">홈</Link>

@@ -13,7 +13,6 @@ import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import Markdown2Html from "@/components/Markdown2Html";
 
 const ProjectItem = ({ html_text }) => {
-  console.log(html_text);
   return (
     <Layout>
       <Markdown2Html html={html_text}></Markdown2Html>

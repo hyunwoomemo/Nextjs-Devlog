@@ -5,7 +5,6 @@ import { POST_DATABASE_ID, TOKEN } from "@/config";
 import React, { useEffect, useState } from "react";
 
 const index = ({ posts, postsCategory }) => {
-  console.log(postsCategory);
   return (
     <Layout data={posts}>
       <CategoryList data={postsCategory} />
