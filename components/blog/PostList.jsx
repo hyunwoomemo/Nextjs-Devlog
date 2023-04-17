@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import DefaultImg from "@/public/defaultImg.svg";
 
 const PostList = ({ data }) => {
   return (
@@ -21,13 +20,7 @@ const PostList = ({ data }) => {
 
         return (
           <Post href={`/blog/posts/${id}`} key={post.id}>
-            {imgSrc ? (
-              <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} />
-            ) : (
-              <SvgWrapper>
-                <SvgItem />
-              </SvgWrapper>
-            )}
+            {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <span>Hyunwoomemo&apos;s Devlog</span>}
 
             <Wrapper>
               <Category>{category}</Category>
@@ -99,6 +92,26 @@ const Post = styled(Link)`
     max-width: 450px;
     width: 100%;
   }
+
+  > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: var(--text-color);
+    font-size: 12px;
+
+    @media (max-width: 768px) {
+      height: 150px;
+      font-size: 12px;
+    }
+
+    @media (min-width: 769px) {
+      min-height: 250px;
+      min-width: 300px;
+    }
+  }
 `;
 
 const ImageItem = styled(Image)`
@@ -110,21 +123,6 @@ const ImageItem = styled(Image)`
     height: 150px;
   }
 `;
-
-const SvgWrapper = styled.div`
-  width: 100%;
-  object-fit: cover;
-  border-radius: 5px 5px 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @media (max-width: 768px) {
-    height: 150px;
-  }
-`;
-
-const SvgItem = styled(DefaultImg)``;
 
 const Wrapper = styled.div`
   padding: 1rem 0;
