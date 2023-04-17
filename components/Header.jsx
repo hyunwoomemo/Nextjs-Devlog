@@ -57,7 +57,7 @@ const Header = ({ data, choiceCt }) => {
             <BackArrow width={20} />
           </BackIcon>
         ) : undefined}
-        {title ? <Title href="/">{scrollTop > 170 ? title : "hyunwoomemo"}</Title> : <Title href="/">hyunwoomemo</Title>}
+        {title ? <Title>{scrollTop > 170 ? title : "hyunwoomemo"}</Title> : <Title href="/">hyunwoomemo</Title>}
         <LinkWrapper>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
@@ -141,7 +141,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Title = styled(Link)`
+const Title = styled.h1`
   margin-right: auto;
   font-size: 30px;
 
