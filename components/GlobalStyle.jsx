@@ -214,6 +214,10 @@ const defaultStyle = css`
     }
   }
 
+  * {
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
   :lang(ko) {
     word-break: keep-all;
   }
