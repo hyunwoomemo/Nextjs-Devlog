@@ -54,10 +54,8 @@ export async function getStaticPaths() {
     }),
   };
 
-  const res = await fetch(`https://api.notion.com/v1/blocks/${PROJECT_DATABASE_ID}/children`, options);
+  const res = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
   const dbs = await res.json();
-
-  fetch("https://api.notion.com/v1/blocks/block_id/children?page_size=100", options);
 
   const paths = dbs.results.map((db) => ({
     params: { id: db.id, detail: fetch(`https://api.notion.com/v1/blocks/${db.id}/children`, options).results.filter((v) => v.type === "child_database")[0].id },
