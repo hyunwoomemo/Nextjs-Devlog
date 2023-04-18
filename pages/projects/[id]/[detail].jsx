@@ -62,10 +62,10 @@ export async function getStaticPaths() {
   })); */
 
   const paths = dbs.results.map((db) => {
-    const detail = fetch(`https://api.notion.com/v1/blocks/${db.id}/children`, options);
-    const detailId = detail.results.filter((v) => v.type === "child_database")[0].id;
+    /* const detail = fetch(`https://api.notion.com/v1/blocks/${db.id}/children`, options);
+    const detailId = detail.results.filter((v) => v.type === "child_database")[0].id; */
     return {
-      params: { id: db.id, detail: detailId },
+      params: { id: db.id, detail: db.parent.database_id },
     };
   });
 
