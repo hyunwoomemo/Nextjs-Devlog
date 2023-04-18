@@ -23,7 +23,7 @@ const ProjectList = ({ data }) => {
       {data.results?.map((project) => {
         const title = project.properties.Name.title[0]?.plain_text;
         const description = project.properties.Description.rich_text[0]?.plain_text;
-        const imgSrc = project.cover.file?.url || project.cover.external?.url;
+        const imgSrc = project?.cover.file?.url || project?.cover?.external?.url;
         const tags = project.properties.Tags?.multi_select;
         const start = project.properties.WorkPeriod?.date?.start;
         const end = project.properties.WorkPeriod?.date?.end;
