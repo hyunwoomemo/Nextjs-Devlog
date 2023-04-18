@@ -57,9 +57,17 @@ export async function getStaticPaths() {
   const res = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
   const dbs = await res.json();
 
-  const paths = dbs.results.map((db) => ({
+  /* const paths = dbs.results.map((db) => ({
     params: { id: db.id, detail: fetch(`https://api.notion.com/v1/blocks/${db.id}/children`, options).results.filter((v) => v.type === "child_database")[0].id },
-  }));
+  })); */
+
+  const paths = dbs.results.map((db) => {
+    const detail = fetch(`https://api.notion.com/v1/blocks/${db.id}/children`, options);
+    const detailId = detail.results.filter((v) => v.type === "child_database")[0].id;
+    return {
+      params: { id: db.id, detail: detailId },
+    };
+  });
 
   return { paths, fallback: "blocking" };
 }
