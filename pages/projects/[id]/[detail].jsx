@@ -58,7 +58,7 @@ export async function getStaticPaths() {
   const dbs = await res.json();
 
   const paths = dbs.results.map((db) => ({
-    params: { id: db.properties.Name.title[0].plain_text, detail: "1" },
+    params: { id: db.id, detail: db.id },
   }));
 
   return { paths, fallback: "blocking" };
