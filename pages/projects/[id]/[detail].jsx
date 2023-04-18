@@ -44,12 +44,6 @@ export async function getStaticPaths() {
       Authorization: `Bearer ${TOKEN}`,
     },
     body: JSON.stringify({
-      sorts: [
-        {
-          property: "Name",
-          direction: "ascending",
-        },
-      ],
       page_size: 100,
     }),
   };
@@ -67,7 +61,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  console.log(context.params.detail);
   if (!context.params) {
     return { props: { html_text: null, posts: null, toc: null } };
   }
@@ -94,6 +87,7 @@ export async function getStaticProps(context) {
     .use(require("unified-remark-prismjs"), {
       showLanguage: true, // show language tag
       enableCopy: true,
+      plugins: ["autolinker", "show-invisibles", "data-uri-highlight", "diff-highlight", "inline-color", "line-numbers", "command-line", "treeview"],
     })
     .use(remark2rehype)
     .use(rehypeSlug)
