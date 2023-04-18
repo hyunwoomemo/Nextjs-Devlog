@@ -40,7 +40,6 @@ const CategoryPostList = ({ data }) => {
                   );
                 })}
               </Tags>
-              <CreatedDate>{dayjs(new Date(createdDate)).format("YYYY-MM-DD HH:mm")}</CreatedDate>
             </Wrapper>
           </Post>
         );
@@ -51,13 +50,15 @@ const CategoryPostList = ({ data }) => {
 
 const Base = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   padding: 2rem;
   gap: 2rem;
 
   @media (max-width: 768px) {
     padding: 1rem;
+    gap: 1rem;
   }
+
   @media (min-width: 769px) {
     grid-template-columns: 1fr 1fr;
   }
@@ -75,10 +76,6 @@ const Post = styled(Link)`
   transition: all 0.3s;
 
   margin: 0 auto;
-
-  &:hover {
-    transform: scale(1.05);
-  }
 
   @media (max-width: 768px) {
     max-width: 400px;
@@ -117,35 +114,49 @@ const ImageItem = styled(Image)`
   border-radius: 5px 5px 0 0;
   object-fit: cover;
   width: 100%;
+
+  @media (max-width: 768px) {
+    height: 150px;
+  }
 `;
 
 const Wrapper = styled.div`
-  padding: 2rem 0;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
 `;
 
 const Category = styled.p`
   color: gray;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 20px;
+  font-size: 14px;
+  line-height: 24px;
   font-weight: bold;
   position: relative;
   align-self: flex-start;
 
   @media (min-width: 769px) {
     line-height: 30px;
+    font-size: 20px;
   }
 
   &:after {
     content: "";
     position: absolute;
     width: 0;
-    height: 5px;
+    height: 3px;
     background-color: greenyellow;
     border-radius: 5px;
     left: 0;
@@ -160,12 +171,11 @@ const Title = styled.h1`
 
 const Summary = styled.h2`
   color: gray;
+  line-height: 16px;
   @media (max-width: 768px) {
     font-size: 12px;
   }
 `;
-
-const Period = styled.span``;
 
 const Tags = styled.ul`
   display: flex;
@@ -176,12 +186,10 @@ const Tags = styled.ul`
     font-size: 12px;
     padding: 5px;
     border-radius: 5px;
-  }
-`;
 
-const CreatedDate = styled.p`
-  @media (max-width: 768px) {
-    font-size: 14px;
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
   }
 `;
 

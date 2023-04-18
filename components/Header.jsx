@@ -13,6 +13,8 @@ const Header = ({ data, choiceCt }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
+  console.log(router.pathname);
+
   const [isCSR, setIsCSR] = useState(false);
   useEffect(() => {
     setIsCSR(true);
@@ -57,7 +59,7 @@ const Header = ({ data, choiceCt }) => {
             <BackArrow width={20} />
           </BackIcon>
         ) : undefined}
-        {title ? <Title>{scrollTop > 170 ? title : "hyunwoomemo"}</Title> : <Title href="/">hyunwoomemo</Title>}
+        {title && scrollTop > 170 ? <Title>{title}</Title> : <TitleLink href="/">Hyunwoomemo</TitleLink>}
         <LinkWrapper>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
@@ -89,7 +91,7 @@ const Header = ({ data, choiceCt }) => {
           )}
         </ThemeToggleBtn>
       </Wrapper>
-      {router.pathname.indexOf("blog") > -1 && !router.query.id ? <ChoiceCategory category={choiceCt} /> : undefined}
+      {router.pathname.indexOf("blog") > -1 && !router.query.id && router.pathname !== "/blog/categories" ? <ChoiceCategory category={choiceCt} /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
         <ModalBody>
           <Link href="/">홈</Link>
@@ -142,6 +144,19 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
+  margin-right: auto;
+  font-size: 30px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    white-space: nowrap;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+`;
+
+const TitleLink = styled(Link)`
   margin-right: auto;
   font-size: 30px;
 

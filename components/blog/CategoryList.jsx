@@ -18,9 +18,9 @@ const CategoryList = ({ data }) => {
 };
 
 const Base = styled.div`
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   padding: 2rem;
-  grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
 
   @media (max-width: 768px) {
