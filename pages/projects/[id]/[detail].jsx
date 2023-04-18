@@ -25,7 +25,7 @@ const ProjectDetailItem = ({ html_text, posts, toc }) => {
   console.log(router.query.detail);
   return (
     <Layout>
-      <ProjectPostHeader data={posts}></ProjectPostHeader>
+      {/* <ProjectPostHeader data={posts}></ProjectPostHeader> */}
       {toc.json.length > 0 ? <Toc toc={toc}></Toc> : undefined}
       <Markdown2Html html={html_text} />
     </Layout>
