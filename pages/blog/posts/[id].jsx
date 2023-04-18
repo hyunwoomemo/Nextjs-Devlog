@@ -85,7 +85,6 @@ export async function getStaticProps(context) {
     .use(require("unified-remark-prismjs"), {
       showLanguage: true, // show language tag
       enableCopy: true,
-      plugins: ["autolinker", "show-invisibles", "data-uri-highlight", "diff-highlight", "inline-color", "line-numbers", "command-line", "treeview"],
     })
     .use(remark2rehype)
     .use(rehypeSlug)

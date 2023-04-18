@@ -11,12 +11,12 @@ const ProjectPostHeader = ({ data }) => {
   const router = useRouter();
   const filterData = data?.results.filter((v) => v.id === router.query.detail);
 
-  const category = filterData[0].properties.category?.select?.name;
-  const title = filterData[0].properties.Name.title[0].plain_text;
-  const summary = filterData[0].properties.summary?.rich_text[0]?.plain_text;
-  const imgSrc = filterData[0].cover?.file?.url || filterData[0].cover?.external.url;
-  const tags = filterData[0].properties.tags?.multi_select;
-  const createdDate = filterData[0].created_time;
+  const category = filterData[0]?.properties.category?.select?.name;
+  const title = filterData[0]?.properties.Name.title[0].plain_text;
+  const summary = filterData[0]?.properties.summary?.rich_text[0]?.plain_text;
+  const imgSrc = filterData[0]?.cover?.file?.url || filterData[0].cover?.external.url;
+  const tags = filterData[0]?.properties.tags?.multi_select;
+  const createdDate = filterData[0]?.created_time;
 
   return (
     <>

@@ -25,7 +25,7 @@ const ProjectDetailItem = ({ html_text, posts, toc }) => {
   console.log(router.query.detail);
   return (
     <Layout>
-      {/* <ProjectPostHeader data={posts}></ProjectPostHeader> */}
+      <ProjectPostHeader data={posts}></ProjectPostHeader>
       {toc.json.length > 0 ? <Toc toc={toc}></Toc> : undefined}
       <Markdown2Html html={html_text} />
     </Layout>
@@ -57,13 +57,7 @@ export async function getStaticPaths() {
   const res = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
   const dbs = await res.json();
 
-  /* const paths = dbs.results.map((db) => ({
-    params: { id: db.id, detail: fetch(`https://api.notion.com/v1/blocks/${db.id}/children`, options).results.filter((v) => v.type === "child_database")[0].id },
-  })); */
-
   const paths = dbs.results.map((db) => {
-    /* const detail = fetch(`https://api.notion.com/v1/blocks/${db.id}/children`, options);
-    const detailId = detail.results.filter((v) => v.type === "child_database")[0].id; */
     return {
       params: { id: db.id, detail: db.parent.database_id },
     };
@@ -100,7 +94,6 @@ export async function getStaticProps(context) {
     .use(require("unified-remark-prismjs"), {
       showLanguage: true, // show language tag
       enableCopy: true,
-      plugins: ["autolinker", "show-invisibles", "data-uri-highlight", "diff-highlight", "inline-color", "line-numbers", "command-line", "treeview"],
     })
     .use(remark2rehype)
     .use(rehypeSlug)
