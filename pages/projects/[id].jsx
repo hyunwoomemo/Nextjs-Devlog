@@ -12,12 +12,9 @@ import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import Markdown2Html from "@/components/Markdown2Html";
 
-const ProjectItem = ({ html_text }) => {
-  return (
-    <Layout>
-      <Markdown2Html html={html_text}></Markdown2Html>
-    </Layout>
-  );
+const ProjectItem = ({ projectItem }) => {
+  console.log(projectItem);
+  return <Layout></Layout>;
 };
 
 export default ProjectItem;
@@ -53,28 +50,42 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const notion = new Client({
-    auth: TOKEN,
-    notionVersion: "2022-06-28",
-  });
+  const options = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${TOKEN}`,
+    },
+    body: JSON.stringify({
+      sorts: [
+        {
+          property: "Name",
+          direction: "ascending",
+        },
+      ],
+      page_size: 100,
+    }),
+  };
 
-  const n2m = new NotionToMarkdown({ notionClient: notion });
+  const res = await fetch(`https://api.notion.com/v1/blocks/${params.id}/children`);
 
-  const mdblocks = await n2m.pageToMarkdown(params.id);
-  const mdString = n2m.toMarkdownString(mdblocks);
+  const json = await res.json();
 
-  const html_text = unified()
-    .use(markdown)
-    .use(require("unified-remark-prismjs"), {
-      showLanguage: true, // show language tag
-      enableCopy: true,
-      plugins: ["autolinker", "show-invisibles", "data-uri-highlight", "diff-highlight", "inline-color", "line-numbers", "command-line", "treeview"],
-    })
-    .use(remark2rehype)
-    .use(html)
-    .processSync(mdString).value;
+  const cDbId = await json.results?.filter((v) => v.type === "child_database")[0].id;
+
+  const res2 = await fetch(`https://api.notion.com/v1/databases/${cDbId}/query`, options);
+
+  const projectItem = await res2.json();
+
+  /* const res = await fetch(`https://api.notion.com/v1/blocks/${params.id}/children`, options);
+
+  const projects = await res.json(); */
 
   return {
-    props: { html_text }, // will be passed to the page component as props
+    props: {
+      projectItem,
+    }, // will be passed to the page component as props
   };
 }
