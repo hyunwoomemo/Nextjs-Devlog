@@ -13,8 +13,6 @@ const Header = ({ data, choiceCt }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
-  console.log(router.pathname);
-
   const [isCSR, setIsCSR] = useState(false);
   useEffect(() => {
     setIsCSR(true);
