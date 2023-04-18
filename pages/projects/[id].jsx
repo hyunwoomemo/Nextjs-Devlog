@@ -11,10 +11,15 @@ import Layout from "@/components/Layout";
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import Markdown2Html from "@/components/Markdown2Html";
+import ProjectPostList from "@/components/projects/ProjectPostList";
 
-const ProjectItem = ({ projectItem }) => {
-  console.log(projectItem);
-  return <Layout></Layout>;
+const ProjectItem = ({ child_db, blockId }) => {
+  console.log(child_db);
+  return (
+    <Layout>
+      <ProjectPostList data={child_db} blockId={blockId}></ProjectPostList>
+    </Layout>
+  );
 };
 
 export default ProjectItem;
@@ -53,39 +58,34 @@ export async function getStaticProps({ params }) {
   const options = {
     method: "POST",
     headers: {
-      Accept: "application/json",
+      accept: "application/json",
       "Notion-Version": "2022-06-28",
-      "Content-Type": "application/json",
+      "content-type": "application/json",
       Authorization: `Bearer ${TOKEN}`,
     },
     body: JSON.stringify({
-      sorts: [
-        {
-          property: "Name",
-          direction: "ascending",
-        },
-      ],
       page_size: 100,
     }),
   };
+  const { Client } = require("@notionhq/client");
 
-  const res = await fetch(`https://api.notion.com/v1/blocks/${params.id}/children`);
+  const notion = new Client({ auth: TOKEN });
 
-  const json = await res.json();
+  const blockId = params.id;
+  const response = await notion.blocks.children.list({
+    block_id: blockId,
+  });
 
-  const cDbId = await json.results?.filter((v) => v.type === "child_database")[0].id;
+  const childDbID = response.results.filter((v) => v.type === "child_database")[0].id;
 
-  const res2 = await fetch(`https://api.notion.com/v1/databases/${cDbId}/query`, options);
+  const res = await fetch(`https://api.notion.com/v1/databases/${childDbID}/query`, options);
 
-  const projectItem = await res2.json();
-
-  /* const res = await fetch(`https://api.notion.com/v1/blocks/${params.id}/children`, options);
-
-  const projects = await res.json(); */
+  const child_db = await res.json();
 
   return {
     props: {
-      projectItem,
+      child_db,
+      blockId,
     }, // will be passed to the page component as props
   };
 }
