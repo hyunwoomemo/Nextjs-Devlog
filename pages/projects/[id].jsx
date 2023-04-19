@@ -16,7 +16,6 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 
 const ProjectItem = ({ child_db, blockId, html_text }) => {
-  console.log(child_db);
   return (
     <Layout>
       <Markdown2Html html={html_text} />
