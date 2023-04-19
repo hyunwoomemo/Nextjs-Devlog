@@ -18,6 +18,7 @@ import Toc from "@/components/Toc";
 import remarkGfm from "remark-gfm";
 import { useRouter } from "next/router";
 import ProjectPostHeader from "@/components/projects/ProjectPostHeader";
+import highlight from "remark-highlight.js";
 
 const ProjectDetailItem = ({ html_text, posts, toc }) => {
   const router = useRouter();
@@ -81,7 +82,20 @@ export async function getStaticProps(context) {
     maxdepth: 3,
   });
 
-  const html_text = unified().use(markdown).use(remarkGfm).use(remark2rehype).use(rehypeSlug).use(html).processSync(mdString).value;
+  const html_text = unified()
+    .use(highlight, {
+      prefix: "hljs-", // optional prefix to add to the class names
+      subset: false, // optional array of language names to include
+      aliases: {}, // optional map of aliases to language names
+      theme: "vs2015", // selected theme
+    })
+    .use(markdown)
+    .use(remarkGfm)
+
+    .use(remark2rehype)
+    .use(rehypeSlug)
+    .use(html)
+    .processSync(mdString).value;
 
   const options = {
     method: "POST",
