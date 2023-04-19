@@ -7,46 +7,57 @@ import React from "react";
 
 const ProjectPostList = ({ data, blockId }) => {
   return (
-    <Base>
-      {data.results?.map((post) => {
-        const category = post.properties?.category?.select?.name;
-        const title = post.properties.Name?.title[0]?.plain_text;
-        const summary = post.properties.summary?.rich_text[0]?.plain_text;
-        const imgSrc = post.cover?.file?.url || post.cover?.external.url;
-        const tags = post.properties.tags?.multi_select;
-        const id = post.id;
+    <>
+      <MainTitle>포스트</MainTitle>
+      <Base>
+        {data.results?.map((post) => {
+          const category = post.properties?.category?.select?.name;
+          const title = post.properties.Name?.title[0]?.plain_text;
+          const summary = post.properties.summary?.rich_text[0]?.plain_text;
+          const imgSrc = post.cover?.file?.url || post.cover?.external.url;
+          const tags = post.properties.tags?.multi_select;
+          const id = post.id;
 
-        return (
-          <Post href={`/projects/${blockId}/${id}`} key={post.id}>
-            {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
-
-            <Wrapper>
-              <Category>{category}</Category>
-              <Title>{title}</Title>
-              <Summary>{summary}</Summary>
-              <Tags>
-                {tags?.map((tag) => {
-                  let background;
-                  if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
-                    background = darkThemeTagColor;
-                  } else {
-                    background = lightThemeTagColor;
-                  }
-                  const tagColor = background[tag.color];
-                  return (
-                    <li key={tag.id} style={{ backgroundColor: tagColor }}>
-                      {tag.name}
-                    </li>
-                  );
-                })}
-              </Tags>
-            </Wrapper>
-          </Post>
-        );
-      })}
-    </Base>
+          return (
+            <Post href={`/projects/${blockId}/${id}`} key={post.id}>
+              {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
+              <Wrapper>
+                <Category>{category}</Category>
+                <Title>{title}</Title>
+                <Summary>{summary}</Summary>
+                <Tags>
+                  {tags?.map((tag) => {
+                    let background;
+                    if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
+                      background = darkThemeTagColor;
+                    } else {
+                      background = lightThemeTagColor;
+                    }
+                    const tagColor = background[tag.color];
+                    return (
+                      <li key={tag.id} style={{ backgroundColor: tagColor }}>
+                        {tag.name}
+                      </li>
+                    );
+                  })}
+                </Tags>
+              </Wrapper>
+            </Post>
+          );
+        })}
+      </Base>
+    </>
   );
 };
+
+const MainTitle = styled.h1`
+  font-size: 28px;
+  padding: 1rem;
+
+  @media (min-width: 769px) {
+    padding: 2rem;
+  }
+`;
 
 const Base = styled.div`
   display: grid;

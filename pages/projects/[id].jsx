@@ -14,11 +14,12 @@ import Markdown2Html from "@/components/Markdown2Html";
 import ProjectPostList from "@/components/projects/ProjectPostList";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
+import ProjectMarkdown2Html from "@/components/projects/ProjectMarkdown2Html";
 
 const ProjectItem = ({ child_db, blockId, html_text }) => {
   return (
     <Layout>
-      <Markdown2Html html={html_text} />
+      <ProjectMarkdown2Html html={html_text} />
       <ProjectPostList data={child_db} blockId={blockId}></ProjectPostList>
     </Layout>
   );

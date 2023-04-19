@@ -20,6 +20,7 @@ import { useRouter } from "next/router";
 import ProjectPostHeader from "@/components/projects/ProjectPostHeader";
 import prism from "remark-prism";
 import Head from "next/head";
+import ProjectMarkdown2Html from "@/components/projects/ProjectMarkdown2Html";
 
 const ProjectDetailItem = ({ html_text, posts, toc }) => {
   const router = useRouter();
