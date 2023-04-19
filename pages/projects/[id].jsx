@@ -12,11 +12,14 @@ import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import Markdown2Html from "@/components/Markdown2Html";
 import ProjectPostList from "@/components/projects/ProjectPostList";
+import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
 
-const ProjectItem = ({ child_db, blockId }) => {
+const ProjectItem = ({ child_db, blockId, html_text }) => {
   console.log(child_db);
   return (
     <Layout>
+      <Markdown2Html html={html_text} />
       <ProjectPostList data={child_db} blockId={blockId}></ProjectPostList>
     </Layout>
   );
@@ -69,14 +72,33 @@ export async function getStaticProps({ params }) {
   };
   const { Client } = require("@notionhq/client");
 
-  const notion = new Client({ auth: TOKEN });
+  const notion = new Client({
+    auth: TOKEN,
+    notionVersion: "2022-06-28",
+  });
+
+  const n2m = new NotionToMarkdown({ notionClient: notion });
+
+  const mdblocks = await n2m.pageToMarkdown(params.id);
+  const mdString = n2m.toMarkdownString(mdblocks);
+
+  const html_text = unified()
+    .use(markdown)
+    .use(remarkGfm)
+    .use(require("unified-remark-prismjs"), {
+      showLanguage: true, // show language tag
+      enableCopy: true,
+    })
+    .use(remark2rehype)
+    .use(html)
+    .processSync(mdString).value;
 
   const blockId = params.id;
   const response = await notion.blocks.children.list({
     block_id: blockId,
   });
 
-  const childDbID = response.results.filter((v) => v.type === "child_database")[0].id;
+  const childDbID = response.results.filter((v) => v.type === "child_database")[0]?.id;
 
   const res = await fetch(`https://api.notion.com/v1/databases/${childDbID}/query`, options);
 
@@ -86,6 +108,8 @@ export async function getStaticProps({ params }) {
     props: {
       child_db,
       blockId,
+      response,
+      html_text,
     }, // will be passed to the page component as props
   };
 }

@@ -6,12 +6,11 @@ import Link from "next/link";
 import React from "react";
 
 const ProjectPostList = ({ data, blockId }) => {
-  console.log(data);
   return (
     <Base>
       {data.results?.map((post) => {
         const category = post.properties?.category?.select?.name;
-        const title = post.properties.Name?.title[0].plain_text;
+        const title = post.properties.Name?.title[0]?.plain_text;
         const summary = post.properties.summary?.rich_text[0]?.plain_text;
         const imgSrc = post.cover?.file?.url || post.cover?.external.url;
         const tags = post.properties.tags?.multi_select;
