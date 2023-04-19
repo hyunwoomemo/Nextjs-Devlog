@@ -88,6 +88,11 @@ const Header = ({ data, choiceCt }) => {
             </svg>
           )}
         </ThemeToggleBtn>
+        <SearchBtn href="/search">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+        </SearchBtn>
       </Wrapper>
       {router.pathname.indexOf("blog") > -1 && !router.query.id && router.pathname !== "/blog/categories" ? <ChoiceCategory category={choiceCt} /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
@@ -192,6 +197,11 @@ const ThemeToggleBtn = styled.div`
   width: 24px;
 
   color: ${({ dark }) => (dark ? "yellow" : "#3388a9")};
+`;
+
+const SearchBtn = styled(Link)`
+  width: 20px;
+  height: 100%;
 `;
 
 const ModalBody = styled.ul`
