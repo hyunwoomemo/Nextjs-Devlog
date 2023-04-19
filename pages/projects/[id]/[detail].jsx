@@ -81,17 +81,7 @@ export async function getStaticProps(context) {
     maxdepth: 3,
   });
 
-  const html_text = unified()
-    .use(markdown)
-    .use(remarkGfm)
-    .use(require("unified-remark-prismjs"), {
-      showLanguage: true, // show language tag
-      enableCopy: true,
-    })
-    .use(remark2rehype)
-    .use(rehypeSlug)
-    .use(html)
-    .processSync(mdString).value;
+  const html_text = unified().use(markdown).use(remarkGfm).use(remark2rehype).use(rehypeSlug).use(html).processSync(mdString).value;
 
   const options = {
     method: "POST",
