@@ -18,7 +18,8 @@ import Toc from "@/components/Toc";
 import remarkGfm from "remark-gfm";
 import { useRouter } from "next/router";
 import ProjectPostHeader from "@/components/projects/ProjectPostHeader";
-import highlight from "remark-highlight.js";
+import prism from "remark-prism";
+import Head from "next/head";
 
 const ProjectDetailItem = ({ html_text, posts, toc }) => {
   const router = useRouter();
@@ -26,6 +27,7 @@ const ProjectDetailItem = ({ html_text, posts, toc }) => {
   console.log(router.query.detail);
   return (
     <Layout>
+      <Head></Head>
       <ProjectPostHeader data={posts}></ProjectPostHeader>
       {toc.json.length > 0 ? <Toc toc={toc}></Toc> : undefined}
       <Markdown2Html html={html_text} />
@@ -82,20 +84,7 @@ export async function getStaticProps(context) {
     maxdepth: 3,
   });
 
-  const html_text = unified()
-    .use(highlight, {
-      prefix: "hljs-", // optional prefix to add to the class names
-      subset: false, // optional array of language names to include
-      aliases: {}, // optional map of aliases to language names
-      theme: "vs2015", // selected theme
-    })
-    .use(markdown)
-    .use(remarkGfm)
-
-    .use(remark2rehype)
-    .use(rehypeSlug)
-    .use(html)
-    .processSync(mdString).value;
+  const html_text = unified().use(prism).use(markdown).use(remarkGfm).use(remark2rehype).use(rehypeSlug).use(html).processSync(mdString).value;
 
   const options = {
     method: "POST",
