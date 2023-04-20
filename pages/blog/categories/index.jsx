@@ -41,7 +41,7 @@ export async function getStaticProps() {
 
   const posts = allPosts.results;
 
-  const postsCategory = posts.results?.map((post) => post.properties.category.select.name).filter((v, i, arr) => arr.indexOf(v) === i);
+  const postsCategory = posts?.map((post) => post.properties.category.select.name).filter((v, i, arr) => arr.indexOf(v) === i);
 
   return {
     props: { posts, postsCategory },
