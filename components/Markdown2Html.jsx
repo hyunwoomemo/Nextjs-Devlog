@@ -2,10 +2,9 @@ import React from "react";
 import styled from "@emotion/styled";
 
 const Markdown2Html = ({ html }) => {
-  const replaceHtml = html.replace("child_database", "");
   return (
     <>
-      <Base dangerouslySetInnerHTML={{ __html: replaceHtml }}></Base>
+      <Base dangerouslySetInnerHTML={{ __html: html }}></Base>
     </>
   );
 };
@@ -13,10 +12,6 @@ const Markdown2Html = ({ html }) => {
 const Base = styled.div`
   padding: 2rem;
   color: var(--post-text);
-
-  /* > p > a {
-    display: none;
-  } */
 
   @media (max-width: 768px) {
     padding: 1rem;

@@ -130,6 +130,10 @@ const Base = styled.div`
     img {
       width: 80px;
       height: auto;
+
+      @media (max-width: 768px) {
+        width: 50px;
+      }
     }
   }
 

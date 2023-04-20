@@ -52,14 +52,14 @@ export async function getStaticPaths() {
   const dbs = await res.json();
 
   const paths = dbs.results.map((db) => ({
-    params: { id: db.id },
+    params: { title: db.properties.이름.title[0].plain_text, id: db.id },
   }));
 
   return { paths, fallback: false };
 }
 
-export async function getStaticProps(context) {
-  if (!context.params) {
+export async function getStaticProps({ params }) {
+  if (!params) {
     return { props: { html_text: null, posts: null, toc: null } };
   }
   const notion = new Client({
@@ -69,7 +69,7 @@ export async function getStaticProps(context) {
 
   const n2m = new NotionToMarkdown({ notionClient: notion });
 
-  const mdblocks = await n2m.pageToMarkdown(context.params.id);
+  const mdblocks = await n2m.pageToMarkdown(params.id);
   const mdString = n2m.toMarkdownString(mdblocks);
 
   const toc = markdownToc(mdString, {
@@ -112,7 +112,9 @@ export async function getStaticProps(context) {
 
   const res = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
 
-  const posts = await res.json();
+  const allPosts = await res.json();
+
+  const posts = allPosts.results;
 
   return {
     props: { html_text, posts, toc }, // will be passed to the page component as props

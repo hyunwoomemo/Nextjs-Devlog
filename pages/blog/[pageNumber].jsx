@@ -1,53 +1,24 @@
-import BreadCrumb from "@/components/BreadCrumb";
 import Layout from "@/components/Layout";
-import CategoryList from "@/components/blog/CategoryList";
-import CategoryPostList from "@/components/blog/CategoryPostList";
-import ChoiceCategory from "@/components/blog/ChoiceCategory";
 import PostList from "@/components/blog/PostList";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-const index = ({ posts, filterPosts, choiceCt }) => {
+const Page = ({ posts, numPages }) => {
+  console.log(posts);
   return (
-    <Layout data={posts} choiceCt={choiceCt}>
-      <CategoryPostList data={filterPosts}></CategoryPostList>
+    <Layout data={posts}>
+      <PostList data={posts} numPages={numPages} />
     </Layout>
   );
 };
 
-export default index;
+export default Page;
+
+// getStaticPath() 로 page+1 static 파일 생성
+
+// getStaticProps로 데이터 Page에 넘겨주고 Page에서는 데이터 받아와서렌더링
 
 export async function getStaticPaths() {
-  const options = {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "Notion-Version": "2022-06-28",
-      "content-type": "application/json",
-      Authorization: `Bearer ${TOKEN}`,
-    },
-    body: JSON.stringify({
-      sorts: [
-        {
-          property: "createdDate",
-          direction: "descending",
-        },
-      ],
-      page_size: 100,
-    }),
-  };
-
-  const res = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
-  const dbs = await res.json();
-
-  const paths = dbs.results.map((db) => ({
-    params: { id: db.id, category: db.properties.category.select.name },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps(context) {
   const options = {
     method: "POST",
     headers: {
@@ -72,15 +43,53 @@ export async function getStaticProps(context) {
 
   const allPosts = await res.json();
 
-  const posts = allPosts.results;
+  const postsPerPage = 6;
 
-  const postsCategory = posts?.map((post) => post.properties.category.select.name).filter((v, i, arr) => arr.indexOf(v) === i);
+  const numPages = Math.ceil(allPosts.results.length / postsPerPage);
 
-  const choiceCt = context.params.category;
+  const paths = [];
 
-  const filterPosts = posts.filter((v) => v.properties.category.select.name === context.params.category);
+  for (let i = 1; i <= numPages; i++) {
+    paths.push({ params: { pageNumber: i.toString() } });
+  }
+
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const options = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${TOKEN}`,
+    },
+    body: JSON.stringify({
+      sorts: [
+        {
+          property: "createdDate",
+          direction: "descending",
+        },
+      ],
+
+      page_size: 100,
+    }),
+  };
+
+  const res = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
+
+  const allPosts = await res.json();
+
+  const postsPerPage = 6;
+
+  const numPages = Math.ceil(allPosts.results.length / postsPerPage);
+
+  const offset = (params.pageNumber - 1) * postsPerPage;
+
+  const posts = allPosts.results.slice(offset, offset + postsPerPage);
 
   return {
-    props: { posts, postsCategory, filterPosts, choiceCt },
+    props: { allPosts, posts, numPages },
   };
 }

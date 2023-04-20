@@ -37,7 +37,9 @@ export async function getStaticProps() {
 
   const res = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
 
-  const posts = await res.json();
+  const allPosts = await res.json();
+
+  const posts = allPosts.results;
 
   const postsCategory = posts.results?.map((post) => post.properties.category.select.name).filter((v, i, arr) => arr.indexOf(v) === i);
 

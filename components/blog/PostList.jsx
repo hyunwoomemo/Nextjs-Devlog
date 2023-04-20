@@ -4,47 +4,51 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import slugify from "slugify";
+import PostPagination from "../PostPagination";
 
-const PostList = ({ data }) => {
+const PostList = ({ data, numPages }) => {
   return (
-    <Base>
-      {data.results?.map((post) => {
-        const category = post.properties.category.select?.name;
-        const title = post.properties.이름.title[0].plain_text;
-        const summary = post.properties.summary.rich_text[0]?.plain_text;
-        const imgSrc = post.cover?.file?.url || post.cover?.external.url;
-        const tags = post.properties.tags.multi_select;
-        const id = post.id;
+    <>
+      <Base>
+        {data?.map((post) => {
+          const category = post.properties.category.select?.name;
+          const title = post.properties.이름.title[0].plain_text;
+          const summary = post.properties.summary.rich_text[0]?.plain_text;
+          const imgSrc = post.cover?.file?.url || post.cover?.external.url;
+          const tags = post.properties.tags.multi_select;
+          const id = post.id;
 
-        return (
-          <Post href={`/blog/posts/${id}`} key={post.id}>
-            {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
-
-            <Wrapper>
-              <Category>{category}</Category>
-              <Title>{title}</Title>
-              <Summary>{summary}</Summary>
-              <Tags>
-                {tags.map((tag) => {
-                  let background;
-                  if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
-                    background = darkThemeTagColor;
-                  } else {
-                    background = lightThemeTagColor;
-                  }
-                  const tagColor = background[tag.color];
-                  return (
-                    <li key={tag.id} style={{ backgroundColor: tagColor }}>
-                      {tag.name}
-                    </li>
-                  );
-                })}
-              </Tags>
-            </Wrapper>
-          </Post>
-        );
-      })}
-    </Base>
+          return (
+            <Post href={`/blog/posts/${id}`} key={post.id}>
+              {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
+              <Wrapper>
+                <Category>{category}</Category>
+                <Title>{title}</Title>
+                <Summary>{summary}</Summary>
+                <Tags>
+                  {tags.map((tag) => {
+                    let background;
+                    if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
+                      background = darkThemeTagColor;
+                    } else {
+                      background = lightThemeTagColor;
+                    }
+                    const tagColor = background[tag.color];
+                    return (
+                      <li key={tag.id} style={{ backgroundColor: tagColor }}>
+                        {tag.name}
+                      </li>
+                    );
+                  })}
+                </Tags>
+              </Wrapper>
+            </Post>
+          );
+        })}
+      </Base>
+      <PostPagination numPages={numPages} />
+    </>
   );
 };
 

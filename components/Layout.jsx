@@ -7,6 +7,7 @@ import BreadCrumb from "./BreadCrumb";
 
 const Layout = ({ children, data, choiceCt }) => {
   const { loading } = useContext(LoadingContext);
+  console.log(data);
   return (
     <Base loading={loading.toString()}>
       <Header data={data} choiceCt={choiceCt} />

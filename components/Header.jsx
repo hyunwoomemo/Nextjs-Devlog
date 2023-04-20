@@ -18,7 +18,7 @@ const Header = ({ data, choiceCt }) => {
     setIsCSR(true);
   }, []);
 
-  const title = data?.results.filter((v) => v.id === router.query.id)[0]?.properties.이름.title[0].plain_text;
+  const title = data?.filter((v) => v.id === router.query.id)[0]?.properties.이름.title[0].plain_text;
 
   const [scrollTop, setScrollTop] = useState(0);
   useEffect(() => {
@@ -143,27 +143,23 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
   margin-right: auto;
-  font-size: 30px;
+  font-size: 24px;
+  white-space: nowrap;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @media (max-width: 768px) {
     font-size: 16px;
-    white-space: nowrap;
-    width: 80%;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 `;
 
 const TitleLink = styled(Link)`
   margin-right: auto;
-  font-size: 30px;
+  font-size: 24px;
 
   @media (max-width: 768px) {
     font-size: 16px;
-    white-space: nowrap;
-    width: 80%;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 `;
 
@@ -171,6 +167,7 @@ const LinkWrapper = styled.ul`
   display: flex;
   gap: 1rem;
   color: slategray;
+  white-space: nowrap;
 
   @media (max-width: 768px) {
     display: none;

@@ -5,10 +5,12 @@ import { POST_DATABASE_ID, TOKEN } from "@/config";
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 
-const index = ({ posts }) => {
+const index = ({ posts, allPosts, numPages }) => {
+  console.log(allPosts);
+  console.log(posts);
   return (
     <Layout data={posts}>
-      <PostList data={posts} />
+      <PostList data={posts} numPages={numPages} />
     </Layout>
   );
 };
@@ -38,11 +40,15 @@ export async function getStaticProps() {
 
   const res = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
 
-  const posts = await res.json();
+  const allPosts = await res.json();
 
-  const postsName = posts.results?.map((post) => post.properties.이름.title[0].plain_text);
+  const postsPerPage = 6;
+
+  const numPages = Math.ceil(allPosts.results.length / postsPerPage);
+
+  const posts = allPosts.results.slice(0, postsPerPage);
 
   return {
-    props: { posts },
+    props: { allPosts, posts, numPages },
   };
 }
