@@ -12,7 +12,10 @@ const CodeSnipetList = ({ data, keyword }) => {
     <>
       <Base>
         {data
-          ?.filter((v) => v.properties.Name.title[0].plain_text.indexOf(keyword) > -1 || v.properties.Tag.multi_select.map((v) => v.name).includes(keyword))
+          ?.filter(
+            (v) =>
+              v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.Tag.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
+          )
           .map((post) => {
             const title = post.properties?.Name.title[0].plain_text;
             const imgSrc = post.cover?.file?.url || post.cover?.external.url;

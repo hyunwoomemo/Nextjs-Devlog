@@ -20,7 +20,6 @@ const ProjectItem = ({ child_db, blockId, html_text }) => {
   return (
     <Layout>
       <ProjectMarkdown2Html html={html_text} />
-      <ProjectPostList data={child_db} blockId={blockId}></ProjectPostList>
     </Layout>
   );
 };
