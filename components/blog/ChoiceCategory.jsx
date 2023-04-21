@@ -18,7 +18,7 @@ const ChoiceCategory = ({ category }) => {
 
   return (
     <Base activeScroll={scrollTop > 5}>
-      <Wrapper href="/blog/categories">
+      <Wrapper href="/blog/posts/categories">
         카테고리 ∣ <span>{category || "전체"}</span>
       </Wrapper>
     </Base>

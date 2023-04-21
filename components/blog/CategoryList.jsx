@@ -5,11 +5,11 @@ import React from "react";
 const CategoryList = ({ data }) => {
   return (
     <Base>
-      <CategoryItem href={"/blog"}>전체</CategoryItem>
+      <CategoryItem href={"/blog/posts"}>전체</CategoryItem>
       {data.map((v) => {
         return (
           <>
-            <CategoryItem href={`/blog/categories/${v}`}>{v}</CategoryItem>
+            <CategoryItem href={`/blog/posts/categories/${v}`}>{v}</CategoryItem>
           </>
         );
       })}

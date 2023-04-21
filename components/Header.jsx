@@ -4,7 +4,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Modal from "./Modal";
 import Link from "next/link";
 import ThemeContext from "@/context/ThemeContext";
-import BreadCrumb from "./BreadCrumb";
 import { useRouter } from "next/router";
 import BackArrow from "@/public/back-arrow.svg";
 import ChoiceCategory from "./blog/ChoiceCategory";
@@ -18,7 +17,7 @@ const Header = ({ data, choiceCt }) => {
     setIsCSR(true);
   }, []);
 
-  const title = data?.filter((v) => v.id === router.query.id)[0]?.properties.이름.title[0].plain_text;
+  const title = data?.filter((v) => v.id === router.query.id)[0]?.properties.Name.title[0].plain_text;
 
   const [scrollTop, setScrollTop] = useState(0);
   useEffect(() => {
@@ -89,7 +88,7 @@ const Header = ({ data, choiceCt }) => {
           )}
         </ThemeToggleBtn>
       </Wrapper>
-      {router.pathname.indexOf("blog") > -1 && !router.query.id && router.pathname !== "/blog/categories" ? <ChoiceCategory category={choiceCt} /> : undefined}
+      {router.pathname.indexOf("posts") > -1 && !router.query.id && router.pathname !== "/blog/posts/categories" ? <ChoiceCategory category={choiceCt} /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
         <ModalBody>
           <Link href="/">홈</Link>

@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import Markdown2Html from "@/components/Markdown2Html";
-import { POST_DATABASE_ID, TOKEN } from "@/config";
+import { CODESNIPET_DATABASE_ID, POST_DATABASE_ID, TOKEN } from "@/config";
 import { Client } from "@notionhq/client/build/src";
 import { NotionToMarkdown } from "notion-to-md/build";
 import React, { useEffect, useState } from "react";
@@ -37,22 +37,14 @@ export async function getStaticPaths() {
       "content-type": "application/json",
       Authorization: `Bearer ${TOKEN}`,
     },
-    body: JSON.stringify({
-      sorts: [
-        {
-          property: "createdDate",
-          direction: "descending",
-        },
-      ],
-      page_size: 100,
-    }),
+    body: JSON.stringify({ page_size: 100 }),
   };
 
-  const res = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
+  const res = await fetch(`https://api.notion.com/v1/databases/${CODESNIPET_DATABASE_ID}/query`, options);
   const dbs = await res.json();
 
   const paths = dbs.results.map((db) => ({
-    params: { title: db.properties.Name.title[0].plain_text, id: db.id },
+    params: { id: db.id },
   }));
 
   return { paths, fallback: false };
@@ -100,17 +92,11 @@ export async function getStaticProps({ params }) {
       Authorization: `Bearer ${TOKEN}`,
     },
     body: JSON.stringify({
-      sorts: [
-        {
-          property: "createdDate",
-          direction: "descending",
-        },
-      ],
       page_size: 100,
     }),
   };
 
-  const res = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
+  const res = await fetch(`https://api.notion.com/v1/databases/${CODESNIPET_DATABASE_ID}/query`, options);
 
   const allPosts = await res.json();
 

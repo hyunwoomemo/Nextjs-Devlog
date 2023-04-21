@@ -16,12 +16,12 @@ export default function PostPagination({ numPages }) {
   }, [router.query.pageNumber]);
 
   const handlePrevClick = () => {
-    router.push(`/blog/${page - 1}`);
+    router.push(`/blog/posts/page/${page - 1}`);
     setPage(page - 1);
   };
 
   const handleNextClick = () => {
-    router.push(`/blog/${page + 1}`);
+    router.push(`/blog/posts/page/${page + 1}`);
     setPage(page + 1);
   };
 
@@ -35,7 +35,7 @@ export default function PostPagination({ numPages }) {
         </PrevBtn>
         {new Array(numPages).fill(0).map((v, i) => {
           return (
-            <PaginationItem page={page === i + 1} key={i} onClick={(e) => router.push(`/blog/${e.target.innerText === "1" ? "" : e.target.innerText}`)}>
+            <PaginationItem page={page === i + 1} key={i} onClick={(e) => router.push(`/blog/posts/${e.target.innerText === "1" ? "" : `page/${e.target.innerText}`}`)}>
               {i + 1}
             </PaginationItem>
           );

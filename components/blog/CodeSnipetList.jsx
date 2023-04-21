@@ -7,54 +7,49 @@ import React from "react";
 import slugify from "slugify";
 import PostPagination from "../PostPagination";
 
-const PostList = ({ data, numPages }) => {
+const CodeSnipetList = ({ data, keyword }) => {
   return (
     <>
       <Base>
-        {data?.map((post) => {
-          const category = post.properties.category.select?.name;
-          const title = post.procperties.Name.title[0].plain_text;
-          const summary = post.properties.summary.rich_text[0]?.plain_text;
-          const imgSrc = post.cover?.file?.url || post.cover?.external.url;
-          const tags = post.properties.tags.multi_select;
-          const id = post.id;
+        {data
+          ?.filter((v) => v.properties.Name.title[0].plain_text.indexOf(keyword) > -1 || v.properties.Tag.multi_select.map((v) => v.name).includes(keyword))
+          .map((post) => {
+            const title = post.properties?.Name.title[0].plain_text;
+            const imgSrc = post.cover?.file?.url || post.cover?.external.url;
+            const tags = post.properties.Tag?.multi_select;
+            const id = post.id;
 
-          return (
-            <Post href={`/blog/posts/${id}`} key={post.id}>
-              {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
-              <Wrapper>
-                <Category>{category}</Category>
-                <Title>{title}</Title>
-                <Summary>{summary}</Summary>
-                <Tags>
-                  {tags.map((tag) => {
-                    let background;
-                    if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
-                      background = darkThemeTagColor;
-                    } else {
-                      background = lightThemeTagColor;
-                    }
-                    const tagColor = background[tag.color];
-                    return (
-                      <li key={tag.id} style={{ backgroundColor: tagColor }}>
-                        {tag.name}
-                      </li>
-                    );
-                  })}
-                </Tags>
-              </Wrapper>
-            </Post>
-          );
-        })}
+            return (
+              <Post href={`/blog/codesnipet/${id}`} key={post.id}>
+                <Wrapper>
+                  <Title>{title}</Title>
+                  <Tags>
+                    {tags?.map((tag) => {
+                      let background;
+                      if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
+                        background = darkThemeTagColor;
+                      } else {
+                        background = lightThemeTagColor;
+                      }
+                      const tagColor = background[tag.color];
+                      return (
+                        <li key={tag.id} style={{ backgroundColor: tagColor }}>
+                          {tag.name}
+                        </li>
+                      );
+                    })}
+                  </Tags>
+                </Wrapper>
+              </Post>
+            );
+          })}
       </Base>
-      <PostPagination numPages={numPages} />
     </>
   );
 };
 
 const Base = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   padding: 2rem;
   gap: 2rem;
 
@@ -63,13 +58,7 @@ const Base = styled.div`
     gap: 1rem;
   }
 
-  @media (min-width: 769px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media (min-width: 1200px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+  grid-template-columns: 1fr;
 `;
 
 const Post = styled(Link)`
@@ -78,18 +67,8 @@ const Post = styled(Link)`
   border-radius: 10px;
   background-color: var(--post-item-background);
   transition: all 0.3s;
-
   margin: 0 auto;
-
-  @media (max-width: 768px) {
-    max-width: 400px;
-    width: 100%;
-  }
-
-  @media (max-width: 1200px) {
-    max-width: 450px;
-    width: 100%;
-  }
+  width: 100%;
 `;
 
 const DefaultImg = styled.div`
@@ -197,4 +176,4 @@ const Tags = styled.ul`
   }
 `;
 
-export default PostList;
+export default CodeSnipetList;
