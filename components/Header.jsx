@@ -145,7 +145,6 @@ const Title = styled.h1`
   margin-right: auto;
   font-size: 24px;
   white-space: nowrap;
-  width: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
 

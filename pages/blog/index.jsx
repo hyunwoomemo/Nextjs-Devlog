@@ -5,9 +5,7 @@ import { POST_DATABASE_ID, TOKEN } from "@/config";
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 
-const index = ({ posts, allPosts, numPages }) => {
-  console.log(allPosts);
-  console.log(posts);
+const index = ({ posts, numPages }) => {
   return (
     <Layout data={posts}>
       <PostList data={posts} numPages={numPages} />
