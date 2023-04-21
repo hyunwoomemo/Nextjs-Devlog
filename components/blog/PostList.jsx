@@ -13,7 +13,7 @@ const PostList = ({ data, numPages }) => {
       <Base>
         {data?.map((post) => {
           const category = post.properties.category.select?.name;
-          const title = post.procperties.Name.title[0].plain_text;
+          const title = post.properties.Name.title[0].plain_text;
           const summary = post.properties.summary.rich_text[0]?.plain_text;
           const imgSrc = post.cover?.file?.url || post.cover?.external.url;
           const tags = post.properties.tags.multi_select;
