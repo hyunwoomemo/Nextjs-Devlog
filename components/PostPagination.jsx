@@ -73,6 +73,7 @@ const PaginationItem = styled.li`
   align-items: center;
   padding: 5px;
   border-radius: 50%;
+  cursor: pointer;
 `;
 
 const PrevBtn = styled.li`

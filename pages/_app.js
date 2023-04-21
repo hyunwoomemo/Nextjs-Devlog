@@ -1,4 +1,5 @@
 import GlobalStyle from '@/components/GlobalStyle'
+import Loading from '@/components/Loading'
 import LoadingContext from '@/context/LoadingContext'
 import ThemeContext from '@/context/ThemeContext'
 import '@/styles/globals.css'
@@ -14,9 +15,11 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     const start = () => {
       setLoading(true);
+      document.body.style.overflow = 'hidden';
     };
     const end = (url) => {
       setLoading(false);
+      document.body.style.overflow = 'unset';
     };
 
 
@@ -38,25 +41,8 @@ export default function App({ Component, pageProps }) {
       <LoadingContext.Provider value={{ loading }}>
         <GlobalStyle />
         <Component {...pageProps} />
-        {loading ? <Loading>Loading...</Loading> : undefined}
+        {loading ? <Loading /> : undefined}
       </LoadingContext.Provider>
     </ThemeContext.Provider>
   )
 }
-
-const Loading = styled.div`
-  position: fixed;
-  z-index: 999;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-color: var(--text-color);
-  color: var(--main-background);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 1;
-`

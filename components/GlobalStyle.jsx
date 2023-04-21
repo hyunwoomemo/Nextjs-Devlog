@@ -3,9 +3,9 @@ import { Global, css } from "@emotion/react";
 
 const defaultStyle = css`
   @font-face {
-    font-family: "TheJamsil5Bold";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2") format("woff2");
-    font-weight: 700;
+    font-family: "OTWelcomeRA";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2") format("woff2");
+    font-weight: normal;
     font-style: normal;
   }
 
@@ -201,8 +201,7 @@ const defaultStyle = css`
   } */
 
   body {
-    font-family: "TheJamsil5Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Apple SD Gothic Neo, Roboto, Arial Helvetica, sans-serif;
     background-color: var(--main-background);
     -webkit-font-smoothing: antialiased;
     overflow-x: auto;

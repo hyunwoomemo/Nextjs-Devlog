@@ -153,8 +153,9 @@ const Base = styled.div`
 
   img {
     border-radius: 15px;
-    max-width: 904px;
-    width: 100%;
+    width: 50%;
+    display: flex;
+    margin: 0 auto;
   }
 
   details {
