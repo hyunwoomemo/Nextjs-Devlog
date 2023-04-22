@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Footer() {
+  const router = useRouter();
   return (
-    <Base>
+    <Base display={router.pathname === "/"}>
       <Wrapper className="mx-auto flex items-center sm:flex-row flex-col">
         <Link href="/" className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
           <span className="ml-3 text-xl">Hyunwoomemo&apos;s Blog</span>
@@ -23,6 +25,7 @@ const Base = styled.footer`
   align-items: center;
   background-color: var(--footer-background);
   margin-top: auto;
+  display: ${({ display }) => (display ? "block" : "none")};
 `;
 
 const Wrapper = styled.div`

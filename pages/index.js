@@ -5,6 +5,7 @@ import Seo from '@/components/Seo'
 import Layout from '@/components/Layout'
 import Hero from '@/components/Hero'
 import styled from '@emotion/styled'
+import Footer from '@/components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 

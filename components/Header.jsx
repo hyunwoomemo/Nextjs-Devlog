@@ -61,7 +61,7 @@ const Header = ({ data, choiceCt }) => {
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
           <Link href="/projects">프로젝트</Link>
-          <Link href="">about</Link>
+          <Link href="/about">about</Link>
         </LinkWrapper>
         <Hambuger onClick={() => setIsOpen(true)}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -94,7 +94,7 @@ const Header = ({ data, choiceCt }) => {
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
           <Link href="/projects">프로젝트</Link>
-          <Link href="">about</Link>
+          <Link href="/about">about</Link>
         </ModalBody>
       </Modal>
     </Base>
