@@ -45,28 +45,26 @@ const SearchList = ({ data, keyword, fade }) => {
             return (
               <Post href={parentDb === "projects" ? `/${parentDb}/${id}` : `/blog/${parentDb}/${id}`} key={post.id}>
                 <Wrapper>
-                  {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="150" height="120" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
-                  <Contents>
-                    <Title>{title}</Title>
-                    <Category>{`${parentDb} / ${category}`}</Category>
-                    <Summary>{summary}</Summary>
-                    <Tags>
-                      {tags?.map((tag) => {
-                        let background;
-                        if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
-                          background = darkThemeTagColor;
-                        } else {
-                          background = lightThemeTagColor;
-                        }
-                        const tagColor = background[tag.color];
-                        return (
-                          <li key={tag.id} style={{ backgroundColor: tagColor }}>
-                            {tag.name}
-                          </li>
-                        );
-                      })}
-                    </Tags>
-                  </Contents>
+                  {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
+                  <Title>{title}</Title>
+                  <Category>{`${parentDb} / ${category}`}</Category>
+                  <Summary>{summary}</Summary>
+                  <Tags>
+                    {tags?.map((tag) => {
+                      let background;
+                      if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
+                        background = darkThemeTagColor;
+                      } else {
+                        background = lightThemeTagColor;
+                      }
+                      const tagColor = background[tag.color];
+                      return (
+                        <li key={tag.id} style={{ backgroundColor: tagColor }}>
+                          {tag.name}
+                        </li>
+                      );
+                    })}
+                  </Tags>
                 </Wrapper>
               </Post>
             );
@@ -77,7 +75,11 @@ const SearchList = ({ data, keyword, fade }) => {
 };
 
 const Base = styled.div`
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   padding: 2rem;
   gap: 2rem;
 
@@ -86,18 +88,13 @@ const Base = styled.div`
     gap: 1rem;
   }
 
-  grid-template-columns: 1fr;
+  @media (min-width: 769px) {
+    grid-template-columns: 1fr 1fr;
+  }
 
-  transition: all 0.3s;
-
-  ${({ fade }) =>
-    fade
-      ? css`
-          opacity: 0;
-        `
-      : css`
-          opacity: 1;
-        `}
+  @media (min-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 `;
 
 const Post = styled(Link)`
@@ -106,45 +103,58 @@ const Post = styled(Link)`
   border-radius: 10px;
   background-color: var(--post-item-background);
   transition: all 0.3s;
+
   margin: 0 auto;
-  width: 100%;
+
+  @media (max-width: 768px) {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  @media (max-width: 1200px) {
+    max-width: 450px;
+    width: 100%;
+  }
 `;
 
 const DefaultImg = styled.div`
-  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   line-height: 20px;
-  width: 150px;
-  height: 120px;
+  width: 100%;
+  height: 100%;
   color: var(--text-color);
-  font-size: 14px;
-  background-color: #d6d6d6;
+  font-size: 20px;
+
+  @media (max-width: 768px) {
+    height: 150px;
+    font-size: 14px;
+  }
+
+  @media (min-width: 769px) {
+    min-height: 250px;
+    min-width: 300px;
+  }
 `;
 
 const ImageItem = styled(Image)`
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
+  object-fit: cover;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    height: 150px;
+  }
 `;
 
 const Wrapper = styled.div`
   padding: 1rem 0;
   display: flex;
-  gap: 1rem;
-  width: 100%;
-  align-items: center;
-
-  @media (max-width: 768px) {
-    gap: 10px;
-  }
-`;
-
-const Contents = styled.div`
-  display: flex;
   flex-direction: column;
   gap: 1rem;
-  height: 100%;
+  width: 100%;
 
   @media (max-width: 768px) {
     gap: 10px;
@@ -200,8 +210,6 @@ const Tags = styled.ul`
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: auto;
-  margin-bottom: 5px;
 
   li {
     font-size: 12px;

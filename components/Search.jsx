@@ -53,9 +53,6 @@ const Base = styled.div`
   flex-direction: column;
   gap: 2rem;
   position: absolute;
-  /* top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   padding: 2rem;
   background-color: #fff;
 
@@ -75,6 +72,9 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
 `;
 
 const CloseBtn = styled.div`
