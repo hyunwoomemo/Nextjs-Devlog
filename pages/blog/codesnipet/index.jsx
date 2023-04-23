@@ -7,6 +7,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 const Home = ({ posts }) => {
+  console.log(posts);
   const [keyword, setKeyword] = useState("");
 
   const handleSearch = (e) => {

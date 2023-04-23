@@ -9,7 +9,7 @@ import BackArrow from "@/public/back-arrow.svg";
 import ChoiceCategory from "./blog/ChoiceCategory";
 import Search from "./Search";
 
-const Header = ({ data, choiceCt }) => {
+const Header = ({ data, choiceCt, posts }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -101,7 +101,7 @@ const Header = ({ data, choiceCt }) => {
           <Link href="/about">About</Link>
         </ModalBody>
       </Modal>
-      <Search active={search} />
+      <Search active={search} posts={posts} />
     </Base>
   );
 };

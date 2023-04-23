@@ -18,12 +18,13 @@ import mysql from '@/public/languageIcons/mysql.png';
 import aws from '@/public/languageIcons/aws.png';
 import gatsby from '@/public/languageIcons/gatsby.png';
 import notion from '@/public/languageIcons/notion.png';
+import { CODESNIPET_DATABASE_ID, POST_DATABASE_ID, PROJECT_DATABASE_ID, TOKEN } from '@/config'
 
-export default function Home() {
-
+export default function Home({ posts }) {
+  console.log(posts)
   return (
     <Base>
-      <Layout>
+      <Layout posts={posts}>
         <Seo title="home" />
         <Hero />
         <RollingBanner speed={5}>
@@ -45,3 +46,35 @@ export default function Home() {
 
 const Base = styled.div`
 `
+
+export async function getStaticProps() {
+  const options = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${TOKEN}`,
+    },
+    body: JSON.stringify({
+      page_size: 100,
+    }),
+  };
+
+  const snipetRes = await fetch(`https://api.notion.com/v1/databases/${CODESNIPET_DATABASE_ID}/query`, options);
+  const postsRes = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
+  const projectRes = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
+
+  const snipetData = await snipetRes.json();
+  const postsData = await postsRes.json();
+
+  const projectData = await projectRes.json();
+
+  const posts = [...snipetData.results, ...postsData.results, ...projectData.results];
+
+  return {
+    props: { posts },
+  };
+}
+
+

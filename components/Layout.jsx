@@ -4,11 +4,11 @@ import styled from "@emotion/styled";
 import Footer from "./Footer";
 import LoadingContext from "@/context/LoadingContext";
 
-const Layout = ({ children, data, choiceCt }) => {
+const Layout = ({ children, data, choiceCt, posts }) => {
   const { loading } = useContext(LoadingContext);
   return (
     <Base loading={loading.toString()}>
-      <Header data={data} choiceCt={choiceCt} />
+      <Header data={data} choiceCt={choiceCt} posts={posts} />
       <Children>{children}</Children>
       <Footer />
     </Base>
