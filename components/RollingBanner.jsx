@@ -67,12 +67,9 @@ const SlideItem = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  min-width: 150px;
 
   > img {
-    width: 100%;
-    max-width: 75px;
+    width: 50px;
     height: auto;
   }
 `;

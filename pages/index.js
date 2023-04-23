@@ -15,6 +15,9 @@ import html from '@/public/languageIcons/html.png';
 import nodejs from '@/public/languageIcons/nodejs.png';
 import express from '@/public/languageIcons/express.png';
 import mysql from '@/public/languageIcons/mysql.png';
+import aws from '@/public/languageIcons/aws.png';
+import gatsby from '@/public/languageIcons/gatsby.png';
+import notion from '@/public/languageIcons/notion.png';
 
 export default function Home() {
 
@@ -24,13 +27,16 @@ export default function Home() {
         <Seo title="home" />
         <Hero />
         <RollingBanner speed={5}>
-          <Image alt="language-icons" src={github}></Image>
           <Image alt="language-icons" src={react}></Image>
           <Image alt="language-icons" src={javascript}></Image>
           <Image alt="language-icons" src={html}></Image>
           <Image alt="language-icons" src={nodejs}></Image>
           <Image alt="language-icons" src={express}></Image>
           <Image alt="language-icons" src={mysql}></Image>
+          <Image alt="language-icons" src={github}></Image>
+          <Image alt="language-icons" src={aws}></Image>
+          <Image alt="language-icons" src={gatsby}></Image>
+          <Image alt="language-icons" src={notion}></Image>
         </RollingBanner>
       </Layout>
     </Base>
