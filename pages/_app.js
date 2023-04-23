@@ -1,9 +1,12 @@
 import GlobalStyle from '@/components/GlobalStyle'
 import Loading from '@/components/Loading'
 import LoadingContext from '@/context/LoadingContext'
+import SearchContext from '@/context/SearchContext'
 import ThemeContext from '@/context/ThemeContext'
 import '@/styles/globals.css'
 import '@/styles/modal.scss'
+import { cache } from '@emotion/css'
+import { CacheProvider } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Router } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -11,6 +14,7 @@ import { useEffect, useState } from 'react'
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   const [themeMode, setThemeMode] = useState(typeof window === "object" ? window.localStorage.getItem("theme") : "dark");
+  const [search, setSearch] = useState(false);
 
   useEffect(() => {
     const start = () => {
@@ -37,12 +41,16 @@ export default function App({ Component, pageProps }) {
 
 
   return (
-    <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
-      <LoadingContext.Provider value={{ loading }}>
-        <GlobalStyle />
-        <Component {...pageProps} />
-        {loading ? <Loading /> : undefined}
-      </LoadingContext.Provider>
-    </ThemeContext.Provider>
+    <CacheProvider value={cache}>
+      <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
+        <LoadingContext.Provider value={{ loading }}>
+          <SearchContext.Provider value={{ search, setSearch }}>
+            <GlobalStyle />
+            <Component {...pageProps} />
+            {loading ? <Loading /> : undefined}
+          </SearchContext.Provider>
+        </LoadingContext.Provider>
+      </ThemeContext.Provider>
+    </CacheProvider>
   )
 }

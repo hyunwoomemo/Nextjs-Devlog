@@ -21,7 +21,6 @@ import notion from '@/public/languageIcons/notion.png';
 import { CODESNIPET_DATABASE_ID, POST_DATABASE_ID, PROJECT_DATABASE_ID, TOKEN } from '@/config'
 
 export default function Home({ posts }) {
-  console.log(posts)
   return (
     <Base>
       <Layout posts={posts}>

@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import BackArrow from "@/public/back-arrow.svg";
 import ChoiceCategory from "./blog/ChoiceCategory";
 import Search from "./Search";
+import SearchContext from "@/context/SearchContext";
 
 const Header = ({ data, choiceCt, posts }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +50,7 @@ const Header = ({ data, choiceCt, posts }) => {
     setIsOpen(false);
   };
 
-  const [search, setSearch] = useState(false);
+  const { search, setSearch } = useContext(SearchContext);
 
   return (
     <Base>
@@ -90,7 +91,7 @@ const Header = ({ data, choiceCt, posts }) => {
             </svg>
           )}
         </ThemeToggleBtn>
-        <SearchBtn onClick={() => setSearch(!search)}>검색</SearchBtn>
+        {router.pathname === "/" ? <SearchBtn onClick={() => setSearch(!search)}>검색</SearchBtn> : undefined}
       </Wrapper>
       {router.pathname.indexOf("posts") > -1 && !router.query.id && router.pathname !== "/blog/posts/categories" ? <ChoiceCategory category={choiceCt} /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">

@@ -38,7 +38,7 @@ const Container = styled.div`
     padding: 1rem;
   }
 
-  ${({ position }) =>
+  /*   ${({ position }) =>
     position == "right"
       ? css`
           right: 0;
@@ -49,7 +49,7 @@ const Container = styled.div`
           left: 50%;
           transform: translate(-50%, -50%);
           height: 50%;
-        `}
+        `} */
 `;
 
 const Modal = ({ children, onClose, isOpen, selector = "#portal", position }) => {
