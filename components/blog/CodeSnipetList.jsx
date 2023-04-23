@@ -14,18 +14,22 @@ const CodeSnipetList = ({ data, keyword }) => {
         {data
           ?.filter(
             (v) =>
-              v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.Tag.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
+              v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.tags.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
           )
           .map((post) => {
+            const category = post.properties.category.select?.name;
             const title = post.properties?.Name.title[0].plain_text;
             const imgSrc = post.cover?.file?.url || post.cover?.external.url;
-            const tags = post.properties.Tag?.multi_select;
+            const summary = post.properties.summary.rich_text[0]?.plain_text;
+            const tags = post.properties.tags?.multi_select;
             const id = post.id;
 
             return (
               <Post href={`/blog/codesnipet/${id}`} key={post.id}>
                 <Wrapper>
+                  <Category>{category}</Category>
                   <Title>{title}</Title>
+                  <Summary>{summary}</Summary>
                   <Tags>
                     {tags?.map((tag) => {
                       let background;

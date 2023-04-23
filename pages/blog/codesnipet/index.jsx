@@ -14,7 +14,7 @@ const Home = ({ posts }) => {
   };
 
   const keywordLength = posts?.filter(
-    (v) => v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.Tag.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
+    (v) => v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.tags.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
   );
 
   return (

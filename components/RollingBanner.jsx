@@ -69,7 +69,10 @@ const SlideItem = styled.li`
   align-items: center;
 
   > img {
-    width: 50px;
     height: auto;
+    background-color: #ffffff;
+    padding: 1rem;
+    width: 70px;
+    border-radius: 20px;
   }
 `;

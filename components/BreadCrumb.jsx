@@ -17,12 +17,14 @@ const BreadCrumb = ({ data }) => {
   const filterData = data?.map((v) => v.properties.category?.select?.name).filter((v1, i, arr) => arr.indexOf(v1) === i);
 
   return (
-    <Base style={{ display: router.pathname === "/" ? "none" : "block" }}>
+    <Base style={{ display: router.pathname === "/" || router.pathname.indexOf("codesnipet") > -1 ? "none" : "block" }}>
       <BreadCrumbWrapper>
         <BreadCrumbItem href="/">home</BreadCrumbItem>
         <BreadCrumbItem href={router.pathname.indexOf("blog") > -1 ? "/blog" : "/projects"}>{router.pathname.indexOf("blog") > -1 ? "blog" : "projects"}</BreadCrumbItem>
         <BreadCrumbItem
-          href={`/blog/categories/${data?.map((v) => [v.id, v.properties.category?.select?.name, v.properties?.Name?.title[0]?.plain_text]).filter((v1, i, arr) => v1[0] === router.query.id)[0][1]}`}
+          href={`/blog/posts/categories/${
+            data?.map((v) => [v.id, v.properties.category?.select?.name, v.properties?.Name?.title[0]?.plain_text]).filter((v1, i, arr) => v1[0] === router.query.id)[0][1]
+          }`}
         >
           {router.query.id
             ? data?.map((v) => [v.id, v.properties.category?.select?.name, v.properties?.Name?.title[0]?.plain_text]).filter((v1, i, arr) => v1[0] === router.query.id)[0][1]
