@@ -7,6 +7,7 @@ import ThemeContext from "@/context/ThemeContext";
 import { useRouter } from "next/router";
 import BackArrow from "@/public/back-arrow.svg";
 import ChoiceCategory from "./blog/ChoiceCategory";
+import Search from "./Search";
 
 const Header = ({ data, choiceCt }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,6 +49,8 @@ const Header = ({ data, choiceCt }) => {
     setIsOpen(false);
   };
 
+  const [search, setSearch] = useState(false);
+
   return (
     <Base>
       <Wrapper>
@@ -87,6 +90,7 @@ const Header = ({ data, choiceCt }) => {
             </svg>
           )}
         </ThemeToggleBtn>
+        <SearchBtn onClick={() => setSearch(!search)}>검색</SearchBtn>
       </Wrapper>
       {router.pathname.indexOf("posts") > -1 && !router.query.id && router.pathname !== "/blog/posts/categories" ? <ChoiceCategory category={choiceCt} /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
@@ -97,6 +101,7 @@ const Header = ({ data, choiceCt }) => {
           <Link href="/about">About</Link>
         </ModalBody>
       </Modal>
+      <Search active={search} />
     </Base>
   );
 };
@@ -188,6 +193,8 @@ const ThemeToggleBtn = styled.div`
 
   color: ${({ dark }) => (dark ? "yellow" : "#3388a9")};
 `;
+
+const SearchBtn = styled.div``;
 
 const ModalBody = styled.ul`
   display: flex;

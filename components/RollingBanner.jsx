@@ -70,7 +70,8 @@ const SlideItem = styled.li`
 
   > img {
     height: auto;
-    background-color: #ffffff;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px #fff;
     padding: 1rem;
     width: 70px;
     border-radius: 20px;
