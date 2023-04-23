@@ -56,7 +56,7 @@ const Header = ({ data, choiceCt }) => {
             <BackArrow width={20} />
           </BackIcon>
         ) : undefined}
-        {title && scrollTop > 170 ? <Title>{title}</Title> : <TitleLink href="/">Hyunwoomemo</TitleLink>}
+        {title && scrollTop > 170 ? <Title onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{title}</Title> : <TitleLink href="/">Hyunwoomemo</TitleLink>}
         <LinkWrapper>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
