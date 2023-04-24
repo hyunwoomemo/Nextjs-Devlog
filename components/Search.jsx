@@ -54,7 +54,7 @@ const Base = styled.div`
   gap: 2rem;
   position: absolute;
   padding: 2rem;
-  background-color: #fff;
+  backdrop-filter: blur(50px);
 
   opacity: ${({ active }) => (active ? "1" : "0")};
   pointer-events: ${({ active }) => (active ? "all" : "none")};

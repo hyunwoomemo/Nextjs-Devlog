@@ -8,16 +8,6 @@ import styled from '@emotion/styled'
 import Footer from '@/components/Footer'
 import { useEffect, useState } from 'react'
 import RollingBanner from '@/components/RollingBanner'
-import github from '@/public/languageIcons/github.png';
-import react from '@/public/languageIcons/react.png';
-import javascript from '@/public/languageIcons/javascript.png';
-import html from '@/public/languageIcons/html.png';
-import nodejs from '@/public/languageIcons/nodejs.png';
-import express from '@/public/languageIcons/express.png';
-import mysql from '@/public/languageIcons/mysql.png';
-import aws from '@/public/languageIcons/aws.png';
-import gatsby from '@/public/languageIcons/gatsby.png';
-import notion from '@/public/languageIcons/notion.png';
 import { CODESNIPET_DATABASE_ID, LANGUAGE_DATABASE_ID, POST_DATABASE_ID, PROJECT_DATABASE_ID, TOKEN } from '@/config'
 
 
@@ -28,7 +18,7 @@ export default function Home({ posts, languages }) {
       <Layout posts={posts}>
         <Seo title="home" />
         <Hero />
-        <RollingBanner speed={5}>
+        {/* <RollingBanner speed={5}>
           {languages.map((v) => {
             return (
               <>
@@ -36,7 +26,7 @@ export default function Home({ posts, languages }) {
               </>
             )
           })}
-        </RollingBanner>
+        </RollingBanner> */}
       </Layout>
     </Base>
   )
