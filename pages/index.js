@@ -42,7 +42,7 @@ export default function Home({ posts, languages }) {
           {languages.map((v) => {
             return (
               <>
-                <Image key={v.id} width={150} height={150} src={v.icon.file?.url} alt={v.properties.이름.title[0].plain_text}></Image>
+                <Image key={v.id} width={150} height={150} src={v.icon?.file?.url} alt={v.properties.이름.title[0].plain_text}></Image>
               </>
             )
           })}
