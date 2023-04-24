@@ -29,7 +29,7 @@ const RollingBanner = ({ speed, children }) => {
         clearInterval(move);
       };
     }
-  }, [moveX, direction]);
+  }, [moveX, direction, children.length, speed]);
 
   return (
     <Container id="container">
