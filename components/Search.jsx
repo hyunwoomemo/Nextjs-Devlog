@@ -56,16 +56,8 @@ const Base = styled.div`
   padding: 2rem;
   background-color: #fff;
 
-  ${({ active }) =>
-    active
-      ? css`
-          opacity: 1;
-          pointer-events: all;
-        `
-      : css`
-          opacity: 0;
-          pointer-events: none;
-        `}
+  opacity: ${({ active }) => (active ? "1" : "0")};
+  pointer-events: ${({ active }) => (active ? "all" : "none")};
 `;
 
 const Header = styled.div`
