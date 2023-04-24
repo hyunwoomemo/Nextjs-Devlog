@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  compiler: {
+    emotion: true,
+  },
   env: {
     API_KEY: process.env.BASE_URL,
   },
