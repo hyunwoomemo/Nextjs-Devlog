@@ -1,20 +1,22 @@
 import { CODESNIPET_DATABASE_ID, POST_DATABASE_ID, PROJECT_DATABASE_ID } from "@/config";
+import SearchContext from "@/context/SearchContext";
 import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 import slugify from "slugify";
 
 const SearchList = ({ data, keyword, fade }) => {
   const codesnipetId = CODESNIPET_DATABASE_ID;
   const postsId = POST_DATABASE_ID;
   const projectId = PROJECT_DATABASE_ID;
+  const { search, setSearch } = useContext(SearchContext);
   return (
     <>
-      <Base fade={fade}>
+      <Base fade={fade} onClick={() => setSearch(false)}>
         {data
           ?.filter(
             (v) =>

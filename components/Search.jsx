@@ -6,11 +6,13 @@ import { createPortal } from "react-dom";
 import { css } from "@emotion/css";
 import Portal from "./Portal";
 import SearchContext from "@/context/SearchContext";
+import { useRouter } from "next/router";
 
 const Search = ({ posts }) => {
   const [keyword, setKeyword] = useState("");
   const [fade, setFade] = useState(false);
   const { search, setSearch } = useContext(SearchContext);
+  const [activeKeyword, setActiveKeyword] = useState(false);
 
   const handleSearch = (e) => {
     setKeyword(e.target.value);
@@ -18,11 +20,19 @@ const Search = ({ posts }) => {
     setTimeout(() => {
       setFade(false);
     }, 100);
+
+    setActiveKeyword(true);
   };
 
-  const keywordLength = posts?.filter(
-    (v) => v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.tags.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
-  );
+  useEffect(() => {
+    if (activeKeyword && keyword.length === 0) {
+      setSearch(false);
+      setActiveKeyword(false);
+    }
+  }, [keyword, activeKeyword, setSearch]);
+
+  console.log(keyword.length);
+
   return (
     <Portal selector="#portal">
       <Base active={search} id="base">

@@ -15,10 +15,12 @@ import { BsMoonFill, BsFillSunFill } from "react-icons/bs";
 const Header = ({ data, choiceCt, posts }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const { themeMode, setThemeMode } = useContext(ThemeContext);
 
   const [isCSR, setIsCSR] = useState(false);
   useEffect(() => {
     setIsCSR(true);
+    setThemeMode(window.localStorage.getItem("theme"));
   }, []);
 
   const title = data?.filter((v) => v.id === router.query.id)[0]?.properties.Name.title[0].plain_text;
@@ -33,8 +35,6 @@ const Header = ({ data, choiceCt, posts }) => {
       setScrollTop(document.documentElement.scrollTop);
     });
   }, []);
-
-  const { themeMode, setThemeMode } = useContext(ThemeContext);
 
   useEffect(() => {
     if (typeof window === "object") {
@@ -79,9 +79,9 @@ const Header = ({ data, choiceCt, posts }) => {
           </svg>
         </Hambuger>
         {router.pathname === "/" ? <SearchBtn onClick={() => setSearch(!search)}>검색</SearchBtn> : undefined}
-        <ThemeToggleBtn dark={themeMode === "dark"} onClick={handleTheme}>
-          {(typeof window === "object" ? window.localStorage.getItem("theme") : themeMode) === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
-        </ThemeToggleBtn>
+        <ToggleBtn dark={themeMode === "dark"} onClick={handleTheme}>
+          {themeMode === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
+        </ToggleBtn>
       </Wrapper>
       {router.pathname.indexOf("posts") > -1 && !router.query.id && router.pathname !== "/blog/posts/categories" ? <ChoiceCategory category={choiceCt} /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
@@ -178,9 +178,9 @@ const Hambuger = styled.div`
   }
 `;
 
-const ThemeToggleBtn = styled.div`
+const ToggleBtn = styled.div`
   height: 100%;
-  width: 24px !important;
+  width: 24px;
 
   color: ${({ dark }) => (dark ? "yellow" : "orange")};
 

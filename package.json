@@ -12,14 +12,18 @@
     "log-utils": "1.0.0"
   },
   "dependencies": {
+    "@emotion/cache": "^11.10.7",
+    "@emotion/core": "^11.0.0",
     "@emotion/css": "^11.10.6",
     "@emotion/react": "^11.10.6",
     "@emotion/serialize": "^1.1.1",
+    "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.6",
     "@emotion/utils": "^1.2.0",
     "@mui/material": "^5.12.1",
     "@notionhq/client": "^2.2.4",
     "@svgr/webpack": "^7.0.0",
+    "create-emotion-server": "^11.0.0",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
     "eslint": "8.38.0",
