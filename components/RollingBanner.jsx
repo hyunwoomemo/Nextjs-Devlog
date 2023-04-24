@@ -74,6 +74,7 @@ const SlideItem = styled.li`
     box-shadow: 0px 0px 10px #fff;
     padding: 1rem;
     width: 70px;
+    height: 70px;
     border-radius: 20px;
   }
 `;

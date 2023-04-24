@@ -79,7 +79,7 @@ const Base = styled.div`
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   padding: 2rem;
   gap: 2rem;
 
@@ -103,12 +103,23 @@ const Post = styled(Link)`
   border-radius: 10px;
   background-color: var(--post-item-background);
   transition: all 0.3s;
+  position: relative;
 
   margin: 0 auto;
 
   @media (max-width: 768px) {
     max-width: 400px;
     width: 100%;
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      height: 1px;
+      width: 100%;
+      left: 0;
+      background-color: #8080805e;
+    }
   }
 
   @media (max-width: 1200px) {

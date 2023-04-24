@@ -29,16 +29,6 @@ export default function Home({ posts, languages }) {
         <Seo title="home" />
         <Hero />
         <RollingBanner speed={5}>
-          {/* <Image alt="language-icons" src={react}></Image>
-          <Image alt="language-icons" src={javascript}></Image>
-          <Image alt="language-icons" src={html}></Image>
-          <Image alt="language-icons" src={nodejs}></Image>
-          <Image alt="language-icons" src={express}></Image>
-          <Image alt="language-icons" src={mysql}></Image>
-          <Image alt="language-icons" src={github}></Image>
-          <Image alt="language-icons" src={aws}></Image>
-          <Image alt="language-icons" src={gatsby}></Image>
-          <Image alt="language-icons" src={notion}></Image> */}
           {languages.map((v) => {
             return (
               <>
