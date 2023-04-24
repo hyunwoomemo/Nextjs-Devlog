@@ -35,7 +35,7 @@ const SearchList = ({ data, keyword, fade }) => {
           There are <ResultNumber colorEffect={colorEffect}>{filterData.length}</ResultNumber> search results{" "}
         </Result>
       ) : (
-        "검색 결과가 없습니다."
+        <Result>검색 결과가 없습니다.</Result>
       )}
       <Base fade={fade} onClick={() => setSearch(false)}>
         {data
@@ -97,7 +97,11 @@ const SearchList = ({ data, keyword, fade }) => {
   );
 };
 
-const Result = styled.div``;
+const Result = styled.div`
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+`;
 
 const ResultNumber = styled.span`
   color: ${({ colorEffect }) => (colorEffect ? "purple" : undefined)};

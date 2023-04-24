@@ -16,12 +16,13 @@ const Header = ({ data, choiceCt, posts }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const { themeMode, setThemeMode } = useContext(ThemeContext);
+  const [currentTheme, setCurrentTheme] = useState("dark");
 
-  const [isCSR, setIsCSR] = useState(false);
   useEffect(() => {
-    setIsCSR(true);
-    setThemeMode(window.localStorage.getItem("theme"));
-  }, []);
+    if (typeof window !== "object") return;
+    setCurrentTheme(window.localStorage.getItem("theme"));
+    document.body.dataset.theme = window.localStorage.getItem("theme");
+  }, [themeMode]);
 
   const title = data?.filter((v) => v.id === router.query.id)[0]?.properties.Name.title[0].plain_text;
 
@@ -36,16 +37,10 @@ const Header = ({ data, choiceCt, posts }) => {
     });
   }, []);
 
-  useEffect(() => {
-    if (typeof window === "object") {
-      document.body.dataset.theme = themeMode;
-      window.localStorage.setItem("theme", themeMode);
-    }
-  }, [themeMode, isCSR]);
-
   const handleTheme = () => {
-    window.localStorage.setItem("theme", themeMode === "dark" ? "light" : "dark");
     setThemeMode(themeMode === "dark" ? "light" : "dark");
+    window.localStorage.setItem("theme", window.localStorage.getItem("theme") === "dark" ? "light" : "dark");
+    console.log("click");
   };
 
   const handleClose = () => {
@@ -93,8 +88,8 @@ const Header = ({ data, choiceCt, posts }) => {
           <Link href="/blog">블로그</Link>
           <Link href="/projects">프로젝트</Link>
           <Link href="/about">About</Link>
-          <ToggleBtn dark={themeMode === "dark"} onClick={handleTheme}>
-            {themeMode === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
+          <ToggleBtn dark={currentTheme === "dark"} onClick={handleTheme}>
+            {currentTheme === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
           </ToggleBtn>
         </ModalBody>
       </Modal>
@@ -200,6 +195,7 @@ const ToggleBtn = styled.div`
 `;
 
 const SearchBtn = styled.div`
+  cursor: pointer;
   svg {
     width: 24px;
   }

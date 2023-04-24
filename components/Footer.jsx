@@ -8,23 +8,18 @@ import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
 export default function Footer() {
   const router = useRouter();
   const { themeMode, setThemeMode } = useContext(ThemeContext);
-
-  const [isCSR, setIsCSR] = useState(false);
-  useEffect(() => {
-    setIsCSR(true);
-    setThemeMode(window.localStorage.getItem("theme"));
-  }, [setThemeMode]);
+  const [currentTheme, setCurrentTheme] = useState("");
 
   useEffect(() => {
-    if (typeof window === "object") {
-      document.body.dataset.theme = themeMode;
-      window.localStorage.setItem("theme", themeMode);
-    }
-  }, [themeMode, isCSR]);
+    if (typeof window !== "object") return;
+    setCurrentTheme(window.localStorage.getItem("theme"));
+    document.body.dataset.theme = window.localStorage.getItem("theme");
+  }, [themeMode]);
 
   const handleTheme = () => {
-    window.localStorage.setItem("theme", themeMode === "dark" ? "light" : "dark");
     setThemeMode(themeMode === "dark" ? "light" : "dark");
+    window.localStorage.setItem("theme", window.localStorage.getItem("theme") === "dark" ? "light" : "dark");
+    console.log("click");
   };
   return (
     <Base display={router.pathname === "/"}>
@@ -32,8 +27,8 @@ export default function Footer() {
         <Link href="/" className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
           <span className="ml-3 text-xl">Hyunwoomemo&apos;s Devlog</span>
         </Link>
-        <ToggleBtn dark={themeMode === "dark"} onClick={handleTheme}>
-          {themeMode === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
+        <ToggleBtn dark={currentTheme === "dark"} onClick={handleTheme}>
+          {currentTheme === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
         </ToggleBtn>
       </Wrapper>
     </Base>

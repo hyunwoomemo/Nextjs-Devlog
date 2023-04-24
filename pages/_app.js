@@ -13,13 +13,14 @@ import { useEffect, useState } from 'react'
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
-  const [themeMode, setThemeMode] = useState(typeof window === "object" ? window.localStorage.getItem("theme") : "dark");
+  const [themeMode, setThemeMode] = useState('dark');
   const [search, setSearch] = useState(false);
 
   useEffect(() => {
     const start = () => {
       setLoading(true);
       document.body.style.overflow = 'hidden';
+      setThemeMode(window.localStorage.getItem('theme'))
     };
     const end = (url) => {
       setLoading(false);

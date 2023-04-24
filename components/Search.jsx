@@ -32,7 +32,7 @@ const Search = ({ posts }) => {
             전체
             <div>카테고리</div>
           </SearchCategory> */}
-          <SearchInput id="#search_input" placeholder="검색어를 입력하세요" value={keyword} onChange={handleSearch}></SearchInput>
+          <SearchInput autocomplete="off" id="#search_input" placeholder="검색어를 입력하세요" value={keyword} onChange={handleSearch}></SearchInput>
           <CloseBtn
             onClick={() => {
               setSearch(!search);
@@ -78,6 +78,7 @@ const CloseBtn = styled.div`
   width: 30px;
   height: 30px;
   margin-left: auto;
+  cursor: pointer;
 `;
 
 const SearchCategory = styled.div`
@@ -85,11 +86,16 @@ const SearchCategory = styled.div`
 `;
 
 const SearchInput = styled.input`
+  font-family: "TheJamsil5Bold";
   background-color: var(--tag-background);
   border: 0;
   padding: 1rem;
   width: 100%;
   border-radius: 10px;
+
+  &::placeholder {
+    font-family: "TheJamsil5Bold";
+  }
 `;
 
 const SearchResult = styled.div``;
