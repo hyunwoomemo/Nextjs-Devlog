@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import slugify from "slugify";
 
 const SearchList = ({ data, keyword, fade }) => {
@@ -14,8 +14,29 @@ const SearchList = ({ data, keyword, fade }) => {
   const postsId = POST_DATABASE_ID;
   const projectId = PROJECT_DATABASE_ID;
   const { search, setSearch } = useContext(SearchContext);
+  const filterData = data?.filter(
+    (v) => v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.tags.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
+  );
+
+  const [colorEffect, setColorEffect] = useState(false);
+
+  useEffect(() => {
+    setColorEffect(true);
+
+    setTimeout(() => {
+      setColorEffect(false);
+    }, 300);
+  }, [filterData.length]);
+
   return (
     <>
+      {filterData.length > 0 ? (
+        <Result>
+          There are <ResultNumber colorEffect={colorEffect}>{filterData.length}</ResultNumber> search results{" "}
+        </Result>
+      ) : (
+        "검색 결과가 없습니다."
+      )}
       <Base fade={fade} onClick={() => setSearch(false)}>
         {data
           ?.filter(
@@ -76,6 +97,14 @@ const SearchList = ({ data, keyword, fade }) => {
   );
 };
 
+const Result = styled.div``;
+
+const ResultNumber = styled.span`
+  color: ${({ colorEffect }) => (colorEffect ? "purple" : undefined)};
+  font-size: ${({ colorEffect }) => (colorEffect ? "18px" : undefined)};
+  transition: all 0.3s;
+`;
+
 const Base = styled.div`
   max-width: 1100px;
   margin: 0 auto;
@@ -97,6 +126,8 @@ const Base = styled.div`
   @media (min-width: 1200px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
+
+  opacity: ${({ fade }) => (fade ? "0" : "1")};
 `;
 
 const Post = styled(Link)`

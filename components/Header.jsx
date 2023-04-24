@@ -78,10 +78,13 @@ const Header = ({ data, choiceCt, posts }) => {
             />
           </svg>
         </Hambuger>
-        {router.pathname === "/" ? <SearchBtn onClick={() => setSearch(!search)}>검색</SearchBtn> : undefined}
-        <ToggleBtn dark={themeMode === "dark"} onClick={handleTheme}>
-          {themeMode === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
-        </ToggleBtn>
+        {router.pathname === "/" ? (
+          <SearchBtn onClick={() => setSearch(!search)}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+          </SearchBtn>
+        ) : undefined}
       </Wrapper>
       {router.pathname.indexOf("posts") > -1 && !router.query.id && router.pathname !== "/blog/posts/categories" ? <ChoiceCategory category={choiceCt} /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
@@ -90,6 +93,9 @@ const Header = ({ data, choiceCt, posts }) => {
           <Link href="/blog">블로그</Link>
           <Link href="/projects">프로젝트</Link>
           <Link href="/about">About</Link>
+          <ToggleBtn dark={themeMode === "dark"} onClick={handleTheme}>
+            {themeMode === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
+          </ToggleBtn>
         </ModalBody>
       </Modal>
       <Search active={search} posts={posts} />
@@ -179,18 +185,25 @@ const Hambuger = styled.div`
 `;
 
 const ToggleBtn = styled.div`
-  height: 100%;
   width: 24px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 50px;
 
   color: ${({ dark }) => (dark ? "yellow" : "orange")};
 
   > svg {
     width: 100%;
-    height: 100%;
+    font-size: 36px;
   }
 `;
 
-const SearchBtn = styled.div``;
+const SearchBtn = styled.div`
+  svg {
+    width: 24px;
+  }
+`;
 
 const ModalBody = styled.ul`
   display: flex;
