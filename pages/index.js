@@ -11,13 +11,13 @@ import RollingBanner from '@/components/RollingBanner'
 import { CODESNIPET_DATABASE_ID, LANGUAGE_DATABASE_ID, POST_DATABASE_ID, PROJECT_DATABASE_ID, TOKEN } from '@/config'
 
 
-export default function Home({ posts }) {
+export default function Home({ posts, languages }) {
   return (
     <Base>
       <Layout posts={posts}>
         <Seo title="home" />
         <Hero />
-        {/* <RollingBanner speed={5}>
+        <RollingBanner speed={5}>
           {languages.map((v) => {
             return (
               <>
@@ -25,7 +25,7 @@ export default function Home({ posts }) {
               </>
             )
           })}
-        </RollingBanner> */}
+        </RollingBanner>
       </Layout>
     </Base>
   )
@@ -48,34 +48,34 @@ export async function getStaticProps() {
     }),
   };
 
-  /*   const languageOptions = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Notion-Version": "2022-06-28",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      body: JSON.stringify({
-        page_size: 100,
-      }),
-    } */
+  const languageOptions = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${TOKEN}`,
+    },
+    body: JSON.stringify({
+      page_size: 100,
+    }),
+  }
 
   const snipetRes = await fetch(`https://api.notion.com/v1/databases/${CODESNIPET_DATABASE_ID}/query`, options);
   const postsRes = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
   const projectRes = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
-  /*   const languageRes = await fetch(`https://api.notion.com/v1/databases/${LANGUAGE_DATABASE_ID}/query`, languageOptions)
-   */
+  const languageRes = await fetch(`https://api.notion.com/v1/databases/${LANGUAGE_DATABASE_ID}/query`, languageOptions)
+
   const snipetData = await snipetRes.json();
   const postsData = await postsRes.json();
   const projectData = await projectRes.json();
-  /*   const languageData = await languageRes.json();
-   */
+  const languageData = await languageRes.json();
+
   const posts = [...snipetData.results, ...postsData.results, ...projectData.results];
-  /*   const languages = languageData.results;
-   */
+  const languages = languageData.results;
+
   return {
-    props: { posts },
+    props: { posts, languages },
   };
 }
 
