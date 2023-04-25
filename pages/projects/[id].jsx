@@ -70,7 +70,8 @@ const ActionWrapper = styled.div`
 const ActionItem = styled.div`
   padding: 10px 14px;
   font-size: 20px;
-  background-color: #e0e0e0;
+  background-color: var(--text-color);
+  color: var(--main-background);
   border-radius: 15px;
   width: 100%;
 `;
