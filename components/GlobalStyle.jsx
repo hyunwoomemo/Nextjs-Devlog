@@ -31,7 +31,7 @@ const defaultStyle = css`
       --categoryItem-bgc: #eee;
       --purple-color: #7c7cff;
       --choiceCategory-bgc: #fff;
-      --project-post-bgc: #eeeeee;
+      --project-post-bgc: #ffffff;
     }
     body[data-theme="dark"] {
       --text-color: #f9f9f9;

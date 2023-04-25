@@ -26,12 +26,16 @@ const ProjectPostList = ({ closeEvent, active, data, title }) => {
           const imgSrc = post.cover?.file?.url || post.cover?.external.url;
           const tags = post.properties.tags.multi_select;
           const id = post.id;
+          const num = post.properties.projectNum.select.name;
 
           return (
             <Post href={`/blog/posts/${id}`} key={post.id}>
               <Wrapper>
+                <TitleWrapper>
+                  <Num>{num}</Num>
+                  <PostTitle>{title}</PostTitle>
+                </TitleWrapper>
                 <Category>{category}</Category>
-                <PostTitle>{title}</PostTitle>
                 <Summary>{summary}</Summary>
                 <Tags>
                   {tags.map((tag) => {
@@ -129,6 +133,22 @@ const Category = styled.p`
   @media (max-width: 768px) {
     font-size: 12px;
   }
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const Num = styled.div`
+  padding: 4px 6px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background-color: var(--text-color);
+  color: var(--main-background);
 `;
 
 const PostTitle = styled.h1`
