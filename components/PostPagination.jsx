@@ -26,7 +26,7 @@ export default function PostPagination({ numPages }) {
   };
 
   return (
-    <Base spacing={2}>
+    <Base>
       <Pagination>
         <PrevBtn disabled={page === 1} onClick={handlePrevClick}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
