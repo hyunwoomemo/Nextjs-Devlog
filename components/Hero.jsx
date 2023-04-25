@@ -8,7 +8,7 @@ const Hero = () => {
       <Wrapper>
         <Text>
           <H1>안녕하세요, 이현우입니다.</H1>
-          <H2>좀 더 나은 개발자가 되기 위해서 항상 노력하고 있습니다</H2>
+          <H2></H2>
           <MoreBtn>더 보러가기</MoreBtn>
         </Text>
         <Lottie>

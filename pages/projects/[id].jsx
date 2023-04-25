@@ -19,10 +19,21 @@ import styled from "@emotion/styled";
 
 const ProjectItem = ({ html_text }) => {
   const [action, setAction] = useState(false);
+
+  const handleAction = (e) => {
+    setAction(!action);
+  };
+
+  const handlePostAction = (e) => {
+    e.stopPropagation();
+  };
+  const handlePageAction = (e) => {
+    e.stopPropagation();
+  };
   return (
     <Layout>
       <ProjectMarkdown2Html html={html_text} />
-      <ActionBtn onClick={() => setAction(!action)}>
+      <ActionBtn onClick={(e) => handleAction(e)}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
           <path
             fill-rule="evenodd"
@@ -30,50 +41,69 @@ const ProjectItem = ({ html_text }) => {
             clip-rule="evenodd"
           />
         </svg>
+        <ActionItem action={action} onClick={handlePostAction}>
+          포스트
+        </ActionItem>
+        <ActionItem action={action} onClick={handlePageAction}>
+          서비스
+          <br /> 페이지
+        </ActionItem>
       </ActionBtn>
-      <ActionWrapper action={action}>
-        <ActionItem>✍🏻 포스트</ActionItem>
-        <ActionItem>🏠 홈페이지</ActionItem>
-      </ActionWrapper>
     </Layout>
   );
 };
 
 const ActionBtn = styled.div`
-  width: 50px;
   position: absolute;
-  bottom: 50px;
-  right: 50px;
+  width: 70px;
+  bottom: 25px;
+  right: 25px;
   padding: 10px;
   background-color: var(--text-color);
   color: var(--main-background);
   border-radius: 50%;
-`;
-
-const ActionWrapper = styled.div`
-  color: var(--text-color);
-  background-color: var(--main-background);
-  position: absolute;
-  right: 0;
-  padding: 1rem;
-  bottom: 120px;
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  white-space: nowrap;
-  margin-bottom: 1rem;
-  transform: ${({ action }) => (action ? "scaleY(1)" : "scaleY(0)")};
-  transform-origin: bottom;
-  transition: all 0.3s;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    width: 50px;
+  }
 `;
 
 const ActionItem = styled.div`
-  padding: 10px 14px;
-  font-size: 20px;
+  position: absolute;
   background-color: var(--text-color);
   color: var(--main-background);
-  border-radius: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 0.3s;
+  padding: 1rem;
+  border-radius: 50%;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  height: 100%;
+  white-space: nowrap;
+  line-height: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  &:first-of-type {
+    transform: ${({ action }) => (action ? "translate(-50%, -200%) scale(1)" : undefined)};
+    opacity: ${({ action }) => (action ? "1" : "0")};
+  }
+
+  &:last-of-type {
+    transform: ${({ action }) => (action ? "translate(-200%, -100%) scale(1)" : undefined)};
+    opacity: ${({ action }) => (action ? "1" : "0")};
+  }
 `;
 
 export default ProjectItem;
