@@ -26,26 +26,24 @@ const Search = ({ posts }) => {
 
   return (
     <Portal selector="#portal">
-      <Base active={search} id="base">
-        <Header>
-          {/* <SearchCategory>
-            전체
-            <div>카테고리</div>
-          </SearchCategory> */}
-          <SearchInput autocomplete="off" id="#search_input" placeholder="검색어를 입력하세요" value={keyword} onChange={handleSearch}></SearchInput>
-          <CloseBtn
-            onClick={() => {
-              setSearch(!search);
-              setKeyword("");
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </CloseBtn>
-        </Header>
-        {keyword ? <SearchList data={posts} keyword={keyword} fade={fade} /> : undefined}
-      </Base>
+      {search ? (
+        <Base active={search} id="base">
+          <Header>
+            <SearchInput autocomplete="off" id="#search_input" placeholder="검색어를 입력하세요" value={keyword} onChange={handleSearch}></SearchInput>
+            <CloseBtn
+              onClick={() => {
+                setSearch(!search);
+                setKeyword("");
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </CloseBtn>
+          </Header>
+          {keyword ? <SearchList data={posts} keyword={keyword} fade={fade} /> : undefined}
+        </Base>
+      ) : undefined}
     </Portal>
   );
 };

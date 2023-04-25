@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import ProjectList from "@/components/projects/ProjectList";
-import { TOKEN, PROJECT_DATABASE_ID } from "@/config";
+import { TOKEN, PROJECT_DATABASE_ID, POST_DATABASE_ID } from "@/config";
 import styled from "@emotion/styled";
 
 const index = ({ projects }) => {

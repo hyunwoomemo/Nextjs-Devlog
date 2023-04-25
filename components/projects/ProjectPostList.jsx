@@ -1,32 +1,40 @@
-import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
-import styled from "@emotion/styled";
-import dayjs from "dayjs";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
+import styled from "@emotion/styled";
+import { POST_DATABASE_ID, TOKEN } from "@/config";
+import Link from "next/link";
+import Image from "next/image";
 
-const ProjectPostList = ({ data, blockId }) => {
+const ProjectPostList = ({ closeEvent, active, data, title }) => {
+  const selectData = data.results.filter((v) => v.properties.프로젝트명?.rich_text[0]?.plain_text === title);
+  console.log(selectData);
+
   return (
-    <>
-      <MainTitle>포스트</MainTitle>
-      <Base>
-        {data.results?.map((post) => {
-          const category = post.properties?.category?.select?.name;
-          const title = post.properties.Name?.title[0]?.plain_text;
-          const summary = post.properties.summary?.rich_text[0]?.plain_text;
+    <Base active={active}>
+      <Header>
+        <Title>포스트 ({selectData.length})</Title>
+        <CloseBtn onClick={closeEvent}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </CloseBtn>
+      </Header>
+      <Container>
+        {selectData?.map((post) => {
+          const category = post.properties.category.select?.name;
+          const title = post.properties.Name.title[0].plain_text;
+          const summary = post.properties.summary.rich_text[0]?.plain_text;
           const imgSrc = post.cover?.file?.url || post.cover?.external.url;
-          const tags = post.properties.tags?.multi_select;
+          const tags = post.properties.tags.multi_select;
           const id = post.id;
 
           return (
-            <Post href={`/projects/${blockId}/${id}`} key={post.id}>
-              {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
+            <Post href={`/blog/posts/${id}`} key={post.id}>
               <Wrapper>
                 <Category>{category}</Category>
-                <Title>{title}</Title>
+                <PostTitle>{title}</PostTitle>
                 <Summary>{summary}</Summary>
                 <Tags>
-                  {tags?.map((tag) => {
+                  {tags.map((tag) => {
                     let background;
                     if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
                       background = darkThemeTagColor;
@@ -45,90 +53,62 @@ const ProjectPostList = ({ data, blockId }) => {
             </Post>
           );
         })}
-      </Base>
-    </>
+      </Container>
+    </Base>
   );
 };
 
-const MainTitle = styled.h1`
-  font-size: 28px;
-  padding: 1rem;
-
-  @media (min-width: 769px) {
-    padding: 2rem;
-  }
-`;
-
 const Base = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
+  background-color: var(--project-post-bgc);
+  border-radius: 30px 30px 0 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  position: absolute;
+  z-index: 9;
+  height: 90vh;
+  width: 100vw;
+  bottom: 0;
   padding: 2rem;
+  transform: translateY(100%);
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
-
   @media (max-width: 768px) {
     padding: 1rem;
-    gap: 1rem;
   }
+  transition: all 0.3s;
 
-  @media (min-width: 769px) {
-    grid-template-columns: 1fr 1fr;
-  }
+  transform: ${({ active }) => (active ? "translateY(0)" : undefined)};
+`;
 
-  @media (min-width: 1200px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+const Header = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Title = styled.h1``;
+
+const CloseBtn = styled.div`
+  width: 24px;
+  height: auto;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
 `;
 
 const Post = styled(Link)`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  background-color: var(--post-item-background);
+  width: 100%;
   transition: all 0.3s;
-
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    max-width: 400px;
-    width: 100%;
-  }
-
-  @media (max-width: 1200px) {
-    max-width: 450px;
-    width: 100%;
-  }
-`;
-
-const DefaultImg = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  line-height: 20px;
-  width: 100%;
-  height: 100%;
-  color: var(--text-color);
-  font-size: 20px;
-
-  @media (max-width: 768px) {
-    height: 150px;
-    font-size: 14px;
-  }
-
-  @media (min-width: 769px) {
-    min-height: 250px;
-    min-width: 300px;
-  }
-`;
-
-const ImageItem = styled(Image)`
-  border-radius: 5px 5px 0 0;
-  object-fit: cover;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    height: 150px;
-  }
+  padding: 0 10px;
 `;
 
 const Wrapper = styled.div`
@@ -151,7 +131,7 @@ const Category = styled.p`
   }
 `;
 
-const Title = styled.h1`
+const PostTitle = styled.h1`
   font-size: 14px;
   line-height: 24px;
   font-weight: bold;

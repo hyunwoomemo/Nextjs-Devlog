@@ -1,4 +1,4 @@
-import { PROJECT_DATABASE_ID, TOKEN } from "@/config";
+import { POST_DATABASE_ID, PROJECT_DATABASE_ID, TOKEN } from "@/config";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 import React, { useState } from "react";
@@ -17,8 +17,10 @@ import rehypeSlug from "rehype-slug";
 import ProjectMarkdown2Html from "@/components/projects/ProjectMarkdown2Html";
 import styled from "@emotion/styled";
 
-const ProjectItem = ({ html_text }) => {
+const ProjectItem = ({ html_text, posts, title }) => {
+  console.log(title);
   const [action, setAction] = useState(false);
+  const [showPost, setShowPost] = useState(false);
 
   const handleAction = (e) => {
     setAction(!action);
@@ -26,32 +28,38 @@ const ProjectItem = ({ html_text }) => {
 
   const handlePostAction = (e) => {
     e.stopPropagation();
+    setShowPost(true);
   };
   const handlePageAction = (e) => {
     e.stopPropagation();
   };
   return (
-    <Layout>
-      <ProjectMarkdown2Html html={html_text} />
-      <ActionBtn onClick={(e) => handleAction(e)}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-          <path
-            fill-rule="evenodd"
-            d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z"
-            clip-rule="evenodd"
-          />
-        </svg>
-        <ActionItem action={action} onClick={handlePostAction}>
-          포스트
-        </ActionItem>
-        <ActionItem action={action} onClick={handlePageAction}>
-          서비스
-          <br /> 페이지
-        </ActionItem>
-      </ActionBtn>
+    <Layout headerTitle={title}>
+      <Base>
+        <ProjectMarkdown2Html html={html_text} />
+        <ActionBtn onClick={(e) => handleAction(e)}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path
+              fill-rule="evenodd"
+              d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <ActionItem action={action} onClick={handlePostAction}>
+            포스트
+          </ActionItem>
+          <ActionItem action={action} onClick={handlePageAction}>
+            서비스
+            <br /> 페이지
+          </ActionItem>
+        </ActionBtn>
+      </Base>
+      <ProjectPostList closeEvent={() => setShowPost(false)} active={showPost} data={posts} title={title} />
     </Layout>
   );
 };
+
+const Base = styled.div``;
 
 const ActionBtn = styled.div`
   position: absolute;
@@ -174,9 +182,21 @@ export async function getStaticProps({ params }) {
     .use(html)
     .processSync(mdString).value;
 
+  const postRes = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
+
+  const posts = await postRes.json();
+
+  const projectRes = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
+
+  const projectData = await projectRes.json();
+
+  const title = projectData.results.filter((v) => v.id === params.id)[0].properties.Name.title[0].plain_text;
+
   return {
     props: {
       html_text,
+      posts,
+      title,
     }, // will be passed to the page component as props
   };
 }

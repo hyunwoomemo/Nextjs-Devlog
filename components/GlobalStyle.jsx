@@ -17,7 +17,7 @@ const defaultStyle = css`
   :root {
     body {
       --text-color: #000;
-      --main-background: #fff;
+      --main-background: #f9f9f9;
       --footer-background: #e6e5e5;
       --dim-background: rgba(0, 0, 0, 0.5);
       --project-item-background: #ececec;
@@ -31,10 +31,11 @@ const defaultStyle = css`
       --categoryItem-bgc: #eee;
       --purple-color: #7c7cff;
       --choiceCategory-bgc: #fff;
+      --project-post-bgc: #eeeeee;
     }
     body[data-theme="dark"] {
-      --text-color: #ffffff;
-      --main-background: #000;
+      --text-color: #f9f9f9;
+      --main-background: #1b1b1b;
       --footer-background: #16202b;
       --dim-background: rgba(255, 255, 255, 0.2);
       --project-item-background: #272626;
@@ -48,6 +49,7 @@ const defaultStyle = css`
       --categoryItem-bgc: #1d2125;
       --purple-color: #7c7cff;
       --choiceCategory-bgc: #1d2125;
+      --project-post-bgc: #262626;
     }
   }
 
