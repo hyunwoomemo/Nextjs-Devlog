@@ -97,6 +97,7 @@ const Title = styled.h1``;
 const CloseBtn = styled.div`
   width: 24px;
   height: auto;
+  cursor: pointer;
 `;
 
 const Container = styled.div`

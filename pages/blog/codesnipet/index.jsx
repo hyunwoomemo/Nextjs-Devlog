@@ -33,7 +33,6 @@ const Home = ({ posts }) => {
           />
           {keywordLength.length > 0 && keyword ? <Text>{`${keywordLength.length}개`}</Text> : undefined}
         </ImageWrapper>
-        <Search placeholder="검색어를 입력하세요" onChange={handleSearch}></Search>
         <CodeSnipetList data={posts} keyword={keyword} />
       </Base>
     </Layout>
