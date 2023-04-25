@@ -150,6 +150,7 @@ const Title = styled.h1`
   font-weight: bold;
   position: relative;
   align-self: flex-start;
+  word-break: break-all;
 
   @media (min-width: 769px) {
     line-height: 30px;

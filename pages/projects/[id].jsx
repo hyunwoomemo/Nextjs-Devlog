@@ -1,7 +1,7 @@
 import { POST_DATABASE_ID, PROJECT_DATABASE_ID, TOKEN } from "@/config";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { unified } from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
@@ -33,31 +33,47 @@ const ProjectItem = ({ html_text, posts, title }) => {
   const handlePageAction = (e) => {
     e.stopPropagation();
   };
+
+  useEffect(() => {
+    setAction(true);
+    setTimeout(() => {
+      setAction(false);
+    }, 1000);
+  }, []);
+
   return (
-    <Layout headerTitle={title}>
-      <Base>
-        <ProjectMarkdown2Html html={html_text} />
-        <ActionBtn onClick={(e) => handleAction(e)}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-            <path
-              fill-rule="evenodd"
-              d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <ActionItem action={action} onClick={handlePostAction}>
-            포스트
-          </ActionItem>
-          <ActionItem action={action} onClick={handlePageAction}>
-            서비스
-            <br /> 페이지
-          </ActionItem>
-        </ActionBtn>
-      </Base>
+    <Container>
+      <Layout headerTitle={title}>
+        <Base>
+          <ProjectMarkdown2Html html={html_text} />
+          <ActionBtn onClick={(e) => handleAction(e)}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+              <path
+                fill-rule="evenodd"
+                d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <ActionItem action={action} onClick={handlePostAction}>
+              포스트
+            </ActionItem>
+            <ActionItem action={action} onClick={handlePageAction}>
+              서비스
+              <br /> 페이지
+            </ActionItem>
+          </ActionBtn>
+        </Base>
+      </Layout>
       <ProjectPostList closeEvent={() => setShowPost(false)} active={showPost} data={posts} title={title} />
-    </Layout>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  max-height: 100vh;
+  overflow: hidden;
+  position: relative;
+`;
 
 const Base = styled.div``;
 
@@ -73,6 +89,7 @@ const ActionBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     width: 50px;
