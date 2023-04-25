@@ -41,7 +41,7 @@ export async function getStaticPaths() {
   const dbs = await res.json();
 
   const paths = dbs.results.map((db) => ({
-    params: { id: db.id, category: db.properties.category.select.name },
+    params: { id: db.id, category: db.properties.category?.select?.name },
   }));
 
   return { paths, fallback: false };
@@ -78,7 +78,7 @@ export async function getStaticProps(context) {
 
   const choiceCt = context.params.category;
 
-  const filterPosts = posts.filter((v) => v.properties.category.select.name === context.params.category);
+  const filterPosts = posts.filter((v) => v.properties.category?.select?.name === context.params.category);
 
   return {
     props: { posts, postsCategory, filterPosts, choiceCt },
