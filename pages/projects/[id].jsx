@@ -1,7 +1,7 @@
 import { PROJECT_DATABASE_ID, TOKEN } from "@/config";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
-import React from "react";
+import React, { useState } from "react";
 import { unified } from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
@@ -15,14 +15,65 @@ import ProjectPostList from "@/components/projects/ProjectPostList";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import ProjectMarkdown2Html from "@/components/projects/ProjectMarkdown2Html";
+import styled from "@emotion/styled";
 
-const ProjectItem = ({ child_db, blockId, html_text }) => {
+const ProjectItem = ({ html_text }) => {
+  const [action, setAction] = useState(false);
   return (
     <Layout>
       <ProjectMarkdown2Html html={html_text} />
+      <ActionBtn onClick={() => setAction(!action)}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path
+            fill-rule="evenodd"
+            d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </ActionBtn>
+      <ActionWrapper action={action}>
+        <ActionItem>✍🏻 포스트</ActionItem>
+        <ActionItem>🏠 홈페이지</ActionItem>
+      </ActionWrapper>
     </Layout>
   );
 };
+
+const ActionBtn = styled.div`
+  width: 50px;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  padding: 10px;
+  background-color: var(--text-color);
+  color: var(--main-background);
+  border-radius: 50%;
+`;
+
+const ActionWrapper = styled.div`
+  color: var(--text-color);
+  background-color: var(--main-background);
+  position: absolute;
+  right: 0;
+  padding: 1rem;
+  bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  white-space: nowrap;
+  margin-bottom: 1rem;
+  transform: ${({ action }) => (action ? "scaleY(1)" : "scaleY(0)")};
+  transform-origin: bottom;
+  transition: all 0.3s;
+`;
+
+const ActionItem = styled.div`
+  padding: 10px 14px;
+  font-size: 20px;
+  background-color: #e0e0e0;
+  border-radius: 15px;
+  width: 100%;
+`;
 
 export default ProjectItem;
 
@@ -92,22 +143,8 @@ export async function getStaticProps({ params }) {
     .use(html)
     .processSync(mdString).value;
 
-  const blockId = params.id;
-  const response = await notion.blocks.children.list({
-    block_id: blockId,
-  });
-
-  const childDbID = response.results.filter((v) => v.type === "child_database")[0]?.id;
-
-  const res = await fetch(`https://api.notion.com/v1/databases/${childDbID}/query`, options);
-
-  const child_db = await res.json();
-
   return {
     props: {
-      child_db,
-      blockId,
-      response,
       html_text,
     }, // will be passed to the page component as props
   };
