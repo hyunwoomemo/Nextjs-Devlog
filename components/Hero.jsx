@@ -21,7 +21,6 @@ const Hero = () => {
 
 const Base = styled.div`
   margin-top: 5rem;
-  height: 100%;
   display: flex;
 
   @media (min-width: 1280px) {

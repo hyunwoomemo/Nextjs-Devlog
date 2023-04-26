@@ -1,17 +1,17 @@
 import styled from "@emotion/styled";
-import React from "react";
-
-const Page = ({ children }) => {
-  <PageItem>{children}</PageItem>;
-};
 
 const FullPage = ({ children }) => {
-  return <Base>{children}</Base>;
+  console.log(children);
+  return (
+    <Base>
+      {children.map((child, idx) => {
+        return <PageItem key={idx}>{child}</PageItem>;
+      })}
+    </Base>
+  );
 };
 
-const Base = styled.div`
-  /* background-color: red; */
-`;
+const Base = styled.div``;
 
 const PageItem = styled.div`
   height: 100vh;

@@ -6,7 +6,7 @@ import Layout from '@/components/Layout'
 import Hero from '@/components/Hero'
 import styled from '@emotion/styled'
 import Footer from '@/components/Footer'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import RollingBanner from '@/components/RollingBanner'
 import { CODESNIPET_DATABASE_ID, LANGUAGE_DATABASE_ID, POST_DATABASE_ID, PROJECT_DATABASE_ID, TOKEN } from '@/config'
 import RecentPost from '@/components/RecentPost'
@@ -15,25 +15,25 @@ import FullPage from '@/components/FullPage'
 
 export default function Home({ allPosts, posts, projects, languages }) {
   const slicePosts = posts.slice(0, 3)
+
   return (
     <Base>
-      <FullPage>
+      <Layout posts={allPosts}>
+        <Seo title="home" />
+        <Hero />
+        <RollingBanner speed={5}>
+          {languages.map((v) => {
+            return (
+              <>
+                <Image key={v.id} width={150} height={150} src={v.icon?.file?.url} alt={v.properties.이름.title[0].plain_text}></Image>
+              </>
+            )
+          })}
+        </RollingBanner>
 
-        <Layout posts={allPosts}>
-          <Seo title="home" />
-          <Hero />
-          <RollingBanner speed={5}>
-            {languages.map((v) => {
-              return (
-                <>
-                  <Image key={v.id} width={150} height={150} src={v.icon?.file?.url} alt={v.properties.이름.title[0].plain_text}></Image>
-                </>
-              )
-            })}
-          </RollingBanner>
-          <RecentPost data={slicePosts} projects={projects} />
-        </Layout>
-      </FullPage>
+        <RecentPost data={slicePosts} projects={projects} />
+
+      </Layout>
     </Base>
   )
 }
