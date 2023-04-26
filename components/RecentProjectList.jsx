@@ -50,41 +50,16 @@ const RecentProjectList = ({ projects }) => {
 const Base = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  padding: 2rem;
   gap: 2rem;
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-    gap: 1rem;
-  }
-
-  @media (min-width: 769px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media (min-width: 1200px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
 `;
 
 const Post = styled(Link)`
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
   background-color: var(--post-item-background);
   transition: all 0.3s;
 
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    max-width: 400px;
-    width: 100%;
-  }
-
-  @media (max-width: 1200px) {
-    max-width: 450px;
-    width: 100%;
-  }
+  border-bottom: 1px solid var(--border-bottom-color);
 `;
 
 const DefaultImg = styled.div`

@@ -32,6 +32,7 @@ const defaultStyle = css`
       --purple-color: #7c7cff;
       --choiceCategory-bgc: #fff;
       --project-post-bgc: #ffffff;
+      --border-bottom-color: rgba(0, 0, 0, 0.2);
     }
     body[data-theme="dark"] {
       --text-color: #f9f9f9;
@@ -50,6 +51,7 @@ const defaultStyle = css`
       --purple-color: #7c7cff;
       --choiceCategory-bgc: #1d2125;
       --project-post-bgc: #262626;
+      --border-bottom-color: rgba(255, 255, 255, 0.2);
     }
   }
 
