@@ -34,4 +34,8 @@ const MenuItem = styled(Link)`
   border-radius: 10px;
   padding: 2rem;
   font-size: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;

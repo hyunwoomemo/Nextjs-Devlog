@@ -94,6 +94,7 @@ const Title = styled.h1`
 const ArrowWrapper = styled.div`
   display: flex;
   gap: 3rem;
+  cursor: pointer;
 `;
 
 const PrevBtn = styled.div`

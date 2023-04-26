@@ -1,9 +1,13 @@
+import ThemeContext from "@/context/ThemeContext";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const RollingBanner = ({ speed, children }) => {
   const [moveX, setMoveX] = useState(0);
   const [direction, setDirection] = useState(1);
+
+  const { themeMode } = useContext(ThemeContext);
 
   useEffect(() => {
     if (typeof window !== "object") return;
@@ -36,7 +40,11 @@ const RollingBanner = ({ speed, children }) => {
       <SlideWrapper id="slide-wrapper">
         {children.length > 1 ? (
           children.map((v, i) => {
-            return <SlideItem key={i}>{v}</SlideItem>;
+            return (
+              <SlideItem key={i} themeMode={themeMode === "dark"}>
+                {v}
+              </SlideItem>
+            );
           })
         ) : (
           <SlideItem>{children}</SlideItem>
@@ -54,6 +62,7 @@ const Container = styled.div`
 
 const SlideWrapper = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   padding: 2rem;
   @media (max-width: 768px) {
@@ -68,13 +77,37 @@ const SlideItem = styled.li`
   justify-content: center;
   align-items: center;
 
-  > img {
-    height: auto;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px #fff;
-    padding: 1rem;
-    width: 70px;
-    height: 70px;
-    border-radius: 20px;
+  @media (max-width: 768px) {
+    padding: 0;
   }
+
+  ${({ themeMode }) =>
+    themeMode
+      ? css`
+          > img {
+            width: 50px;
+            height: 50px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            padding: 5px;
+
+            @media (max-width: 768px) {
+              width: 35px;
+              height: 35px;
+              border-radius: 50%;
+            }
+          }
+        `
+      : css`
+          > img {
+            width: 50px;
+            height: 50px;
+            padding: 5px;
+
+            @media (max-width: 768px) {
+              width: 35px;
+              height: 35px;
+            }
+          }
+        `}
 `;

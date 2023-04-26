@@ -16,9 +16,10 @@ const defaultStyle = css`
 
   :root {
     body {
+      --primary-color: slategray;
       --text-color: #000;
       --main-background: #f9f9f9;
-      --footer-background: #e6e5e5;
+      --footer-background: #f2f2f2;
       --dim-background: rgba(0, 0, 0, 0.5);
       --project-item-background: #ececec;
       --tag-background: #ddddd1;
@@ -35,9 +36,10 @@ const defaultStyle = css`
       --border-bottom-color: rgba(0, 0, 0, 0.2);
     }
     body[data-theme="dark"] {
+      --primary-color: #8498ab;
       --text-color: #f9f9f9;
       --main-background: #1b1b1b;
-      --footer-background: #16202b;
+      --footer-background: #000000;
       --dim-background: rgba(255, 255, 255, 0.2);
       --project-item-background: #272626;
       --tag-background: #585853;

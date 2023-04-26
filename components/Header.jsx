@@ -84,6 +84,9 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
     }
   }, [router.pathname]);
 
+  // 홈화면 아이콘 클릭시 검색창에 검색하는 함수 만들기
+  const iconSearch = () => {};
+
   return (
     <Base>
       <Wrapper>
@@ -223,6 +226,7 @@ const Hambuger = styled.div`
   height: 100%;
   width: 30px;
   display: none;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     display: block;

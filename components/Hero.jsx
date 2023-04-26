@@ -7,7 +7,6 @@ const Hero = () => {
     <Base>
       <Wrapper>
         <Text>
-          <H1>안녕하세요, 이현우입니다.</H1>
           <H2>프론트엔드 개발자의 기술 블로그, 다양한 주제의 새로운 지식을 기록합니다.</H2>
           <H3>A technology blog for front-end developers that documents new knowledge on various topics.</H3>
           {/* <MoreBtn>더 보러가기</MoreBtn> */}
@@ -66,7 +65,7 @@ const H1 = styled.h1`
   }
 `;
 const H2 = styled.h2`
-  color: slategray;
+  color: var(--primary-color);
   line-height: 20px;
   word-break: keep-all;
   @media (max-width: 768px) {
