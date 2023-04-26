@@ -42,26 +42,25 @@ const ProjectItem = ({ html_text, posts, title, projectData }) => {
     e.stopPropagation();
   };
 
-  useEffect(() => {
-    setAction(true);
-    setTimeout(() => {
-      setAction(false);
-    }, 500);
-  }, []);
-
   return (
     <Container>
       <Layout headerTitle={title}>
         <Base>
           <ProjectMarkdown2Html html={html_text} />
           <ActionBtn onClick={(e) => handleAction(e)}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-              <path
-                fill-rule="evenodd"
-                d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z"
-                clip-rule="evenodd"
-              />
-            </svg>
+            {!action ? (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                <path
+                  fill-rule="evenodd"
+                  d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            )}
             <ActionItem action={action} onClick={handlePostAction}>
               포스트
             </ActionItem>
@@ -86,16 +85,16 @@ const ProjectItem = ({ html_text, posts, title, projectData }) => {
             </ActionItem>
           </ActionBtn>
         </Base>
+        <ProjectPostList closeEvent={() => setShowPost(false)} active={showPost} data={posts} title={title} />
       </Layout>
-      <ProjectPostList closeEvent={() => setShowPost(false)} active={showPost} data={posts} title={title} />
     </Container>
   );
 };
 
 const Container = styled.div`
+  max-width: 100vw;
   max-height: 100vh;
-  overflow: hidden;
-  position: relative;
+  overflow-x: hidden;
 `;
 
 const Base = styled.div``;

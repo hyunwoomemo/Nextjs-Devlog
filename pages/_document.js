@@ -7,8 +7,8 @@ export default function Document() {
       <Head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/icon-192x192.png"></link>
-        <meta name="msapplication-TileColor" content="#1976d2"></meta>
-        <meta name='theme-color' content='#1976d2'></meta>
+        <meta name="msapplication-TileColor" content="#000"></meta>
+        <meta name='theme-color' content='#000'></meta>
         <meta name="google" content="notranslate"></meta>
       </Head>
       <body>

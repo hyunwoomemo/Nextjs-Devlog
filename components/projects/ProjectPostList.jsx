@@ -74,7 +74,7 @@ const Base = styled.div`
   width: 100vw;
   bottom: 0;
   padding: 2rem;
-  transform: translateY(100%);
+  transform: translateX(100%);
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -83,7 +83,7 @@ const Base = styled.div`
   }
   transition: all 0.3s;
 
-  transform: ${({ active }) => (active ? "translateY(0)" : undefined)};
+  transform: ${({ active }) => (active ? "translateX(0)" : undefined)};
 `;
 
 const Header = styled.header`
@@ -98,6 +98,7 @@ const CloseBtn = styled.div`
   width: 24px;
   height: auto;
   cursor: pointer;
+  transform: rotate(-90deg);
 `;
 
 const Container = styled.div`

@@ -1,8 +1,8 @@
 {
   "name": "Devlog",
   "short_name": "Devlog",
-  "theme_color": "#1976d2",
-  "description": "어제보다 더 나은 개발자가 되고 싶어 만든 블로그",
+  "theme_color": "#000",
+  "description": "Development Blog",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
