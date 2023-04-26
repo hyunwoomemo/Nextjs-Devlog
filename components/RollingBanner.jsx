@@ -62,6 +62,7 @@ const Container = styled.div`
 
 const SlideWrapper = styled.ul`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
   padding: 2rem;
