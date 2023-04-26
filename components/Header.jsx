@@ -213,7 +213,7 @@ const LinkWrapper = styled.ul`
     active
       ? css`
           > a:nth-of-type(${active}) {
-            color: #fff;
+            color: var(--text-color);
           }
         `
       : css``}
@@ -261,7 +261,7 @@ const ModalBody = styled.ul`
     active
       ? css`
           > a:nth-of-type(${active}) {
-            color: #fff;
+            color: var(--text-color);
           }
         `
       : css``}

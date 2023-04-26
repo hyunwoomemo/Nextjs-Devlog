@@ -8,8 +8,9 @@ const Hero = () => {
       <Wrapper>
         <Text>
           <H1>안녕하세요, 이현우입니다.</H1>
-          <H2></H2>
-          <MoreBtn>더 보러가기</MoreBtn>
+          <H2>프론트엔드 개발자의 기술 블로그, 다양한 주제의 새로운 지식을 기록합니다.</H2>
+          <H3>A technology blog for front-end developers that documents new knowledge on various topics.</H3>
+          {/* <MoreBtn>더 보러가기</MoreBtn> */}
         </Text>
         <Lottie>
           <Animation />
@@ -58,10 +59,10 @@ const Text = styled.div`
 `;
 
 const H1 = styled.h1`
-  font-size: 36px;
+  font-size: 30px;
 
   @media (max-width: 768px) {
-    font-size: 24px;
+    font-size: 20px;
   }
 `;
 const H2 = styled.h2`
@@ -74,7 +75,21 @@ const H2 = styled.h2`
 
   @media (max-width: 768px) {
     width: 60%;
-    font-size: 14px;
+    font-size: 12px;
+  }
+`;
+const H3 = styled.h3`
+  color: #70809081;
+  line-height: 20px;
+  font-size: 14px;
+  word-break: keep-all;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    width: 60%;
+    font-size: 10px;
   }
 `;
 
