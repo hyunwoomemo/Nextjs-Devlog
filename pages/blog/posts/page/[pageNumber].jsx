@@ -4,7 +4,6 @@ import { POST_DATABASE_ID, TOKEN } from "@/config";
 import React from "react";
 
 const Page = ({ posts, numPages, filterPosts }) => {
-  console.log(filterPosts);
   return (
     <Layout data={posts}>
       <PostList data={posts} numPages={numPages} />

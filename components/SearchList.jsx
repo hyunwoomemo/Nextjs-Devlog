@@ -18,6 +18,7 @@ const SearchList = ({ data, keyword, fade }) => {
     (v) => v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.tags.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
   );
 
+  console.log(filterData);
   const [colorEffect, setColorEffect] = useState(false);
 
   useEffect(() => {
@@ -50,18 +51,20 @@ const SearchList = ({ data, keyword, fade }) => {
             const summary = post.properties.summary?.rich_text[0]?.plain_text;
             const tags = post.properties.tags?.multi_select;
             const id = post.id;
+            const projectName = post.properties.프로젝트명?.rich_text[0]?.plain_text;
+            console.log(projectName);
             let parentDb;
             switch (post.parent.database_id.replaceAll("-", "")) {
               case codesnipetId:
-                parentDb = "codesnipet";
+                parentDb = "Codesnipet";
                 break;
 
               case postsId:
-                parentDb = "posts";
+                parentDb = "Posts";
                 break;
 
               case projectId:
-                parentDb = "projects";
+                parentDb = "Projects";
                 break;
             }
 
@@ -70,7 +73,7 @@ const SearchList = ({ data, keyword, fade }) => {
                 <Wrapper>
                   {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
                   <Title>{title}</Title>
-                  <Category>{`${parentDb} / ${category}`}</Category>
+                  {!projectName ? <Category>{`${parentDb} / ${category}`}</Category> : <Category>{`${projectName} 프로젝트`}</Category>}
                   <Summary>{summary}</Summary>
                   <Tags>
                     {tags?.map((tag) => {

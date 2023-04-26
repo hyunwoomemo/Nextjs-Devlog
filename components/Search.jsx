@@ -29,7 +29,7 @@ const Search = ({ posts }) => {
       {search ? (
         <Base active={search} id="base">
           <Header>
-            <SearchInput autocomplete="off" id="#search_input" placeholder="검색어를 입력하세요" value={keyword} onChange={handleSearch}></SearchInput>
+            <SearchInput autoFocus autocomplete="off" id="#search_input" placeholder="검색어를 입력하세요" value={keyword} onChange={handleSearch}></SearchInput>
             <CloseBtn
               onClick={() => {
                 setSearch(!search);

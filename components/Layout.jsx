@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import LoadingContext from "@/context/LoadingContext";
 import SearchContext from "@/context/SearchContext";
 
-const Layout = ({ children, data, choiceCt, posts, headerTitle = "Hyunwoomemo" }) => {
+const Layout = ({ children, data, choiceCt, posts, headerTitle }) => {
   const { loading } = useContext(LoadingContext);
   const { search } = useContext(SearchContext);
   return (

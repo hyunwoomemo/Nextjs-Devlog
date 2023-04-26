@@ -27,20 +27,39 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
   const title = data?.filter((v) => v.id === router.query.id)[0]?.properties.Name.title[0].plain_text;
 
   const [scrollTop, setScrollTop] = useState(0);
+
+  const handleScroll = () => {
+    setScrollTop(document.documentElement.scrollTop);
+  };
+
   useEffect(() => {
     if (typeof window === undefined) {
       return;
     }
 
-    window.addEventListener("scroll", () => {
-      setScrollTop(document.documentElement.scrollTop);
-    });
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.ctrlKey && e.key === "k") {
+        setSearch(true);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 
   const handleTheme = () => {
     setThemeMode(themeMode === "dark" ? "light" : "dark");
     window.localStorage.setItem("theme", window.localStorage.getItem("theme") === "dark" ? "light" : "dark");
-    console.log("click");
   };
 
   const handleClose = () => {
@@ -48,6 +67,22 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
   };
 
   const { search, setSearch } = useContext(SearchContext);
+
+  // 활성화 탭 스타일 적용
+
+  const [activeTab, setActiveTab] = useState(1);
+
+  useEffect(() => {
+    if (router.pathname.indexOf("/blog") > -1) {
+      setActiveTab(2);
+    } else if (router.pathname.indexOf("/projects") > -1) {
+      setActiveTab(3);
+    } else if (router.pathname.indexOf("/about") > -1) {
+      setActiveTab(4);
+    } else {
+      setActiveTab(1);
+    }
+  }, [router.pathname]);
 
   return (
     <Base>
@@ -64,7 +99,7 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
         ) : (
           <TitleLink href="/">Hyunwoomemo</TitleLink>
         )}
-        <LinkWrapper>
+        <LinkWrapper active={activeTab}>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
           <Link href="/projects">프로젝트</Link>
@@ -89,7 +124,7 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
       </Wrapper>
       {router.pathname.indexOf("posts") > -1 && !router.query.id && router.pathname !== "/blog/posts/categories" ? <ChoiceCategory category={choiceCt} /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
-        <ModalBody>
+        <ModalBody active={activeTab}>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
           <Link href="/projects">프로젝트</Link>
@@ -173,6 +208,15 @@ const LinkWrapper = styled.ul`
   @media (max-width: 768px) {
     display: none;
   }
+
+  ${({ active }) =>
+    active
+      ? css`
+          > a:nth-of-type(${active}) {
+            color: #fff;
+          }
+        `
+      : css``}
 `;
 
 const Hambuger = styled.div`
@@ -211,6 +255,16 @@ const ModalBody = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  color: slategray;
+
+  ${({ active }) =>
+    active
+      ? css`
+          > a:nth-of-type(${active}) {
+            color: #fff;
+          }
+        `
+      : css``}
 `;
 
 export default Header;

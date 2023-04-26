@@ -72,8 +72,6 @@ const Post = styled(Link)`
   background-color: var(--post-item-background);
   transition: all 0.3s;
 
-  margin: 0 auto;
-
   @media (max-width: 768px) {
     max-width: 400px;
     width: 100%;

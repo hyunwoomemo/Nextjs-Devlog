@@ -104,7 +104,8 @@ const Base = styled.div``;
 
 const ActionBtn = styled.div`
   position: absolute;
-  width: 50px;
+  width: 70px;
+  height: 70px;
   bottom: 25px;
   right: 25px;
   padding: 10px;
@@ -119,6 +120,7 @@ const ActionBtn = styled.div`
 
   @media (max-width: 768px) {
     width: 50px;
+    height: 50px;
   }
 `;
 
