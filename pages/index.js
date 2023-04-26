@@ -9,12 +9,14 @@ import Footer from '@/components/Footer'
 import { useEffect, useState } from 'react'
 import RollingBanner from '@/components/RollingBanner'
 import { CODESNIPET_DATABASE_ID, LANGUAGE_DATABASE_ID, POST_DATABASE_ID, PROJECT_DATABASE_ID, TOKEN } from '@/config'
+import RecentPost from '@/components/RecentPost'
 
 
-export default function Home({ posts, languages }) {
+export default function Home({ allPosts, posts, projects, languages }) {
+  const slicePosts = posts.slice(0, 3)
   return (
     <Base>
-      <Layout posts={posts}>
+      <Layout posts={allPosts}>
         <Seo title="home" />
         <Hero />
         <RollingBanner speed={5}>
@@ -26,6 +28,7 @@ export default function Home({ posts, languages }) {
             )
           })}
         </RollingBanner>
+        <RecentPost data={slicePosts} projects={projects} />
       </Layout>
     </Base>
   )
@@ -71,11 +74,16 @@ export async function getStaticProps() {
   const projectData = await projectRes.json();
   const languageData = await languageRes.json();
 
-  const posts = [...snipetData.results, ...postsData.results, ...projectData.results];
+  const allPosts = [...snipetData.results, ...postsData.results, ...projectData.results];
+
+  // posts에서 project post 제외
+  const posts = postsData.results.filter((v) => v.properties.project.checkbox !== true);
+
+  const projects = projectData.results;
   const languages = languageData.results;
 
   return {
-    props: { posts, languages },
+    props: { allPosts, posts, projects, languages },
   };
 }
 

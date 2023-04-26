@@ -1,22 +1,14 @@
 import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 import styled from "@emotion/styled";
-import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import slugify from "slugify";
-import PostPagination from "../PostPagination";
 
-const PostList = ({ data, numPages }) => {
-  // data 중에서 project 포스트는 제외한다.
-  /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
-
-  console.log(numPages);
+const RecentProjectList = ({ projects }) => {
   return (
     <>
       <Base>
-        {data?.map((post) => {
-          const category = post.properties.category.select?.name;
+        {projects?.map((post) => {
           const title = post.properties.Name.title[0].plain_text;
           const summary = post.properties.summary.rich_text[0]?.plain_text;
           const imgSrc = post.cover?.file?.url || post.cover?.external.url;
@@ -25,9 +17,9 @@ const PostList = ({ data, numPages }) => {
 
           return (
             <Post href={`/blog/posts/${id}`} key={post.id}>
-              {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
+              {/*               {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
+               */}
               <Wrapper>
-                <Category>{category}</Category>
                 <Title>{title}</Title>
                 <Summary>{summary}</Summary>
                 <Tags>
@@ -51,14 +43,13 @@ const PostList = ({ data, numPages }) => {
           );
         })}
       </Base>
-      {numPages > 0 ? <PostPagination numPages={numPages} /> : undefined}
     </>
   );
 };
 
 const Base = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   padding: 2rem;
   gap: 2rem;
 
@@ -202,4 +193,4 @@ const Tags = styled.ul`
   }
 `;
 
-export default PostList;
+export default RecentProjectList;

@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 
 const index = ({ projects }) => {
   return (
-    <Layout>
+    <Layout headerTitle="Projects">
       <Title>진행한 프로젝트</Title>
       <ProjectList data={projects} />
     </Layout>

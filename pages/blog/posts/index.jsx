@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 
 const index = ({ posts, numPages }) => {
   return (
-    <Layout data={posts}>
+    <Layout data={posts} headerTitle="Posts">
       <PostList data={posts} numPages={numPages} />
     </Layout>
   );
