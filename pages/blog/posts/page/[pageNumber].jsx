@@ -3,7 +3,8 @@ import PostList from "@/components/blog/PostList";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
 import React from "react";
 
-const Page = ({ posts, numPages }) => {
+const Page = ({ posts, numPages, filterPosts }) => {
+  console.log(filterPosts);
   return (
     <Layout data={posts}>
       <PostList data={posts} numPages={numPages} />
@@ -80,15 +81,17 @@ export async function getStaticProps({ params }) {
 
   const allPosts = await res.json();
 
+  const filterPosts = allPosts.results.filter((v) => v.properties.project.checkbox !== true);
+
   const postsPerPage = 6;
 
-  const numPages = Math.ceil(allPosts.results.length / postsPerPage);
+  const numPages = Math.ceil(filterPosts.length / postsPerPage);
 
   const offset = (params.pageNumber - 1) * postsPerPage;
 
-  const posts = allPosts.results.slice(offset, offset + postsPerPage);
+  const posts = filterPosts.slice(offset, offset + postsPerPage);
 
   return {
-    props: { allPosts, posts, numPages },
+    props: { filterPosts, posts, numPages },
   };
 }

@@ -33,6 +33,7 @@ const ProjectItem = ({ html_text, posts, title, projectData }) => {
 
   const handlePostAction = (e) => {
     e.stopPropagation();
+    setAction(false);
     setShowPost(true);
   };
   const handlePageAction = (e) => {
@@ -92,7 +93,9 @@ const ProjectItem = ({ html_text, posts, title, projectData }) => {
 };
 
 const Container = styled.div`
-  max-width: 100vw;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
   max-height: 100vh;
   overflow-x: hidden;
 `;
@@ -101,10 +104,11 @@ const Base = styled.div``;
 
 const ActionBtn = styled.div`
   position: absolute;
-  width: 70px;
+  width: 50px;
   bottom: 25px;
   right: 25px;
   padding: 10px;
+  z-index: 10;
   background-color: var(--text-color);
   color: var(--main-background);
   border-radius: 50%;

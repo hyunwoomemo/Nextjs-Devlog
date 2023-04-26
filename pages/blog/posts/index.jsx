@@ -39,12 +39,13 @@ export async function getStaticProps() {
   const res = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
 
   const allPosts = await res.json();
+  const filterPosts = allPosts.results.filter((v) => v.properties.project.checkbox !== true);
 
   const postsPerPage = 6;
 
-  const numPages = Math.ceil(allPosts.results.length / postsPerPage);
+  const numPages = Math.ceil(filterPosts.length / postsPerPage);
 
-  const posts = allPosts.results.slice(0, postsPerPage);
+  const posts = filterPosts.slice(0, postsPerPage);
 
   return {
     props: { allPosts, posts, numPages },

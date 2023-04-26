@@ -125,7 +125,31 @@ const Base = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 10px;
+
+    > p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      > strong {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        height: 80px;
+        background-color: var(--text-color);
+        color: var(--main-background);
+        border-radius: 15px;
+        font-size: 16px;
+
+        @media (max-width: 768px) {
+          width: 50px;
+          height: 50px;
+          font-size: 14px;
+        }
+      }
+    }
 
     img {
       width: 80px;

@@ -9,11 +9,11 @@ import PostPagination from "../PostPagination";
 
 const PostList = ({ data, numPages }) => {
   // data 중에서 project 포스트는 제외한다.
-  const selectData = data.filter((v) => v.properties.project.checkbox !== true);
+  /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
   return (
     <>
       <Base>
-        {selectData?.map((post) => {
+        {data?.map((post) => {
           const category = post.properties.category.select?.name;
           const title = post.properties.Name.title[0].plain_text;
           const summary = post.properties.summary.rich_text[0]?.plain_text;

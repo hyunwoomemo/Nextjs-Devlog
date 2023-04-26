@@ -70,11 +70,11 @@ const Base = styled.div`
   width: 100%;
   position: absolute;
   z-index: 9;
-  height: 90vh;
+  height: 92vh;
   width: 100vw;
   bottom: 0;
   padding: 2rem;
-  transform: translateX(100%);
+  transform: translateX(150%);
   display: flex;
   flex-direction: column;
   gap: 2rem;
