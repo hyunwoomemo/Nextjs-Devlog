@@ -20,6 +20,20 @@ const RecentPost = ({ data, projects }) => {
     setSlideIdx((prev) => prev + 1);
   };
 
+  useEffect(() => {
+    if (typeof window !== "object") return;
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handleResize = () => {
+    setSlideWidth(slideRef.current.clientWidth);
+  };
+
   return (
     <Base>
       <Header>
@@ -109,8 +123,6 @@ const SlideWrapper = styled.div`
   }
 `;
 
-const SlideItem = styled.div`
-  width: 100%;
-`;
+const SlideItem = styled.div``;
 
 export default RecentPost;

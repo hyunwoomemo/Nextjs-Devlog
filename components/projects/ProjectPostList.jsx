@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
 import Link from "next/link";
 import Image from "next/image";
+import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 
 const ProjectPostList = ({ closeEvent, active, data, title }) => {
   const selectData = data.results.filter((v) => v.properties.프로젝트명?.rich_text[0]?.plain_text === title);
@@ -24,7 +25,7 @@ const ProjectPostList = ({ closeEvent, active, data, title }) => {
           const title = post.properties.Name.title[0].plain_text;
           const summary = post.properties.summary.rich_text[0]?.plain_text;
           const imgSrc = post.cover?.file?.url || post.cover?.external.url;
-          const tags = post.properties.tags.multi_select;
+          const tags = post.properties.tags?.multi_select;
           const id = post.id;
           const num = post.properties.projectNum.select.name;
 
@@ -38,7 +39,7 @@ const ProjectPostList = ({ closeEvent, active, data, title }) => {
                 <Category>{category}</Category>
                 <Summary>{summary}</Summary>
                 <Tags>
-                  {tags.map((tag) => {
+                  {tags?.map((tag) => {
                     let background;
                     if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
                       background = darkThemeTagColor;

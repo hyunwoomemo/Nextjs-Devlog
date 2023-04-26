@@ -1,6 +1,5 @@
 import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 import styled from "@emotion/styled";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -83,38 +82,6 @@ const Post = styled(Link)`
   @media (max-width: 1200px) {
     max-width: 450px;
     width: 100%;
-  }
-`;
-
-const DefaultImg = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  line-height: 20px;
-  width: 100%;
-  height: 100%;
-  color: var(--text-color);
-  font-size: 20px;
-
-  @media (max-width: 768px) {
-    height: 150px;
-    font-size: 14px;
-  }
-
-  @media (min-width: 769px) {
-    min-height: 250px;
-    min-width: 300px;
-  }
-`;
-
-const ImageItem = styled(Image)`
-  border-radius: 5px 5px 0 0;
-  object-fit: cover;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    height: 150px;
   }
 `;
 
