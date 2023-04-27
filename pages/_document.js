@@ -1,3 +1,4 @@
+import { GA_TRACKING_ID } from '@/lib/gtag'
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
@@ -10,6 +11,23 @@ export default function Document() {
         <meta name="msapplication-TileColor" content="#000"></meta>
         <meta name='theme-color' content='#000'></meta>
         <meta name="google" content="notranslate"></meta>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+          }}
+        />
       </Head>
       <body>
         <div id="portal"></div>

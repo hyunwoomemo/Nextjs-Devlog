@@ -9,6 +9,7 @@ import { CacheProvider } from '@emotion/react'
 import { cache } from '@emotion/css'
 import { Router, useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import * as gtag from '@/lib/gtag'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -38,6 +39,16 @@ export default function App({ Component, pageProps }) {
       Router.events.off("routeChangeError", end);
     };
   }, [])
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return (
 
