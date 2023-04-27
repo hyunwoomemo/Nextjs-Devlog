@@ -32,7 +32,7 @@ const SearchList = ({ data, keyword, fade }) => {
     <>
       {filterData.length > 0 ? (
         <Result>
-          There are <ResultNumber colorEffect={colorEffect}>{filterData.length}</ResultNumber> search results{" "}
+          There are <ResultNumber colorEffect={colorEffect}>{filterData.length}</ResultNumber> search results
         </Result>
       ) : (
         <Result>검색 결과가 없습니다.</Result>
@@ -55,15 +55,15 @@ const SearchList = ({ data, keyword, fade }) => {
             let parentDb;
             switch (post.parent.database_id.replaceAll("-", "")) {
               case codesnipetId:
-                parentDb = "Codesnipet";
+                parentDb = "codesnipet";
                 break;
 
               case postsId:
-                parentDb = "Posts";
+                parentDb = "posts";
                 break;
 
               case projectId:
-                parentDb = "Projects";
+                parentDb = "projects";
                 break;
             }
 
@@ -118,7 +118,7 @@ const Base = styled.div`
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   padding: 2rem;
   gap: 2rem;
 
@@ -134,8 +134,6 @@ const Base = styled.div`
   @media (min-width: 1200px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
-
-  opacity: ${({ fade }) => (fade ? "0" : "1")};
 `;
 
 const Post = styled(Link)`
@@ -144,23 +142,10 @@ const Post = styled(Link)`
   border-radius: 10px;
   background-color: var(--post-item-background);
   transition: all 0.3s;
-  position: relative;
-
-  margin: 0 auto;
 
   @media (max-width: 768px) {
     max-width: 400px;
     width: 100%;
-
-    &:after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      height: 1px;
-      width: 100%;
-      left: 0;
-      background-color: #8080805e;
-    }
   }
 
   @media (max-width: 1200px) {
@@ -186,8 +171,7 @@ const DefaultImg = styled.div`
   }
 
   @media (min-width: 769px) {
-    min-height: 250px;
-    min-width: 300px;
+    height: 250px;
   }
 `;
 
@@ -227,6 +211,7 @@ const Title = styled.h1`
   font-weight: bold;
   position: relative;
   align-self: flex-start;
+  word-break: break-all;
 
   @media (min-width: 769px) {
     line-height: 30px;
@@ -250,17 +235,17 @@ const Title = styled.h1`
   }
 `;
 
-const CreatedDate = styled.p`
-  color: gray;
-  font-size: 12px;
-`;
-
 const Summary = styled.h2`
   color: gray;
   line-height: 16px;
   @media (max-width: 768px) {
     font-size: 12px;
   }
+`;
+
+const CreatedDate = styled.p`
+  color: gray;
+  font-size: 12px;
 `;
 
 const Tags = styled.ul`

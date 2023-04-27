@@ -6,54 +6,58 @@ import Layout from '@/components/Layout'
 import Hero from '@/components/Hero'
 import styled from '@emotion/styled'
 import Footer from '@/components/Footer'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import RollingBanner from '@/components/RollingBanner'
 import { CODESNIPET_DATABASE_ID, LANGUAGE_DATABASE_ID, POST_DATABASE_ID, PROJECT_DATABASE_ID, TOKEN } from '@/config'
 import RecentPost from '@/components/RecentPost'
 import FullPage from '@/components/FullPage'
+import SearchContext from '@/context/SearchContext'
+import { css } from '@emotion/react'
+import { NextSeo } from 'next-seo'
+import Img from '@/public/icons/icon-512x512.png';
 
 
 export default function Home({ allPosts, posts, projects, languages }) {
   const slicePosts = posts.slice(0, 3)
+  const { search } = useContext(SearchContext);
 
   const [speed, setSpeed] = useState(5);
 
   return (
-    <Base>
-      <Layout posts={allPosts}>
-        <Seo title="home" />
-        <Hero />
-        {/* <RollingBanner speed={speed}>
-          {languages.map((v) => {
-            return (
-              <>
-                <Image onClick={() => console.log('e')} key={v.id} width={150} height={150} src={v.icon?.file?.url} alt={v.properties.이름.title[0].plain_text}></Image>
-              </>
-            )
-          })}
-        </RollingBanner> */}
-
-        <RecentPost data={slicePosts} projects={projects} />
-
-      </Layout>
-    </Base>
+    <>
+      <NextSeo
+        title="Hyunwoomemo's Devlog"
+        description="프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다."
+        openGraph={{
+          type: 'website',
+          url: 'https://hyunwoomemo.vercel.app/',
+          title: "Hyunwoomemo's Devlog",
+          description: '프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다.',
+          images: [
+            {
+              url: Img,
+              width: 800,
+              height: 400,
+            },
+          ],
+        }}
+      />
+      <Base search={search}>
+        <Layout posts={allPosts}>
+          <Hero />
+          <RecentPost data={slicePosts} projects={projects} />
+        </Layout>
+      </Base>
+    </>
   )
 }
 
 
 const Base = styled.div`
+${({ search }) => search ? css`
+  pointer-events: none;
+` : css``}
 `
-const Util = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 2rem;
-  @media (max-width: 768px) {
-    padding: 0 1rem;
-  }
-  > svg {
-    width: 30px;
-  }
-`;
 
 export async function getStaticProps() {
   const options = {
