@@ -1,5 +1,7 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -15,9 +17,10 @@ const ChoiceCategory = ({ category }) => {
       setScrollTop(document.documentElement.scrollTop);
     });
   }, []);
+  const router = useRouter();
 
   return (
-    <Base activeScroll={scrollTop > 5}>
+    <Base activeScroll={scrollTop > 5} show={router.pathname === "/blog/posts"}>
       <Wrapper href="/blog/posts/categories">
         카테고리 ∣ <span>{category || "전체"}</span>
       </Wrapper>
@@ -32,6 +35,13 @@ const Base = styled.div`
   z-index: 2;
   background-color: var(--main-background);
   padding: 1rem;
+
+  ${({ show }) =>
+    show
+      ? css``
+      : css`
+          display: none;
+        `}
 
   @media (min-width: 769px) {
     padding: 2rem;

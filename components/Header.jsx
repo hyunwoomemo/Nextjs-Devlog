@@ -26,6 +26,9 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
 
   const title = data?.filter((v) => v.id === router.query.id)[0]?.properties.Name.title[0].plain_text;
 
+  const categoryLength = data?.filter((v) => v.properties.category.select.name === choiceCt).length;
+  console.log(categoryLength);
+
   const [scrollTop, setScrollTop] = useState(0);
 
   const handleScroll = () => {
@@ -99,6 +102,8 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
           <Title onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{title}</Title>
         ) : headerTitle ? (
           <Title>{headerTitle}</Title>
+        ) : choiceCt ? (
+          <CategoryLink href="/blog/posts/categories">{`${choiceCt} (${categoryLength})`}</CategoryLink>
         ) : (
           <TitleLink href="/">Hyunwoomemo</TitleLink>
         )}
@@ -200,6 +205,18 @@ const TitleLink = styled(Link)`
   @media (max-width: 768px) {
     font-size: 16px;
   }
+`;
+
+const CategoryLink = styled(Link)`
+  margin-right: auto;
+  font-size: 24px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+
+  text-decoration: underline;
+  color: var(--primary-color);
 `;
 
 const LinkWrapper = styled.ul`

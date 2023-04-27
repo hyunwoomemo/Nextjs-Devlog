@@ -3,6 +3,7 @@ import PostList from "./blog/PostList";
 import RecentPostsList from "./RecentPostsList";
 import { useEffect, useRef, useState } from "react";
 import RecentProjectList from "./RecentProjectList";
+import Link from "next/link";
 
 const RecentPost = ({ data, projects }) => {
   const slideRef = useRef();
@@ -35,33 +36,37 @@ const RecentPost = ({ data, projects }) => {
   };
 
   return (
-    <Base>
-      <Header>
-        <Title>{slideIdx === 0 ? "최근 포스트" : "진행중인 프로젝트"}</Title>
-        <ArrowWrapper>
-          <PrevBtn onClick={handlePrev} disabled={slideIdx === 0}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </PrevBtn>
-          <NextBtn onClick={handleNext} disabled={slideIdx === 1}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </NextBtn>
-        </ArrowWrapper>
-      </Header>
-      <Wrapper>
-        <SlideWrapper ref={slideRef} move={slideIdx * slideWidth} minWidth={slideWidth}>
-          <SlideItem>
-            <RecentPostsList data={data} />
-          </SlideItem>
-          <SlideItem>
-            <RecentProjectList projects={projects} />
-          </SlideItem>
-        </SlideWrapper>
-      </Wrapper>
-    </Base>
+    <>
+      <Base>
+        <Header>
+          <Title>{slideIdx === 0 ? "최근 포스트" : "최근 프로젝트"}</Title>
+          <ReadMore href={slideIdx === 0 ? "/blog/posts" : "/projects"}>더 보러가기</ReadMore>
+
+          <ArrowWrapper>
+            <PrevBtn onClick={handlePrev} disabled={slideIdx === 0}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </PrevBtn>
+            <NextBtn onClick={handleNext} disabled={slideIdx === 1}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </NextBtn>
+          </ArrowWrapper>
+        </Header>
+        <Wrapper>
+          <SlideWrapper ref={slideRef} move={slideIdx * slideWidth} minWidth={slideWidth}>
+            <SlideItem>
+              <RecentPostsList data={data} />
+            </SlideItem>
+            <SlideItem>
+              <RecentProjectList projects={projects} />
+            </SlideItem>
+          </SlideWrapper>
+        </Wrapper>
+      </Base>
+    </>
   );
 };
 
@@ -126,5 +131,16 @@ const SlideWrapper = styled.div`
 `;
 
 const SlideItem = styled.div``;
+
+const ReadMore = styled(Link)`
+  margin-right: auto;
+  margin-left: 10px;
+  font-size: 14px;
+  color: var(--primary-color);
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
+`;
 
 export default RecentPost;

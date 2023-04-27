@@ -17,8 +17,6 @@ const RecentProjectList = ({ projects }) => {
 
           return (
             <Post href={`/blog/posts/${id}`} key={post.id}>
-              {/*               {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
-               */}
               <Wrapper>
                 <Title>{title}</Title>
                 <Summary>{summary}</Summary>

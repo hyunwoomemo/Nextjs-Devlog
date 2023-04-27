@@ -23,7 +23,6 @@ const RecentPostsList = ({ data }) => {
                 <Title>{title}</Title>
                 <Summary>{summary}</Summary>
                 <CreatedDate>{createdDate}</CreatedDate>
-
                 <Tags>
                   {tags.map((tag) => {
                     let background;

@@ -102,7 +102,8 @@ const SearchCategory = styled.div`
 
 const SearchInput = styled.input`
   font-family: "TheJamsil5Bold";
-  background-color: var(--tag-background);
+  background-color: var(--text-color);
+  color: var(--main-background);
   border: 0;
   padding: 1rem;
   width: 100%;
