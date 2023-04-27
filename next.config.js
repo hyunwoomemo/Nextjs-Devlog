@@ -19,6 +19,9 @@ const nextConfig = {
     });
     return config;
   },
+  siteUrl: "https://hyunwoomemo.vercel.app",
+  generateRobotsTxt: true,
+  sitemapSize: 7000,
 }
 
 module.exports = nextConfig
