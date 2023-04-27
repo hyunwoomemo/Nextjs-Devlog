@@ -24,6 +24,7 @@ const PostItem = ({ html_text, posts, toc }) => {
   const filterPosts = posts.filter((v) => v.id === router.query.id);
   const title = filterPosts[0].properties.Name.title[0].plain_text;
   const img = filterPosts[0].cover?.file?.url || filterPosts[0].cover?.external.url;
+  console.log(img);
   return (
     <>
       <NextSeo
@@ -36,7 +37,7 @@ const PostItem = ({ html_text, posts, toc }) => {
           description: "프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다.",
           images: [
             {
-              url: img ? img : "https://user-images.githubusercontent.com/105469077/234896480-32d59948-f5fb-4232-823b-38bb12bb34d6.png",
+              url: img || "https://user-images.githubusercontent.com/105469077/234896480-32d59948-f5fb-4232-823b-38bb12bb34d6.png",
               width: 800,
               height: 400,
             },

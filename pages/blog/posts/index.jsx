@@ -3,13 +3,33 @@ import ChoiceCategory from "@/components/blog/ChoiceCategory";
 import PostList from "@/components/blog/PostList";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
 import styled from "@emotion/styled";
+import { NextSeo } from "next-seo";
 import React, { useEffect, useState } from "react";
 
 const index = ({ posts, numPages }) => {
   return (
-    <Layout data={posts} headerTitle="Posts">
-      <PostList data={posts} numPages={numPages} />
-    </Layout>
+    <>
+      <NextSeo
+        title="Posts | Hyunwoomemo"
+        description="프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다."
+        openGraph={{
+          type: "website",
+          url: "https://hyunwoomemo.vercel.app/",
+          title: "Hyunwoomemo's Devlog",
+          description: "프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다.",
+          images: [
+            {
+              url: "https://user-images.githubusercontent.com/105469077/234896480-32d59948-f5fb-4232-823b-38bb12bb34d6.png",
+              width: 800,
+              height: 400,
+            },
+          ],
+        }}
+      />
+      <Layout data={posts} headerTitle="Posts">
+        <PostList data={posts} numPages={numPages} />
+      </Layout>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import CodeSnipetList from "@/components/blog/CodeSnipetList";
 import { CODESNIPET_DATABASE_ID, TOKEN } from "@/config";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { NextSeo } from "next-seo";
 import Image from "next/image";
 import React, { useState } from "react";
 
@@ -18,23 +19,42 @@ const Home = ({ posts }) => {
   );
 
   return (
-    <Layout>
-      <Base>
-        <Title>나의 코드 조각들</Title>
-        <ImageWrapper active={keywordLength.length > 0 && keyword}>
-          <Image
-            src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80"
-            width={100}
-            height={100}
-            quality={100}
-            layout="responsive"
-            alt="cover"
-          />
-          {keywordLength.length > 0 && keyword ? <Text>{`${keywordLength.length}개`}</Text> : undefined}
-        </ImageWrapper>
-        <CodeSnipetList data={posts} keyword={keyword} />
-      </Base>
-    </Layout>
+    <>
+      <NextSeo
+        title="CodeSnipet | Hyunwoomemo"
+        description="프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다."
+        openGraph={{
+          type: "website",
+          url: "https://hyunwoomemo.vercel.app/",
+          title: "Hyunwoomemo's Devlog",
+          description: "프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다.",
+          images: [
+            {
+              url: "https://user-images.githubusercontent.com/105469077/234896480-32d59948-f5fb-4232-823b-38bb12bb34d6.png",
+              width: 800,
+              height: 400,
+            },
+          ],
+        }}
+      />
+      <Layout>
+        <Base>
+          <Title>나의 코드 조각들</Title>
+          <ImageWrapper active={keywordLength.length > 0 && keyword}>
+            <Image
+              src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80"
+              width={100}
+              height={100}
+              quality={100}
+              layout="responsive"
+              alt="cover"
+            />
+            {keywordLength.length > 0 && keyword ? <Text>{`${keywordLength.length}개`}</Text> : undefined}
+          </ImageWrapper>
+          <CodeSnipetList data={posts} keyword={keyword} />
+        </Base>
+      </Layout>
+    </>
   );
 };
 
