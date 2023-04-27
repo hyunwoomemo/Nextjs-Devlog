@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
+import VisitorCounter from "./VisitorCounter";
 
 export default function Footer() {
   const router = useRouter();
@@ -28,11 +29,7 @@ export default function Footer() {
           <Link href="/">
             <span>Hyunwoomemo&apos;s Devlog</span>
           </Link>
-          <Copyright>
-            Copyright 2023. Hyunwoo.lee
-            <br />
-            All rights reserved
-          </Copyright>
+          <Copyright>© 2023. hyunwoo.lee. All rights reserved</Copyright>
         </Left>
         <ToggleBtn dark={currentTheme === "dark"} onClick={handleTheme}>
           {currentTheme === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
@@ -55,6 +52,7 @@ export default function Footer() {
             </svg>
           </LinkItem>
         </LinkWrapper>
+        <VisitorCounter />
       </Wrapper>
     </Base>
   );

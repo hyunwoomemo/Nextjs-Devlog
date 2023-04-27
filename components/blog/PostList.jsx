@@ -11,7 +11,7 @@ const PostList = ({ data, numPages }) => {
   // data 중에서 project 포스트는 제외한다.
   /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
 
-  console.log(numPages);
+  console.log(data);
   return (
     <>
       <Base>
@@ -22,6 +22,7 @@ const PostList = ({ data, numPages }) => {
           const imgSrc = post.cover?.file?.url || post.cover?.external.url;
           const tags = post.properties.tags.multi_select;
           const id = post.id;
+          const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
 
           return (
             <Post href={`/blog/posts/${id}`} key={post.id}>
@@ -30,6 +31,7 @@ const PostList = ({ data, numPages }) => {
                 <Category>{category}</Category>
                 <Title>{title}</Title>
                 <Summary>{summary}</Summary>
+                <CreatedDate>{createdDate}</CreatedDate>
                 <Tags>
                   {tags.map((tag) => {
                     let background;
@@ -121,7 +123,6 @@ const DefaultImg = styled.div`
 const ImageItem = styled(Image)`
   border-radius: 5px 5px 0 0;
   object-fit: cover;
-  width: 100%;
 
   @media (max-width: 768px) {
     height: 150px;
@@ -184,6 +185,11 @@ const Summary = styled.h2`
   @media (max-width: 768px) {
     font-size: 12px;
   }
+`;
+
+const CreatedDate = styled.p`
+  color: gray;
+  font-size: 12px;
 `;
 
 const Tags = styled.ul`

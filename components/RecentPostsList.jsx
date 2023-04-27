@@ -1,5 +1,6 @@
 import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 import styled from "@emotion/styled";
+import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";
 
@@ -13,6 +14,7 @@ const RecentPostsList = ({ data }) => {
           const summary = post.properties.summary.rich_text[0]?.plain_text;
           const tags = post.properties.tags.multi_select;
           const id = post.id;
+          const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
 
           return (
             <Post href={`/blog/posts/${id}`} key={post.id}>
@@ -20,6 +22,8 @@ const RecentPostsList = ({ data }) => {
                 <Category>{category}</Category>
                 <Title>{title}</Title>
                 <Summary>{summary}</Summary>
+                <CreatedDate>{createdDate}</CreatedDate>
+
                 <Tags>
                   {tags.map((tag) => {
                     let background;
@@ -120,6 +124,11 @@ const Summary = styled.h2`
   @media (max-width: 768px) {
     font-size: 12px;
   }
+`;
+
+const CreatedDate = styled.p`
+  color: gray;
+  font-size: 12px;
 `;
 
 const Tags = styled.ul`

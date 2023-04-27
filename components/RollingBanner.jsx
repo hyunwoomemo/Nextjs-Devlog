@@ -77,6 +77,7 @@ const SlideItem = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   @media (max-width: 768px) {
     padding: 0;

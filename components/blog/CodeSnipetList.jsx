@@ -23,13 +23,16 @@ const CodeSnipetList = ({ data, keyword }) => {
             const summary = post.properties.summary.rich_text[0]?.plain_text;
             const tags = post.properties.tags?.multi_select;
             const id = post.id;
+            const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
 
             return (
               <Post href={`/blog/codesnipet/${id}`} key={post.id}>
                 <Wrapper>
                   <Category>{category}</Category>
+
                   <Title>{title}</Title>
                   <Summary>{summary}</Summary>
+                  <CreatedDate>{createdDate}</CreatedDate>
                   <Tags>
                     {tags?.map((tag) => {
                       let background;
@@ -165,6 +168,11 @@ const Summary = styled.h2`
   @media (max-width: 768px) {
     font-size: 12px;
   }
+`;
+
+const CreatedDate = styled.p`
+  color: gray;
+  font-size: 12px;
 `;
 
 const Tags = styled.ul`

@@ -18,7 +18,6 @@ const SearchList = ({ data, keyword, fade }) => {
     (v) => v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.tags.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
   );
 
-  console.log(filterData);
   const [colorEffect, setColorEffect] = useState(false);
 
   useEffect(() => {
@@ -52,7 +51,7 @@ const SearchList = ({ data, keyword, fade }) => {
             const tags = post.properties.tags?.multi_select;
             const id = post.id;
             const projectName = post.properties.프로젝트명?.rich_text[0]?.plain_text;
-            console.log(projectName);
+            const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
             let parentDb;
             switch (post.parent.database_id.replaceAll("-", "")) {
               case codesnipetId:
@@ -72,9 +71,11 @@ const SearchList = ({ data, keyword, fade }) => {
               <Post href={parentDb === "projects" ? `/${parentDb}/${id}` : `/blog/${parentDb}/${id}`} key={post.id}>
                 <Wrapper>
                   {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
+                  <CreatedDate>{createdDate}</CreatedDate>
                   <Title>{title}</Title>
                   {!projectName ? <Category>{`${parentDb} / ${category}`}</Category> : <Category>{`${projectName} 프로젝트`}</Category>}
                   <Summary>{summary}</Summary>
+
                   <Tags>
                     {tags?.map((tag) => {
                       let background;
@@ -247,6 +248,11 @@ const Title = styled.h1`
   &:hover:after {
     width: 100%;
   }
+`;
+
+const CreatedDate = styled.p`
+  color: gray;
+  font-size: 12px;
 `;
 
 const Summary = styled.h2`

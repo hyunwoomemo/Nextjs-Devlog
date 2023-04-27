@@ -24,6 +24,23 @@ const Search = ({ posts }) => {
     setActiveKeyword(true);
   };
 
+  const handleKeydown = (e) => {
+    if (e.key === "Escape") {
+      setSearch(false);
+      setKeyword("");
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== "object") return;
+
+    window.addEventListener("keydown", handleKeydown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+    };
+  });
+
   return (
     <Portal selector="#portal">
       {search ? (
