@@ -23,7 +23,7 @@ export default function Home({ allPosts, posts, projects, languages }) {
       <Layout posts={allPosts}>
         <Seo title="home" />
         <Hero />
-        <RollingBanner speed={speed}>
+        {/* <RollingBanner speed={speed}>
           {languages.map((v) => {
             return (
               <>
@@ -31,7 +31,7 @@ export default function Home({ allPosts, posts, projects, languages }) {
               </>
             )
           })}
-        </RollingBanner>
+        </RollingBanner> */}
 
         <RecentPost data={slicePosts} projects={projects} />
 
