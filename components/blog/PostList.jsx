@@ -85,7 +85,7 @@ const Post = styled(Link)`
   background-color: var(--post-item-background);
   transition: all 0.3s;
 
-  margin: 0 auto;
+  /*   margin: 0 auto; */
 
   @media (max-width: 768px) {
     max-width: 400px;
@@ -115,14 +115,13 @@ const DefaultImg = styled.div`
   }
 
   @media (min-width: 769px) {
-    min-height: 250px;
-    min-width: 300px;
   }
 `;
 
 const ImageItem = styled(Image)`
   border-radius: 5px 5px 0 0;
   object-fit: cover;
+  width: 100%;
 
   @media (max-width: 768px) {
     height: 150px;
