@@ -7,7 +7,6 @@ import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 
 const ProjectPostList = ({ closeEvent, active, data, title }) => {
   const selectData = data.results.filter((v) => v.properties.프로젝트명?.rich_text[0]?.plain_text === title);
-  console.log(selectData);
 
   return (
     <Base active={active}>

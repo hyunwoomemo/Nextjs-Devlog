@@ -7,15 +7,13 @@ import '@/styles/globals.css'
 import '@/styles/modal.scss'
 import { CacheProvider } from '@emotion/react'
 import { cache } from '@emotion/css'
-import { Router, useRouter } from 'next/router'
+import { Router } from 'next/router'
 import { useEffect, useState } from 'react'
-import ReactGA from "react-ga";
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   const [themeMode, setThemeMode] = useState('dark');
   const [search, setSearch] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const start = () => {

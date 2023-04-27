@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 
 const FullPage = ({ children }) => {
-  console.log(children);
   return (
     <Base>
       {children.map((child, idx) => {

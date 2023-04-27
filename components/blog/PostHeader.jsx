@@ -8,7 +8,6 @@ import React, { useRef } from "react";
 import BreadCrumb from "../BreadCrumb";
 
 const PostHeader = ({ data }) => {
-  console.log(data);
   const router = useRouter();
   const filterData = data?.filter((v) => v.id === router.query.id);
 
