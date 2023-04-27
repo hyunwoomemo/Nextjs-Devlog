@@ -16,14 +16,39 @@ import markdownToc from "markdown-toc";
 import rehypeSlug from "rehype-slug";
 import Toc from "@/components/Toc";
 import remarkGfm from "remark-gfm";
+import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
 
 const PostItem = ({ html_text, posts, toc }) => {
+  const router = useRouter();
+  console.log(router.query.id);
+  console.log(posts.filter((v) => v.id === router.query.id));
+  const title = posts.filter((v) => v.id === router.query.id)[0].properties.Name.title[0].plain_text;
   return (
-    <Layout data={posts}>
-      <PostHeader data={posts}></PostHeader>
-      {toc.json.length > 0 ? <Toc toc={toc}></Toc> : undefined}
-      <Markdown2Html html={html_text} />
-    </Layout>
+    <>
+      <NextSeo
+        title={`${title} | Hyunwoomemo`}
+        description="프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다."
+        openGraph={{
+          type: "website",
+          url: "https://hyunwoomemo.vercel.app/",
+          title: "Hyunwoomemo's Devlog",
+          description: "프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다.",
+          images: [
+            {
+              url: "https://user-images.githubusercontent.com/105469077/234896480-32d59948-f5fb-4232-823b-38bb12bb34d6.png",
+              width: 800,
+              height: 400,
+            },
+          ],
+        }}
+      />
+      <Layout data={posts}>
+        <PostHeader data={posts}></PostHeader>
+        {toc.json.length > 0 ? <Toc toc={toc}></Toc> : undefined}
+        <Markdown2Html html={html_text} />
+      </Layout>
+    </>
   );
 };
 
