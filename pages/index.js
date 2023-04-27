@@ -35,7 +35,7 @@ export default function Home({ allPosts, posts, projects, languages }) {
           description: '프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다.',
           images: [
             {
-              url: Img,
+              url: 'https://user-images.githubusercontent.com/105469077/234896480-32d59948-f5fb-4232-823b-38bb12bb34d6.png',
               width: 800,
               height: 400,
             },
