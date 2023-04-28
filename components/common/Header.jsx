@@ -133,6 +133,7 @@ const Base = styled.header`
   margin: 0 auto;
   background-color: var(--main-background);
   z-index: 2;
+  height: 60px;
 
   @media (max-width: 768px) {
     padding: 1rem;
