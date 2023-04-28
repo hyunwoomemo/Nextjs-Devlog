@@ -4,20 +4,16 @@ import { CODESNIPET_DATABASE_ID, POST_DATABASE_ID, PROJECT_DATABASE_ID, TOKEN } 
 import SearchList from "@/components/common/SearchList";
 import Portal from "@/components/common/Portal";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 
 const Search = ({ allPosts }) => {
   const router = useRouter();
 
   const [keyword, setKeyword] = useState("");
-  const [fade, setFade] = useState(false);
   const [activeKeyword, setActiveKeyword] = useState(false);
 
   const handleSearch = (e) => {
     setKeyword(e.target.value);
-    setFade(true);
-    setTimeout(() => {
-      setFade(false);
-    }, 100);
 
     setActiveKeyword(true);
   };
@@ -39,22 +35,41 @@ const Search = ({ allPosts }) => {
   });
 
   return (
-    <Base id="base">
-      <Header>
-        <SearchInput autoFocus autocomplete="off" id="#search_input" placeholder="검색어를 입력하세요" value={keyword} onChange={handleSearch}></SearchInput>
-        <CloseBtn
-          onClick={() => {
-            setKeyword("");
-            router.push("/");
-          }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </CloseBtn>
-      </Header>
-      {keyword ? <SearchList data={allPosts} keyword={keyword} fade={fade} /> : undefined}
-    </Base>
+    <>
+      <NextSeo
+        title="Search | Hyunwoomemo"
+        description="프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다."
+        openGraph={{
+          type: "website",
+          url: "https://hyunwoomemo.vercel.app/",
+          title: "Hyunwoomemo's Devlog",
+          description: "프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다.",
+          images: [
+            {
+              url: "https://user-images.githubusercontent.com/105469077/234896480-32d59948-f5fb-4232-823b-38bb12bb34d6.png",
+              width: 800,
+              height: 400,
+            },
+          ],
+        }}
+      />
+      <Base id="base">
+        <Header>
+          <SearchInput autoFocus autocomplete="off" id="#search_input" placeholder="검색어를 입력하세요" value={keyword} onChange={handleSearch}></SearchInput>
+          <CloseBtn
+            onClick={() => {
+              setKeyword("");
+              router.back();
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </CloseBtn>
+        </Header>
+        {keyword ? <SearchList data={allPosts} keyword={keyword} /> : undefined}
+      </Base>
+    </>
   );
 };
 
@@ -66,6 +81,10 @@ const Base = styled.div`
   flex-direction: column;
   gap: 2rem;
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const Header = styled.div`

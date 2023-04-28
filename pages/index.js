@@ -66,19 +66,6 @@ export async function getStaticProps() {
     }),
   };
 
-  const languageOptions = {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Notion-Version": "2022-06-28",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${TOKEN}`,
-    },
-    body: JSON.stringify({
-      page_size: 100,
-    }),
-  }
-
   const snipetRes = await fetch(`https://api.notion.com/v1/databases/${CODESNIPET_DATABASE_ID}/query`, options);
   const postsRes = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
   const projectRes = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);

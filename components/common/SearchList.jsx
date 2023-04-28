@@ -9,11 +9,10 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import slugify from "slugify";
 
-const SearchList = ({ data, keyword, fade }) => {
+const SearchList = ({ data, keyword }) => {
   const codesnipetId = CODESNIPET_DATABASE_ID;
   const postsId = POST_DATABASE_ID;
   const projectId = PROJECT_DATABASE_ID;
-  const { search, setSearch } = useContext(SearchContext);
   const filterData = data?.filter(
     (v) => v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.tags.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
   );
@@ -37,7 +36,7 @@ const SearchList = ({ data, keyword, fade }) => {
       ) : (
         <Result>검색 결과가 없습니다.</Result>
       )}
-      <Base fade={fade} onClick={() => setSearch(false)}>
+      <Base>
         {data
           ?.filter(
             (v) =>
@@ -46,6 +45,7 @@ const SearchList = ({ data, keyword, fade }) => {
           .map((post) => {
             const category = post.properties?.category?.select?.name;
             const title = post.properties?.Name.title[0].plain_text;
+            const highlightedTitle = title.replace(new RegExp(keyword, "gi"), `<mark>${keyword}</mark>`);
             const imgSrc = post.cover?.file?.url || post.cover?.external.url;
             const summary = post.properties.summary?.rich_text[0]?.plain_text;
             const tags = post.properties.tags?.multi_select;
@@ -72,7 +72,7 @@ const SearchList = ({ data, keyword, fade }) => {
                 <Wrapper>
                   {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
                   <CreatedDate>{createdDate}</CreatedDate>
-                  <Title>{title}</Title>
+                  <Title dangerouslySetInnerHTML={{ __html: highlightedTitle }}></Title>
                   {!projectName ? <Category>{`${parentDb} / ${category}`}</Category> : <Category>{`${projectName} 프로젝트`}</Category>}
                   <Summary>{summary}</Summary>
 
@@ -118,13 +118,10 @@ const Base = styled.div`
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  padding: 2rem;
+  grid-template-columns: repeat(1, 1fr);
   gap: 2rem;
 
   @media (max-width: 768px) {
-    padding: 1rem;
-    gap: 1rem;
   }
 
   @media (min-width: 769px) {
@@ -142,16 +139,6 @@ const Post = styled(Link)`
   border-radius: 10px;
   background-color: var(--post-item-background);
   transition: all 0.3s;
-
-  @media (max-width: 768px) {
-    max-width: 400px;
-    width: 100%;
-  }
-
-  @media (max-width: 1200px) {
-    max-width: 450px;
-    width: 100%;
-  }
 `;
 
 const DefaultImg = styled.div`
