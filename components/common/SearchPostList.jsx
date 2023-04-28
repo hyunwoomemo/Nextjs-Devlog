@@ -48,16 +48,16 @@ const SearchPostList = ({ data, keyword, parent }) => {
           const highlightedProjectName = projectName?.replace(new RegExp(keyword, "gi"), `<mark>${keyword}</mark>`);
           const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
           let parentDb;
-          switch (post.parent.database_id.replaceAll("-", "")) {
-            case codesnipetId:
-              parentDb = "codesnipet";
-              break;
-
-            case postsId:
+          switch (parent) {
+            case "포스트":
               parentDb = "posts";
               break;
 
-            case projectId:
+            case "코드 조각들":
+              parentDb = "codesnipet";
+              break;
+
+            case "프로젝트":
               parentDb = "projects";
               break;
           }
