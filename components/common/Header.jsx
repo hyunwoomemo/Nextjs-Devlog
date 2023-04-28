@@ -8,8 +8,9 @@ import { useRouter } from "next/router";
 import BackArrow from "@/public/back-arrow.svg";
 import ChoiceCategory from "../blog/ChoiceCategory";
 import { BsMoonFill, BsFillSunFill } from "react-icons/bs";
+import Filter from "../blog/Filter";
 
-const Header = ({ data, choiceCt, posts, headerTitle, allPosts }) => {
+const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const { themeMode, setThemeMode } = useContext(ThemeContext);
@@ -68,6 +69,14 @@ const Header = ({ data, choiceCt, posts, headerTitle, allPosts }) => {
     }
   }, [router.pathname]);
 
+  // 포스트 필터 기능을 위한 필터 아이콘 클릭 정의
+  const [filter, setFilter] = useState(false);
+
+  const handleFilter = () => {
+    setFilter(!filter);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <Base>
       <Wrapper>
@@ -79,12 +88,30 @@ const Header = ({ data, choiceCt, posts, headerTitle, allPosts }) => {
         {title && scrollTop > 170 ? (
           <Title onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{title}</Title>
         ) : headerTitle ? (
-          <Title>{headerTitle === "Posts" ? `Posts (${allPosts.results.length})` : headerTitle}</Title>
+          <Title>
+            {headerTitle === "Posts" ? (
+              <>
+                {`Posts (${allPosts.results.length})`}
+                <FilterIcon onClick={handleFilter} filter={filter}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"
+                    />
+                  </svg>
+                </FilterIcon>
+              </>
+            ) : (
+              headerTitle
+            )}
+          </Title>
         ) : choiceCt ? (
           <CategoryLink href="/blog/posts/categories">{`${choiceCt} (${categoryLength})`}</CategoryLink>
         ) : (
           <TitleLink href="/">Hyunwoomemo</TitleLink>
         )}
+        <Filter filter={filter} posts={data} />
         <LinkWrapper active={activeTab}>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
@@ -133,7 +160,6 @@ const Base = styled.header`
   margin: 0 auto;
   background-color: var(--main-background);
   z-index: 2;
-  height: 60px;
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -168,9 +194,28 @@ const Title = styled.h1`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
   @media (max-width: 768px) {
     font-size: 16px;
+  }
+`;
+
+const FilterIcon = styled.div`
+  display: flex;
+  align-items: center;
+  svg {
+    ${({ filter }) =>
+      filter
+        ? css`
+            > path {
+              fill: var(--text-color);
+            }
+          `
+        : css``}
+    width: 20px;
   }
 `;
 

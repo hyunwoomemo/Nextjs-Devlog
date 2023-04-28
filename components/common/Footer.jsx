@@ -22,7 +22,7 @@ export default function Footer() {
     window.localStorage.setItem("theme", window.localStorage.getItem("theme") === "dark" ? "light" : "dark");
   };
   return (
-    <Base display={router.pathname === "/"}>
+    <Base>
       <Wrapper>
         <Left>
           <Link href="/">
@@ -60,7 +60,6 @@ const Base = styled.footer`
   align-items: center;
   background-color: var(--footer-background);
   margin-top: auto;
-  display: ${({ display }) => (display ? "flex" : "none")};
 `;
 
 const Wrapper = styled.div`

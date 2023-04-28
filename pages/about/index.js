@@ -24,7 +24,7 @@ const about = () => {
         }}
       />
       <Layout>
-        <Base>About</Base>
+        <Base>안녕하세요, 이현우입니다!</Base>
       </Layout>
     </>
   );

@@ -39,7 +39,6 @@ const Base = styled.div`
   top: 61px;
   z-index: 2;
   background-color: var(--main-background);
-  padding: 2rem 0;
 
   ${({ show }) =>
     show

@@ -72,22 +72,6 @@ const Title = styled.h1`
   font-size: 20px;
 `;
 
-const Search = styled.input`
-  margin: 1rem auto;
-  padding: 1rem;
-  width: 100%;
-  color: var(--text-color);
-  font-size: 18px;
-
-  background-color: var(--tag-background);
-  border: 0;
-
-  &::placeholder {
-    color: var(--text-color);
-    opacity: 0.5;
-  }
-`;
-
 const ImageWrapper = styled.div`
   height: 150px;
   overflow: hidden;

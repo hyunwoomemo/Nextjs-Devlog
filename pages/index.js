@@ -36,7 +36,7 @@ export default function Home({ allPosts, posts, projects }) {
         }}
       />
       <Base search={search}>
-        <Layout posts={allPosts}>
+        <Layout allPosts={allPosts} posts={posts}>
           <Hero />
           <RecentPost data={slicePosts} projects={projects} />
         </Layout>

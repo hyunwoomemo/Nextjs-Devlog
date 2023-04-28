@@ -8,6 +8,7 @@ import SearchContext from "@/context/SearchContext";
 const Layout = ({ children, data, choiceCt, posts, headerTitle, allPosts }) => {
   const { loading } = useContext(LoadingContext);
   const { search } = useContext(SearchContext);
+  console.log(posts);
   return (
     <Base loading={loading.toString()} search={search}>
       <Header data={data} allPosts={allPosts} choiceCt={choiceCt} posts={posts} headerTitle={headerTitle} />

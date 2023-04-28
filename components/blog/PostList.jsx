@@ -13,10 +13,6 @@ const PostList = ({ data, numPages }) => {
   /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
 
   const router = useRouter();
-
-  console.log(router);
-
-  console.log(data);
   return (
     <>
       <Base>

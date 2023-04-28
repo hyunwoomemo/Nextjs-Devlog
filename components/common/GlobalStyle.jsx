@@ -22,7 +22,7 @@ const defaultStyle = css`
       --footer-background: #f2f2f2;
       --dim-background: rgba(0, 0, 0, 0.5);
       --project-item-background: #ececec;
-      --tag-background: #ddddd1;
+      --tag-background: #f2f2f2;
       --code-bgc: #ececec;
       --code-text: tomato;
       --blockquote-bgc: #dddddd;
@@ -39,10 +39,10 @@ const defaultStyle = css`
       --primary-color: #8498ab;
       --text-color: #f9f9f9;
       --main-background: #1b1b1b;
-      --footer-background: #000000;
+      --footer-background: #2a2a2a;
       --dim-background: rgba(255, 255, 255, 0.2);
       --project-item-background: #272626;
-      --tag-background: #585853;
+      --tag-background: #2a2a2a;
       --code-bgc: #2b2b2b;
       --code-text: tomato;
       --blockquote-bgc: #1a1b17;

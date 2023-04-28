@@ -10,6 +10,8 @@ import { cache } from '@emotion/css'
 import { Router, useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import * as gtag from '@/lib/gtag'
+import { Provider } from 'react-redux'
+import store from '@/store'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -51,18 +53,18 @@ export default function App({ Component, pageProps }) {
   }, [router.events])
 
   return (
-
-    <CacheProvider value={cache}>
-      <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
-        <LoadingContext.Provider value={{ loading }}>
-          <SearchContext.Provider value={{ search, setSearch }}>
-            <GlobalStyle />
-            <Component {...pageProps} />
-            {loading ? <Loading /> : undefined}
-          </SearchContext.Provider>
-        </LoadingContext.Provider>
-      </ThemeContext.Provider>
-    </CacheProvider>
-
+    <Provider store={store}>
+      <CacheProvider value={cache}>
+        <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
+          <LoadingContext.Provider value={{ loading }}>
+            <SearchContext.Provider value={{ search, setSearch }}>
+              <GlobalStyle />
+              <Component {...pageProps} />
+              {loading ? <Loading /> : undefined}
+            </SearchContext.Provider>
+          </LoadingContext.Provider>
+        </ThemeContext.Provider>
+      </CacheProvider>
+    </Provider>
   )
 }
