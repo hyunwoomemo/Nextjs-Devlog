@@ -6,13 +6,10 @@ import Link from "next/link";
 import ThemeContext from "@/context/ThemeContext";
 import { useRouter } from "next/router";
 import BackArrow from "@/public/back-arrow.svg";
-import ChoiceCategory from "./blog/ChoiceCategory";
-import Search from "./Search";
-import SearchContext from "@/context/SearchContext";
-import { CiSun } from "react-icons/ci";
+import ChoiceCategory from "../blog/ChoiceCategory";
 import { BsMoonFill, BsFillSunFill } from "react-icons/bs";
 
-const Header = ({ data, choiceCt, posts, headerTitle }) => {
+const Header = ({ data, choiceCt, posts, headerTitle, allPosts }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const { themeMode, setThemeMode } = useContext(ThemeContext);
@@ -27,7 +24,6 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
   const title = data?.filter((v) => v.id === router.query.id)[0]?.properties.Name.title[0].plain_text;
 
   const categoryLength = data?.filter((v) => v.properties.category.select.name === choiceCt).length;
-  console.log(categoryLength);
 
   const [scrollTop, setScrollTop] = useState(0);
 
@@ -47,19 +43,6 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.ctrlKey && e.key === "k") {
-        setSearch(true);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  });
-
   const handleTheme = () => {
     setThemeMode(themeMode === "dark" ? "light" : "dark");
     window.localStorage.setItem("theme", window.localStorage.getItem("theme") === "dark" ? "light" : "dark");
@@ -68,8 +51,6 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
   const handleClose = () => {
     setIsOpen(false);
   };
-
-  const { search, setSearch } = useContext(SearchContext);
 
   // 활성화 탭 스타일 적용
 
@@ -87,9 +68,6 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
     }
   }, [router.pathname]);
 
-  // 홈화면 아이콘 클릭시 검색창에 검색하는 함수 만들기
-  const iconSearch = () => {};
-
   return (
     <Base>
       <Wrapper>
@@ -101,7 +79,7 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
         {title && scrollTop > 170 ? (
           <Title onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{title}</Title>
         ) : headerTitle ? (
-          <Title>{headerTitle}</Title>
+          <Title>{headerTitle === "Posts" ? `Posts (${allPosts.results.length})` : headerTitle}</Title>
         ) : choiceCt ? (
           <CategoryLink href="/blog/posts/categories">{`${choiceCt} (${categoryLength})`}</CategoryLink>
         ) : (
@@ -122,13 +100,11 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
             />
           </svg>
         </Hambuger>
-        {router.pathname === "/" ? (
-          <SearchBtn onClick={() => setSearch(!search)}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-            </svg>
-          </SearchBtn>
-        ) : undefined}
+        <SearchBtn href="/search">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+        </SearchBtn>
       </Wrapper>
       {router.pathname.indexOf("posts") > -1 && !router.query.id && router.pathname !== "/blog/posts/categories" ? <ChoiceCategory category={choiceCt} /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
@@ -142,7 +118,6 @@ const Header = ({ data, choiceCt, posts, headerTitle }) => {
           </ToggleBtn>
         </ModalBody>
       </Modal>
-      <Search active={search} posts={posts} />
     </Base>
   );
 };
@@ -265,7 +240,7 @@ const ToggleBtn = styled.div`
   }
 `;
 
-const SearchBtn = styled.div`
+const SearchBtn = styled(Link)`
   cursor: pointer;
   svg {
     width: 24px;

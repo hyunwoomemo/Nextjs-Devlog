@@ -6,11 +6,11 @@ import { unified } from "unified";
 import markdown from "remark-parse";
 import remark2rehype from "remark-rehype";
 import html from "rehype-stringify";
-import Layout from "@/components/Layout";
+import Layout from "@/components/common/Layout";
 
 import "prismjs/themes/prism-okaidia.css";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
-import Markdown2Html from "@/components/Markdown2Html";
+import Markdown2Html from "@/components/blog/Markdown2Html";
 import ProjectPostList from "@/components/projects/ProjectPostList";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";

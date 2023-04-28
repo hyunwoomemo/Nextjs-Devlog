@@ -1,5 +1,5 @@
-import GlobalStyle from '@/components/GlobalStyle'
-import Loading from '@/components/Loading'
+import GlobalStyle from '@/components/common/GlobalStyle'
+import Loading from '@/components/common/Loading'
 import LoadingContext from '@/context/LoadingContext'
 import SearchContext from '@/context/SearchContext'
 import ThemeContext from '@/context/ThemeContext'

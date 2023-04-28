@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import PostList from "./blog/PostList";
+import PostList from "../blog/PostList";
 import RecentPostsList from "./RecentPostsList";
 import { useEffect, useRef, useState } from "react";
 import RecentProjectList from "./RecentProjectList";

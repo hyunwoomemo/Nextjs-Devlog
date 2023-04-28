@@ -21,8 +21,13 @@ const ChoiceCategory = ({ category }) => {
 
   return (
     <Base activeScroll={scrollTop > 5} show={router.pathname === "/blog/posts"}>
-      <Wrapper href="/blog/posts/categories">
-        카테고리 ∣ <span>{category || "전체"}</span>
+      <Wrapper>
+        <Item href="/blog/posts/categories">
+          카테고리 : <span>{category || "전체"}</span>
+        </Item>
+        <Item href="/blog/posts/tags">
+          태그 : <span>{category || "전체"}</span>
+        </Item>
       </Wrapper>
     </Base>
   );
@@ -34,7 +39,7 @@ const Base = styled.div`
   top: 61px;
   z-index: 2;
   background-color: var(--main-background);
-  padding: 1rem;
+  padding: 2rem 0;
 
   ${({ show }) =>
     show
@@ -44,26 +49,25 @@ const Base = styled.div`
         `}
 
   @media (min-width: 769px) {
-    padding: 2rem;
   }
 `;
 
-const Wrapper = styled(Link)`
-  border: 1px solid gray;
-  padding: 6px 7px;
-  background-color: var(--choiceCategory-bgc);
-  box-shadow: 0px 0px 3px gray;
-  border-radius: 5px;
+const Wrapper = styled.div`
   font-size: 14px;
+  display: flex;
+  justify-content: end;
+  gap: 10px;
 
   @media (max-width: 768px) {
     padding: 6px 7px;
     font-size: 12px;
   }
+`;
 
-  > span {
-    color: var(--purple-color);
-  }
+const Item = styled(Link)`
+  border: 1px solid gray;
+  padding: 10px 1rem;
+  border-radius: 5px;
 `;
 
 export default ChoiceCategory;

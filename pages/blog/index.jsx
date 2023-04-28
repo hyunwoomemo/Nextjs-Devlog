@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/common/Layout";
 import styled from "@emotion/styled";
 import { NextSeo } from "next-seo";
 import Link from "next/link";

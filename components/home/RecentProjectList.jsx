@@ -16,7 +16,7 @@ const RecentProjectList = ({ projects }) => {
           const id = post.id;
 
           return (
-            <Post href={`/blog/posts/${id}`} key={post.id}>
+            <Post href={`/projects/${id}`} key={post.id}>
               <Wrapper>
                 <Title>{title}</Title>
                 <Summary>{summary}</Summary>

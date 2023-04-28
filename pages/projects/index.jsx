@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/common/Layout";
 import ProjectList from "@/components/projects/ProjectList";
 import { TOKEN, PROJECT_DATABASE_ID, POST_DATABASE_ID } from "@/config";
 import styled from "@emotion/styled";

@@ -1,5 +1,5 @@
-import Layout from "@/components/Layout";
-import Markdown2Html from "@/components/Markdown2Html";
+import Layout from "@/components/common/Layout";
+import Markdown2Html from "@/components/blog/Markdown2Html";
 import { CODESNIPET_DATABASE_ID, POST_DATABASE_ID, TOKEN } from "@/config";
 import { Client } from "@notionhq/client/build/src";
 import { NotionToMarkdown } from "notion-to-md/build";
@@ -14,7 +14,7 @@ import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import PostHeader from "@/components/blog/PostHeader";
 import markdownToc from "markdown-toc";
 import rehypeSlug from "rehype-slug";
-import Toc from "@/components/Toc";
+import Toc from "@/components/blog/Toc";
 import remarkGfm from "remark-gfm";
 
 const PostItem = ({ html_text, posts, toc }) => {

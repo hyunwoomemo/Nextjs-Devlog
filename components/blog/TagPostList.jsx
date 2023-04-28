@@ -4,62 +4,53 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import slugify from "slugify";
-import PostPagination from "./PostPagination";
 
-const CodeSnipetList = ({ data, keyword }) => {
+const TagPostList = ({ data }) => {
   return (
-    <>
-      <Base>
-        {data
-          ?.filter(
-            (v) =>
-              v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.tags.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
-          )
-          .map((post) => {
-            const category = post.properties.category.select?.name;
-            const title = post.properties?.Name.title[0].plain_text;
-            const imgSrc = post.cover?.file?.url || post.cover?.external.url;
-            const summary = post.properties.summary.rich_text[0]?.plain_text;
-            const tags = post.properties.tags?.multi_select;
-            const id = post.id;
-            const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
+    <Base>
+      {data.map((post) => {
+        const category = post.properties.category.select?.name;
+        const title = post.properties.Name.title[0].plain_text;
+        const summary = post.properties.summary.rich_text[0]?.plain_text;
+        const imgSrc = post.cover?.file?.url || post.cover?.external.url;
+        const tags = post.properties.tags.multi_select;
+        const createdDate = post.created_time;
+        const id = post.id;
 
-            return (
-              <Post href={`/blog/codesnipet/${id}`} key={post.id}>
-                <Wrapper>
-                  <Category>{category}</Category>
-
-                  <Title>{title}</Title>
-                  <Summary>{summary}</Summary>
-                  <CreatedDate>{createdDate}</CreatedDate>
-                  <Tags>
-                    {tags?.map((tag) => {
-                      let background;
-                      if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
-                        background = darkThemeTagColor;
-                      } else {
-                        background = lightThemeTagColor;
-                      }
-                      const tagColor = background[tag.color];
-                      return (
-                        <li key={tag.id} style={{ backgroundColor: tagColor }}>
-                          {tag.name}
-                        </li>
-                      );
-                    })}
-                  </Tags>
-                </Wrapper>
-              </Post>
-            );
-          })}
-      </Base>
-    </>
+        return (
+          <Post href={`/blog/posts/${id}`} key={post.id}>
+            {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
+            <Wrapper>
+              <Category>{category}</Category>
+              <Title>{title}</Title>
+              <Summary>{summary}</Summary>
+              <Tags>
+                {tags.map((tag) => {
+                  let background;
+                  if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
+                    background = darkThemeTagColor;
+                  } else {
+                    background = lightThemeTagColor;
+                  }
+                  const tagColor = background[tag.color];
+                  return (
+                    <li key={tag.id} style={{ backgroundColor: tagColor }}>
+                      {tag.name}
+                    </li>
+                  );
+                })}
+              </Tags>
+            </Wrapper>
+          </Post>
+        );
+      })}
+    </Base>
   );
 };
 
 const Base = styled.div`
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   padding: 2rem;
   gap: 2rem;
 
@@ -68,7 +59,13 @@ const Base = styled.div`
     gap: 1rem;
   }
 
-  grid-template-columns: 1fr;
+  @media (min-width: 769px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 `;
 
 const Post = styled(Link)`
@@ -77,8 +74,18 @@ const Post = styled(Link)`
   border-radius: 10px;
   background-color: var(--post-item-background);
   transition: all 0.3s;
+
   margin: 0 auto;
-  width: 100%;
+
+  @media (max-width: 768px) {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  @media (max-width: 1200px) {
+    max-width: 450px;
+    width: 100%;
+  }
 `;
 
 const DefaultImg = styled.div`
@@ -170,11 +177,6 @@ const Summary = styled.h2`
   }
 `;
 
-const CreatedDate = styled.p`
-  color: gray;
-  font-size: 12px;
-`;
-
 const Tags = styled.ul`
   display: flex;
   gap: 10px;
@@ -191,4 +193,4 @@ const Tags = styled.ul`
   }
 `;
 
-export default CodeSnipetList;
+export default TagPostList;

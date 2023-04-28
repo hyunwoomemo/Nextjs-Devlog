@@ -5,15 +5,14 @@ import Footer from "./Footer";
 import LoadingContext from "@/context/LoadingContext";
 import SearchContext from "@/context/SearchContext";
 
-const Layout = ({ children, data, choiceCt, posts, headerTitle }) => {
+const Layout = ({ children, data, choiceCt, posts, headerTitle, allPosts }) => {
   const { loading } = useContext(LoadingContext);
   const { search } = useContext(SearchContext);
   return (
     <Base loading={loading.toString()} search={search}>
-      <Header data={data} choiceCt={choiceCt} posts={posts} headerTitle={headerTitle} />
+      <Header data={data} allPosts={allPosts} choiceCt={choiceCt} posts={posts} headerTitle={headerTitle} />
       <Children>{children}</Children>
       <Footer />
-      {/* <Aside></Aside> */}
     </Base>
   );
 };

@@ -5,11 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import slugify from "slugify";
-import PostPagination from "../PostPagination";
+import PostPagination from "./PostPagination";
+import { useRouter } from "next/router";
 
 const PostList = ({ data, numPages }) => {
   // data 중에서 project 포스트는 제외한다.
   /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
+
+  const router = useRouter();
+
+  console.log(router);
 
   console.log(data);
   return (
@@ -115,6 +120,7 @@ const DefaultImg = styled.div`
   }
 
   @media (min-width: 769px) {
+    height: 250px;
   }
 `;
 

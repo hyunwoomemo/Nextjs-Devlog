@@ -1,14 +1,15 @@
 import Layout from "@/components/common/Layout";
 import CategoryList from "@/components/blog/CategoryList";
 import PostList from "@/components/blog/PostList";
+import TagList from "@/components/blog/TagList";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
 import React, { useEffect, useState } from "react";
 
-const index = ({ posts, postsCategory }) => {
-  console.log(posts);
+const index = ({ posts, postsTag }) => {
+  const uniqueTag = postsTag.filter((v, i, arr) => arr.indexOf(v) === i);
   return (
     <Layout data={posts}>
-      <CategoryList data={postsCategory} posts={posts} />
+      <TagList data={uniqueTag} posts={posts} />
     </Layout>
   );
 };
@@ -42,9 +43,9 @@ export async function getStaticProps() {
 
   const posts = allPosts.results;
 
-  const postsCategory = posts?.map((post) => post.properties.category.select.name).filter((v, i, arr) => arr.indexOf(v) === i);
+  const postsTag = posts?.map((post) => post.properties.tags.multi_select.map((v1) => v1.name)).flat();
 
   return {
-    props: { posts, postsCategory },
+    props: { posts, postsTag },
   };
 }

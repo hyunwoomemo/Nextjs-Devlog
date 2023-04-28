@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/common/Layout";
 import CodeSnipetList from "@/components/blog/CodeSnipetList";
 import { CODESNIPET_DATABASE_ID, TOKEN } from "@/config";
 import { css } from "@emotion/react";

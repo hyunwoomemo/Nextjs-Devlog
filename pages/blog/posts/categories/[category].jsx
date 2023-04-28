@@ -1,5 +1,4 @@
-import BreadCrumb from "@/components/BreadCrumb";
-import Layout from "@/components/Layout";
+import Layout from "@/components/common/Layout";
 import CategoryList from "@/components/blog/CategoryList";
 import CategoryPostList from "@/components/blog/CategoryPostList";
 import ChoiceCategory from "@/components/blog/ChoiceCategory";

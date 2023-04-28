@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/common/Layout";
 import PostList from "@/components/blog/PostList";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
 import React from "react";

@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/common/Layout";
 import ChoiceCategory from "@/components/blog/ChoiceCategory";
 import PostList from "@/components/blog/PostList";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useState } from "react";
 
-const index = ({ posts, numPages }) => {
+const index = ({ posts, numPages, allPosts }) => {
   return (
     <>
       <NextSeo
@@ -26,7 +26,7 @@ const index = ({ posts, numPages }) => {
           ],
         }}
       />
-      <Layout data={posts} headerTitle="Posts">
+      <Layout data={posts} allPosts={allPosts} headerTitle="Posts">
         <PostList data={posts} numPages={numPages} />
       </Layout>
     </>
