@@ -1,4 +1,3 @@
-import { CODESNIPET_DATABASE_ID, POST_DATABASE_ID, PROJECT_DATABASE_ID } from "@/config";
 import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -8,9 +7,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 const SearchPostList = ({ data, keyword, parent }) => {
-  const codesnipetId = CODESNIPET_DATABASE_ID;
-  const postsId = POST_DATABASE_ID;
-  const projectId = PROJECT_DATABASE_ID;
   const [fold, setFold] = useState(false);
 
   const handleFold = () => {
@@ -33,7 +29,7 @@ const SearchPostList = ({ data, keyword, parent }) => {
           )}
         </ActionBtn>
       </PostCategory>
-      <Base fold={fold} id="base">
+      <Base fold={fold}>
         {data?.map((post) => {
           const category = post.properties?.category?.select?.name;
           const highlightedCateogry = category?.replace(new RegExp(keyword, "gi"), `<mark>${keyword}</mark>`);
