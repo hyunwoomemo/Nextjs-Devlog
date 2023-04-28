@@ -8,15 +8,25 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import slugify from "slugify";
+import SearchPostList from "./SearchPostList";
 
 const SearchList = ({ data, keyword }) => {
   const codesnipetId = CODESNIPET_DATABASE_ID;
   const postsId = POST_DATABASE_ID;
   const projectId = PROJECT_DATABASE_ID;
   const filterData = data?.filter(
-    (v) => v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.tags.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
+    (v) =>
+      v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
+      v.properties.tags.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase()) ||
+      v.properties.summary?.rich_text[0]?.plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1
   );
 
+  const postsData = filterData.filter((v) => v.parent.database_id.replaceAll("-", "") === postsId);
+  const projectData = filterData.filter((v) => v.parent.database_id.replaceAll("-", "") === projectId);
+  const codesnipetData = filterData.filter((v) => v.parent.database_id.replaceAll("-", "") === codesnipetId);
+
+  console.log(postsData);
+  console.log(postsId);
   const [colorEffect, setColorEffect] = useState(false);
 
   useEffect(() => {
@@ -36,67 +46,9 @@ const SearchList = ({ data, keyword }) => {
       ) : (
         <Result>검색 결과가 없습니다.</Result>
       )}
-      <Base>
-        {data
-          ?.filter(
-            (v) =>
-              v.properties.Name.title[0].plain_text.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || v.properties.tags.multi_select.map((v) => v.name.toLowerCase()).includes(keyword.toLowerCase())
-          )
-          .map((post) => {
-            const category = post.properties?.category?.select?.name;
-            const title = post.properties?.Name.title[0].plain_text;
-            const highlightedTitle = title.replace(new RegExp(keyword, "gi"), `<mark>${keyword}</mark>`);
-            const imgSrc = post.cover?.file?.url || post.cover?.external.url;
-            const summary = post.properties.summary?.rich_text[0]?.plain_text;
-            const tags = post.properties.tags?.multi_select;
-            const id = post.id;
-            const projectName = post.properties.프로젝트명?.rich_text[0]?.plain_text;
-            const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
-            let parentDb;
-            switch (post.parent.database_id.replaceAll("-", "")) {
-              case codesnipetId:
-                parentDb = "codesnipet";
-                break;
-
-              case postsId:
-                parentDb = "posts";
-                break;
-
-              case projectId:
-                parentDb = "projects";
-                break;
-            }
-
-            return (
-              <Post href={parentDb === "projects" ? `/${parentDb}/${id}` : `/blog/${parentDb}/${id}`} key={post.id}>
-                <Wrapper>
-                  {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
-                  <CreatedDate>{createdDate}</CreatedDate>
-                  <Title dangerouslySetInnerHTML={{ __html: highlightedTitle }}></Title>
-                  {!projectName ? <Category>{`${parentDb} / ${category}`}</Category> : <Category>{`${projectName} 프로젝트`}</Category>}
-                  <Summary>{summary}</Summary>
-
-                  <Tags>
-                    {tags?.map((tag) => {
-                      let background;
-                      if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
-                        background = darkThemeTagColor;
-                      } else {
-                        background = lightThemeTagColor;
-                      }
-                      const tagColor = background[tag.color];
-                      return (
-                        <li key={tag.id} style={{ backgroundColor: tagColor }}>
-                          {tag.name}
-                        </li>
-                      );
-                    })}
-                  </Tags>
-                </Wrapper>
-              </Post>
-            );
-          })}
-      </Base>
+      <SearchPostList data={postsData} keyword={keyword} parent="포스트" />
+      <SearchPostList data={codesnipetData} keyword={keyword} parent="코드 조각들" />
+      <SearchPostList data={projectData} keyword={keyword} parent="프로젝트" />
     </>
   );
 };
