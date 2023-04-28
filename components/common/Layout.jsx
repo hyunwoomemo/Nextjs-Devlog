@@ -36,11 +36,4 @@ const Children = styled.div`
   margin: 0 auto;
 `;
 
-const Aside = styled.div`
-  position: absolute;
-  width: 400px;
-  height: 100%;
-  background-color: #fff;
-`;
-
 export default Layout;

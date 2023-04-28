@@ -13,6 +13,7 @@ const CategoryList = ({ data, posts }) => {
   };
 
   const { selectedCategory, selectedTag } = useSelector((state) => state.FilterSlice);
+  console.log(selectedCategory);
 
   return (
     <Base>
