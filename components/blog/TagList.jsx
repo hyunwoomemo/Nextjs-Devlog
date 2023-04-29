@@ -39,6 +39,18 @@ const Base = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  border: 1px solid gray;
+  padding: 1rem;
+  border-radius: 10px;
+  position: relative;
+
+  &:after {
+    content: "Tag";
+    position: absolute;
+    top: -10px;
+    background-color: var(--main-background);
+    padding: 0 10px;
+  }
 `;
 
 const TagItem = styled.div`
@@ -55,12 +67,14 @@ const TagItem = styled.div`
 
   @media (max-width: 768px) {
     padding: 5px;
+    font-size: 12px;
   }
 
   ${({ selectedTag }) =>
     selectedTag
       ? css`
-          border: 1px solid yellowgreen;
+          background-color: var(--primary-color);
+          color: #fff;
         `
       : css``}
 `;

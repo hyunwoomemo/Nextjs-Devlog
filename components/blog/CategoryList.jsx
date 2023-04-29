@@ -13,11 +13,10 @@ const CategoryList = ({ data, posts }) => {
   };
 
   const { selectedCategory, selectedTag } = useSelector((state) => state.FilterSlice);
-  console.log(selectedCategory);
 
   return (
     <Base>
-      <CategoryItem selectedCategory={selectedCategory === undefined} onClick={() => handleClickCategory()}>{`전체 (${posts.length})`}</CategoryItem>
+      <CategoryItem selectedCategory={selectedCategory === undefined || selectedCategory?.length === 0} onClick={() => handleClickCategory()}>{`전체 (${posts.length})`}</CategoryItem>
       {data?.map((v) => {
         const length = posts?.filter((v1) => v1.properties.category.select?.name === v).length;
         return (
@@ -34,10 +33,21 @@ const Base = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  border: 1px solid gray;
+  padding: 1rem;
+  border-radius: 10px;
+  position: relative;
+
+  &:after {
+    content: "Category";
+    position: absolute;
+    top: -10px;
+    background-color: var(--main-background);
+    padding: 0 10px;
+  }
 `;
 
 const CategoryItem = styled.div`
-  box-sizing: border-box;
   display: flex;
   padding: 2rem;
   justify-content: center;
@@ -47,15 +57,18 @@ const CategoryItem = styled.div`
   white-space: nowrap;
   max-width: 100%;
   flex: 1 1 auto;
+  position: relative;
 
   @media (max-width: 768px) {
     padding: 10px;
+    font-size: 12px;
   }
 
   ${({ selectedCategory }) =>
     selectedCategory
       ? css`
-          border: 1px solid yellowgreen;
+          background-color: var(--primary-color);
+          color: #fff;
         `
       : css``}
 `;

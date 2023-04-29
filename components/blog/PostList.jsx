@@ -8,15 +8,45 @@ import slugify from "slugify";
 import PostPagination from "./PostPagination";
 import { useRouter } from "next/router";
 
-const PostList = ({ data, numPages }) => {
+const PostList = ({ data }) => {
   // data 중에서 project 포스트는 제외한다.
   /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
 
+  const postsPerPage = 6;
+
   const router = useRouter();
+
+  const selectedCategory = router.query.category;
+  const selectedTag = router.query.tag;
+
+  const filterData =
+    selectedCategory && selectedTag
+      ? data.filter(
+          (v) =>
+            v.properties.category.select.name === selectedCategory &&
+            v.properties.tags.multi_select
+              .map((v1) => v1.name)
+              .flat()
+              .includes(selectedTag)
+        )
+      : selectedCategory
+      ? data.filter((v) => v.properties.category.select.name === selectedCategory)
+      : selectedTag
+      ? data.filter((v) =>
+          v.properties.tags.multi_select
+            .map((v1) => v1.name)
+            .flat()
+            .includes(selectedTag)
+        )
+      : data;
+
+  console.log(data);
+
+  const numPages = Math.ceil(filterData.length / postsPerPage);
   return (
     <>
       <Base>
-        {data?.map((post) => {
+        {filterData?.map((post) => {
           const category = post.properties.category.select?.name;
           const title = post.properties.Name.title[0].plain_text;
           const summary = post.properties.summary.rich_text[0]?.plain_text;

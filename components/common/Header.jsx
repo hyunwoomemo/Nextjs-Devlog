@@ -9,6 +9,8 @@ import BackArrow from "@/public/back-arrow.svg";
 import ChoiceCategory from "../blog/ChoiceCategory";
 import { BsMoonFill, BsFillSunFill } from "react-icons/bs";
 import Filter from "../blog/Filter";
+import { useDispatch, useSelector } from "react-redux";
+import { choiceCategory, choiceTag, close, open } from "@/slices/FilterSlice";
 
 const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -70,18 +72,21 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   }, [router.pathname]);
 
   // 포스트 필터 기능을 위한 필터 아이콘 클릭 정의
-  const [filter, setFilter] = useState(false);
+  const dispatch = useDispatch();
+  const { filterOpen } = useSelector((state) => state.FilterSlice);
 
   const handleFilter = () => {
-    setFilter(!filter);
     window.scrollTo({ top: 0, behavior: "smooth" });
+    filterOpen ? dispatch(close()) : dispatch(open());
+    dispatch(choiceCategory());
+    dispatch(choiceTag());
   };
 
   return (
     <Base>
       <Wrapper>
         {router.pathname !== "/" ? (
-          <BackIcon onClick={() => window.history.back()}>
+          <BackIcon onClick={() => window.history.back()} filterOpen={filterOpen}>
             <BackArrow width={20} />
           </BackIcon>
         ) : undefined}
@@ -92,7 +97,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
             {headerTitle === "Posts" ? (
               <>
                 {`Posts (${allPosts.results.length})`}
-                <FilterIcon onClick={handleFilter} filter={filter}>
+                <FilterIcon onClick={handleFilter} filter={filterOpen}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path
                       stroke-linecap="round"
@@ -111,14 +116,14 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
         ) : (
           <TitleLink href="/">Hyunwoomemo</TitleLink>
         )}
-        {router.pathname.indexOf("blog/posts") > -1 ? <Filter filter={filter} posts={data} /> : undefined}
+        {router.pathname.indexOf("blog/posts") > -1 ? <Filter filter={filterOpen} posts={data} /> : undefined}
         <LinkWrapper active={activeTab}>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
           <Link href="/projects">프로젝트</Link>
           <Link href="/about">About</Link>
         </LinkWrapper>
-        <Hambuger onClick={() => setIsOpen(true)}>
+        <Hambuger /* onClick={() => setIsOpen(true)} */ filterOpen={filterOpen}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
             <path
               fillRule="evenodd"
@@ -127,13 +132,12 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
             />
           </svg>
         </Hambuger>
-        <SearchBtn href="/search">
+        <SearchBtn href="/search" filterOpen={filterOpen}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </SearchBtn>
       </Wrapper>
-      {router.pathname.indexOf("posts") > -1 && !router.query.id && router.pathname !== "/blog/posts/categories" ? <ChoiceCategory category={choiceCt} /> : undefined}
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
         <ModalBody active={activeTab}>
           <Link href="/">홈</Link>
@@ -176,6 +180,13 @@ const BackIcon = styled.div`
       fill: var(--text-color);
     }
   }
+
+  ${({ filterOpen }) =>
+    filterOpen
+      ? css`
+          display: none;
+        `
+      : css``}
 `;
 
 const Wrapper = styled.div`
@@ -206,12 +217,13 @@ const Title = styled.h1`
 const FilterIcon = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
   svg {
     ${({ filter }) =>
       filter
         ? css`
             > path {
-              fill: var(--text-color);
+              fill: var(--primary-color);
             }
           `
         : css``}
@@ -267,7 +279,14 @@ const Hambuger = styled.div`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    display: block;
+    ${({ filterOpen }) =>
+      filterOpen
+        ? css`
+            display: none;
+          `
+        : css`
+            display: block;
+          `}
   }
 `;
 
@@ -291,6 +310,13 @@ const SearchBtn = styled(Link)`
   svg {
     width: 24px;
   }
+
+  ${({ filterOpen }) =>
+    filterOpen
+      ? css`
+          display: none;
+        `
+      : css``}
 `;
 
 const ModalBody = styled.ul`
