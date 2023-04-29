@@ -7,14 +7,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const CategoryList = ({ data, posts }) => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const handleClickCategory = (category) => {
     dispatch(choiceCategory(category));
     dispatch(choiceTag());
   };
 
-  const { selectedCategory, selectedTag } = useSelector((state) => state.FilterSlice);
+  const { selectedCategory } = useSelector((state) => state.FilterSlice);
 
   return (
     <Base>

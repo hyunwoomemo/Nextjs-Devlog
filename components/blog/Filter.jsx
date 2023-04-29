@@ -5,15 +5,11 @@ import { css } from "@emotion/react";
 import CategoryList from "./CategoryList";
 import TagList from "./TagList";
 import { useDispatch, useSelector } from "react-redux";
-import { choiceCategory, choiceTag, close } from "@/slices/FilterSlice";
-import { useRouter } from "next/router";
 
 const Filter = ({ posts }) => {
-  const router = useRouter();
   const category = posts?.map((v) => v.properties.category.select?.name).filter((v, i, arr) => arr.indexOf(v) === i);
 
-  const dispatch = useDispatch();
-  const { selectedCategory, selectedTag, filterOpen } = useSelector((state) => state.FilterSlice);
+  const { filterOpen } = useSelector((state) => state.FilterSlice);
   // filter true 인 경우 body 스크롤 방지
   useEffect(() => {
     if (typeof window !== "object") return;
@@ -50,6 +46,7 @@ const Base = styled.div`
   overflow-y: auto;
   height: calc(100vh - 80px);
   max-width: 1100px;
+  margin-bottom: 2rem;
   ${({ filter }) =>
     filter
       ? css`

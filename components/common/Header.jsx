@@ -114,7 +114,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
     <Base>
       <Wrapper>
         {router.pathname !== "/" ? (
-          <BackIcon onClick={() => window.history.back()}>
+          <BackIcon onClick={() => window.history.back()} filter={filterOpen}>
             <BackArrow width={20} />
           </BackIcon>
         ) : undefined}
@@ -124,7 +124,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
           <Title>
             {headerTitle === "Posts" ? (
               <>
-                {`Posts (${allPosts.length})`}
+                {`Posts`}
                 <FilterIcon onClick={handleFilter} filter={filterOpen}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path
@@ -165,7 +165,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </SearchBtn>
-        <FilterSaveBtn show={filterOpen && (selectedCategory || selectedTag)} onClick={handleFilterSave}>
+        <FilterSaveBtn show={filterOpen} onClick={handleFilterSave}>
           <GrPowerReset onClick={handleFilterReset} />
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -209,6 +209,18 @@ const BackIcon = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  ${({ filter }) =>
+    filter
+      ? css`
+          opacity: 0;
+          pointer-events: none;
+        `
+      : css`
+          opacity: 1;
+          pointer-events: all;
+        `}
+
   > svg {
     path {
       fill: var(--text-color);
@@ -369,10 +381,12 @@ const FilterSaveBtn = styled.div`
     height: 30px;
     margin-left: 10px;
 
+    > path {
+      stroke: var(--text-color);
+    }
+
     @media (min-width: 769px) {
       margin-left: 30px;
-      width: 35px;
-      height: 35px;
     }
   }
 

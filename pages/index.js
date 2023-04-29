@@ -76,7 +76,7 @@ export async function getStaticProps() {
   const allPosts = [...snipetData.results, ...postsData.results, ...projectData.results];
 
   // posts에서 project post 제외
-  const posts = postsData.results.filter((v) => v.properties.project.checkbox !== true);
+  const posts = postsData.results;
 
   const projects = projectData.results;
 
