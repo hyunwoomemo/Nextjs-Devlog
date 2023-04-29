@@ -3,15 +3,18 @@ import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import slugify from "slugify";
 import PostPagination from "./PostPagination";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { CountFilterData, MakeFilterData } from "@/slices/FilterSlice";
 
 const PostList = ({ allPosts }) => {
   // data 중에서 project 포스트는 제외한다.
   /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
   const postsPerPage = 6;
+  const dispatch = useDispatch();
 
   const router = useRouter();
   const currentPage = router.query.page ? router.query.page : 1;
@@ -64,7 +67,11 @@ const PostList = ({ allPosts }) => {
     : categoryFilteredData;
 
   const filterData = tagFilteredData;
-  console.log(typeof filterData);
+
+  useEffect(() => {
+    dispatch(MakeFilterData(filterData));
+    dispatch(CountFilterData(allPostsFilter));
+  }, [dispatch, filterData, allPostsFilter]);
 
   const numPages = Math.ceil(allPostsFilter.length / postsPerPage);
   return (
@@ -142,7 +149,6 @@ const FilterCategoryItem = styled.div`
   background-color: var(--text-color);
   color: var(--main-background);
   border-radius: 5px;
-  flex: 1 1 auto;
   display: flex;
   justify-content: center;
 `;

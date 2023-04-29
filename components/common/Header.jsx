@@ -77,12 +77,19 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   const { filterOpen } = useSelector((state) => state.FilterSlice);
 
   const handleFilter = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    filterOpen ? dispatch(close()) : dispatch(open());
+    if (selectedCategory || selectedTag) {
+      dispatch(choiceCategory());
+      dispatch(choiceTag());
+      router.push("/blog/posts");
+      dispatch(close());
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      filterOpen ? dispatch(close()) : dispatch(open());
+    }
   };
 
   // 포스트 필터 적용 버튼
-  const { selectedCategory, selectedTag } = useSelector((state) => state.FilterSlice);
+  const { selectedCategory, selectedTag, filterData, filterCount } = useSelector((state) => state.FilterSlice);
   const handleFilterSave = () => {
     let query = {};
 
@@ -110,6 +117,8 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
     });
   };
 
+  console.log(filterData.length);
+
   return (
     <Base>
       <Wrapper>
@@ -124,8 +133,8 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
           <Title>
             {headerTitle === "Posts" ? (
               <>
-                {`Posts`}
-                <FilterIcon onClick={handleFilter} filter={filterOpen}>
+                {`Posts (${filterCount.length})`}
+                <FilterIcon onClick={handleFilter} filter={filterOpen || selectedCategory || selectedTag}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path
                       stroke-linecap="round"
@@ -165,8 +174,10 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </SearchBtn>
-        <FilterSaveBtn show={filterOpen} onClick={handleFilterSave}>
+        <FilterResetBtn show={filterOpen}>
           <GrPowerReset onClick={handleFilterReset} />
+        </FilterResetBtn>
+        <FilterSaveBtn show={filterOpen} onClick={handleFilterSave}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
@@ -370,25 +381,41 @@ const SearchBtn = styled(Link)`
       : css``}
 `;
 
+const FilterResetBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  path {
+    stroke: var(--text-color);
+  }
+
+  ${({ show }) =>
+    show
+      ? css`
+          display: block;
+        `
+      : css`
+          display: none;
+        `}
+`;
+
 const FilterSaveBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-
-  > svg {
-    width: 30px;
-    height: 30px;
-    margin-left: 10px;
-
-    > path {
-      stroke: var(--text-color);
-    }
-
-    @media (min-width: 769px) {
-      margin-left: 30px;
-    }
-  }
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
 
   ${({ show }) =>
     show
