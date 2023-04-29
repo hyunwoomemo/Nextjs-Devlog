@@ -9,11 +9,19 @@ import { useDispatch, useSelector } from "react-redux";
 const TagList = ({ posts }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const handleChoiceTag = (tag) => {
-    dispatch(choiceTag(tag));
-  };
 
   const { selectedCategory, selectedTag } = useSelector((state) => state.FilterSlice);
+  const handleChoiceTag = (tag) => {
+    if (selectedTag.length === 1) {
+      selectedTag.indexOf(tag) === -1 && dispatch(choiceTag(tag));
+    } else if (typeof selectedTag === "object") {
+      !selectedTag.includes(tag) && dispatch(choiceTag(tag));
+    } else {
+      dispatch(choiceTag(tag));
+    }
+  };
+
+  console.log(selectedTag);
   const tagData = selectedCategory
     ? posts
         ?.filter((post) => post.properties.category.select.name === selectedCategory)

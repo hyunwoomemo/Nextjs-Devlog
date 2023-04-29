@@ -70,8 +70,16 @@ const PostList = ({ allPosts }) => {
   return (
     <>
       <FilterDisplay>
-        <FilterCategoryItem>{selectedCategory}</FilterCategoryItem>
-        <FilterTagItem>{typeof selectedTag === "object" ? selectedTag.map((v) => v) : selectedTag}</FilterTagItem>
+        {selectedCategory ? <FilterCategoryItem>{selectedCategory}</FilterCategoryItem> : undefined}
+        {selectedTag ? (
+          typeof selectedTag === "object" ? (
+            selectedTag.map((v, i) => {
+              return <FilterTagItem key={i}>{v}</FilterTagItem>;
+            })
+          ) : (
+            <FilterTagItem>{selectedTag}</FilterTagItem>
+          )
+        ) : undefined}
       </FilterDisplay>
       <Base>
         {filterData?.map((post) => {
@@ -119,15 +127,33 @@ const PostList = ({ allPosts }) => {
 
 const FilterDisplay = styled.div`
   padding: 2rem;
+  flex-wrap: wrap;
   @media (max-width: 768px) {
     padding: 1rem;
-    gap: 1rem;
+    font-size: 12px;
   }
   display: flex;
+  align-items: center;
+  gap: 10px;
 `;
 
-const FilterCategoryItem = styled.div``;
-const FilterTagItem = styled.div``;
+const FilterCategoryItem = styled.div`
+  padding: 5px;
+  background-color: var(--text-color);
+  color: var(--main-background);
+  border-radius: 5px;
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+`;
+const FilterTagItem = styled.div`
+  padding: 5px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+`;
 
 const Base = styled.div`
   display: grid;
