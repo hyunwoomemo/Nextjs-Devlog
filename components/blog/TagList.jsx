@@ -29,14 +29,14 @@ const TagList = ({ posts }) => {
 
   return (
     <Base>
-      <TagItem selectedTag={selectedTag.length === 0 && !router.query.tag} onClick={() => handleChoiceTag()}>{`전체 (${
+      <TagItem selectedTag={selectedTag.length === 0} onClick={() => handleChoiceTag()}>{`전체 (${
         selectedCategory ? posts.filter((v) => v.properties.category.select.name === selectedCategory).length : posts.length
       } ) `}</TagItem>
       {tagData?.map((v) => {
         const length = posts.map((post) => post.properties.tags.multi_select.map((tag) => tag.name)).filter((item) => item.includes(v) === true).length;
         return (
           <>
-            <TagItem selectedTag={selectedTag.includes(v) || router.query.tag?.indexOf(v) > -1} key={v.id} onClick={() => handleChoiceTag(v)}>{`${v} (${length})`}</TagItem>
+            <TagItem selectedTag={selectedTag.includes(v)} key={v.id} onClick={() => handleChoiceTag(v)}>{`${v} (${length})`}</TagItem>
           </>
         );
       })}

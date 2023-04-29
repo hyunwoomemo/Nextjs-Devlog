@@ -23,7 +23,7 @@ const PostList = ({ allPosts }) => {
   // 페이지네이션 기능을 위해서 전체 포스트 중 필터에 맞는 데이터의 총 갯수 파악 필요
   const allPostsFilter = allPosts.filter((v) => {
     if (selectedCategory && selectedTag) {
-      if (selectedTag.length === 1) {
+      if (typeof selectedTag.length !== "object") {
         v.properties.category.select.name === selectedCategory &&
           v.properties.tags.multi_select
             .map((v1) => v1.name)
@@ -35,7 +35,7 @@ const PostList = ({ allPosts }) => {
     } else if (selectedCategory) {
       return v.properties.category.select.name === selectedCategory;
     } else if (selectedTag) {
-      if (selectedTag.length === 1) {
+      if (typeof selectedTag.length !== "object") {
         return v.properties.tags.multi_select
           .map((v1) => v1.name)
           .flat()
