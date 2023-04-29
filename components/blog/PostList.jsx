@@ -8,20 +8,25 @@ import slugify from "slugify";
 import PostPagination from "./PostPagination";
 import { useRouter } from "next/router";
 
-const PostList = ({ data }) => {
+const PostList = ({ firstPagePosts, allPosts }) => {
   // data 중에서 project 포스트는 제외한다.
   /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
-
+  console.log(allPosts);
   const postsPerPage = 6;
 
   const router = useRouter();
+  const currentPage = router.query.page ? router.query.page : 1;
+  const offset = (parseInt(currentPage) - 1) * postsPerPage;
+
+  const pagePosts = allPosts.slice(offset, offset + postsPerPage);
+  console.log(pagePosts);
 
   const selectedCategory = router.query.category;
   const selectedTag = router.query.tag;
 
   const filterData =
     selectedCategory && selectedTag
-      ? data.filter(
+      ? pagePosts.filter(
           (v) =>
             v.properties.category.select.name === selectedCategory &&
             v.properties.tags.multi_select
@@ -30,19 +35,17 @@ const PostList = ({ data }) => {
               .includes(selectedTag)
         )
       : selectedCategory
-      ? data.filter((v) => v.properties.category.select.name === selectedCategory)
+      ? pagePosts.filter((v) => v.properties.category.select.name === selectedCategory)
       : selectedTag
-      ? data.filter((v) =>
+      ? pagePosts.filter((v) =>
           v.properties.tags.multi_select
             .map((v1) => v1.name)
             .flat()
             .includes(selectedTag)
         )
-      : data;
+      : pagePosts;
 
-  console.log(data);
-
-  const numPages = Math.ceil(filterData.length / postsPerPage);
+  const numPages = Math.ceil(allPosts.length / postsPerPage);
   return (
     <>
       <Base>

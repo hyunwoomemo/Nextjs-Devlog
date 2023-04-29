@@ -20,7 +20,6 @@ const Layout = ({ children, data, choiceCt, posts, headerTitle, allPosts }) => {
 
 const Base = styled.div`
   min-height: 100vh;
-  height: 100%;
   display: flex;
   flex-direction: column;
   scroll-margin-top: 5rem;

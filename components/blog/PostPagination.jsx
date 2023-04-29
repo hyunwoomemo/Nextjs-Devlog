@@ -5,24 +5,54 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useEffect } from "react";
 import { css } from "@emotion/css";
+import { useSelector } from "react-redux";
 
 export default function PostPagination({ numPages }) {
   const router = useRouter();
 
   const [page, setPage] = useState(1);
 
+  const { selectedCategory, selectedTag } = useSelector((state) => state.FilterSlice);
+
   useEffect(() => {
     setPage(router.query.pageNumber === undefined ? 1 : parseInt(router.query.pageNumber));
   }, [router.query.pageNumber]);
 
   const handlePrevClick = () => {
-    router.push(`/blog/posts/page/${page - 1}`);
-    setPage(page - 1);
+    const query = { page: page - 1 };
+    if (selectedCategory) {
+      query.category = selectedCategory;
+    }
+    if (selectedTag) {
+      query.tag = selectedTag;
+    }
+    router.push({ pathname: "/blog/posts", query });
+    setPage((prev) => prev - 1);
   };
 
   const handleNextClick = () => {
-    router.push(`/blog/posts/page/${page + 1}`);
-    setPage(page + 1);
+    const query = { page: page + 1 };
+    if (selectedCategory) {
+      query.category = selectedCategory;
+    }
+    if (selectedTag) {
+      query.tag = selectedTag;
+    }
+    router.push({ pathname: "/blog/posts", query });
+    setPage((prev) => prev + 1);
+  };
+
+  const handleNumberClick = (e) => {
+    const query = e.target.innerText === "1" ? null : { page: e.target.innerText };
+    if (selectedCategory) {
+      query.category = selectedCategory;
+    }
+    if (selectedTag) {
+      query.tag = selectedTag;
+    }
+
+    router.push({ pathname: "/blog/posts", query });
+    setPage(parseInt(e.target.innerText));
   };
 
   return (
@@ -35,7 +65,7 @@ export default function PostPagination({ numPages }) {
         </PrevBtn>
         {new Array(numPages).fill(0).map((v, i) => {
           return (
-            <PaginationItem page={page === i + 1} key={i} onClick={(e) => router.push(`/blog/posts/${e.target.innerText === "1" ? "" : `page/${e.target.innerText}`}`)}>
+            <PaginationItem page={page === i + 1} key={i} onClick={(e) => handleNumberClick(e)}>
               {i + 1}
             </PaginationItem>
           );

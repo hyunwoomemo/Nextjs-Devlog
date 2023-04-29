@@ -27,7 +27,7 @@ const index = ({ posts, numPages, allPosts }) => {
         }}
       />
       <Layout data={posts} allPosts={allPosts} headerTitle="Posts">
-        <PostList data={posts} numPages={numPages} />
+        <PostList allPosts={allPosts} firstPagePosts={posts} numPages={numPages} />
       </Layout>
     </>
   );
@@ -58,14 +58,15 @@ export async function getStaticProps() {
 
   const res = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
 
-  const allPosts = await res.json();
-  const filterPosts = allPosts.results.filter((v) => v.properties.project.checkbox !== true);
+  const data = await res.json();
+
+  const allPosts = data.results;
 
   const postsPerPage = 6;
 
-  const numPages = Math.ceil(filterPosts.length / postsPerPage);
+  const numPages = Math.ceil(allPosts.length / postsPerPage);
 
-  const posts = filterPosts.slice(0, postsPerPage);
+  const posts = allPosts.slice(0, postsPerPage);
 
   return {
     props: { allPosts, posts, numPages },

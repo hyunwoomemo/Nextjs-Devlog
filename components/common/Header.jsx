@@ -96,7 +96,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
           <Title>
             {headerTitle === "Posts" ? (
               <>
-                {`Posts (${allPosts.results.length})`}
+                {`Posts (${allPosts.length})`}
                 <FilterIcon onClick={handleFilter} filter={filterOpen}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path
@@ -184,15 +184,20 @@ const BackIcon = styled.div`
   ${({ filterOpen }) =>
     filterOpen
       ? css`
-          display: none;
+          opacity: 0;
+          pointer-events: none;
         `
-      : css``}
+      : css`
+          opacity: 1;
+          pointer-events: all;
+        `}
 `;
 
 const Wrapper = styled.div`
   display: flex;
   gap: 2rem;
   align-items: center;
+  min-height: 33px;
 
   @media (max-width: 768px) {
     gap: 1rem;

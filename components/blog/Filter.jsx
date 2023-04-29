@@ -80,11 +80,12 @@ const Base = styled.div`
   z-index: 10;
   transition: all 0.3s;
 
-  top: 65px;
+  /* top: 65px; */
   margin: 0 auto;
   background-color: var(--main-background);
-  height: 100vh;
+  height: 93vh;
   overflow-y: scroll;
+  bottom: 0;
 
   ${({ filter }) =>
     filter
@@ -100,7 +101,7 @@ const Base = styled.div`
 const Wrapper = styled.div`
   max-width: 1100px;
   width: 100%;
-  margin: 0 auto;
+  height: 100%;
 
   padding: 2rem;
   @media (max-width: 768px) {
