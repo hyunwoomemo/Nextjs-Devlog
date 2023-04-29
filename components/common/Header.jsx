@@ -123,7 +123,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
           <Link href="/projects">프로젝트</Link>
           <Link href="/about">About</Link>
         </LinkWrapper>
-        <Hambuger /* onClick={() => setIsOpen(true)} */ filterOpen={filterOpen}>
+        <Hambuger onClick={() => setIsOpen(true)} filterOpen={filterOpen}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
             <path
               fillRule="evenodd"
