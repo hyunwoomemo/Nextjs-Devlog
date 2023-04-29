@@ -12,17 +12,22 @@ const TagList = ({ posts }) => {
   };
 
   const { selectedCategory, selectedTag } = useSelector((state) => state.FilterSlice);
-  console.log(selectedTag.length);
   const tagData = selectedCategory
     ? posts
         .filter((post) => post.properties.category.select.name === selectedCategory)
         .map((v) => v.properties.tags.multi_select.map((v1) => v1.name))
         .flat()
-    : posts.map((v) => v.properties.tags.multi_select.map((v1) => v1.name)).flat();
+        .filter((v, i, arr) => arr.indexOf(v) === i)
+    : posts
+        .map((v) => v.properties.tags.multi_select.map((v1) => v1.name))
+        .flat()
+        .filter((v2, i, arr) => arr.indexOf(v2) === i);
 
   return (
     <Base>
-      <TagItem selectedTag={selectedTag.length === 0} onClick={() => handleChoiceTag()}>{`전체 (${posts.length})`}</TagItem>
+      <TagItem selectedTag={selectedTag.length === 0} onClick={() => handleChoiceTag()}>{`전체 (${
+        selectedCategory ? posts.filter((v) => v.properties.category.select.name === selectedCategory).length : posts.length
+      } ) `}</TagItem>
       {tagData?.map((v) => {
         const length = posts.map((post) => post.properties.tags.multi_select.map((tag) => tag.name)).filter((item) => item.includes(v) === true).length;
         return (

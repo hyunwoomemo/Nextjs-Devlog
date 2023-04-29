@@ -116,7 +116,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
         ) : (
           <TitleLink href="/">Hyunwoomemo</TitleLink>
         )}
-        {router.pathname.indexOf("blog/posts") > -1 ? <Filter filter={filterOpen} posts={data} /> : undefined}
+        {router.pathname.indexOf("blog/posts") > -1 ? <Filter filter={filterOpen} posts={allPosts} /> : undefined}
         <LinkWrapper active={activeTab}>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>

@@ -9,43 +9,68 @@ import PostPagination from "./PostPagination";
 import { useRouter } from "next/router";
 
 const PostList = ({ firstPagePosts, allPosts }) => {
+  console.log(allPosts);
   // data 중에서 project 포스트는 제외한다.
   /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
-  console.log(allPosts);
   const postsPerPage = 6;
 
   const router = useRouter();
   const currentPage = router.query.page ? router.query.page : 1;
   const offset = (parseInt(currentPage) - 1) * postsPerPage;
 
-  const pagePosts = allPosts.slice(offset, offset + postsPerPage);
-  console.log(pagePosts);
-
   const selectedCategory = router.query.category;
   const selectedTag = router.query.tag;
 
-  const filterData =
-    selectedCategory && selectedTag
-      ? pagePosts.filter(
-          (v) =>
-            v.properties.category.select.name === selectedCategory &&
-            v.properties.tags.multi_select
-              .map((v1) => v1.name)
-              .flat()
-              .includes(selectedTag)
-        )
-      : selectedCategory
-      ? pagePosts.filter((v) => v.properties.category.select.name === selectedCategory)
-      : selectedTag
-      ? pagePosts.filter((v) =>
+  // 페이지네이션 기능을 위해서 전체 포스트 중 필터에 맞는 데이터의 총 갯수 파악 필요
+  const allPostsFilter = allPosts.filter((v) => {
+    if (selectedCategory && selectedTag) {
+      if (selectedTag.length === 1) {
+        v.properties.category.select.name === selectedCategory &&
+          v.properties.tags.multi_select
+            .map((v1) => v1.name)
+            .flat()
+            .includes(selectedTag);
+      } else {
+        return v.properties.category.select.name === selectedCategory && v.properties.tags.multi_select.map((v1) => v1.name).some((item) => selectedTag?.includes(item));
+      }
+    } else if (selectedCategory) {
+      return v.properties.category.select.name === selectedCategory;
+    } else if (selectedTag) {
+      if (selectedTag.length === 1) {
+        return v.properties.tags.multi_select
+          .map((v1) => v1.name)
+          .flat()
+          .includes(selectedTag);
+      } else {
+        return v.properties.tags.multi_select.map((v1) => v1.name).some((item) => selectedTag?.includes(item));
+      }
+    } else {
+      return v;
+    }
+  });
+
+  console.log(allPostsFilter);
+
+  const pagePosts = allPostsFilter.slice(offset, offset + postsPerPage);
+
+  const categoryFilteredData = selectedCategory ? pagePosts.filter((v) => v.properties.category.select.name === selectedCategory) : pagePosts;
+
+  const tagFilteredData = selectedTag
+    ? selectedTag.length === 1
+      ? categoryFilteredData.filter((v) =>
           v.properties.tags.multi_select
             .map((v1) => v1.name)
             .flat()
             .includes(selectedTag)
         )
-      : pagePosts;
+      : categoryFilteredData.filter((v) => v.properties.tags.multi_select.map((v1) => v1.name).some((item) => selectedTag?.includes(item)))
+    : categoryFilteredData;
 
-  const numPages = Math.ceil(allPosts.length / postsPerPage);
+  const filterData = tagFilteredData;
+
+  console.log(filterData);
+
+  const numPages = Math.ceil(allPostsFilter.length / postsPerPage);
   return (
     <>
       <Base>

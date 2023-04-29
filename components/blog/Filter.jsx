@@ -26,32 +26,23 @@ const Filter = ({ posts }) => {
     }
   });
 
+  console.log(selectedTag);
+
   const handleSave = () => {
-    selectedCategory && selectedTag
-      ? router.push({
-          pathname: "/blog/posts",
-          query: {
-            category: selectedCategory,
-            tag: selectedTag,
-          },
-        })
-      : selectedCategory
-      ? router.push({
-          pathname: "/blog/posts",
-          query: {
-            category: selectedCategory,
-          },
-        })
-      : selectedTag
-      ? router.push({
-          pathname: "/blog/posts",
-          query: {
-            tag: selectedTag,
-          },
-        })
-      : router.push({
-          pathname: "/blog/posts",
-        });
+    let query = {};
+
+    if (selectedCategory) {
+      query.category = selectedCategory;
+    }
+
+    if (selectedTag) {
+      query.tag = selectedTag;
+    }
+
+    router.push({
+      pathname: "/blog/posts",
+      query: query,
+    });
     dispatch(close());
   };
 
@@ -59,7 +50,7 @@ const Filter = ({ posts }) => {
     return () => {
       dispatch(close());
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <Portal selector="#portal">
@@ -83,14 +74,13 @@ const Base = styled.div`
   position: absolute;
   z-index: 10;
   transition: all 0.3s;
-
-  /* top: 65px; */
-  margin: 0 auto;
   background-color: var(--main-background);
-  height: 90vh;
-  overflow-y: scroll;
+  height: calc(100vh - 65px);
+  overflow-y: auto;
   bottom: 0;
-
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1100px;
   ${({ filter }) =>
     filter
       ? css`
@@ -118,9 +108,9 @@ const Wrapper = styled.div`
 `;
 
 const Action = styled.div`
-  position: fixed;
-  bottom: 50px;
-  right: 20px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   width: 200px;
   height: 100px;
   font-size: 12px;

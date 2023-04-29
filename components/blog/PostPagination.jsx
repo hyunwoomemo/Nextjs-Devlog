@@ -43,7 +43,7 @@ export default function PostPagination({ numPages }) {
   };
 
   const handleNumberClick = (e) => {
-    const query = e.target.innerText === "1" ? null : { page: e.target.innerText };
+    const query = { page: e.target.innerText };
     if (selectedCategory) {
       query.category = selectedCategory;
     }
