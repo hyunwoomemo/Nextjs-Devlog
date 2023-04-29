@@ -17,7 +17,6 @@ const CategoryList = ({ data, posts }) => {
 
   return (
     <Base>
-      <CategoryItem selectedCategory={selectedCategory === undefined} onClick={() => handleClickCategory()}>{`전체 (${posts?.length})`}</CategoryItem>
       {data?.map((v) => {
         const length = posts?.filter((v1) => v1.properties.category.select?.name === v).length;
         return (
@@ -32,20 +31,13 @@ const CategoryList = ({ data, posts }) => {
 
 const Base = styled.div`
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  border: 1px solid gray;
-  padding: 1rem;
-  border-radius: 10px;
   position: relative;
-
-  &:after {
-    content: "Category";
-    position: absolute;
-    top: -10px;
-    background-color: var(--main-background);
-    padding: 0 10px;
-  }
+  max-height: 170px;
+  overflow-y: scroll;
+  box-sizing: border-box;
 `;
 
 const CategoryItem = styled.div`

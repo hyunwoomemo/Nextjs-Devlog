@@ -26,6 +26,7 @@ const Filter = ({ posts }) => {
       <Base filter={filterOpen}>
         <Wrapper>
           <CategoryList data={category} posts={posts} />
+          <hr />
           <TagList posts={posts} />
         </Wrapper>
       </Base>
@@ -46,7 +47,7 @@ const Base = styled.div`
   overflow-y: auto;
   height: calc(100vh - 80px);
   max-width: 1100px;
-  margin-bottom: 2rem;
+
   ${({ filter }) =>
     filter
       ? css`
@@ -71,7 +72,11 @@ const Wrapper = styled.div`
 
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 1rem;
+
+  > hr {
+    width: 100%;
+  }
 `;
 
 export default Filter;
