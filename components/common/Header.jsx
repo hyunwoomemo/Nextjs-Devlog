@@ -11,6 +11,7 @@ import { BsMoonFill, BsFillSunFill } from "react-icons/bs";
 import Filter from "../blog/Filter";
 import { useDispatch, useSelector } from "react-redux";
 import { choiceCategory, choiceTag, close, open } from "@/slices/FilterSlice";
+import { GrPowerReset } from "react-icons/gr";
 
 const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,15 +79,42 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   const handleFilter = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     filterOpen ? dispatch(close()) : dispatch(open());
+  };
+
+  // 포스트 필터 적용 버튼
+  const { selectedCategory, selectedTag } = useSelector((state) => state.FilterSlice);
+  const handleFilterSave = () => {
+    let query = {};
+
+    if (selectedCategory) {
+      query.category = selectedCategory;
+    }
+
+    if (selectedTag) {
+      query.tag = selectedTag;
+    }
+
+    router.push({
+      pathname: "/blog/posts",
+      query: query,
+    });
+
+    dispatch(close());
+  };
+
+  const handleFilterReset = () => {
     dispatch(choiceCategory());
     dispatch(choiceTag());
+    router.push({
+      pathname: "/blog/posts",
+    });
   };
 
   return (
     <Base>
       <Wrapper>
         {router.pathname !== "/" ? (
-          <BackIcon onClick={() => window.history.back()} filterOpen={filterOpen}>
+          <BackIcon onClick={() => window.history.back()}>
             <BackArrow width={20} />
           </BackIcon>
         ) : undefined}
@@ -117,7 +145,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
           <TitleLink href="/">Hyunwoomemo</TitleLink>
         )}
         {router.pathname.indexOf("blog/posts") > -1 ? <Filter filter={filterOpen} posts={allPosts} /> : undefined}
-        <LinkWrapper active={activeTab}>
+        <LinkWrapper active={activeTab} filterOpen={filterOpen}>
           <Link href="/">홈</Link>
           <Link href="/blog">블로그</Link>
           <Link href="/projects">프로젝트</Link>
@@ -137,6 +165,12 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </SearchBtn>
+        <FilterSaveBtn show={filterOpen && (selectedCategory || selectedTag)} onClick={handleFilterSave}>
+          <GrPowerReset onClick={handleFilterReset} />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </FilterSaveBtn>
       </Wrapper>
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
         <ModalBody active={activeTab}>
@@ -180,17 +214,6 @@ const BackIcon = styled.div`
       fill: var(--text-color);
     }
   }
-
-  ${({ filterOpen }) =>
-    filterOpen
-      ? css`
-          opacity: 0;
-          pointer-events: none;
-        `
-      : css`
-          opacity: 1;
-          pointer-events: all;
-        `}
 `;
 
 const Wrapper = styled.div`
@@ -267,6 +290,17 @@ const LinkWrapper = styled.ul`
     display: none;
   }
 
+  ${({ filterOpen }) =>
+    filterOpen
+      ? css`
+          opacity: 0;
+          pointer-events: none;
+        `
+      : css`
+          opacity: 1;
+          pointer-events: all;
+        `}
+
   ${({ active }) =>
     active
       ? css`
@@ -322,6 +356,34 @@ const SearchBtn = styled(Link)`
           display: none;
         `
       : css``}
+`;
+
+const FilterSaveBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  > svg {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+
+    @media (min-width: 769px) {
+      margin-left: 30px;
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  ${({ show }) =>
+    show
+      ? css`
+          display: block;
+        `
+      : css`
+          display: none;
+        `}
 `;
 
 const ModalBody = styled.ul`

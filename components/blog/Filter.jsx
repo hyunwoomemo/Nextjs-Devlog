@@ -7,11 +7,10 @@ import TagList from "./TagList";
 import { useDispatch, useSelector } from "react-redux";
 import { choiceCategory, choiceTag, close } from "@/slices/FilterSlice";
 import { useRouter } from "next/router";
-import { GrPowerReset } from "react-icons/gr";
 
 const Filter = ({ posts }) => {
   const router = useRouter();
-  const category = posts.map((v) => v.properties.category.select?.name).filter((v, i, arr) => arr.indexOf(v) === i);
+  const category = posts?.map((v) => v.properties.category.select?.name).filter((v, i, arr) => arr.indexOf(v) === i);
 
   const dispatch = useDispatch();
   const { selectedCategory, selectedTag, filterOpen } = useSelector((state) => state.FilterSlice);
@@ -26,32 +25,6 @@ const Filter = ({ posts }) => {
     }
   });
 
-  console.log(selectedTag);
-
-  const handleSave = () => {
-    let query = {};
-
-    if (selectedCategory) {
-      query.category = selectedCategory;
-    }
-
-    if (selectedTag) {
-      query.tag = selectedTag;
-    }
-
-    router.push({
-      pathname: "/blog/posts",
-      query: query,
-    });
-    dispatch(close());
-  };
-
-  useEffect(() => {
-    return () => {
-      dispatch(close());
-    };
-  }, [dispatch]);
-
   return (
     <Portal selector="#portal">
       <Base filter={filterOpen}>
@@ -59,10 +32,6 @@ const Filter = ({ posts }) => {
           <CategoryList data={category} posts={posts} />
           <TagList posts={posts} />
         </Wrapper>
-        <Action>
-          <GrPowerReset />
-          <SaveBtn onClick={handleSave}>적용</SaveBtn>
-        </Action>
       </Base>
     </Portal>
   );
@@ -75,11 +44,11 @@ const Base = styled.div`
   z-index: 10;
   transition: all 0.3s;
   background-color: var(--main-background);
-  height: calc(100vh - 65px);
-  overflow-y: auto;
-  bottom: 0;
   left: 50%;
+  bottom: 0;
   transform: translateX(-50%);
+  overflow-y: auto;
+  height: calc(100vh - 80px);
   max-width: 1100px;
   ${({ filter }) =>
     filter
@@ -93,6 +62,7 @@ const Base = styled.div`
         `}
 `;
 const Wrapper = styled.div`
+  position: relative;
   max-width: 1100px;
   width: 100%;
   height: 100%;
@@ -105,36 +75,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
-`;
-
-const Action = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 200px;
-  height: 100px;
-  font-size: 12px;
-  white-space: nowrap;
-  padding: 1rem;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
-  > svg:first-of-type {
-    width: 40px;
-    height: 40px;
-  }
-`;
-
-const SaveBtn = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: var(--primary-color);
-  color: var(--main-background);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 export default Filter;

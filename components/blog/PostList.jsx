@@ -8,8 +8,7 @@ import slugify from "slugify";
 import PostPagination from "./PostPagination";
 import { useRouter } from "next/router";
 
-const PostList = ({ firstPagePosts, allPosts }) => {
-  console.log(allPosts);
+const PostList = ({ allPosts }) => {
   // data 중에서 project 포스트는 제외한다.
   /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
   const postsPerPage = 6;
@@ -49,8 +48,6 @@ const PostList = ({ firstPagePosts, allPosts }) => {
     }
   });
 
-  console.log(allPostsFilter);
-
   const pagePosts = allPostsFilter.slice(offset, offset + postsPerPage);
 
   const categoryFilteredData = selectedCategory ? pagePosts.filter((v) => v.properties.category.select.name === selectedCategory) : pagePosts;
@@ -67,12 +64,15 @@ const PostList = ({ firstPagePosts, allPosts }) => {
     : categoryFilteredData;
 
   const filterData = tagFilteredData;
-
-  console.log(filterData);
+  console.log(typeof filterData);
 
   const numPages = Math.ceil(allPostsFilter.length / postsPerPage);
   return (
     <>
+      <FilterDisplay>
+        <FilterCategoryItem>{selectedCategory}</FilterCategoryItem>
+        <FilterTagItem>{typeof selectedTag === "object" ? selectedTag.map((v) => v) : selectedTag}</FilterTagItem>
+      </FilterDisplay>
       <Base>
         {filterData?.map((post) => {
           const category = post.properties.category.select?.name;
@@ -116,6 +116,18 @@ const PostList = ({ firstPagePosts, allPosts }) => {
     </>
   );
 };
+
+const FilterDisplay = styled.div`
+  padding: 2rem;
+  @media (max-width: 768px) {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  display: flex;
+`;
+
+const FilterCategoryItem = styled.div``;
+const FilterTagItem = styled.div``;
 
 const Base = styled.div`
   display: grid;

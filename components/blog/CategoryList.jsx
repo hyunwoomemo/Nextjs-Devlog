@@ -2,10 +2,12 @@ import { choiceCategory, choiceTag } from "@/slices/FilterSlice";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const CategoryList = ({ data, posts }) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const handleClickCategory = (category) => {
     dispatch(choiceCategory(category));
@@ -16,12 +18,12 @@ const CategoryList = ({ data, posts }) => {
 
   return (
     <Base>
-      <CategoryItem selectedCategory={selectedCategory === undefined || selectedCategory?.length === 0} onClick={() => handleClickCategory()}>{`전체 (${posts.length})`}</CategoryItem>
+      <CategoryItem selectedCategory={selectedCategory === undefined && !router.query.category} onClick={() => handleClickCategory()}>{`전체 (${posts.length})`}</CategoryItem>
       {data?.map((v) => {
         const length = posts?.filter((v1) => v1.properties.category.select?.name === v).length;
         return (
           <>
-            <CategoryItem selectedCategory={selectedCategory === v} onClick={() => handleClickCategory(v)}>{`${v} (${length})`}</CategoryItem>
+            <CategoryItem selectedCategory={selectedCategory === v || router.query.category === v} onClick={() => handleClickCategory(v)}>{`${v} (${length})`}</CategoryItem>
           </>
         );
       })}

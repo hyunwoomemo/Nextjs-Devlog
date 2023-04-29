@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 export default function Footer() {
   const router = useRouter();
@@ -21,8 +22,11 @@ export default function Footer() {
     setThemeMode(themeMode === "dark" ? "light" : "dark");
     window.localStorage.setItem("theme", window.localStorage.getItem("theme") === "dark" ? "light" : "dark");
   };
+
+  const { filterOpen } = useSelector((state) => state.FilterSlice);
+
   return (
-    <Base>
+    <Base hide={filterOpen}>
       <Wrapper>
         <Left>
           <Link href="/">
@@ -60,6 +64,13 @@ const Base = styled.footer`
   align-items: center;
   background-color: var(--footer-background);
   margin-top: auto;
+
+  ${({ hide }) =>
+    hide
+      ? css`
+          display: none;
+        `
+      : undefined}
 `;
 
 const Wrapper = styled.div`
