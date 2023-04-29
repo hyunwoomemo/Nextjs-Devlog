@@ -7,6 +7,7 @@ import TagList from "./TagList";
 import { useDispatch, useSelector } from "react-redux";
 import { choiceCategory, choiceTag, close } from "@/slices/FilterSlice";
 import { useRouter } from "next/router";
+import { GrPowerReset } from "react-icons/gr";
 
 const Filter = ({ posts }) => {
   const router = useRouter();
@@ -67,7 +68,10 @@ const Filter = ({ posts }) => {
           <CategoryList data={category} posts={posts} />
           <TagList posts={posts} />
         </Wrapper>
-        <SaveBtn onClick={handleSave}>적용</SaveBtn>
+        <Action>
+          <GrPowerReset />
+          <SaveBtn onClick={handleSave}>적용</SaveBtn>
+        </Action>
       </Base>
     </Portal>
   );
@@ -83,7 +87,7 @@ const Base = styled.div`
   /* top: 65px; */
   margin: 0 auto;
   background-color: var(--main-background);
-  height: 93vh;
+  height: 90vh;
   overflow-y: scroll;
   bottom: 0;
 
@@ -113,21 +117,34 @@ const Wrapper = styled.div`
   gap: 3rem;
 `;
 
-const SaveBtn = styled.div`
+const Action = styled.div`
   position: fixed;
-  bottom: 100px;
+  bottom: 50px;
   right: 20px;
-  width: 50px;
-  height: 50px;
+  width: 200px;
+  height: 100px;
   font-size: 12px;
   white-space: nowrap;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  > svg:first-of-type {
+    width: 40px;
+    height: 40px;
+  }
+`;
+
+const SaveBtn = styled.div`
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background-color: var(--primary-color);
   color: var(--main-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default Filter;
