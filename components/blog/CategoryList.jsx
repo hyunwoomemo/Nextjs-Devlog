@@ -18,7 +18,7 @@ const CategoryList = ({ data, posts }) => {
 
   return (
     <Base>
-      <CategoryItem selectedCategory={selectedCategory === undefined} onClick={() => handleClickCategory()}>{`전체 (${posts.length})`}</CategoryItem>
+      <CategoryItem selectedCategory={selectedCategory === undefined} onClick={() => handleClickCategory()}>{`전체 (${posts?.length})`}</CategoryItem>
       {data?.map((v) => {
         const length = posts?.filter((v1) => v1.properties.category.select?.name === v).length;
         return (
