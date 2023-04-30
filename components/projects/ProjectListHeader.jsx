@@ -32,6 +32,13 @@ const ProjectListHeader = () => {
     dispatch(changeStatus(text));
   };
 
+  // 언마운트시 displayStatus 값을 초기화
+  useEffect(() => {
+    return () => {
+      dispatch(changeStatus("all"));
+    };
+  }, [dispatch]);
+
   return (
     <Base>
       <StatusWrapper id="container" active={active}>
