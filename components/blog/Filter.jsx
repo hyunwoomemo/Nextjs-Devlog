@@ -85,12 +85,8 @@ const Filter = ({ posts }) => {
             return <ChoicedItem key={i}>{item}</ChoicedItem>;
           })}
         </ChoicedFilter>
-
         <FilterSaveBtn show={filterOpen} onClick={handleFilterSave}>
           적용
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
         </FilterSaveBtn>
       </Base>
     </Portal>
@@ -136,10 +132,14 @@ const Reset = styled.div`
   gap: 10px;
   font-size: 12px;
   align-items: center;
-  width: 15px;
+  width: 25px;
   > svg {
     width: 100%;
     height: 100%;
+  }
+
+  @media (max-width: 768px) {
+    width: 20px;
   }
 `;
 const Title = styled.div`
@@ -150,7 +150,11 @@ const Title = styled.div`
   }
 `;
 const Close = styled.div`
-  width: 15px;
+  width: 25px;
+
+  @media (max-width: 768px) {
+    width: 20px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -178,6 +182,7 @@ const ChoicedFilter = styled.div`
 
   @media (max-width: 768px) {
     padding: 1rem;
+    font-size: 12px;
   }
 
   transition: all 0.3s;
@@ -193,7 +198,7 @@ const ChoicedFilter = styled.div`
 `;
 
 const ChoicedItem = styled.div`
-  padding: 3px 5px;
+  padding: 6px 10px;
   background-color: #c0e25a;
   border-radius: 5px;
 `;
@@ -203,13 +208,15 @@ const FilterSaveBtn = styled.div`
   gap: 10px;
   white-space: nowrap;
   align-items: center;
-  padding: 10px 0;
-  width: 100%;
   justify-content: center;
+  align-self: center;
+  width: 90%;
+  padding: 10px 0;
+  margin: 1rem 0;
+  border-radius: 20px;
 
-  > svg {
-    width: 30px;
-  }
+  background-color: var(--primary-color);
+  color: #fff;
 `;
 
 export default Filter;

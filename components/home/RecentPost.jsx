@@ -39,8 +39,8 @@ const RecentPost = ({ data, projects }) => {
     <>
       <Base>
         <Header>
-          <Title>{slideIdx === 0 ? "최근 포스트" : "최근 프로젝트"}</Title>
-          <ReadMore href={slideIdx === 0 ? "/blog/posts" : "/projects"}>더 보러가기</ReadMore>
+          <Title>{slideIdx === 0 ? "Recent Post" : "Recent Project"}</Title>
+          <ReadMore href={slideIdx === 0 ? "/blog/posts" : "/projects"}>read more</ReadMore>
 
           <ArrowWrapper>
             <PrevBtn onClick={handlePrev} disabled={slideIdx === 0}>

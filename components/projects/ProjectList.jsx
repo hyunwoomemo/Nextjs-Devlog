@@ -3,8 +3,13 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const ProjectList = ({ data }) => {
+  const { displayStatus } = useSelector((state) => state.ProjectSlice);
+  console.log(displayStatus);
+  const filterData = displayStatus !== "all" ? data.results.filter((v) => v.properties.상태.status.name?.toLowerCase() === displayStatus?.toLowerCase()) : data.results;
+  console.log(filterData);
   const calculatedPeriod = (start, end) => {
     const startDateStringArray = start.split("-");
     const endDateStringArray = end.split("-");
@@ -20,7 +25,7 @@ const ProjectList = ({ data }) => {
 
   return (
     <Base>
-      {data.results?.map((project) => {
+      {filterData?.map((project) => {
         const title = project.properties.Name.title[0]?.plain_text;
         const description = project.properties.summary.rich_text[0]?.plain_text;
         const imgSrc = project?.cover?.file?.url || project?.cover?.external?.url;

@@ -26,7 +26,7 @@ const ProjectPostList = ({ closeEvent, active, data, title }) => {
           const imgSrc = post.cover?.file?.url || post.cover?.external.url;
           const tags = post.properties.tags?.multi_select;
           const id = post.id;
-          const num = post.properties.projectNum.select.name;
+          const num = post.properties.projectNum?.select?.name;
 
           return (
             <Post href={`/blog/posts/${id}`} key={post.id}>

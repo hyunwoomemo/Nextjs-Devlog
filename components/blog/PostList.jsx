@@ -155,7 +155,7 @@ const FilterCategoryItem = styled.div`
 const FilterTagItem = styled.div`
   padding: 5px;
   background-color: var(--primary-color);
-  color: var(--text-color);
+  color: #fff;
   border-radius: 5px;
   display: flex;
   justify-content: center;

@@ -1,5 +1,6 @@
 import Layout from "@/components/common/Layout";
 import ProjectList from "@/components/projects/ProjectList";
+import ProjectListHeader from "@/components/projects/ProjectListHeader";
 import { TOKEN, PROJECT_DATABASE_ID, POST_DATABASE_ID } from "@/config";
 import styled from "@emotion/styled";
 import { NextSeo } from "next-seo";
@@ -25,7 +26,7 @@ const index = ({ projects }) => {
         }}
       />
       <Layout headerTitle="Projects">
-        <Title>진행한 프로젝트</Title>
+        <ProjectListHeader />
         <ProjectList data={projects} />
       </Layout>
     </>
