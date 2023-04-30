@@ -126,7 +126,7 @@ const ActionBtn = styled.div`
   position: absolute;
   width: 70px;
   height: 70px;
-  bottom: 118px;
+  bottom: 25px;
   right: 25px;
   padding: 10px;
   z-index: 10;

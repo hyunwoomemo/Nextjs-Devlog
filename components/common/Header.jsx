@@ -254,7 +254,6 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
   margin-right: auto;
-  font-size: 24px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -263,7 +262,7 @@ const Title = styled.h1`
   gap: 1rem;
 
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 14px;
   }
 `;
 
