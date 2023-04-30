@@ -118,7 +118,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   };
 
   return (
-    <Base hide={router.pathname === "/about"}>
+    <Base /* hide={router.pathname === "/about"} */>
       <Wrapper>
         {router.pathname !== "/" ? (
           <BackIcon onClick={() => window.history.back()} filter={filterOpen}>
