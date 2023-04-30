@@ -68,19 +68,11 @@ const Base = styled.div`
   @media (max-width: 768px) {
     padding: 1rem;
   }
-
-  @media (min-width: 769px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media (min-width: 1200px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
 `;
 
 const Project = styled(Link)`
   display: flex;
-  flex-direction: column;
+  gap: 1rem;
   width: 100%;
   padding: 1rem;
   border-radius: 10px;
@@ -96,35 +88,38 @@ const ImageItem = styled(Image)`
   border-radius: 5px 5px 0 0;
   object-fit: cover;
   width: 100%;
+  width: 150px;
+  height: 150px;
 
   @media (max-width: 768px) {
-    max-width: 400px;
-    width: 100%;
-  }
-
-  @media (max-width: 1200px) {
-    max-width: 450px;
-    width: 100%;
+    width: 75px;
+    height: 75px;
   }
 `;
 
 const Wrapper = styled.div`
-  padding: 2rem 0;
+  /* padding: 2rem 0; */
   display: flex;
   flex-direction: column;
   align-self: flex-start;
   gap: 1rem;
+  height: 100%;
 `;
 
 const Title = styled.h1`
   font-size: 20px;
   font-weight: bold;
+  @media (max-width: 768px) {
+    font-size: 12px;
+    line-height: 14px;
+  }
 `;
 
 const Desc = styled.h2`
   color: gray;
   @media (max-width: 768px) {
-    font-size: 12px;
+    font-size: 10px;
+    line-height: 12px;
   }
 `;
 
@@ -133,12 +128,20 @@ const Period = styled.span``;
 const Tags = styled.ul`
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
 
   li {
     font-size: 12px;
     padding: 5px;
     border-radius: 5px;
     color: var(--text-color);
+    white-space: nowrap;
+
+    @media (max-width: 768px) {
+      font-size: 10px;
+      padding: 3px;
+    }
   }
 `;
 

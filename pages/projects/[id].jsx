@@ -21,7 +21,6 @@ import Link from "next/link";
 import { NextSeo } from "next-seo";
 
 const ProjectItem = ({ html_text, posts, title, projectData }) => {
-  console.log(title);
   const router = useRouter();
 
   const github = projectData.results?.filter((v) => v.id === router.query.id)[0].properties.Github.rich_text[0]?.href;
@@ -127,7 +126,7 @@ const ActionBtn = styled.div`
   position: absolute;
   width: 70px;
   height: 70px;
-  bottom: 25px;
+  bottom: 118px;
   right: 25px;
   padding: 10px;
   z-index: 10;
