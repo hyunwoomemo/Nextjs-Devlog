@@ -70,6 +70,7 @@
     "sass": "^1.62.0",
     "slugify": "^1.6.6",
     "tls": "^0.0.1",
+    "typeit-react": "^2.6.4",
     "unified": "^10.1.2",
     "unified-remark-prismjs": "^1.1.6",
     "workbox": "^0.0.0"

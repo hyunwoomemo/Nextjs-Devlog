@@ -207,7 +207,7 @@ const defaultStyle = css`
   } */
 
   body {
-    font-family: "TheJamsil5Bold", Apple SD Gothic Neo, Roboto, Arial Helvetica, sans-serif;
+    font-family: /* "TheJamsil5Bold" */ "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     background-color: var(--main-background);
     -webkit-font-smoothing: antialiased;
     overflow-x: auto;

@@ -26,7 +26,7 @@ export default function Footer() {
   const { filterOpen } = useSelector((state) => state.FilterSlice);
 
   return (
-    <Base hide={filterOpen}>
+    <Base hide={filterOpen || router.pathname === "/about"}>
       <Wrapper>
         <Left>
           <Link href="/">

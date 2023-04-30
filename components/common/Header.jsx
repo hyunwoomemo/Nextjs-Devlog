@@ -117,10 +117,8 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
     });
   };
 
-  console.log(filterData.length);
-
   return (
-    <Base>
+    <Base hide={router.pathname === "/about"}>
       <Wrapper>
         {router.pathname !== "/" ? (
           <BackIcon onClick={() => window.history.back()} filter={filterOpen}>
@@ -213,6 +211,13 @@ const Base = styled.header`
   @media (max-width: 768px) {
     padding: 1rem;
   }
+
+  ${({ hide }) =>
+    hide
+      ? css`
+          display: none;
+        `
+      : undefined}
 `;
 
 const BackIcon = styled.div`
