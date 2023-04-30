@@ -77,18 +77,13 @@ const Project = styled(Link)`
   display: flex;
   gap: 1rem;
   width: 100%;
-  padding: 1rem;
   border-radius: 10px;
   align-items: center;
   transition: all 0.3s;
-
-  &:hover {
-    transform: scale(1.05);
-  }
 `;
 
 const ImageItem = styled(Image)`
-  border-radius: 5px 5px 0 0;
+  border-radius: 5px;
   object-fit: cover;
   width: 100%;
   width: 150px;
