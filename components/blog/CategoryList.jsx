@@ -34,10 +34,6 @@ const Base = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  position: relative;
-  max-height: 170px;
-  overflow-y: scroll;
-  box-sizing: border-box;
 `;
 
 const CategoryItem = styled.div`

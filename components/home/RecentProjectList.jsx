@@ -8,7 +8,7 @@ const RecentProjectList = ({ projects }) => {
   return (
     <>
       <Base>
-        {projects?.map((post) => {
+        {projects?.slice(0, 3).map((post) => {
           const title = post.properties.Name.title[0].plain_text;
           const summary = post.properties.summary.rich_text[0]?.plain_text;
           const imgSrc = post.cover?.file?.url || post.cover?.external.url;

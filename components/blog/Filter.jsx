@@ -5,11 +5,16 @@ import { css } from "@emotion/react";
 import CategoryList from "./CategoryList";
 import TagList from "./TagList";
 import { useDispatch, useSelector } from "react-redux";
+import { GrPowerReset } from "react-icons/gr";
+import { choiceCategory, choiceTag, close } from "@/slices/FilterSlice";
+import { useRouter } from "next/router";
 
 const Filter = ({ posts }) => {
   const category = posts?.map((v) => v.properties.category.select?.name).filter((v, i, arr) => arr.indexOf(v) === i);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  const { filterOpen } = useSelector((state) => state.FilterSlice);
+  const { filterOpen, selectedCategory, selectedTag } = useSelector((state) => state.FilterSlice);
   // filter true 인 경우 body 스크롤 방지
   useEffect(() => {
     if (typeof window !== "object") return;
@@ -21,14 +26,72 @@ const Filter = ({ posts }) => {
     }
   });
 
+  // 선택한 필터 초기화
+  const handleFilterReset = () => {
+    dispatch(choiceCategory());
+    dispatch(choiceTag());
+    router.push({
+      pathname: "/blog/posts",
+    });
+  };
+
+  // 선택한 필터 저장
+  const handleFilterSave = () => {
+    let query = {};
+
+    if (selectedCategory) {
+      query.category = selectedCategory;
+    }
+
+    if (selectedTag) {
+      query.tag = selectedTag;
+    }
+
+    router.push({
+      pathname: "/blog/posts",
+      query: query,
+    });
+
+    dispatch(close());
+  };
+
+  const handleClose = () => {
+    dispatch(close());
+    dispatch(choiceCategory());
+    dispatch(choiceTag());
+  };
+
   return (
     <Portal selector="#portal">
       <Base filter={filterOpen}>
+        <FilterHeader>
+          <Reset>
+            <GrPowerReset onClick={handleFilterReset} />
+          </Reset>
+          <Title>카테고리 / 태그</Title>
+          <Close onClick={handleClose}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </Close>
+        </FilterHeader>
         <Wrapper>
           <CategoryList data={category} posts={posts} />
           <hr />
           <TagList posts={posts} />
         </Wrapper>
+        <ChoicedFilter active={selectedCategory || selectedTag}>
+          {[selectedCategory, ...selectedTag].map((item, i) => {
+            return <ChoicedItem key={i}>{item}</ChoicedItem>;
+          })}
+        </ChoicedFilter>
+
+        <FilterSaveBtn show={filterOpen} onClick={handleFilterSave}>
+          적용
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </FilterSaveBtn>
       </Base>
     </Portal>
   );
@@ -42,11 +105,12 @@ const Base = styled.div`
   transition: all 0.3s;
   background-color: var(--main-background);
   left: 50%;
-  bottom: 0;
+  top: 0;
   transform: translateX(-50%);
-  overflow-y: auto;
-  height: calc(100vh - 80px);
+  height: 100vh;
   max-width: 1100px;
+  display: flex;
+  flex-direction: column;
 
   ${({ filter }) =>
     filter
@@ -59,11 +123,40 @@ const Base = styled.div`
           pointer-events: none;
         `}
 `;
+
+const FilterHeader = styled.header`
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #0000001c;
+`;
+
+const Reset = styled.div`
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  align-items: center;
+  width: 15px;
+  > svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+const Title = styled.div`
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+`;
+const Close = styled.div`
+  width: 15px;
+`;
+
 const Wrapper = styled.div`
   position: relative;
   max-width: 1100px;
-  width: 100%;
-  height: 100%;
+  height: 50vh;
 
   padding: 2rem;
   @media (max-width: 768px) {
@@ -73,9 +166,49 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  flex: 1 1 auto;
+`;
 
-  > hr {
-    width: 100%;
+const ChoicedFilter = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  transition: all 0.3s;
+
+  ${({ active }) =>
+    active
+      ? css`
+          opacity: 1;
+        `
+      : css`
+          opacity: 0;
+        `}
+`;
+
+const ChoicedItem = styled.div`
+  padding: 3px 5px;
+  background-color: #c0e25a;
+  border-radius: 5px;
+`;
+
+const FilterSaveBtn = styled.div`
+  display: flex;
+  gap: 10px;
+  white-space: nowrap;
+  align-items: center;
+  padding: 10px 0;
+  width: 100%;
+  justify-content: center;
+
+  > svg {
+    width: 30px;
   }
 `;
 

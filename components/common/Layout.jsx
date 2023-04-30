@@ -4,11 +4,15 @@ import styled from "@emotion/styled";
 import Footer from "./Footer";
 import LoadingContext from "@/context/LoadingContext";
 import SearchContext from "@/context/SearchContext";
+import { useRouter } from "next/router";
 
 const Layout = ({ children, data, choiceCt, posts, headerTitle, allPosts }) => {
   const { loading } = useContext(LoadingContext);
   const { search } = useContext(SearchContext);
-  console.log(posts);
+
+  const router = useRouter();
+  console.log(router.query);
+
   return (
     <Base loading={loading.toString()} search={search}>
       <Header data={data} allPosts={allPosts} choiceCt={choiceCt} posts={posts} headerTitle={headerTitle} />

@@ -51,14 +51,16 @@ const Base = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  position: relative;
-  max-height: 400px;
   overflow-y: scroll;
-  align-items: center;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 const TagItem = styled.div`
-  box-sizing: border-box;
   display: flex;
   padding: 10px;
   justify-content: center;
@@ -67,7 +69,6 @@ const TagItem = styled.div`
   background-color: var(--categoryItem-bgc);
   white-space: nowrap;
   max-width: 100%;
-  flex: 1 1 auto;
 
   @media (max-width: 768px) {
     padding: 5px;
