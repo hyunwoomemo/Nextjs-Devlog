@@ -152,6 +152,7 @@ const SkillItemTitle = styled.div`
 
 const SkillItemContents = styled.li`
 list-style: disc;
+font-size: 14px;
 `
 
 const TextTitle = styled.div`

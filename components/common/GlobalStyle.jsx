@@ -17,7 +17,7 @@ const defaultStyle = css`
   :root {
     body {
       --primary-color: slategray;
-      --text-color: #000;
+      --text-color: #212529;
       --main-background: #f9f9f9;
       --footer-background: #f2f2f2;
       --dim-background: rgba(0, 0, 0, 0.5);
