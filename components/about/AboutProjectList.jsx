@@ -4,8 +4,9 @@ import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import Portal from "../common/Portal";
 
 // 프로젝트 날짜
 const date = (start, end) => {
@@ -46,7 +47,7 @@ const getKeyword = (data) => {
 const AboutProjectList = ({ data }) => {
   const filterData = data.results.filter((v) => v.properties.상태.status.name === "Done");
 
-  console.log(filterData);
+  const [showProject, setShowProject] = useState(false);
 
   return (
     <Base>
@@ -61,15 +62,17 @@ const AboutProjectList = ({ data }) => {
         const keywords = project.properties.keyword.multi_select;
 
         return (
-          <Project href={`/projects/${id}`} key={project.id} imgSrc={imgSrc}>
-            {start && end ? <ProjectDate>{date(start, end)}</ProjectDate> : undefined}
-            <Wrapper>
-              <Title>{title}</Title>
-              <Desc>{description}</Desc>
-              {getContents(contents)}
-              {getKeyword(keywords)}
-            </Wrapper>
-          </Project>
+          <>
+            <Project key={project.id} imgSrc={imgSrc}>
+              {start && end ? <ProjectDate>{date(start, end)}</ProjectDate> : undefined}
+              <Wrapper>
+                <Title>{title}</Title>
+                <Desc>{description}</Desc>
+                {getContents(contents)}
+                {getKeyword(keywords)}
+              </Wrapper>
+            </Project>
+          </>
         );
       })}
     </Base>
@@ -87,7 +90,7 @@ const Base = styled.div`
   }
 `;
 
-const Project = styled(Link)`
+const Project = styled.div`
   display: flex;
   gap: 1rem;
   width: 100%;
