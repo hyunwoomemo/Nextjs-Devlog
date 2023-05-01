@@ -6,15 +6,19 @@ import React from "react";
 import TypeIt from "typeit-react";
 import Profile from '@/public/profile.png'
 import Image from "next/image";
-import { TOKEN } from "@/config";
+import { SKILL, TOKEN } from "@/config";
+import dayjs from "dayjs";
 
-const skill = {
-  
-}
 
-const about = ({ response, blockResponse }) => {
-  console.log(response)
-  console.log(blockResponse)
+const about = ({ skill }) => {
+  const array = ['Front-end', 'Back-end', 'Database', 'Etc'];
+  const skillMap = (category) => skill.filter((v) => v.properties.category.select.name === category).sort((a, b) => new Date(a.created_time) - new Date(b.created_time)).map((v) => {
+    const contents = v.properties.이름.title[0].plain_text;
+    return (
+      <SkillItemContents key={contents}>{contents}</SkillItemContents>
+    )
+  })
+
   return (
     <>
       <NextSeo
@@ -47,9 +51,23 @@ const about = ({ response, blockResponse }) => {
             </Title>
           </Intro>
           <Container>
-            <Skill>
-              SKILL
-            </Skill>
+            <SkillWrapper>
+              <Skill>
+                SKILL
+              </Skill>
+              <SkillItem>
+                {array.map((v) => {
+                  return (
+                    <>
+                      <SkillItemTitle>{v}</SkillItemTitle>
+                      <SkillItemWrapper key={v}>
+                        {skillMap(v)}
+                      </SkillItemWrapper>
+                    </>
+                  )
+                })}
+              </SkillItem>
+            </SkillWrapper>
             <Introduce>INTRODUCE</Introduce>
             <IntroduceText>
 
@@ -101,23 +119,51 @@ margin-top: 2rem;
 align-items: flex-start;
 `
 
+const SkillWrapper = styled.div`
+display: flex;
+flex-wrap: wrap;
+width: 100%;
+flex-direction: column;
+padding: 2rem 0;
+
+@media (max-width:768px) {
+}
+`
+
+const SkillItem = styled.div`
+  padding: 1rem;
+`
+
+const SkillItemWrapper = styled.ul`
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  @media (max-width:768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`
+const SkillItemTitle = styled.div`
+  padding: 1rem 0;
+  color: gray;
+`
+
+const SkillItemContents = styled.li`
+list-style: disc;
+`
+
 const TextTitle = styled.div`
 position: relative;
 display: inline-block;
 font-size: larger;
-  &:before {
-    content: '';
-    width: 100%;
-    height: 3px;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: gray;
-    position: absolute;
-  }
+color: var(--primary-color);
 `
 
-const Skill = styled(TextTitle)``
+const Skill = styled(TextTitle)`
+width: 100%;
+`
 
 
 const Introduce = styled(TextTitle)`
@@ -127,3 +173,28 @@ const IntroduceText = styled.div`
 
 margin-top: 3rem;
 `
+
+export async function getStaticProps() {
+  const options = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${TOKEN}`,
+    },
+    body: JSON.stringify({
+      page_size: 100,
+    }),
+  };
+
+  const res = await fetch(`https://api.notion.com/v1/databases/${SKILL}/query`, options);
+
+  const allSkill = await res.json();
+
+  const skill = allSkill.results;
+
+  return {
+    props: { skill },
+  };
+}
