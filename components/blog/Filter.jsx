@@ -212,8 +212,8 @@ const FilterSaveBtn = styled.div`
   align-self: center;
   width: 90%;
   padding: 10px 0;
-  margin: 1rem 0;
   border-radius: 20px;
+  margin: 10px 0;
 
   background-color: var(--primary-color);
   color: #fff;

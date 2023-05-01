@@ -183,9 +183,8 @@ const defaultStyle = css`
   }
 
   html,
-  body,
-  #___gatsby,
-  #gatsby-focus-wrapper {
+  body {
+    width: 100%;
     min-height: 100%;
     padding: 0;
     margin: 0;
@@ -201,17 +200,18 @@ const defaultStyle = css`
     }
   }
 
-  /* *,
-  html {
-    scroll-behavior: smooth !important;
-  } */
-
   body {
     font-family: /* "TheJamsil5Bold" */ "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     background-color: var(--main-background);
     -webkit-font-smoothing: antialiased;
     overflow-x: auto;
     color: var(--text-color);
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera*/
+    }
 
     * {
       box-sizing: border-box;

@@ -127,7 +127,7 @@ const PostList = ({ allPosts }) => {
           );
         })}
       </Base>
-      {numPages > 0 ? <PostPagination numPages={numPages} /> : undefined}
+      {/* {numPages > 0 ? <PostPagination numPages={numPages} /> : undefined} */}
     </>
   );
 };
