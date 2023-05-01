@@ -12,7 +12,6 @@ const Search = ({ allPosts }) => {
   const [keyword, setKeyword] = useState("");
   const [activeKeyword, setActiveKeyword] = useState(false);
   const [recentKeyword, setRecentKeyword] = useState([]);
-  const [savedKeyword, setSavedKeyword] = useState([]);
 
   const handleSearch = (e) => {
     setKeyword(e.target.value);
@@ -38,15 +37,11 @@ const Search = ({ allPosts }) => {
 
   const handleSave = (e) => {
     document.activeElement.blur();
-    setRecentKeyword((prev) => [...prev, keyword]);
-    setKeyword("");
+    if (recentKeyword.length > 4) {
+      setRecentKeyword(recentKeyword.filter((v, i, arr) => i !== arr.length - 1));
+    }
+    setRecentKeyword((prev) => [keyword, ...prev]);
   };
-
-  useEffect(() => {
-    if (typeof window !== "object") return;
-    window.localStorage.setItem("recentKeyword", JSON.stringify(recentKeyword));
-    setSavedKeyword(JSON.parse(window.localStorage.getItem("recentKeyword")));
-  }, [recentKeyword]);
 
   return (
     <>
@@ -91,8 +86,10 @@ const Search = ({ allPosts }) => {
         ) : (
           <RecentKeywordList>
             최근 검색어
-            {savedKeyword.map((v, i) => (
-              <KeywordItem key={i}>{v}</KeywordItem>
+            {recentKeyword.map((v, i) => (
+              <KeywordItem key={i} onClick={() => setKeyword(v)}>
+                {v}
+              </KeywordItem>
             ))}
           </RecentKeywordList>
         )}
@@ -157,6 +154,7 @@ const RecentKeywordList = styled.div`
   gap: 5px;
   align-items: center;
   font-size: 14px;
+  flex-wrap: wrap;
 `;
 
 const KeywordItem = styled.div`
@@ -165,6 +163,7 @@ const KeywordItem = styled.div`
   color: var(--main-background);
   border-radius: 5px;
   font-size: 12px;
+  white-space: nowrap;
 `;
 
 export default Search;
