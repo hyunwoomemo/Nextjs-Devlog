@@ -6,7 +6,8 @@ import Image from "next/image";
 import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 
 const ProjectPostList = ({ closeEvent, active, data, title }) => {
-  const selectData = data.results.filter((v) => v.properties.프로젝트명?.rich_text[0]?.plain_text === title);
+  console.log(data, title);
+  const selectData = data.results.filter((v) => v.properties.롤업?.rollup?.array[0]?.title[0].plain_text === title);
 
   return (
     <Base active={active}>
@@ -26,13 +27,11 @@ const ProjectPostList = ({ closeEvent, active, data, title }) => {
           const imgSrc = post.cover?.file?.url || post.cover?.external.url;
           const tags = post.properties.tags?.multi_select;
           const id = post.id;
-          const num = post.properties.projectNum?.select?.name;
 
           return (
             <Post href={`/blog/posts/${id}`} key={post.id}>
               <Wrapper>
                 <TitleWrapper>
-                  <Num>{num}</Num>
                   <PostTitle>{title}</PostTitle>
                 </TitleWrapper>
                 <Category>{category}</Category>
@@ -70,14 +69,15 @@ const Base = styled.div`
   width: 100%;
   position: absolute;
   z-index: 9;
-  height: 92vh;
   width: 100vw;
+  height: 90vh;
   bottom: 0;
   padding: 2rem;
   transform: translateX(150%);
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  overflow-y: scroll;
   @media (max-width: 768px) {
     padding: 1rem;
   }
@@ -140,17 +140,6 @@ const Category = styled.p`
 const TitleWrapper = styled.div`
   display: flex;
   gap: 10px;
-`;
-
-const Num = styled.div`
-  padding: 4px 6px;
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 3px;
-  background-color: var(--text-color);
-  color: var(--main-background);
 `;
 
 const PostTitle = styled.h1`

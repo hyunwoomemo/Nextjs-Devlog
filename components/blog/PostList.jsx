@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { CountFilterData, MakeFilterData } from "@/slices/FilterSlice";
 
 const PostList = ({ allPosts }) => {
+  console.log(allPosts);
   // data 중에서 project 포스트는 제외한다.
   /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
   const postsPerPage = 6;
