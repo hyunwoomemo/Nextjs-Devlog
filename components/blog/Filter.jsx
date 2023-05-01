@@ -77,7 +77,6 @@ const Filter = ({ posts }) => {
         </FilterHeader>
         <Wrapper>
           <CategoryList data={category} posts={posts} />
-          <hr />
           <TagList posts={posts} />
         </Wrapper>
         <ChoicedFilter active={selectedCategory || selectedTag}>
@@ -169,7 +168,7 @@ const Wrapper = styled.div`
 
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 3rem;
   flex: 1 1 auto;
 `;
 

@@ -117,6 +117,14 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
     });
   };
 
+  // 언마운트 될 때 선택한 카테고리와 태그 초기화
+  useEffect(() => {
+    return () => {
+      dispatch(choiceCategory());
+      dispatch(choiceTag());
+    };
+  }, [dispatch]);
+
   return (
     <Base /* hide={router.pathname === "/about"} */>
       <Wrapper>
