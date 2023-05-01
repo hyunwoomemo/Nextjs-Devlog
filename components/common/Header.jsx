@@ -118,12 +118,14 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   };
 
   // 언마운트 될 때 선택한 카테고리와 태그 초기화
-  useEffect(() => {
+  /* useEffect(() => {
     return () => {
       dispatch(choiceCategory());
       dispatch(choiceTag());
     };
-  }, [dispatch]);
+  }, [dispatch]); */
+
+  console.log(selectedCategory, selectedTag, filterOpen);
 
   return (
     <Base /* hide={router.pathname === "/about"} */>
@@ -140,7 +142,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
             {headerTitle === "Posts" ? (
               <>
                 {`Posts (${filterCount.length})`}
-                <FilterIcon onClick={handleFilter} filter={filterOpen || selectedCategory || selectedTag}>
+                <FilterIcon onClick={handleFilter} filter={router.pathname !== "/blog/posts" && (filterOpen || selectedCategory || selectedTag)}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path
                       stroke-linecap="round"

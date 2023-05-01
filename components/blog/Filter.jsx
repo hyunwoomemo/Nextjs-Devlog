@@ -79,11 +79,6 @@ const Filter = ({ posts }) => {
           <CategoryList data={category} posts={posts} />
           <TagList posts={posts} />
         </Wrapper>
-        <ChoicedFilter active={selectedCategory || selectedTag}>
-          {[selectedCategory, ...selectedTag].map((item, i) => {
-            return <ChoicedItem key={i}>{item}</ChoicedItem>;
-          })}
-        </ChoicedFilter>
         <FilterSaveBtn show={filterOpen} onClick={handleFilterSave}>
           적용
         </FilterSaveBtn>
