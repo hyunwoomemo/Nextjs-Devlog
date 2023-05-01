@@ -33,15 +33,17 @@ const SearchList = ({ data, keyword }) => {
   return (
     <>
       {filterData.length > 0 ? (
-        <Result>
-          There are <ResultNumber colorEffect={colorEffect}>{filterData.length}</ResultNumber> search results
-        </Result>
+        <>
+          <Result>
+            There are <ResultNumber colorEffect={colorEffect}>{filterData.length}</ResultNumber> search results
+          </Result>
+          <SearchPostList data={postsData} keyword={keyword} parent="포스트" />
+          <SearchPostList data={codesnipetData} keyword={keyword} parent="코드 조각들" />
+          <SearchPostList data={projectData} keyword={keyword} parent="프로젝트" />
+        </>
       ) : (
         <Result>검색 결과가 없습니다.</Result>
       )}
-      <SearchPostList data={postsData} keyword={keyword} parent="포스트" />
-      <SearchPostList data={codesnipetData} keyword={keyword} parent="코드 조각들" />
-      <SearchPostList data={projectData} keyword={keyword} parent="프로젝트" />
     </>
   );
 };

@@ -11,6 +11,8 @@ const Search = ({ allPosts }) => {
 
   const [keyword, setKeyword] = useState("");
   const [activeKeyword, setActiveKeyword] = useState(false);
+  const [recentKeyword, setRecentKeyword] = useState([]);
+  const [savedKeyword, setSavedKeyword] = useState([]);
 
   const handleSearch = (e) => {
     setKeyword(e.target.value);
@@ -34,9 +36,17 @@ const Search = ({ allPosts }) => {
     };
   });
 
-  const handleSave = () => {
+  const handleSave = (e) => {
     document.activeElement.blur();
+    setRecentKeyword((prev) => [...prev, keyword]);
+    setKeyword("");
   };
+
+  useEffect(() => {
+    if (typeof window !== "object") return;
+    window.localStorage.setItem("recentKeyword", JSON.stringify(recentKeyword));
+    setSavedKeyword(JSON.parse(window.localStorage.getItem("recentKeyword")));
+  }, [recentKeyword]);
 
   return (
     <>
@@ -76,7 +86,16 @@ const Search = ({ allPosts }) => {
             </svg>
           </CloseBtn>
         </Header>
-        {keyword ? <SearchList data={allPosts} keyword={keyword} /> : undefined}
+        {keyword ? (
+          <SearchList data={allPosts} keyword={keyword} />
+        ) : (
+          <RecentKeywordList>
+            최근 검색어
+            {savedKeyword.map((v, i) => (
+              <KeywordItem key={i}>{v}</KeywordItem>
+            ))}
+          </RecentKeywordList>
+        )}
       </Base>
     </>
   );
@@ -119,10 +138,6 @@ const CloseBtn = styled.div`
   cursor: pointer;
 `;
 
-const SearchCategory = styled.div`
-  white-space: nowrap;
-`;
-
 const SearchInput = styled.input`
   font-family: "TheJamsil5Bold";
   background-color: var(--text-color);
@@ -137,7 +152,20 @@ const SearchInput = styled.input`
   }
 `;
 
-const SearchResult = styled.div``;
+const RecentKeywordList = styled.div`
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 14px;
+`;
+
+const KeywordItem = styled.div`
+  padding: 5px 10px;
+  background-color: gray;
+  color: var(--main-background);
+  border-radius: 5px;
+  font-size: 12px;
+`;
 
 export default Search;
 
