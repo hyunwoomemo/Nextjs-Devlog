@@ -6,11 +6,13 @@ import React from "react";
 import TypeIt from "typeit-react";
 import Profile from '@/public/profile.png'
 import Image from "next/image";
-import { SKILL, TOKEN } from "@/config";
+import { PROJECT_DATABASE_ID, SKILL, TOKEN } from "@/config";
 import dayjs from "dayjs";
+import ProjectList from "@/components/projects/ProjectList";
+import AboutProjectList from "@/components/about/AboutProjectList";
 
 
-const about = ({ skill }) => {
+const about = ({ skill, projects }) => {
   const array = ['Front-end', 'Back-end', 'Database', 'Etc'];
   const skillMap = (category) => skill.filter((v) => v.properties.category.select.name === category).sort((a, b) => new Date(a.created_time) - new Date(b.created_time)).map((v) => {
     const contents = v.properties.이름.title[0].plain_text;
@@ -51,11 +53,11 @@ const about = ({ skill }) => {
             </Title>
           </Intro>
           <Container>
-            <SkillWrapper>
-              <Skill>
+            <Wrapper>
+              <TextTitle>
                 SKILL
-              </Skill>
-              <SkillItem>
+              </TextTitle>
+              <ItemWrapper>
                 {array.map((v) => {
                   return (
                     <>
@@ -66,12 +68,14 @@ const about = ({ skill }) => {
                     </>
                   )
                 })}
-              </SkillItem>
-            </SkillWrapper>
-            <Introduce>INTRODUCE</Introduce>
-            <IntroduceText>
-
-            </IntroduceText>
+              </ItemWrapper>
+            </Wrapper>
+            <Wrapper>
+              <TextTitle>
+                PROJECT
+              </TextTitle>
+              <AboutProjectList data={projects} />
+            </Wrapper>
           </Container>
         </Base>
       </Layout>
@@ -119,7 +123,7 @@ margin-top: 2rem;
 align-items: flex-start;
 `
 
-const SkillWrapper = styled.div`
+const Wrapper = styled.div`
 display: flex;
 flex-wrap: wrap;
 width: 100%;
@@ -130,7 +134,15 @@ padding: 2rem 0;
 }
 `
 
-const SkillItem = styled.div`
+const TextTitle = styled.div`
+position: relative;
+display: inline-block;
+font-size: larger;
+color: var(--primary-color);
+padding: 1rem 0;
+`
+
+const ItemWrapper = styled.div`
   padding: 1rem;
 `
 
@@ -152,28 +164,9 @@ const SkillItemTitle = styled.div`
 
 const SkillItemContents = styled.li`
 list-style: disc;
-font-size: 14px;
+
 `
 
-const TextTitle = styled.div`
-position: relative;
-display: inline-block;
-font-size: larger;
-color: var(--primary-color);
-`
-
-const Skill = styled(TextTitle)`
-width: 100%;
-`
-
-
-const Introduce = styled(TextTitle)`
-`
-
-const IntroduceText = styled.div`
-
-margin-top: 3rem;
-`
 
 export async function getStaticProps() {
   const options = {
@@ -191,11 +184,14 @@ export async function getStaticProps() {
 
   const res = await fetch(`https://api.notion.com/v1/databases/${SKILL}/query`, options);
 
+  const projectRes = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
+
+  const projects = await projectRes.json();
   const allSkill = await res.json();
 
   const skill = allSkill.results;
 
   return {
-    props: { skill },
+    props: { skill, projects },
   };
 }
