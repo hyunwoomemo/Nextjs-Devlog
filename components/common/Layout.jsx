@@ -28,7 +28,7 @@ const Base = styled.div`
   flex-direction: column;
   scroll-margin-top: 5rem;
   opacity: ${({ loading, search }) => (loading === "true" ? "0.5" : search ? "0.2" : "1")};
-  transform: ${({ search }) => (search ? "scale(0.9)" : "scale(1)")};
+  /* transform: ${({ search }) => (search ? "scale(0.9)" : "scale(1)")}; */
   transition: all 0.3s;
   position: relative;
 `;

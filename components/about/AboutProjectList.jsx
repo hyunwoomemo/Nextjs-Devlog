@@ -5,8 +5,10 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Portal from "../common/Portal";
+import AboutProjectItem from "./AboutProjectItem";
+import { selectId } from "@/slices/AboutSlice";
 
 // 프로젝트 날짜
 const date = (start, end) => {
@@ -45,9 +47,17 @@ const getKeyword = (data) => {
 };
 
 const AboutProjectList = ({ data }) => {
+  const dispatch = useDispatch();
   const filterData = data.results.filter((v) => v.properties.상태.status.name === "Done");
 
   const [showProject, setShowProject] = useState(false);
+  const [showId, setShowId] = useState("");
+
+  const handleProjectClick = (id) => {
+    setShowProject(!showProject);
+    setShowId(id);
+    dispatch(selectId(id));
+  };
 
   return (
     <Base>
@@ -63,7 +73,7 @@ const AboutProjectList = ({ data }) => {
 
         return (
           <>
-            <Project key={project.id} imgSrc={imgSrc}>
+            <Project key={id} imgSrc={imgSrc} onClick={(e) => handleProjectClick(id)}>
               {start && end ? <ProjectDate>{date(start, end)}</ProjectDate> : undefined}
               <Wrapper>
                 <Title>{title}</Title>
@@ -75,6 +85,7 @@ const AboutProjectList = ({ data }) => {
           </>
         );
       })}
+      {showProject ? <AboutProjectItem id={showId} cancel={setShowProject} data={data} /> : undefined}
     </Base>
   );
 };
@@ -99,6 +110,7 @@ const Project = styled.div`
   transition: all 0.3s;
   flex-wrap: wrap;
   padding: 1rem 0;
+  position: relative;
 
   ${({ imgSrc }) =>
     imgSrc

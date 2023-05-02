@@ -18,6 +18,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   const router = useRouter();
   const { themeMode, setThemeMode } = useContext(ThemeContext);
   const [currentTheme, setCurrentTheme] = useState("dark");
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     if (typeof window !== "object") return;
@@ -46,6 +47,16 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (typeof window === undefined) {
+      return;
+    }
+
+    window.addEventListener("scroll", () => {
+      setScrollY(window.scrollY);
+    });
+  });
 
   const handleTheme = () => {
     setThemeMode(themeMode === "dark" ? "light" : "dark");
@@ -116,16 +127,6 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
       pathname: "/blog/posts",
     });
   };
-
-  // 언마운트 될 때 선택한 카테고리와 태그 초기화
-  /* useEffect(() => {
-    return () => {
-      dispatch(choiceCategory());
-      dispatch(choiceTag());
-    };
-  }, [dispatch]); */
-
-  console.log(selectedCategory, selectedTag, filterOpen);
 
   return (
     <Base /* hide={router.pathname === "/about"} */>

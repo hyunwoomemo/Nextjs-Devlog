@@ -3,12 +3,8 @@ import Layout from "@/components/common/Layout";
 import styled from "@emotion/styled";
 import { NextSeo } from "next-seo";
 import React from "react";
-import TypeIt from "typeit-react";
-import Profile from '@/public/profile.png'
 import Image from "next/image";
 import { PROJECT_DATABASE_ID, SKILL, TOKEN } from "@/config";
-import dayjs from "dayjs";
-import ProjectList from "@/components/projects/ProjectList";
 import AboutProjectList from "@/components/about/AboutProjectList";
 
 
@@ -16,6 +12,7 @@ const about = ({ skill, projects }) => {
   const array = ['Front-end', 'Back-end', 'Database', 'Etc'];
   const skillMap = (category) => skill.filter((v) => v.properties.category.select.name === category).sort((a, b) => new Date(a.created_time) - new Date(b.created_time)).map((v) => {
     const contents = v.properties.이름.title[0].plain_text;
+
     return (
       <SkillItemContents key={contents}>{contents}</SkillItemContents>
     )
@@ -76,6 +73,8 @@ const about = ({ skill, projects }) => {
               </TextTitle>
               <AboutProjectList data={projects} />
             </Wrapper>
+            <Wrapper>
+            </Wrapper>
           </Container>
         </Base>
       </Layout>
@@ -87,6 +86,7 @@ export default about;
 
 const Base = styled.div`
   padding: 2rem;
+  position: relative;
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -121,6 +121,7 @@ display: flex;
 flex-direction: column;
 margin-top: 2rem;
 align-items: flex-start;
+position: relative;
 `
 
 const Wrapper = styled.div`
@@ -129,6 +130,7 @@ flex-wrap: wrap;
 width: 100%;
 flex-direction: column;
 padding: 2rem 0;
+position: relative;
 
 @media (max-width:768px) {
 }
