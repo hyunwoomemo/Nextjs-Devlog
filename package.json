@@ -31,7 +31,6 @@
     "eslint-config-next": "13.3.0",
     "fs": "^0.0.1-security",
     "highlight.js": "^11.7.0",
-    "js-cookie": "^3.0.5",
     "markdown-toc": "^1.2.0",
     "net": "^1.0.2",
     "next": "13.3.0",

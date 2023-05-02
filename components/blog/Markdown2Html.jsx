@@ -66,7 +66,7 @@ const Base = styled.div`
       top: 0;
 
       left: 0;
-      width: 100%;
+      width: 1100px;
       background-color: #525252;
     }
   }
