@@ -36,11 +36,13 @@ const AboutExperienceList = ({ data }) => {
           const description = v.properties.직무.rich_text[0].plain_text;
           const keywords = v.properties.keywords.multi_select;
           const position = v.properties.직급?.rich_text[0]?.plain_text;
+          const keypoint = v.properties.keypoint?.rich_text[0]?.plain_text;
           return (
             <ExperienceItem key={v.id}>
               <Title>{title}</Title>
               <DateItem>{`${date(start, end)} / ${team} ${position ? `/ ${position}` : ""}`}</DateItem>
               <Description>{description}</Description>
+              {keypoint ? <Keypoint dangerouslySetInnerHTML={{ __html: keypoint.replaceAll(".", "<br/><br/>") }}></Keypoint> : undefined}
               {getKeywords(keywords)}
             </ExperienceItem>
           );
@@ -92,6 +94,11 @@ const DateItem = styled.div`
   width: 100%;
   color: gray;
   font-size: 14px;
+`;
+
+const Keypoint = styled.div`
+  line-height: 18px;
+  padding: 1rem 0;
 `;
 
 const KeywordsWrapper = styled.div`

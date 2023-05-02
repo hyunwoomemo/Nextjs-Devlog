@@ -4,12 +4,14 @@ import styled from "@emotion/styled";
 import { NextSeo } from "next-seo";
 import React from "react";
 import Image from "next/image";
-import { EXPERIENCE, PROJECT_DATABASE_ID, SKILL, TOKEN } from "@/config";
+import { ETC, EXPERIENCE, PROJECT_DATABASE_ID, SKILL, TOKEN } from "@/config";
 import AboutProjectList from "@/components/about/AboutProjectList";
 import AboutExperienceList from "@/components/about/AboutExperienceList";
+import AboutEtc from "@/components/about/AboutEtc";
+import Link from "next/link";
 
 
-const about = ({ skill, projects, experience }) => {
+const about = ({ skill, projects, experience, etc }) => {
   const array = ['Front-end', 'Back-end', 'Database', 'Etc'];
   const skillMap = (category) => skill.filter((v) => v.properties.category.select.name === category).sort((a, b) => new Date(a.created_time) - new Date(b.created_time)).map((v) => {
     const contents = v.properties.이름.title[0].plain_text;
@@ -49,7 +51,7 @@ const about = ({ skill, projects, experience }) => {
             <Title>
               안녕하세요, 이현우입니다.
               <SubTitle>
-                새로운 지식 배우는 것을 정말 좋아합니다.
+                한번 사는 인생 수동적으로 기계처럼 일하는 것은 인생을 낭비하는 것 같아 열정적으로, 효율적인 방법으로 일하는 것을 좋아합니다.
               </SubTitle>
               <Front>Frontend Developer</Front>
             </Title>
@@ -90,6 +92,12 @@ const about = ({ skill, projects, experience }) => {
               </TextTitle>
               <AboutExperienceList data={otherExperience} />
             </Wrapper>
+            <Wrapper>
+              <TextTitle>
+                그 외
+              </TextTitle>
+              <AboutEtc data={etc} />
+            </Wrapper>
           </Container>
         </Base>
       </Layout>
@@ -111,6 +119,8 @@ const Base = styled.div`
 
 const Intro = styled.div`
 display: flex;
+
+align-items: center;
 `
 
 const Title = styled.div`
@@ -119,17 +129,32 @@ const Title = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+  @media (min-width:768px) {
+    font-size: 18px;
+    margin-left: 2rem;
+  }
 `
 
 const SubTitle = styled.div`
   color: var(--primary-color);
   font-size: 12px;
+  line-height: 14px;
+  @media (min-width:768px) {
+    font-size: 14px;
+  line-height: 16px;
+  }
 `
 
 const Front = styled.div`
   margin-top: auto;
   font-size: 14px;
+
+  @media (min-width:768px) {
+    font-size: 16px;
+  }
 `
+
 
 const Container = styled.div`
 display: flex;
@@ -171,7 +196,7 @@ const SkillItemWrapper = styled.ul`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   @media (max-width:768px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 `
 const SkillItemTitle = styled.div`
@@ -180,8 +205,13 @@ const SkillItemTitle = styled.div`
 `
 
 const SkillItemContents = styled.li`
-list-style: disc;
+display: flex;
+justify-content: center;
+padding: 5px 0;
 
+@media (min-width:768px) {
+  padding: 10px 0;
+}
 `
 
 
@@ -204,15 +234,20 @@ export async function getStaticProps() {
   const projectRes = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
 
   const experienceRes = await fetch(`https://api.notion.com/v1/databases/${EXPERIENCE}/query`, options);
+  const etcRes = await fetch(`https://api.notion.com/v1/databases/${ETC}/query`, options);
 
   const projects = await projectRes.json();
   const allSkill = await res.json();
   const allExperience = await experienceRes.json();
+  const allEtc = await etcRes.json();
 
   const skill = allSkill.results;
   const experience = allExperience.results;
+  const etc = allEtc.results;
+
+
 
   return {
-    props: { skill, projects, experience },
+    props: { skill, projects, experience, etc },
   };
 }

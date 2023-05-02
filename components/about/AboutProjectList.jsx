@@ -111,8 +111,6 @@ const AboutProjectList = ({ data }) => {
           </>
         );
       })}
-      {/*       {showProject ? <AboutProjectItem id={showId} cancel={setShowProject} data={data} /> : undefined}
-       */}{" "}
     </Base>
   );
 };
