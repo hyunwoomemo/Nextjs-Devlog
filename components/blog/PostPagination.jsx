@@ -9,15 +9,14 @@ import { useSelector } from "react-redux";
 
 export default function PostPagination({ numPages }) {
   const router = useRouter();
-
   const groupCount = 4;
   const [page, setPage] = useState(1);
 
   const { selectedCategory, selectedTag } = useSelector((state) => state.FilterSlice);
 
   useEffect(() => {
-    setPage(router.query.pageNumber === undefined ? 1 : parseInt(router.query.pageNumber));
-  }, [router.query.pageNumber]);
+    setPage(router.query.page === undefined ? 1 : parseInt(router.query.page));
+  }, [router.query.page]);
 
   const handlePrevClick = () => {
     const query = { page: page - 1 };
