@@ -4,11 +4,12 @@ import styled from "@emotion/styled";
 import { NextSeo } from "next-seo";
 import React from "react";
 import Image from "next/image";
-import { PROJECT_DATABASE_ID, SKILL, TOKEN } from "@/config";
+import { EXPERIENCE, PROJECT_DATABASE_ID, SKILL, TOKEN } from "@/config";
 import AboutProjectList from "@/components/about/AboutProjectList";
+import AboutExperienceList from "@/components/about/AboutExperienceList";
 
 
-const about = ({ skill, projects }) => {
+const about = ({ skill, projects, experience }) => {
   const array = ['Front-end', 'Back-end', 'Database', 'Etc'];
   const skillMap = (category) => skill.filter((v) => v.properties.category.select.name === category).sort((a, b) => new Date(a.created_time) - new Date(b.created_time)).map((v) => {
     const contents = v.properties.이름.title[0].plain_text;
@@ -17,6 +18,10 @@ const about = ({ skill, projects }) => {
       <SkillItemContents key={contents}>{contents}</SkillItemContents>
     )
   })
+
+  const relativeExperience = experience.filter((v) => v.properties.선택.select.name === "relative").reverse();
+  const otherExperience = experience.filter((v) => v.properties.선택.select.name === "other");
+
 
   return (
     <>
@@ -74,6 +79,16 @@ const about = ({ skill, projects }) => {
               <AboutProjectList data={projects} />
             </Wrapper>
             <Wrapper>
+              <TextTitle>
+                Experiences
+              </TextTitle>
+              <AboutExperienceList data={relativeExperience} />
+            </Wrapper>
+            <Wrapper>
+              <TextTitle>
+                Other Experiences
+              </TextTitle>
+              <AboutExperienceList data={otherExperience} />
             </Wrapper>
           </Container>
         </Base>
@@ -188,12 +203,16 @@ export async function getStaticProps() {
 
   const projectRes = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
 
+  const experienceRes = await fetch(`https://api.notion.com/v1/databases/${EXPERIENCE}/query`, options);
+
   const projects = await projectRes.json();
   const allSkill = await res.json();
+  const allExperience = await experienceRes.json();
 
   const skill = allSkill.results;
+  const experience = allExperience.results;
 
   return {
-    props: { skill, projects },
+    props: { skill, projects, experience },
   };
 }

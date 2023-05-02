@@ -18,7 +18,6 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   const router = useRouter();
   const { themeMode, setThemeMode } = useContext(ThemeContext);
   const [currentTheme, setCurrentTheme] = useState("dark");
-  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     if (typeof window !== "object") return;
@@ -47,16 +46,6 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    if (typeof window === undefined) {
-      return;
-    }
-
-    window.addEventListener("scroll", () => {
-      setScrollY(window.scrollY);
-    });
-  });
 
   const handleTheme = () => {
     setThemeMode(themeMode === "dark" ? "light" : "dark");

@@ -46,7 +46,30 @@ const getKeyword = (data) => {
   );
 };
 
+// 프로젝트 깃헙, 서비스 페이지 주소 렌더링하는 함수
+const getUrl = (github, url) => {
+  return (
+    <UrlWrapper>
+      <UrlItem href={github}>
+        <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="github">
+          <path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"></path>
+        </svg>
+      </UrlItem>
+      <UrlItem href={url}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+          />
+        </svg>
+      </UrlItem>
+    </UrlWrapper>
+  );
+};
+
 const AboutProjectList = ({ data }) => {
+  console.log(data);
   const dispatch = useDispatch();
   const filterData = data.results.filter((v) => v.properties.상태.status.name === "Done");
 
@@ -70,6 +93,8 @@ const AboutProjectList = ({ data }) => {
         const end = project.properties.날짜?.date?.end;
         const contents = project.properties.내용.multi_select;
         const keywords = project.properties.keyword.multi_select;
+        const github = project.properties.Github.rich_text[0].plain_text;
+        const url = project.properties.URL.url;
 
         return (
           <>
@@ -80,12 +105,14 @@ const AboutProjectList = ({ data }) => {
                 <Desc>{description}</Desc>
                 {getContents(contents)}
                 {getKeyword(keywords)}
+                {getUrl(github, url)}
               </Wrapper>
             </Project>
           </>
         );
       })}
-      {showProject ? <AboutProjectItem id={showId} cancel={setShowProject} data={data} /> : undefined}
+      {/*       {showProject ? <AboutProjectItem id={showId} cancel={setShowProject} data={data} /> : undefined}
+       */}{" "}
     </Base>
   );
 };
@@ -105,12 +132,12 @@ const Project = styled.div`
   display: flex;
   gap: 1rem;
   width: 100%;
-  border-radius: 10px;
   align-items: center;
   transition: all 0.3s;
   flex-wrap: wrap;
   padding: 1rem 0;
   position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   ${({ imgSrc }) =>
     imgSrc
@@ -134,6 +161,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-self: flex-start;
   gap: 1rem;
+  width: 100%;
 `;
 
 const Title = styled.h1`
@@ -167,8 +195,6 @@ const Desc = styled.h2`
   }
 `;
 
-const Period = styled.span``;
-
 const KeywordWrapper = styled.ul`
   display: flex;
   gap: 10px;
@@ -185,6 +211,19 @@ const KeywordItem = styled.li`
   background-color: gray;
 
   @media (max-width: 768px) {
+  }
+`;
+
+const UrlWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: end;
+`;
+const UrlItem = styled(Link)`
+  width: 25px;
+
+  @media (min-width: 769px) {
+    width: 35px;
   }
 `;
 

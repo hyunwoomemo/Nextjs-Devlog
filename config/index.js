@@ -6,3 +6,4 @@ export const LANGUAGE_DATABASE_ID = process.env.NEXT_PUBLIC_NOTION_BLOG_LANGUAGE
 export const TODO_DATABASE_ID = process.env.NEXT_PUBLIC_NOTION_TODO_DB_ID
 export const GTAG = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 export const SKILL = process.env.NEXT_PUBLIC_SKILL_DB_ID;
+export const EXPERIENCE = process.env.NEXT_PUBLIC_EXPERIENCE_DB_ID
