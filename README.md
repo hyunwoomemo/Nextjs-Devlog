@@ -1,38 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Nextjs-Devlog
 
-## Getting Started
+### nextjs와 notion API로 만든 나만의 개발 블로그
 
-First, run the development server:
+### 사용한 기술스택
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+<div style="display:flex">
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-squre&logo=JavaScript&logoColor=black">
+<img src="https://img.shields.io/badge/react-61DAFB?style=flat-squre&logo=React&logoColor=black">
+<img src="https://img.shields.io/badge/nextjs-fff?style=flat-squre&logo=Next.js&logoColor=black">
+<img src="https://img.shields.io/badge/redux-764ABC?style=flat-squre&logo=Redux&logoColor=black">
+<img src="https://img.shields.io/badge/html-E34F26?style=flat-squre&logo=HTML5&logoColor=black">
+<img src="https://img.shields.io/badge/css-1572B6?style=flat-squre&logo=CSS3&logoColor=black">
+<img src="https://img.shields.io/badge/nodejs-339933?style=flat-squre&logo=Node.js&logoColor=black">
+<img src="https://img.shields.io/badge/express-fff?style=flat-squre&logo=Express&logoColor=black">
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-squre&logo=MySQL&logoColor=white">
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat-squre&logo=Github&logoColor=white">
+<img src="https://img.shields.io/badge/Notion-000?style=flat-squre&logo=Notion&logoColor=white">
+<img src="https://img.shields.io/badge/Ubuntu-E95428?style=flat-squre&logo=Ubuntu&logoColor=white">
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### 주요 기능
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- notion에서 작성한 포스트 가져오기 (기존 md파일 작성한 것보다 아직까지는 편리함 😁)
+- post 필터 기능
+- post 검색 기능
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 서비스 페이지
+<a href="https://hyunwoomemo.vercel.app/" target="_blank"><img src="https://img.shields.io/badge/NextjsDevlog-0A0A0A?style=for-the-badge&logo=dev.to&logoColor=white"></a>
