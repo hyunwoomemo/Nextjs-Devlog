@@ -2,6 +2,9 @@
 
 ### nextjs와 notion API로 만든 나만의 개발 블로그
 
+## 서비스 페이지
+<a href="https://hyunwoomemo.vercel.app/" target="_blank"><img src="https://img.shields.io/badge/NextjsDevlog-0A0A0A?style=for-the-badge&logo=dev.to&logoColor=white"></a>
+
 ## 사용한 기술스택
 
 <div style="display:flex">
@@ -33,8 +36,3 @@
 ![image](https://user-images.githubusercontent.com/105469077/235910649-56810222-f2d8-4e68-9e70-d253b8efb5a6.png)
 ![image](https://user-images.githubusercontent.com/105469077/235910717-6a16442d-bb24-4718-bb0e-db8eff7cc3fb.png)
 ![image](https://user-images.githubusercontent.com/105469077/235910893-3e32e08a-ba79-4e7d-b827-0c59972e5733.png)
-
-
-
-## 서비스 페이지
-<a href="https://hyunwoomemo.vercel.app/" target="_blank"><img src="https://img.shields.io/badge/NextjsDevlog-0A0A0A?style=for-the-badge&logo=dev.to&logoColor=white"></a>
