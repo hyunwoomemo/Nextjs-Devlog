@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 import Animation from "./Animation";
+import Image from "next/image";
 
 const Hero = () => {
   return (
@@ -9,7 +10,12 @@ const Hero = () => {
         <Text>
           <H2>프론트엔드 개발자의 기술 블로그, 다양한 주제의 새로운 지식을 기록합니다.</H2>
           <H3>A technology blog for front-end developers that documents new knowledge on various topics.</H3>
-          {/* <MoreBtn>더 보러가기</MoreBtn> */}
+          <Visitor>
+            <img
+              alt="방문자"
+              src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fhyunwoomemo.vercel.app&count_bg=%23555555&title_bg=%0000&icon=&icon_color=%23555555&title=visitor&edge_flat=false"
+            />
+          </Visitor>
         </Text>
         <Lottie>
           <Animation />
@@ -91,6 +97,8 @@ const H3 = styled.h3`
     font-size: 10px;
   }
 `;
+
+const Visitor = styled.div``;
 
 const MoreBtn = styled.div`
   background-color: rgb(79 70 229);
