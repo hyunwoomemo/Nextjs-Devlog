@@ -31,9 +31,10 @@ const ProjectList = ({ data }) => {
         const start = project.properties.WorkPeriod?.date?.start;
         const end = project.properties.WorkPeriod?.date?.end;
         const id = project.id;
+        const readmeName = project.properties.readmeName?.rich_text[0]?.plain_text;
 
         return (
-          <Project href={`/projects/${id}`} key={project.id}>
+          <Project href={readmeName ? `/projects/${id}` : `/projects`} key={project.id}>
             <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} />
             <Wrapper>
               <Title>{title}</Title>
