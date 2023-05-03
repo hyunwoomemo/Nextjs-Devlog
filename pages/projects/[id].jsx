@@ -19,8 +19,10 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
+import fs from "fs";
+import path from "path";
 
-const ProjectItem = ({ html_text, posts, title, projectData }) => {
+const ProjectItem = ({ html_text, posts, title, projectData, projectId, readme, readmeName }) => {
   const router = useRouter();
 
   const github = projectData.results?.filter((v) => v.id === router.query.id)[0].properties.Github.rich_text[0]?.href;
@@ -66,7 +68,7 @@ const ProjectItem = ({ html_text, posts, title, projectData }) => {
       <Container>
         <Layout headerTitle={title}>
           <Base>
-            <ProjectMarkdown2Html html={html_text} />
+            <ProjectMarkdown2Html html={readme} name={readmeName}></ProjectMarkdown2Html>
             <ActionBtn onClick={(e) => handleAction(e)}>
               {!action ? (
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -123,7 +125,7 @@ const Container = styled.div`
 const Base = styled.div``;
 
 const ActionBtn = styled.div`
-  position: absolute;
+  position: fixed;
   width: 70px;
   height: 70px;
   bottom: 25px;
@@ -236,28 +238,6 @@ export async function getStaticProps({ params }) {
       page_size: 100,
     }),
   };
-  const { Client } = require("@notionhq/client");
-
-  const notion = new Client({
-    auth: TOKEN,
-    notionVersion: "2022-06-28",
-  });
-
-  const n2m = new NotionToMarkdown({ notionClient: notion });
-
-  const mdblocks = await n2m.pageToMarkdown(params.id);
-  const mdString = n2m.toMarkdownString(mdblocks);
-
-  const html_text = unified()
-    .use(markdown)
-    .use(remarkGfm)
-    .use(require("unified-remark-prismjs"), {
-      showLanguage: true, // show language tag
-      enableCopy: true,
-    })
-    .use(remark2rehype)
-    .use(html)
-    .processSync(mdString).value;
 
   const postRes = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
 
@@ -268,13 +248,20 @@ export async function getStaticProps({ params }) {
   const projectData = await projectRes.json();
 
   const title = projectData.results.filter((v) => v.id === params.id)[0].properties.Name.title[0].plain_text;
+  const readmeName = projectData.results.filter((v) => v.id === params.id)[0].properties.readmeName?.rich_text[0]?.plain_text;
+
+  const filePath = path.join(process.cwd(), `readme/${readmeName}.md`);
+  const fileContents = fs.readFileSync(filePath, "utf8");
+
+  const readme = await unified().use(markdown).use(remarkGfm).use(remark2rehype).use(html).processSync(fileContents).value;
 
   return {
     props: {
-      html_text,
       posts,
       title,
       projectData,
+      readme,
+      readmeName,
     }, // will be passed to the page component as props
   };
 }
