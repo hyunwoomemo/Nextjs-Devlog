@@ -9,6 +9,7 @@ import AboutProjectList from "@/components/about/AboutProjectList";
 import AboutExperienceList from "@/components/about/AboutExperienceList";
 import AboutEtc from "@/components/about/AboutEtc";
 import Link from "next/link";
+import DownloadButton from "@/components/about/DownloadButton";
 
 
 const about = ({ skill, projects, experience, etc }) => {
@@ -23,6 +24,8 @@ const about = ({ skill, projects, experience, etc }) => {
 
   const relativeExperience = experience.filter((v) => v.properties.선택.select.name === "relative").reverse();
   const otherExperience = experience.filter((v) => v.properties.선택.select.name === "other");
+
+  console.log(document.querySelector('#about').innerHTML)
 
 
   return (
@@ -44,8 +47,9 @@ const about = ({ skill, projects, experience, etc }) => {
           ],
         }}
       />
+      <DownloadButton content={document.querySelector('#about').innerHTML} />
       <Layout>
-        <Base>
+        <Base id="about">
           <Intro>
             <Image src="/profile.png" alt="My Image" width={100} height={100} />
             <Title>

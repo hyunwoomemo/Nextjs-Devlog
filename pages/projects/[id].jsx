@@ -250,16 +250,10 @@ export async function getStaticProps({ params }) {
   const title = projectData.results.filter((v) => v.id === params.id)[0].properties.Name.title[0].plain_text;
   const readmeName = projectData.results.filter((v) => v.id === params.id)[0].properties.readmeName?.rich_text[0]?.plain_text;
 
-  async function getReadme() {
-    if (readmeName) {
-      const filePath = path.join(process.cwd(), `readme/${readmeName}.md`);
-      const fileContents = fs.readFileSync(filePath, "utf8");
-      const readme = await unified().use(markdown).use(remarkGfm).use(remark2rehype).use(html).processSync(fileContents).value;
-      return readme;
-    }
-  }
+  const filePath = path.join(process.cwd(), `readme/${readmeName}.md`);
+  const fileContents = fs.readFileSync(filePath, "utf8");
 
-  getReadme();
+  const readme = await unified().use(markdown).use(remarkGfm).use(remark2rehype).use(html).processSync(fileContents).value;
 
   return {
     props: {
