@@ -12,6 +12,7 @@
     "log-utils": "1.0.0"
   },
   "dependencies": {
+    "@emotion/babel-plugin": "^11.10.8",
     "@emotion/cache": "^11.10.7",
     "@emotion/core": "^11.0.0",
     "@emotion/css": "^11.10.6",
