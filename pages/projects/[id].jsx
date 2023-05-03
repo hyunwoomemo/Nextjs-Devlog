@@ -22,7 +22,7 @@ import { NextSeo } from "next-seo";
 import fs from "fs";
 import path from "path";
 
-const ProjectItem = ({ html_text, posts, title, projectData, projectId, readme, readmeName }) => {
+const ProjectItem = ({ html_text, posts, title, projectData, projectId, readme }) => {
   const router = useRouter();
 
   const github = projectData.results?.filter((v) => v.id === router.query.id)[0].properties.Github.rich_text[0]?.href;
@@ -68,7 +68,7 @@ const ProjectItem = ({ html_text, posts, title, projectData, projectId, readme, 
       <Container>
         <Layout headerTitle={title}>
           <Base>
-            <ProjectMarkdown2Html html={readme} name={readmeName}></ProjectMarkdown2Html>
+            <ProjectMarkdown2Html html={readme}></ProjectMarkdown2Html>
             <ActionBtn onClick={(e) => handleAction(e)}>
               {!action ? (
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -261,7 +261,6 @@ export async function getStaticProps({ params }) {
       title,
       projectData,
       readme,
-      readmeName,
     }, // will be passed to the page component as props
   };
 }
