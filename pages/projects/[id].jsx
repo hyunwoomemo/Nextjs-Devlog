@@ -131,7 +131,7 @@ const ActionBtn = styled.div`
   bottom: 25px;
   right: 25px;
   padding: 10px;
-  z-index: 10;
+  z-index: 9;
   background-color: var(--text-color);
   color: var(--main-background);
   border-radius: 50%;
