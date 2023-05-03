@@ -1,6 +1,7 @@
 import ThemeContext from "@/context/ThemeContext";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
@@ -33,6 +34,12 @@ export default function Footer() {
             <span>Hyunwoomemo&apos;s Devlog</span>
           </Link>
           <Copyright>© 2023. hyunwoo.lee. All rights reserved</Copyright>
+          <a href="https://hits.seeyoufarm.com">
+            <img
+              alt="방문자"
+              src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fhyunwoomemo.vercel.app&count_bg=%23555555&title_bg=%0000&icon=&icon_color=%23555555&title=visitor&edge_flat=false"
+            />
+          </a>
         </Left>
         <ToggleBtn dark={currentTheme === "dark"} onClick={handleTheme}>
           {currentTheme === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
