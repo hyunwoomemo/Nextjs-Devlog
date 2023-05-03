@@ -2,18 +2,19 @@ import AboutAnimation from "@/components/about/AboutAnimation";
 import Layout from "@/components/common/Layout";
 import styled from "@emotion/styled";
 import { NextSeo } from "next-seo";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { ETC, EXPERIENCE, PROJECT_DATABASE_ID, SKILL, TOKEN } from "@/config";
 import AboutProjectList from "@/components/about/AboutProjectList";
 import AboutExperienceList from "@/components/about/AboutExperienceList";
 import AboutEtc from "@/components/about/AboutEtc";
-import Link from "next/link";
-import DownloadButton from "@/components/about/DownloadButton";
 
 
-const about = ({ skill, projects, experience, etc }) => {
+const About = ({ skill, projects, experience, etc }) => {
+
+
   const array = ['Front-end', 'Back-end', 'Database', 'Etc'];
+
   const skillMap = (category) => skill.filter((v) => v.properties.category.select.name === category).sort((a, b) => new Date(a.created_time) - new Date(b.created_time)).map((v) => {
     const contents = v.properties.이름.title[0].plain_text;
 
@@ -24,8 +25,6 @@ const about = ({ skill, projects, experience, etc }) => {
 
   const relativeExperience = experience.filter((v) => v.properties.선택.select.name === "relative").reverse();
   const otherExperience = experience.filter((v) => v.properties.선택.select.name === "other");
-
-  console.log(document.querySelector('#about').innerHTML)
 
 
   return (
@@ -47,7 +46,6 @@ const about = ({ skill, projects, experience, etc }) => {
           ],
         }}
       />
-      <DownloadButton content={document.querySelector('#about').innerHTML} />
       <Layout>
         <Base id="about">
           <Intro>
@@ -109,7 +107,7 @@ const about = ({ skill, projects, experience, etc }) => {
   );
 };
 
-export default about;
+export default About;
 
 const Base = styled.div`
   padding: 2rem;
