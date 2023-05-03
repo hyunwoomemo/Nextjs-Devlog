@@ -220,6 +220,10 @@ const UrlWrapper = styled.div`
 const UrlItem = styled(Link)`
   width: 25px;
 
+  &:first-of-type {
+    fill: var(--text-color);
+  }
+
   @media (min-width: 769px) {
     width: 35px;
   }
