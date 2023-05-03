@@ -2,10 +2,9 @@ import React from "react";
 import styled from "@emotion/styled";
 
 const ProjectMarkdown2Html = ({ html }) => {
-  const replaceHtml = html.replace("child_database", "").replace("◽ ", "");
   return (
     <>
-      <Base dangerouslySetInnerHTML={{ __html: replaceHtml }}></Base>
+      <Base dangerouslySetInnerHTML={{ __html: html }}></Base>
     </>
   );
 };
@@ -188,10 +187,29 @@ const Base = styled.div`
   strong {
   }
 
+  p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
   img {
     border-radius: 15px;
     max-width: 904px;
-    width: 100%;
+    width: 40%;
+    border: 1px solid gray;
+    padding: 10px;
+    position: relative;
+  }
+
+  img[src*="shields"] {
+    border-radius: 0;
+    max-width: 904px;
+    width: auto;
+    height: 20px;
+    border: 0;
+    padding: 0;
   }
 
   details {
