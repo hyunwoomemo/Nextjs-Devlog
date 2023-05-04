@@ -130,6 +130,10 @@ const Reset = styled.div`
   > svg {
     width: 100%;
     height: 100%;
+
+    > path {
+      stroke: var(--text-color);
+    }
   }
 
   @media (max-width: 768px) {
