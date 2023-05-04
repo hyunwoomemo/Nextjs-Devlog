@@ -14,7 +14,6 @@ export default function Home({ allPosts, posts, projects }) {
   const slicePosts = posts.slice(0, 3)
   const { search } = useContext(SearchContext);
 
-  const [speed, setSpeed] = useState(5);
 
   return (
     <>
@@ -76,7 +75,7 @@ export async function getStaticProps() {
   const allPosts = [...snipetData.results, ...postsData.results, ...projectData.results];
 
   // posts에서 project post 제외
-  const posts = postsData.results;
+  const posts = postsData.results.filter((v) => v.properties.미완료.checkbox !== true);
 
   const projects = projectData.results;
 
