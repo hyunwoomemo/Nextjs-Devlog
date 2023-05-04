@@ -80,7 +80,7 @@ const H2 = styled.h2`
 
   @media (max-width: 768px) {
     width: 60%;
-    font-size: 12px;
+    font-size: 14px;
   }
 `;
 const H3 = styled.h3`
@@ -94,7 +94,7 @@ const H3 = styled.h3`
 
   @media (max-width: 768px) {
     width: 60%;
-    font-size: 10px;
+    font-size: 12px;
   }
 `;
 
