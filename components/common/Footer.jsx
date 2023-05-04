@@ -39,7 +39,7 @@ export default function Footer() {
           {currentTheme === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
         </ToggleBtn>
         <LinkWrapper>
-          <LinkItem>
+          <LinkItem href="https://github.com/hyunwoomemo">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" id="github">
               <g fill="#181616">
                 <path
@@ -148,4 +148,4 @@ const ToggleBtn = styled.div`
   border-radius: 5px;
 `;
 
-const LinkItem = styled.div``;
+const LinkItem = styled(Link)``;
