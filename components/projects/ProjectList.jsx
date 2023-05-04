@@ -34,7 +34,7 @@ const ProjectList = ({ data }) => {
         const readmeName = project.properties.readmeName?.rich_text[0]?.plain_text;
 
         return (
-          <Project href={readmeName ? `/projects/${id}` : `/projects`} key={project.id}>
+          <Project href={`/projects/${id}`} key={project.id}>
             <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} />
             <Wrapper>
               <Title>{title}</Title>
