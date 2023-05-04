@@ -32,9 +32,7 @@
 ### 메인페이지 상단 - 캘린더
 
 ![image](https://user-images.githubusercontent.com/105469077/235883185-5ebafa60-eca8-409a-80d7-765e72e08be4.png)
-<img src="https://user-images.githubusercontent.com/105469077/235883185-5ebafa60-eca8-409a-80d7-765e72e08be4.png" width="50%" />
 
 ### 메인페이지 하단 - 캘린더
 
 ![image](https://user-images.githubusercontent.com/105469077/235883495-0c12d5ac-61c6-4e6c-adc0-0ba7d1437ca2.png)
-<img src="https://user-images.githubusercontent.com/105469077/235883495-0c12d5ac-61c6-4e6c-adc0-0ba7d1437ca2.png" width="50%"/>
