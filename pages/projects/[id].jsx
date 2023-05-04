@@ -41,6 +41,7 @@ const ProjectItem = ({ html_text, posts, title, projectData, projectId, readme }
   };
   const handlePageAction = (e) => {
     e.stopPropagation();
+    router.push("https://hyunwoomemo.vercel.app/");
   };
   const handleGitAction = (e) => {
     e.stopPropagation();
