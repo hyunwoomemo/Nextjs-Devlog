@@ -62,11 +62,11 @@ const Base = styled.div`
     &:after {
       position: absolute;
       content: "";
-      height: 30px;
+      height: 40px;
       top: 0;
 
       left: 0;
-      width: 1100px;
+      width: 100%;
       background-color: #525252;
     }
   }
