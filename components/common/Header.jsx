@@ -56,6 +56,8 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
     setIsOpen(false);
   };
 
+  console.log(scrollTop);
+
   // 활성화 탭 스타일 적용
 
   const [activeTab, setActiveTab] = useState(1);
@@ -118,14 +120,14 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   };
 
   return (
-    <Base /* hide={router.pathname === "/about"} */>
+    <Base show={scrollTop > 10}>
       <Wrapper>
         {router.pathname !== "/" ? (
           <BackIcon onClick={() => window.history.back()} filter={filterOpen}>
             <BackArrow width={20} />
           </BackIcon>
         ) : undefined}
-        {title && scrollTop > 170 ? (
+        {title ? (
           <Title onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{title}</Title>
         ) : headerTitle ? (
           <Title>
@@ -204,17 +206,18 @@ const Base = styled.header`
   margin: 0 auto;
   background-color: var(--main-background);
   z-index: 2;
+  transition: transform 0.3s;
 
   @media (max-width: 768px) {
     padding: 1rem;
   }
 
-  ${({ hide }) =>
-    hide
+  ${({ show }) =>
+    show
       ? css`
-          display: none;
+          transform: translateY(-100px);
         `
-      : undefined}
+      : css``}
 `;
 
 const BackIcon = styled.div`
