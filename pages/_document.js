@@ -1,14 +1,8 @@
-import { GA_TRACKING_ID } from '@/lib/gtag';
-import Document, { Html, Head, Main, NextScript } from 'next/document'
-import * as React from 'react'
-import { renderStatic } from '@/lib/renderer'
-import { css } from '@emotion/react';
+import { GA_TRACKING_ID } from '@/lib/gtag'
+import { Html, Head, Main, NextScript } from 'next/document'
 
-export default function AppDocument(props) {
-  const { css, ids } = React.useMemo(async () => {
-    const page = await props.renderPage()
-    return renderStatic(page.html)
-  }, [props])
+export default function Document() {
+
   return (
     <Html lang="en">
       <Head>
@@ -39,18 +33,7 @@ export default function AppDocument(props) {
         <div id="portal"></div>
         <Main />
         <NextScript />
-        {css && (
-          <style
-            data-emotion={`css ${ids.join(' ')}`}
-            dangerouslySetInnerHTML={{ __html: css }}
-          />
-        )}
       </body>
     </Html>
   )
-}
-
-AppDocument.getInitialProps = async (ctx) => {
-  const initialProps = await Document.getInitialProps(ctx)
-  return { ...initialProps }
 }
