@@ -81,18 +81,7 @@ const Search = ({ allPosts }) => {
             </svg>
           </CloseBtn>
         </Header>
-        {keyword ? (
-          <SearchList data={allPosts} keyword={keyword} />
-        ) : (
-          <RecentKeywordList>
-            최근 검색어
-            {recentKeyword.map((v, i) => (
-              <KeywordItem key={i} onClick={() => setKeyword(v)}>
-                {v}
-              </KeywordItem>
-            ))}
-          </RecentKeywordList>
-        )}
+        {keyword ? <SearchList data={allPosts} keyword={keyword} /> : undefined}
       </Base>
     </>
   );
@@ -188,8 +177,9 @@ export async function getStaticProps() {
 
   const snipetData = await snipetRes.json();
   const postsData = await postsRes.json();
+  const filterPostsData = postsData.results.filter((v) => v.properties.미완료.checkbox !== true);
   const projectData = await projectRes.json();
-  const allPosts = [...snipetData.results, ...postsData.results, ...projectData.results];
+  const allPosts = [...snipetData.results, ...filterPostsData, ...projectData.results];
 
   return {
     props: { allPosts },

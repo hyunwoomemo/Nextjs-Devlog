@@ -91,6 +91,10 @@ const SearchPostList = ({ data, keyword, parent }) => {
 
 const Container = styled.div`
   border-bottom: 1px solid gray;
+
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
 `;
 
 const PostCategory = styled.div`

@@ -7,6 +7,7 @@ import { NextSeo } from "next-seo";
 import React, { useEffect, useState } from "react";
 
 const index = ({ posts, numPages, allPosts }) => {
+  console.log(allPosts);
   return (
     <>
       <NextSeo
@@ -60,7 +61,7 @@ export async function getStaticProps() {
 
   const data = await res.json();
 
-  const allPosts = data.results;
+  const allPosts = data.results.filter((v) => v.properties.미완료.checkbox !== true);
 
   const postsPerPage = 6;
 

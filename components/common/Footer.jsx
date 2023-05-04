@@ -148,4 +148,18 @@ const ToggleBtn = styled.div`
   border-radius: 5px;
 `;
 
-const LinkItem = styled(Link)``;
+const LinkItem = styled(Link)`
+  width: 30px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    > g {
+      fill: var(--text-color);
+    }
+
+    > path {
+      fill: var(--text-color);
+    }
+  }
+`;
