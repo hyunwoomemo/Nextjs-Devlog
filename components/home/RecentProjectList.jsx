@@ -54,10 +54,7 @@ const Base = styled.div`
 const Post = styled(Link)`
   display: flex;
   flex-direction: column;
-  background-color: var(--post-item-background);
   transition: all 0.3s;
-
-  border-bottom: 1px solid var(--border-bottom-color);
 `;
 
 const DefaultImg = styled.div`
