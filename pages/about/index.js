@@ -191,11 +191,11 @@ const ItemWrapper = styled.div`
 `
 
 const SkillItemWrapper = styled.ul`
-  padding: 1rem;
+  padding: 1rem 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-bottom-color);
 
   @media (max-width:768px) {
     grid-template-columns: repeat(3, 1fr);
