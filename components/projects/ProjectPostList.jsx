@@ -67,7 +67,7 @@ const Base = styled.div`
   max-width: 1100px;
   margin: 0 auto;
   width: 100%;
-  position: absolute;
+  position: fixed;
   z-index: 9;
   width: 100vw;
   height: 90vh;
