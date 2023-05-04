@@ -71,7 +71,7 @@ const H1 = styled.h1`
   }
 `;
 const H2 = styled.h2`
-  color: var(--primary-color);
+  color: var(--text-color);
   line-height: 20px;
   word-break: keep-all;
   @media (max-width: 768px) {

@@ -34,10 +34,11 @@ const defaultStyle = css`
       --choiceCategory-bgc: #fff;
       --project-post-bgc: #ffffff;
       --border-bottom-color: rgba(0, 0, 0, 0.2);
+      --post-bgc: #f4f4f4;
     }
     body[data-theme="dark"] {
       --primary-color: #8498ab;
-      --text-color: #f9f9f9;
+      --text-color: #ababab;
       --main-background: #1b1b1b;
       --footer-background: #2a2a2a;
       --dim-background: rgba(255, 255, 255, 0.2);
@@ -54,6 +55,7 @@ const defaultStyle = css`
       --choiceCategory-bgc: #1d2125;
       --project-post-bgc: #262626;
       --border-bottom-color: rgba(255, 255, 255, 0.2);
+      --post-bgc: #2b2b2b95;
     }
   }
 
@@ -201,7 +203,7 @@ const defaultStyle = css`
   }
 
   body {
-    font-family: /* "TheJamsil5Bold" */ "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-family: "Arial Narrow", Arial, sans-serif;
     background-color: var(--main-background);
     -webkit-font-smoothing: antialiased;
     overflow-x: auto;

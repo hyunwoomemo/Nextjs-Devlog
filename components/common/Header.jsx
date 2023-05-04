@@ -382,34 +382,6 @@ const SearchBtn = styled(Link)`
       : css``}
 `;
 
-const FilterResetBtn = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 30px;
-  height: 30px;
-  margin-left: 10px;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  path {
-    stroke: var(--text-color);
-  }
-
-  ${({ show }) =>
-    show
-      ? css`
-          display: block;
-        `
-      : css`
-          display: none;
-        `}
-`;
-
 const FilterSaveBtn = styled.div`
   display: flex;
   justify-content: center;
@@ -433,6 +405,7 @@ const ModalBody = styled.ul`
   flex-direction: column;
   gap: 2rem;
   color: slategray;
+  padding: 10px;
 
   ${({ active }) =>
     active
