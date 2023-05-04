@@ -39,7 +39,7 @@ const RecentPost = ({ data, projects }) => {
     <>
       <Base>
         <Header>
-          <Title>{slideIdx === 0 ? "Recent Post" : "Recent Project"}</Title>
+          <Title>{slideIdx === 0 ? "Post" : "Project"}</Title>
           <ReadMore href={slideIdx === 0 ? "/blog/posts" : "/projects"}>read more</ReadMore>
 
           <ArrowWrapper>
