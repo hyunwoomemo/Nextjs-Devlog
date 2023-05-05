@@ -22,7 +22,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import SeriesInPosts from "@/components/blog/SeriesInPosts";
 
-const PostItem = ({ html_text, posts, toc, seriesPosts, seriesName }) => {
+const PostItem = ({ html_text, posts, toc }) => {
   const router = useRouter();
   const filterPosts = posts.filter((v) => v.id === router.query.id);
   const title = filterPosts[0].properties.Name.title[0].plain_text;
@@ -45,7 +45,14 @@ const PostItem = ({ html_text, posts, toc, seriesPosts, seriesName }) => {
     };
   }, [setOffset]);
 
-  console.log(scrollTop, offset);
+  // 해당 컨텐츠
+  const selectPosts = posts.filter((v) => v.id === params.id);
+
+  // 해당 컨텐츠의 시리즈 네임
+  const seriesName = selectPosts[0].properties?.시리즈?.select?.name !== undefined ? selectPosts[0].properties?.시리즈?.select?.name : null;
+
+  // 가져온 시리즈의 포스트들
+  const seriesPosts = allPosts.results.filter((v) => v.properties?.시리즈?.select?.name === seriesName);
 
   return (
     <>
@@ -192,18 +199,9 @@ export async function getStaticProps({ params }) {
 
   const allPosts = await res.json();
 
-  // 해당 컨텐츠
-  const selectPosts = allPosts.results.filter((v) => v.id === params.id);
-
-  // 해당 컨텐츠의 시리즈 네임
-  const seriesName = selectPosts[0].properties?.시리즈?.select?.name !== undefined ? selectPosts[0].properties?.시리즈?.select?.name : null;
-
-  // 가져온 시리즈의 포스트들
-  const seriesPosts = allPosts.results.filter((v) => v.properties?.시리즈?.select?.name === seriesName);
-
   const posts = allPosts.results;
 
   return {
-    props: { html_text, posts, toc, seriesName, seriesPosts }, // will be passed to the page component as props
+    props: { html_text, posts, toc }, // will be passed to the page component as props
   };
 }
