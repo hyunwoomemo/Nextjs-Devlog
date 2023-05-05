@@ -12,6 +12,8 @@ import SeriesPostsList from "@/components/blog/SeriesPostsList";
 const SeriesItem = ({ selectPosts }) => {
   const title = selectPosts[0].properties.시리즈?.select?.name;
 
+  const sortPosts = selectPosts.sort((a, b) => new Date(a.created_time) - new Date(b.created_time));
+
   return (
     <>
       <NextSeo
@@ -32,7 +34,7 @@ const SeriesItem = ({ selectPosts }) => {
         }}
       />
       <Layout headerTitle={title}>
-        <SeriesPostsList posts={selectPosts}></SeriesPostsList>
+        <SeriesPostsList posts={sortPosts}></SeriesPostsList>
       </Layout>
     </>
   );

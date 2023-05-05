@@ -115,7 +115,7 @@ const SeriesItem = styled(Link)`
   ${({ current }) =>
     current
       ? css`
-          color: yellowgreen;
+          color: tomato;
         `
       : css``}
 `;
