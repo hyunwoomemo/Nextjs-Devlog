@@ -20,15 +20,18 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import SeriesList from "@/components/blog/SeriesList";
 
-const PostItem = ({ html_text, posts, toc }) => {
+const PostItem = ({ html_text, posts, toc, seriesName, seriesPosts }) => {
+  console.log(seriesName, seriesPosts);
   const router = useRouter();
   const filterPosts = posts.filter((v) => v.id === router.query.id);
   const title = filterPosts[0].properties.Name.title[0].plain_text;
   const img = filterPosts[0].cover?.file?.url || filterPosts[0].cover?.external.url;
-  console.log(img);
   const [scrollTop, setScrollTop] = useState(0);
   const [offset, setOffset] = useState(0);
+
+  console.log(posts);
 
   const handleScroll = () => {
     setScrollTop(document.documentElement.scrollTop);
@@ -43,7 +46,7 @@ const PostItem = ({ html_text, posts, toc }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, [setOffset]);
 
   console.log(scrollTop, offset);
 
@@ -68,6 +71,7 @@ const PostItem = ({ html_text, posts, toc }) => {
       />
       <Layout data={posts}>
         <PostHeader data={posts}></PostHeader>
+        {seriesName ? <SeriesList seriesName={seriesName} seriesPosts={seriesPosts}></SeriesList> : undefined}
         {toc.json.length > 0 ? <Toc toc={toc}></Toc> : undefined}
         <Markdown2Html html={html_text} />
         <TopBtn active={scrollTop > offset * 0.3} onClick={() => scrollTo({ top: 0, behavior: "smooth" })}>
@@ -197,9 +201,18 @@ export async function getStaticProps({ params }) {
 
   const allPosts = await res.json();
 
+  // 해당 컨텐츠
+  const selectPosts = allPosts.results.filter((v) => v.id === params.id);
+
+  // 해당 컨텐츠의 시리즈 네임
+  const seriesName = selectPosts[0].properties?.시리즈?.select?.name;
+
+  // 가져온 시리즈의 포스트들
+  const seriesPosts = allPosts.results.filter((v) => v.properties?.시리즈?.select?.name === seriesName);
+
   const posts = allPosts.results;
 
   return {
-    props: { html_text, posts, toc }, // will be passed to the page component as props
+    props: { html_text, posts, toc, seriesName, seriesPosts }, // will be passed to the page component as props
   };
 }

@@ -16,6 +16,7 @@ const PostHeader = ({ data }) => {
   const imgSrc = filterData[0].cover?.file?.url || filterData[0].cover?.external.url;
   const tags = filterData[0].properties.tags?.multi_select;
   const createdDate = filterData[0]?.created_time;
+  const series = filterData[0].properties.시리즈?.select?.name;
 
   return (
     <Base>
@@ -23,6 +24,7 @@ const PostHeader = ({ data }) => {
         {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="150" height="100" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
         <Contents>
           <Category>{category}</Category>
+          {series ? <Series>{series}</Series> : undefined}
           <Title>{title}</Title>
           <Tags>
             {tags?.map((tag) => {
@@ -103,6 +105,8 @@ const Contents = styled.div`
     padding: 1rem;
   }
 `;
+
+const Series = styled.div``;
 
 const Title = styled.h1`
   font-size: 32px;

@@ -98,6 +98,7 @@ const PostList = ({ allPosts }) => {
           const tags = post.properties.tags.multi_select;
           const id = post.id;
           const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
+          const series = post.properties.시리즈?.select?.name;
 
           return (
             <Post href={`/blog/posts/${id}`} key={post.id}>
@@ -248,6 +249,13 @@ const Wrapper = styled.div`
 const Category = styled.p`
   color: gray;
 
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
+const Series = styled.div`
+  line-height: 18px;
   @media (max-width: 768px) {
     font-size: 12px;
   }
