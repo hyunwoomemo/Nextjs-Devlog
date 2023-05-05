@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
+import Link from "next/link";
 
 const SeriesItem = ({ series }) => {
   const seriesList = series.map((v) => v.properties.시리즈?.select?.name).filter((v1, i, arr) => arr.indexOf(v1) === i);
@@ -20,7 +21,7 @@ const SeriesItem = ({ series }) => {
           .sort((a, b) => new Date(b) - new Date(a))[0];
         console.log(lastUpdateDate);
         return (
-          <Item key={i}>
+          <Item key={i} href={`/blog/series/${v}`}>
             <Title>{v}</Title>
             <ItemFooter>
               <Length>{length}개의 포스트</Length>
@@ -45,7 +46,7 @@ const Base = styled.div`
   flex-wrap: wrap;
 `;
 
-const Item = styled.div`
+const Item = styled(Link)`
   display: flex;
   flex-direction: column;
   gap: 1rem;

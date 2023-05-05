@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-const SeriesList = ({ seriesPosts, seriesName }) => {
+const SeriesInPosts = ({ seriesPosts, seriesName }) => {
   console.log(seriesPosts, seriesName);
   const [show, setShow] = useState(false);
   const router = useRouter();
@@ -117,4 +117,4 @@ const SeriesItem = styled(Link)`
   line-height: 18px;
 `;
 
-export default SeriesList;
+export default SeriesInPosts;

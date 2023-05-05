@@ -8,7 +8,7 @@ const index = ({ series }) => {
   return (
     <>
       <NextSeo
-        title="Posts | Hyunwoomemo"
+        title="Series | Hyunwoomemo"
         description="프론트엔드 개발자의 기술 블로그, 다양한 주제의 글로 새로운 지식을 기록합니다."
         openGraph={{
           type: "website",

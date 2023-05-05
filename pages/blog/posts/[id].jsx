@@ -20,10 +20,10 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import SeriesList from "@/components/blog/SeriesList";
+import SeriesInPosts from "@/components/blog/SeriesInPosts";
 
-const PostItem = ({ html_text, posts, toc, seriesName, seriesPosts }) => {
-  console.log(seriesName, seriesPosts);
+const PostItem = ({ html_text, posts, toc, seriesPosts, seriesName }) => {
+  console.log(seriesPosts);
   const router = useRouter();
   const filterPosts = posts.filter((v) => v.id === router.query.id);
   const title = filterPosts[0].properties.Name.title[0].plain_text;
@@ -71,7 +71,7 @@ const PostItem = ({ html_text, posts, toc, seriesName, seriesPosts }) => {
       />
       <Layout data={posts}>
         <PostHeader data={posts}></PostHeader>
-        {seriesName ? <SeriesList seriesName={seriesName} seriesPosts={seriesPosts}></SeriesList> : undefined}
+        {seriesName ? <SeriesInPosts seriesName={seriesName} seriesPosts={seriesPosts}></SeriesInPosts> : undefined}
         {toc.json.length > 0 ? <Toc toc={toc}></Toc> : undefined}
         <Markdown2Html html={html_text} />
         <TopBtn active={scrollTop > offset * 0.3} onClick={() => scrollTo({ top: 0, behavior: "smooth" })}>
@@ -212,7 +212,17 @@ export async function getStaticProps({ params }) {
 
   const posts = allPosts.results;
 
+  const myObj = { html_text, posts, toc, seriesName, seriesPosts };
+
+  const serializedObj = JSON.stringify(myObj, (key, value) => {
+    if (value === undefined) {
+      return null;
+    }
+
+    return value;
+  });
+
   return {
-    props: { html_text, posts, toc, seriesName, seriesPosts }, // will be passed to the page component as props
+    props: serializedObj, // will be passed to the page component as props
   };
 }

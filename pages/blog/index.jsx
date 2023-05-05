@@ -28,6 +28,7 @@ const index = () => {
         <Wrapper>
           <MenuItem href="/blog/posts">Posts</MenuItem>
           <MenuItem href="blog/codesnipet">Code Snipet</MenuItem>
+          <MenuItem href="blog/series">Series</MenuItem>
         </Wrapper>
       </Layout>
     </>
