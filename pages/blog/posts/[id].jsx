@@ -46,7 +46,7 @@ const PostItem = ({ html_text, posts, toc }) => {
   }, [setOffset]);
 
   // 해당 컨텐츠의 시리즈 네임
-  const seriesName = filterPosts[0].properties?.시리즈?.select?.name !== undefined ? selectPosts[0].properties?.시리즈?.select?.name : null;
+  const seriesName = filterPosts[0].properties?.시리즈?.select?.name !== undefined ? filterPosts[0].properties?.시리즈?.select?.name : null;
 
   // 가져온 시리즈의 포스트들
   const seriesPosts = posts.filter((v) => v.properties?.시리즈?.select?.name === seriesName);
