@@ -59,7 +59,6 @@ export default function App({ Component, pageProps }) {
           <LoadingContext.Provider value={{ loading }}>
             <SearchContext.Provider value={{ search, setSearch }}>
               <GlobalStyle />
-              {GlobalStyle}
               <Component {...pageProps} />
               {loading ? <Loading /> : undefined}
             </SearchContext.Provider>
