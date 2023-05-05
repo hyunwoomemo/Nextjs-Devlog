@@ -205,24 +205,14 @@ export async function getStaticProps({ params }) {
   const selectPosts = allPosts.results.filter((v) => v.id === params.id);
 
   // 해당 컨텐츠의 시리즈 네임
-  const seriesName = selectPosts[0].properties?.시리즈?.select?.name;
+  const seriesName = selectPosts[0].properties?.시리즈?.select?.name !== undefined ? selectPosts[0].properties?.시리즈?.select?.name : null;
 
   // 가져온 시리즈의 포스트들
   const seriesPosts = allPosts.results.filter((v) => v.properties?.시리즈?.select?.name === seriesName);
 
   const posts = allPosts.results;
 
-  const myObj = { html_text, posts, toc, seriesName, seriesPosts };
-
-  const serializedObj = JSON.stringify(myObj, (key, value) => {
-    if (value === undefined) {
-      return null;
-    }
-
-    return value;
-  });
-
   return {
-    props: serializedObj, // will be passed to the page component as props
+    props: { html_text, posts, toc, seriesName, seriesPosts }, // will be passed to the page component as props
   };
 }
