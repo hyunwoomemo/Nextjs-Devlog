@@ -6,6 +6,7 @@ import React, { useState } from "react";
 
 const SeriesInPosts = ({ seriesPosts, seriesName }) => {
   const sortPosts = seriesPosts.sort((a, b) => new Date(a.created_time) - new Date(b.created_time));
+  console.log(sortPosts);
   const [show, setShow] = useState(false);
   const router = useRouter();
 
@@ -110,6 +111,13 @@ const SeriesItem = styled(Link)`
   }
 
   line-height: 18px;
+
+  ${({ current }) =>
+    current
+      ? css`
+          color: yellowgreen;
+        `
+      : css``}
 `;
 
 export default SeriesInPosts;

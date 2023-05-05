@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import React, { useRef } from "react";
 import SeriesInPosts from "./SeriesInPosts";
 
-const PostHeader = ({ data, seriesName, seriesPosts }) => {
+const PostHeader = ({ data }) => {
   const router = useRouter();
   const filterData = data?.filter((v) => v.id === router.query.id);
 

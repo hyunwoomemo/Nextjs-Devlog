@@ -27,16 +27,16 @@ const ProjectItem = ({ html_text, posts, title, projectData, projectId, readme }
 
   const github = projectData.results?.filter((v) => v.id === router.query.id)[0].properties.Github.rich_text[0]?.href;
 
-  const [action, setAction] = useState(false);
+  const [showAction, setShowAction] = useState(false);
   const [showPost, setShowPost] = useState(false);
 
   const handleAction = (e) => {
-    setAction(!action);
+    setShowAction(!showAction);
   };
 
   const handlePostAction = (e) => {
     e.stopPropagation();
-    setAction(false);
+    setShowAction(false);
     setShowPost(true);
   };
   const handlePageAction = (e) => {
@@ -71,27 +71,27 @@ const ProjectItem = ({ html_text, posts, title, projectData, projectId, readme }
           <Base>
             <ProjectMarkdown2Html html={readme}></ProjectMarkdown2Html>
             <ActionBtn onClick={(e) => handleAction(e)}>
-              {!action ? (
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+              {!showAction ? (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
               ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               )}
-              <ActionItem action={action} onClick={handlePostAction}>
+              <ActionItem showAction={showAction} onClick={handlePostAction}>
                 포스트
               </ActionItem>
-              <ActionItem action={action} onClick={handlePageAction}>
+              <ActionItem showAction={showAction} onClick={handlePageAction}>
                 서비스
                 <br /> 페이지
               </ActionItem>
-              <ActionItem action={action} onClick={handleGitAction}>
+              <ActionItem showAction={showAction} onClick={handleGitAction}>
                 {github ? (
                   <Link href={github} target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="github">
@@ -172,18 +172,18 @@ const ActionItem = styled.div`
   }
 
   &:first-of-type {
-    transform: ${({ action }) => (action ? "translate(-50%, -200%) scale(1)" : undefined)};
-    opacity: ${({ action }) => (action ? "1" : "0")};
+    transform: ${({ showAction }) => (showAction ? "translate(-50%, -200%) scale(1)" : undefined)};
+    opacity: ${({ showAction }) => (showAction ? "1" : "0")};
   }
 
   &:nth-of-type(2) {
-    transform: ${({ action }) => (action ? "translate(-160%, -300%) scale(1)" : undefined)};
-    opacity: ${({ action }) => (action ? "1" : "0")};
+    transform: ${({ showAction }) => (showAction ? "translate(-160%, -300%) scale(1)" : undefined)};
+    opacity: ${({ showAction }) => (showAction ? "1" : "0")};
   }
 
   &:last-of-type {
-    transform: ${({ action }) => (action ? "translate(-200%, -100%) scale(1)" : undefined)};
-    opacity: ${({ action }) => (action ? "1" : "0")};
+    transform: ${({ showAction }) => (showAction ? "translate(-200%, -100%) scale(1)" : undefined)};
+    opacity: ${({ showAction }) => (showAction ? "1" : "0")};
     padding: 0;
     svg {
       width: 100%;

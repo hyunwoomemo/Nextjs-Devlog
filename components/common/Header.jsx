@@ -135,7 +135,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
               <>
                 {`Posts (${filterCount.length})`}
                 <FilterIcon onClick={handleFilter} filter={!(router.pathname === "/blog/posts" && !router.query.category) && (filterOpen || selectedCategory || selectedTag)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -161,7 +161,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
           <Link href="/about">ABOUT</Link>
         </LinkWrapper>
         <Hambuger onClick={() => setIsOpen(true)} filterOpen={filterOpen}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" classNameName="w-6 h-6">
             <path
               fillRule="evenodd"
               d="M3 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 5.25zm0 4.5A.75.75 0 013.75 9h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 9.75zm0 4.5a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75zm0 4.5a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
@@ -170,12 +170,12 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
           </svg>
         </Hambuger>
         <SearchBtn href="/search" filterOpen={filterOpen}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </SearchBtn>
         <FilterSaveBtn show={filterOpen} onClick={handleFilterSave}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </FilterSaveBtn>

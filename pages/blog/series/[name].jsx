@@ -38,37 +38,8 @@ const SeriesItem = ({ selectPosts }) => {
   );
 };
 
-const TopBtn = styled.div`
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  bottom: 15px;
-  right: 15px;
-  width: 40px;
-  border-radius: 50%;
-  padding: 10px;
-  background-color: var(--text-color);
-  color: var(--main-background);
-  transition: all 0.3;
-  svg {
-    stroke: var(--main-background);
-  }
-
-  ${({ active }) =>
-    active
-      ? css`
-          opacity: 1;
-          pointer-events: all;
-        `
-      : css`
-          opacity: 0;
-          pointer-events: none;
-        `}
-`;
-
 export default SeriesItem;
+
 export async function getStaticPaths() {
   const options = {
     method: "POST",
