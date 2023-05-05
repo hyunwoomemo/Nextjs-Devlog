@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 const SeriesInPosts = ({ seriesPosts, seriesName }) => {
-  console.log(seriesPosts, seriesName);
+  const sortPosts = seriesPosts.sort((a, b) => new Date(a.created_time) - new Date(b.created_time));
   const [show, setShow] = useState(false);
   const router = useRouter();
 
@@ -19,7 +19,7 @@ const SeriesInPosts = ({ seriesPosts, seriesName }) => {
           </AccordionBtn>
         </Header>
         <Wrapper show={show}>
-          {seriesPosts.map((v, i) => {
+          {sortPosts.map((v, i) => {
             return (
               <SeriesItem href={`/blog/posts/${v.id}`} key={v.id} data-order={`${i + 1}. `} current={v.id === router.query.id}>
                 {v.properties.Name?.title[0]?.plain_text}
