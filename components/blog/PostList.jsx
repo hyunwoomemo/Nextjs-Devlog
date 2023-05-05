@@ -104,10 +104,8 @@ const PostList = ({ allPosts }) => {
             <Post href={`/blog/posts/${id}`} key={post.id}>
               {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
               <Wrapper>
-                <Category>{category}</Category>
                 <Title>{title}</Title>
-                <Summary>{summary}</Summary>
-                <CreatedDate>{createdDate}</CreatedDate>
+                <Category>{category}</Category>
                 <Tags>
                   {tags.map((tag) => {
                     let background;
@@ -124,6 +122,8 @@ const PostList = ({ allPosts }) => {
                     );
                   })}
                 </Tags>
+                <Summary>{summary}</Summary>
+                <CreatedDate>{createdDate}</CreatedDate>
               </Wrapper>
             </Post>
           );
@@ -165,7 +165,7 @@ const FilterTagItem = styled.div`
 
 const Base = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   padding: 2rem;
   gap: 2rem;
 

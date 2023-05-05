@@ -89,7 +89,6 @@ const SeriesPostsList = ({ posts }) => {
         return (
           <Post href={`/blog/posts/${id}`} key={post.id}>
             <Wrapper>
-              <Category>{category}</Category>
               <Title data-order={`${i + 1}. `}>{title}</Title>
               <Summary>{summary}</Summary>
               <CreatedDate>{createdDate}</CreatedDate>

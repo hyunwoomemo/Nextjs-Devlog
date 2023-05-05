@@ -5,8 +5,9 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef } from "react";
+import SeriesInPosts from "./SeriesInPosts";
 
-const PostHeader = ({ data }) => {
+const PostHeader = ({ data, seriesName, seriesPosts }) => {
   const router = useRouter();
   const filterData = data?.filter((v) => v.id === router.query.id);
 
@@ -21,11 +22,9 @@ const PostHeader = ({ data }) => {
   return (
     <Base>
       <Wrapper>
-        {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="150" height="100" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
         <Contents>
-          <Category>{category}</Category>
-          {series ? <Series>{series}</Series> : undefined}
           <Title>{title}</Title>
+          <Category>{category}</Category>
           <Tags>
             {tags?.map((tag) => {
               let background;
@@ -51,9 +50,9 @@ const PostHeader = ({ data }) => {
 };
 
 const Base = styled.div`
-  background-color: var(--project-item-background);
   margin: 2rem 0;
   border-radius: 5px;
+  border-bottom: 1px solid var(--border-bottom-color);
 `;
 
 const Wrapper = styled.div`

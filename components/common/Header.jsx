@@ -120,14 +120,14 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   };
 
   return (
-    <Base show={scrollTop > 10}>
+    <Base>
       <Wrapper>
         {router.pathname !== "/" ? (
           <BackIcon onClick={() => window.history.back()} filter={filterOpen}>
             <BackArrow width={20} />
           </BackIcon>
         ) : undefined}
-        {title ? (
+        {title && scrollTop > 50 ? (
           <Title onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{title}</Title>
         ) : headerTitle ? (
           <Title>

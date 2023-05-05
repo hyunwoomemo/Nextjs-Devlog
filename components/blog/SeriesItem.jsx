@@ -22,11 +22,20 @@ const SeriesItem = ({ series }) => {
         console.log(lastUpdateDate);
         return (
           <Item key={i} href={`/blog/series/${v}`}>
-            <Title>{v}</Title>
-            <ItemFooter>
-              <Length>{length}개의 포스트</Length>
-              <Update>마지막 업데이트: {dayjs(new Date(lastUpdateDate)).format("YYYY-MM-DD")}</Update>
-            </ItemFooter>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+              />
+            </svg>
+            <Contents>
+              <Title>{v}</Title>
+              <ItemFooter>
+                <Length>{length}개의 포스트</Length>
+                <Update>마지막 업데이트: {dayjs(new Date(lastUpdateDate)).format("YYYY-MM-DD")}</Update>
+              </ItemFooter>
+            </Contents>
           </Item>
         );
       })}
@@ -48,7 +57,6 @@ const Base = styled.div`
 
 const Item = styled(Link)`
   display: flex;
-  flex-direction: column;
   gap: 1rem;
   padding: 1rem;
   background-color: var(--toc-bgc);
@@ -58,6 +66,17 @@ const Item = styled(Link)`
   @media (min-width: 769px) {
     padding: 2rem;
   }
+
+  > svg {
+    width: 50px;
+  }
+`;
+
+const Contents = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const Title = styled.h1`
@@ -70,8 +89,7 @@ const Title = styled.h1`
 
 const ItemFooter = styled.div`
   display: flex;
-  justify-content: space-between;
-
+  gap: 1rem;
   font-size: 14px;
 
   @media (min-width: 769px) {

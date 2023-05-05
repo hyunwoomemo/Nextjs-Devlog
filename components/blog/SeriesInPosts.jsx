@@ -34,27 +34,21 @@ const SeriesInPosts = ({ seriesPosts, seriesName }) => {
 
 const Base = styled.div`
   transition: height 0.3s;
-  background-color: var(--toc-bgc);
   border-radius: 5px;
-
-  padding: 2rem;
-  @media (max-width: 768px) {
-    padding: 1rem;
-  }
 
   ${({ show }) =>
     show
       ? css``
       : css`
-          height: 100px;
+          height: 70px;
         `}
 `;
 
 const Container = styled.div`
-  padding: 2rem;
+  padding: 1rem;
 
-  @media (max-width: 768px) {
-    padding: 1rem;
+  @media (min-width: 769px) {
+    padding: 2rem;
   }
 `;
 

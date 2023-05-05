@@ -28,11 +28,9 @@ const CodeSnipetList = ({ data, keyword }) => {
             return (
               <Post href={`/blog/codesnipet/${id}`} key={post.id}>
                 <Wrapper>
-                  <Category>{category}</Category>
-
                   <Title>{title}</Title>
                   <Summary>{summary}</Summary>
-                  <CreatedDate>{createdDate}</CreatedDate>
+                  <Category>{category}</Category>
                   <Tags>
                     {tags?.map((tag) => {
                       let background;
@@ -49,6 +47,7 @@ const CodeSnipetList = ({ data, keyword }) => {
                       );
                     })}
                   </Tags>
+                  <CreatedDate>{createdDate}</CreatedDate>
                 </Wrapper>
               </Post>
             );

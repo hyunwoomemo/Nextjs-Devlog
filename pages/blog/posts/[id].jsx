@@ -23,7 +23,7 @@ import { css } from "@emotion/react";
 import SeriesInPosts from "@/components/blog/SeriesInPosts";
 
 const PostItem = ({ html_text, posts, toc, seriesPosts, seriesName }) => {
-  console.log(seriesPosts);
+  console.log(html_text);
   const router = useRouter();
   const filterPosts = posts.filter((v) => v.id === router.query.id);
   const title = filterPosts[0].properties.Name.title[0].plain_text;
