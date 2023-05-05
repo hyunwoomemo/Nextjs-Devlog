@@ -23,6 +23,15 @@ const nextConfig = {
   siteUrl: "https://hyunwoomemo.vercel.app",
   generateRobotsTxt: true,
   sitemapSize: 7000,
+  async redirects() {
+    return [
+      {
+        source: '/blog',
+        destination: '/blog/posts',
+        permanent: false
+      }
+    ]
+  }
 }
 
 module.exports = nextConfig

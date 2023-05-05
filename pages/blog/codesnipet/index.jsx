@@ -6,6 +6,7 @@ import styled from "@emotion/styled";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
 import React, { useState } from "react";
+import Tab from "@/components/blog/Tab";
 
 const Home = ({ posts }) => {
   const [keyword, setKeyword] = useState("");
@@ -38,6 +39,7 @@ const Home = ({ posts }) => {
         }}
       />
       <Layout>
+        <Tab />
         <Base>
           <Title>나의 코드 조각들</Title>
           <ImageWrapper active={keywordLength.length > 0 && keyword}>

@@ -9,6 +9,7 @@ import PostPagination from "./PostPagination";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { CountFilterData, MakeFilterData } from "@/slices/FilterSlice";
+import Tab from "./Tab";
 
 const PostList = ({ allPosts }) => {
   console.log(allPosts);
@@ -77,6 +78,7 @@ const PostList = ({ allPosts }) => {
   const numPages = Math.ceil(allPostsFilter.length / postsPerPage);
   return (
     <>
+      <Tab />
       <FilterDisplay>
         {selectedCategory ? <FilterCategoryItem>{selectedCategory}</FilterCategoryItem> : undefined}
         {selectedTag ? (

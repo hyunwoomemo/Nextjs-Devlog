@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import Link from "next/link";
+import Tab from "./Tab";
 
 const SeriesItem = ({ series }) => {
   const seriesList = series.map((v) => v.properties.시리즈?.select?.name).filter((v1, i, arr) => arr.indexOf(v1) === i);
@@ -10,26 +11,29 @@ const SeriesItem = ({ series }) => {
   }, {});
 
   return (
-    <Base>
-      {seriesList.map((v, i) => {
-        const length = arr[v];
-        const lastUpdateDate = series
-          .filter((v1) => v1.properties.시리즈?.select?.name === v)
-          .map((v2) => v2.last_edited_time)
-          .sort((a, b) => new Date(b) - new Date(a))[0];
-        return (
-          <Item key={i} href={`/blog/series/${v}`}>
-            <Contents>
-              <Title>{v}</Title>
-              <ItemFooter>
-                <Length>{length}개의 포스트</Length>
-                <Update>마지막 업데이트: {dayjs(new Date(lastUpdateDate)).format("YYYY-MM-DD")}</Update>
-              </ItemFooter>
-            </Contents>
-          </Item>
-        );
-      })}
-    </Base>
+    <>
+      <Tab />
+      <Base>
+        {seriesList.map((v, i) => {
+          const length = arr[v];
+          const lastUpdateDate = series
+            .filter((v1) => v1.properties.시리즈?.select?.name === v)
+            .map((v2) => v2.last_edited_time)
+            .sort((a, b) => new Date(b) - new Date(a))[0];
+          return (
+            <Item key={i} href={`/blog/series/${v}`}>
+              <Contents>
+                <Title>{v}</Title>
+                <ItemFooter>
+                  <Length>{length}개의 포스트</Length>
+                  <Update>마지막 업데이트: {dayjs(new Date(lastUpdateDate)).format("YYYY-MM-DD")}</Update>
+                </ItemFooter>
+              </Contents>
+            </Item>
+          );
+        })}
+      </Base>
+    </>
   );
 };
 

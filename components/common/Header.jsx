@@ -156,7 +156,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
         {router.pathname.indexOf("blog/posts") > -1 ? <Filter filter={filterOpen} posts={allPosts} /> : undefined}
         <LinkWrapper active={activeTab} filterOpen={filterOpen}>
           <Link href="/">HOME</Link>
-          <Link href="/blog">BLOG</Link>
+          <Link href="/blog/posts">BLOG</Link>
           <Link href="/projects">PROJECT</Link>
           <Link href="/about">ABOUT</Link>
         </LinkWrapper>
@@ -183,7 +183,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
       <Modal isOpen={isOpen} onClose={handleClose} position="right">
         <ModalBody active={activeTab}>
           <Link href="/">HOME</Link>
-          <Link href="/blog">BLOG</Link>
+          <Link href="/blog/posts">BLOG</Link>
           <Link href="/projects">PROJECT</Link>
           <Link href="/about">ABOUT</Link>
           <ToggleBtn dark={currentTheme === "dark"} onClick={handleTheme}>
