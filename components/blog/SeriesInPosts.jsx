@@ -76,6 +76,7 @@ const AccordionBtn = styled.div`
   padding: 1rem 0;
   font-size: 14px;
   text-decoration: underline;
+  cursor: pointer;
 
   @media (min-width: 769px) {
     font-size: 16px;
