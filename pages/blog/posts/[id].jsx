@@ -46,7 +46,7 @@ const PostItem = ({ html_text, posts, toc }) => {
   }, [setOffset]);
 
   // 해당 컨텐츠
-  const selectPosts = posts.filter((v) => v.id === params.id);
+  const selectPosts = posts.filter((v) => v.id === router.query.id);
 
   // 해당 컨텐츠의 시리즈 네임
   const seriesName = selectPosts[0].properties?.시리즈?.select?.name !== undefined ? selectPosts[0].properties?.시리즈?.select?.name : null;
