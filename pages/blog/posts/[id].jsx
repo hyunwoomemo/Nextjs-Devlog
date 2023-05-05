@@ -23,15 +23,12 @@ import { css } from "@emotion/react";
 import SeriesInPosts from "@/components/blog/SeriesInPosts";
 
 const PostItem = ({ html_text, posts, toc, seriesPosts, seriesName }) => {
-  console.log(html_text);
   const router = useRouter();
   const filterPosts = posts.filter((v) => v.id === router.query.id);
   const title = filterPosts[0].properties.Name.title[0].plain_text;
   const img = filterPosts[0].cover?.file?.url || filterPosts[0].cover?.external.url;
   const [scrollTop, setScrollTop] = useState(0);
   const [offset, setOffset] = useState(0);
-
-  console.log(posts);
 
   const handleScroll = () => {
     setScrollTop(document.documentElement.scrollTop);
@@ -125,12 +122,6 @@ export async function getStaticPaths() {
       Authorization: `Bearer ${TOKEN}`,
     },
     body: JSON.stringify({
-      sorts: [
-        {
-          property: "createdDate",
-          direction: "descending",
-        },
-      ],
       page_size: 100,
     }),
   };
