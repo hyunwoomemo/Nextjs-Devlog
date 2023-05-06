@@ -87,7 +87,11 @@ const Base = styled.div`
   h3 {
     font-weight: 800;
     margin-bottom: 30px;
-    text-shadow: 1px 1px 1px #b2b2b2;
+  }
+
+  h1 {
+    border-bottom: 3px solid var(--primary-color);
+    padding: 1rem 0;
   }
 
   * + h1,
