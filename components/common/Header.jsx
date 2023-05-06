@@ -133,7 +133,8 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
           <Title>
             {headerTitle === "Posts" ? (
               <>
-                {`Posts (${filterCount.length})`}
+                Posts
+                <PostsLength>{filterCount.length}</PostsLength>
                 <FilterIcon onClick={handleFilter} filter={!(router.pathname === "/blog/posts" && !router.query.category) && (filterOpen || selectedCategory || selectedTag)}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                     <path
@@ -263,10 +264,24 @@ const Title = styled.h1`
   display: flex;
   align-items: center;
   gap: 1rem;
+  font-size: 20px;
 
   @media (max-width: 768px) {
-    font-size: 14px;
+    font-size: 18px;
   }
+`;
+
+const PostsLength = styled.span`
+  color: #fff;
+  border-radius: 50%;
+  padding: 3px;
+  font-size: 14px;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
 `;
 
 const FilterIcon = styled.div`
@@ -289,9 +304,10 @@ const FilterIcon = styled.div`
 const TitleLink = styled(Link)`
   margin-right: auto;
   font-size: 24px;
+  color: var(--primary-color);
 
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 20px;
   }
 `;
 
@@ -332,7 +348,7 @@ const LinkWrapper = styled.ul`
     active
       ? css`
           > a:nth-of-type(${active}) {
-            color: var(--text-color);
+            color: var(--primary-color);
           }
         `
       : css``}
@@ -414,7 +430,7 @@ const ModalBody = styled.ul`
     active
       ? css`
           > a:nth-of-type(${active}) {
-            color: var(--text-color);
+            color: var(--primary-color);
           }
         `
       : css``}

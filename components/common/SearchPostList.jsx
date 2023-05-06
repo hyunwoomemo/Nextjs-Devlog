@@ -13,7 +13,7 @@ const SearchPostList = ({ data, keyword, parent }) => {
     setFold(!fold);
   };
   return (
-    <Container>
+    <Container length={data.length}>
       <PostCategory>
         <CategoryText>{parent}</CategoryText>
         <CategoryLength>{data.length}</CategoryLength>
@@ -95,6 +95,13 @@ const Container = styled.div`
   max-width: 1100px;
   margin: 0 auto;
   width: 100%;
+
+  ${({ length }) =>
+    length === 0
+      ? css`
+          display: none;
+        `
+      : css``}
 `;
 
 const PostCategory = styled.div`
@@ -115,8 +122,8 @@ const CategoryLength = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: var(--text-color);
-  color: var(--main-background);
+  background-color: var(--primary-color);
+  color: #fff;
   font-size: 14px;
 `;
 const ActionBtn = styled.div`

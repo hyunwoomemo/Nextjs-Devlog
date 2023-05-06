@@ -49,7 +49,7 @@ const Base = styled.div`
     active
       ? css`
           > a:nth-of-type(${active}) {
-            background-color: tomato;
+            background-color: var(--primary-color);
             color: #fff;
             border-radius: 5px;
           }

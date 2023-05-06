@@ -238,6 +238,13 @@ const Base = styled.div`
     text-align: center;
     padding: 10px;
 
+    > thead {
+      > tr {
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+    }
+
     tr {
     }
     > thead {
@@ -253,6 +260,7 @@ const Base = styled.div`
     td {
       border-bottom: 1px solid var(--text-color);
       vertical-align: middle;
+      padding: 5px;
     }
   }
 

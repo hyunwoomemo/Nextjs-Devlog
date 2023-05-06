@@ -52,10 +52,10 @@ const About = ({ skill, projects, experience, etc }) => {
             <Image src="/profile.png" alt="My Image" width={100} height={100} />
             <Title>
               안녕하세요, 이현우입니다.
+              <Front>Frontend Developer</Front>
               <SubTitle>
                 한번 사는 인생 수동적으로 기계처럼 일하는 것은 인생을 낭비하는 것 같아 열정적으로, 효율적인 방법으로 일하는 것을 좋아합니다.
               </SubTitle>
-              <Front>Frontend Developer</Front>
             </Title>
           </Intro>
           <Container>
@@ -141,10 +141,10 @@ const Title = styled.div`
 const SubTitle = styled.div`
   color: var(--primary-color);
   font-size: 12px;
-  line-height: 14px;
+  line-height: 16px;
   @media (min-width:768px) {
     font-size: 14px;
-  line-height: 16px;
+  line-height: 20px;
   }
 `
 

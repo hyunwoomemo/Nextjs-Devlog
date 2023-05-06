@@ -114,7 +114,7 @@ const Pagination = styled.ul`
 `;
 
 const PaginationItem = styled.li`
-  background-color: ${({ page }) => (page ? "var(--purple-color)" : undefined)};
+  background-color: ${({ page }) => (page ? "var(--primary-color)" : undefined)};
   color: ${({ page }) => (page ? "#fff" : undefined)};
   width: 30px;
   height: 30px;

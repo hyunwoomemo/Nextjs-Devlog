@@ -11,10 +11,9 @@ const Hero = () => {
           <H2>프론트엔드 개발자의 기술 블로그, 다양한 주제의 새로운 지식을 기록합니다.</H2>
           <H3>A technology blog for front-end developers that documents new knowledge on various topics.</H3>
           <Visitor>
-            <img
-              alt="방문자"
-              src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fhyunwoomemo.vercel.app&count_bg=%23555555&title_bg=%0000&icon=&icon_color=%23555555&title=visitor&edge_flat=false"
-            />
+            <a href="https://hits.seeyoufarm.com">
+              <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fhyunwoomemo.vercel.app&count_bg=%23347CC4&title_bg=%23064D93&icon=next-dot-js.svg&icon_color=%23FFFFFF&title=Devlog&edge_flat=false" />
+            </a>
           </Visitor>
         </Text>
         <Lottie>

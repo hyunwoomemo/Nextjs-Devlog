@@ -158,8 +158,8 @@ const FilterCategoryItem = styled.div`
 `;
 const FilterTagItem = styled.div`
   padding: 5px;
-  background-color: var(--primary-color);
-  color: #fff;
+  background-color: var(--text-color);
+  color: var(--main-background);
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -193,16 +193,6 @@ const Post = styled(Link)`
   transition: all 0.3s;
 
   /*   margin: 0 auto; */
-
-  @media (max-width: 768px) {
-    max-width: 400px;
-    width: 100%;
-  }
-
-  @media (max-width: 1200px) {
-    max-width: 450px;
-    width: 100%;
-  }
 `;
 
 const DefaultImg = styled.div`

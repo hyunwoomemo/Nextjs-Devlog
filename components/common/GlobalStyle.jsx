@@ -16,7 +16,7 @@ const defaultStyle = css`
 
   :root {
     body {
-      --primary-color: slategray;
+      --primary-color: #347cc4;
       --text-color: #212529;
       --main-background: #e8e8e8;
       --footer-background: #f2f2f2;
@@ -37,7 +37,7 @@ const defaultStyle = css`
       --post-bgc: #f4f4f4;
     }
     body[data-theme="dark"] {
-      --primary-color: #8498ab;
+      --primary-color: #347cc4;
       --text-color: #ababab;
       --main-background: #1b1b1b;
       --footer-background: #2a2a2a;

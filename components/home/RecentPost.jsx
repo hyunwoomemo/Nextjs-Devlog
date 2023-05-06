@@ -135,11 +135,12 @@ const SlideItem = styled.div``;
 const ReadMore = styled(Link)`
   margin-right: auto;
   margin-left: 10px;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--primary-color);
+  vertical-align: bottom;
 
   @media (max-width: 768px) {
-    font-size: 10px;
+    font-size: 14px;
   }
 `;
 

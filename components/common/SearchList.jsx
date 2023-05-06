@@ -55,7 +55,7 @@ const Result = styled.div`
 `;
 
 const ResultNumber = styled.span`
-  color: ${({ colorEffect }) => (colorEffect ? "purple" : undefined)};
+  color: ${({ colorEffect }) => (colorEffect ? "#347cc4" : undefined)};
   font-size: ${({ colorEffect }) => (colorEffect ? "18px" : undefined)};
   transition: all 0.3s;
 `;
