@@ -101,7 +101,7 @@ const Wrapper = styled.div`
 `;
 
 const SeriesItem = styled(Link)`
-  color: var(--primary-color);
+  color: var(--text-color);
   &:before {
     content: attr(data-order);
   }
@@ -115,7 +115,7 @@ const SeriesItem = styled(Link)`
   ${({ current }) =>
     current
       ? css`
-          color: tomato;
+          color: var(--primary-color);
         `
       : css``}
 `;

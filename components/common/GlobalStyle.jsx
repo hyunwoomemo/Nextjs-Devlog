@@ -46,7 +46,7 @@ const defaultStyle = css`
       --tag-background: #2a2a2a;
       --code-bgc: #2b2b2b;
       --code-text: tomato;
-      --blockquote-bgc: #1a1b17;
+      --blockquote-bgc: #272825;
       --post-text: #e7e7e7;
       --toc-title-bgc: #0a0c0d;
       --toc-bgc: #1d2125;

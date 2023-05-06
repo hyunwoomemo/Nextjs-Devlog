@@ -304,7 +304,7 @@ const FilterIcon = styled.div`
 const TitleLink = styled(Link)`
   margin-right: auto;
   font-size: 24px;
-  color: var(--primary-color);
+  color: var(--text-color);
 
   @media (max-width: 768px) {
     font-size: 20px;

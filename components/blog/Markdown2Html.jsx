@@ -121,7 +121,6 @@ const Base = styled.div`
   // Adjust Quotation Element Style
   blockquote {
     margin: 30px 0;
-    font-weight: 800;
     background-color: var(--blockquote-bgc);
     padding: 1rem;
     border-radius: 5px;
@@ -153,6 +152,7 @@ const Base = styled.div`
   }
 
   strong {
+    font-weight: bolder;
   }
 
   img {
