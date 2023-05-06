@@ -26,8 +26,8 @@ const SeriesItem = ({ series }) => {
                 <Title>{v}</Title>
                 <ItemFooter>
                   <Length>{length}개의 포스트</Length>
-                  <Update>마지막 업데이트: {dayjs(new Date(lastUpdateDate)).format("YYYY-MM-DD")}</Update>
                 </ItemFooter>
+                <Update>마지막 업데이트: {dayjs(new Date(lastUpdateDate)).format("YYYY-MM-DD")}</Update>
               </Contents>
             </Item>
           );
@@ -71,6 +71,7 @@ const Contents = styled.div`
 
 const Title = styled.h1`
   font-size: 16px;
+  padding: 1rem 0;
 
   @media (min-width: 769px) {
     font-size: 18px;
@@ -80,16 +81,22 @@ const Title = styled.h1`
 const ItemFooter = styled.div`
   display: flex;
   gap: 1rem;
-  font-size: 14px;
+  font-size: 12px;
 
   @media (min-width: 769px) {
-    font-size: 16px;
+    font-size: 14px;
   }
   color: gray;
 `;
 
 const Length = styled.div``;
 
-const Update = styled.div``;
+const Update = styled.div`
+  font-size: 12px;
+
+  @media (min-width: 769px) {
+    font-size: 14px;
+  }
+`;
 
 export default SeriesItem;
