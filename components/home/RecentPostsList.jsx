@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 const RecentPostsList = ({ data }) => {
+  console.log(data);
   return (
     <>
       <Base>
@@ -15,10 +16,13 @@ const RecentPostsList = ({ data }) => {
           const tags = post.properties.tags.multi_select;
           const id = post.id;
           const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
+          const projectName = post.properties.롤업?.rollup?.array[0]?.title[0].plain_text;
+          const seriesName = post.properties.시리즈?.select?.name;
 
           return (
             <Post href={`/blog/posts/${id}`} key={post.id}>
               <Wrapper>
+                {projectName || seriesName ? <SubTitle>{projectName || seriesName}</SubTitle> : undefined}
                 <Title>{title}</Title>
                 <Summary>{summary}</Summary>
                 <Category>{category}</Category>
@@ -84,6 +88,10 @@ const Category = styled.p`
   @media (max-width: 768px) {
     font-size: 12px;
   }
+`;
+
+const SubTitle = styled.div`
+  font-size: 12px;
 `;
 
 const Title = styled.h1`

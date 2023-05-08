@@ -271,7 +271,7 @@ const Title = styled.h1`
     position: absolute;
     width: 0;
     height: 3px;
-    background-color: greenyellow;
+    background-color: var(--primary-color);
     border-radius: 5px;
     left: 0;
     bottom: -5px;

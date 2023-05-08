@@ -44,6 +44,7 @@ const Base = styled.div`
   }
 
   display: flex;
+  gap: 2rem;
 
   ${({ active }) =>
     active
