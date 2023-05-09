@@ -101,11 +101,13 @@ const PostList = ({ allPosts }) => {
           const id = post.id;
           const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
           const series = post.properties.시리즈?.select?.name;
+          const projectName = post.properties.롤업?.rollup?.array[0]?.title[0]?.plain_text;
 
           return (
             <Post href={`/blog/posts/${id}`} key={post.id}>
               {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
               <Wrapper>
+                {series || projectName ? <Sub>{series || projectName}</Sub> : undefined}
                 <Title>{title}</Title>
                 <Category>{category}</Category>
                 <Tags>
@@ -248,6 +250,13 @@ const Category = styled.p`
 
 const Series = styled.div`
   line-height: 18px;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
+const Sub = styled.div`
+  font-size: 14px;
   @media (max-width: 768px) {
     font-size: 12px;
   }
