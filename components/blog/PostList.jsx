@@ -3,16 +3,88 @@ import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import slugify from "slugify";
 import PostPagination from "./PostPagination";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { CountFilterData, MakeFilterData } from "@/slices/FilterSlice";
 import Tab from "./Tab";
+import useIntersectionObserver from "@/hook/useIntersectionObserver";
+import { InView, useInView } from "react-intersection-observer";
+import { css } from "@emotion/react";
+
+const PostItem = ({ post }) => {
+  const category = post.properties.category.select?.name;
+  const title = post.properties.Name.title[0].plain_text;
+  const summary = post.properties.summary.rich_text[0]?.plain_text;
+  const imgSrc = post.cover?.file?.url || post.cover?.external.url;
+  const tags = post.properties.tags.multi_select;
+  const id = post.id;
+  const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
+  const series = post.properties.시리즈?.select?.name;
+  const projectName = post.properties.롤업?.rollup?.array[0]?.title[0]?.plain_text;
+  const targetRef = useRef();
+
+  useEffect(() => {
+    const target = targetRef.current;
+    if (!target) return;
+
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.6,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          target.style.opacity = 1;
+          target.style.transitionDuration = `1s`;
+        } else {
+          target.style.opacity = 0;
+        }
+      });
+    }, options);
+
+    observer.observe(target);
+
+    return () => {
+      observer.unobserve(target);
+    };
+  }, [targetRef]);
+
+  return (
+    <Post href={`/blog/posts/${id}`} ref={targetRef}>
+      {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
+      <Wrapper>
+        {series || projectName ? <Sub>{series || projectName}</Sub> : undefined}
+        <Title>{title}</Title>
+        <Category>{category}</Category>
+        <Tags>
+          {tags.map((tag) => {
+            let background;
+            if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
+              background = darkThemeTagColor;
+            } else {
+              background = lightThemeTagColor;
+            }
+            const tagColor = background[tag.color];
+            return (
+              <li key={tag.id} style={{ backgroundColor: tagColor }}>
+                {tag.name}
+              </li>
+            );
+          })}
+        </Tags>
+        <Summary>{summary}</Summary>
+        <CreatedDate>{createdDate}</CreatedDate>
+      </Wrapper>
+    </Post>
+  );
+};
 
 const PostList = ({ allPosts }) => {
-  console.log(allPosts);
   // data 중에서 project 포스트는 제외한다.
   /* const selectData = data.filter((v) => v.properties.project.checkbox !== true); */
   const postsPerPage = 6;
@@ -69,6 +141,7 @@ const PostList = ({ allPosts }) => {
     : categoryFilteredData;
 
   const filterData = tagFilteredData;
+  console.log(filterData);
 
   useEffect(() => {
     dispatch(MakeFilterData(filterData));
@@ -76,6 +149,7 @@ const PostList = ({ allPosts }) => {
   }, [dispatch, filterData, allPostsFilter]);
 
   const numPages = Math.ceil(allPostsFilter.length / postsPerPage);
+
   return (
     <>
       <Tab />
@@ -92,45 +166,8 @@ const PostList = ({ allPosts }) => {
         ) : undefined}
       </FilterDisplay>
       <Base>
-        {filterData?.map((post) => {
-          const category = post.properties.category.select?.name;
-          const title = post.properties.Name.title[0].plain_text;
-          const summary = post.properties.summary.rich_text[0]?.plain_text;
-          const imgSrc = post.cover?.file?.url || post.cover?.external.url;
-          const tags = post.properties.tags.multi_select;
-          const id = post.id;
-          const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
-          const series = post.properties.시리즈?.select?.name;
-          const projectName = post.properties.롤업?.rollup?.array[0]?.title[0]?.plain_text;
-
-          return (
-            <Post href={`/blog/posts/${id}`} key={post.id}>
-              {imgSrc ? <ImageItem src={imgSrc} alt="cover image" width="300" height="250" layout="fixed" objectFit="cover" quality={100} /> : <DefaultImg>Hyunwoomemo&apos;s Devlog</DefaultImg>}
-              <Wrapper>
-                {series || projectName ? <Sub>{series || projectName}</Sub> : undefined}
-                <Title>{title}</Title>
-                <Category>{category}</Category>
-                <Tags>
-                  {tags.map((tag) => {
-                    let background;
-                    if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
-                      background = darkThemeTagColor;
-                    } else {
-                      background = lightThemeTagColor;
-                    }
-                    const tagColor = background[tag.color];
-                    return (
-                      <li key={tag.id} style={{ backgroundColor: tagColor }}>
-                        {tag.name}
-                      </li>
-                    );
-                  })}
-                </Tags>
-                <Summary>{summary}</Summary>
-                <CreatedDate>{createdDate}</CreatedDate>
-              </Wrapper>
-            </Post>
-          );
+        {filterData?.map((post, i) => {
+          return <PostItem key={i} post={post} />;
         })}
       </Base>
       {numPages > 0 ? <PostPagination numPages={numPages} /> : undefined}
@@ -193,8 +230,6 @@ const Post = styled(Link)`
   border-radius: 10px;
   background-color: var(--post-item-background);
   transition: all 0.3s;
-
-  /*   margin: 0 auto; */
 `;
 
 const DefaultImg = styled.div`
