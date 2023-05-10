@@ -12,6 +12,8 @@ import Filter from "../blog/Filter";
 import { useDispatch, useSelector } from "react-redux";
 import { choiceCategory, choiceTag, close, open } from "@/slices/FilterSlice";
 import { GrPowerReset } from "react-icons/gr";
+import { AiFillGithub } from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
 
 const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -265,6 +267,7 @@ const Title = styled.h1`
   align-items: center;
   gap: 1rem;
   font-size: 20px;
+  color: var(--main-text-color);
 
   @media (max-width: 768px) {
     font-size: 18px;
@@ -272,7 +275,7 @@ const Title = styled.h1`
 `;
 
 const PostsLength = styled.span`
-  color: #fff;
+  color: #2e2e2e;
   border-radius: 50%;
   padding: 3px;
   font-size: 14px;
@@ -304,7 +307,7 @@ const FilterIcon = styled.div`
 const TitleLink = styled(Link)`
   margin-right: auto;
   font-size: 24px;
-  color: var(--text-color);
+  color: var(--main-text-color);
 
   @media (max-width: 768px) {
     font-size: 20px;
@@ -434,6 +437,30 @@ const ModalBody = styled.ul`
           }
         `
       : css``}
+`;
+
+const LinkItem = styled(Link)`
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    > g {
+      fill: var(--text-color);
+    }
+
+    > path {
+      fill: var(--text-color);
+    }
+  }
 `;
 
 export default Header;

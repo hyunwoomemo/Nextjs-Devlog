@@ -17,6 +17,7 @@ const defaultStyle = css`
   :root {
     body {
       --primary-color: #347cc4;
+      --main-text-color: #000;
       --text-color: #212529;
       --main-background: #e8e8e8;
       --footer-background: #f2f2f2;
@@ -36,11 +37,14 @@ const defaultStyle = css`
       --border-bottom-color: rgba(0, 0, 0, 0.2);
       --post-bgc: #f4f4f4;
       --about-bgc: #fff;
+      --about-color: #000;
+      --box-bgc: #dddddd;
     }
     body[data-theme="dark"] {
-      --primary-color: #347cc4;
+      --primary-color: #f1c959;
+      --main-text-color: #fff;
       --text-color: #ababab;
-      --main-background: #1b1b1b;
+      --main-background: #232323;
       --footer-background: #2a2a2a;
       --dim-background: rgba(255, 255, 255, 0.2);
       --project-item-background: #272626;
@@ -58,6 +62,8 @@ const defaultStyle = css`
       --border-bottom-color: rgba(255, 255, 255, 0.2);
       --post-bgc: #2b2b2b95;
       --about-bgc: #1b1b1b;
+      --about-color: #fff;
+      --box-bgc: #363636;
     }
   }
 

@@ -67,7 +67,10 @@ const Post = styled(Link)`
   flex-direction: column;
   transition: all 0.3s;
   position: relative;
-  border-radius: 10px;
+  border-radius: 20px;
+  padding: 5px 1rem;
+
+  background-color: var(--box-bgc);
 `;
 
 const Wrapper = styled.div`
@@ -101,6 +104,7 @@ const Title = styled.h1`
   position: relative;
   align-self: flex-start;
   word-break: break-all;
+  color: var(--main-text-color);
 
   @media (min-width: 769px) {
     line-height: 30px;

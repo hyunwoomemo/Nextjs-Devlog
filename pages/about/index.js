@@ -54,7 +54,7 @@ const About = ({ skill, projects, experience, etc }) => {
               안녕하세요, 이현우입니다.
               <Front>Frontend Developer</Front>
               <SubTitle>
-                한번 사는 인생 수동적으로 기계처럼 일하는 것은 인생을 낭비하는 것 같아 열정적으로, 효율적인 방법으로 일하는 것을 좋아합니다.
+                한 번 사는 인생, 내가 좋아하고 관심있는 분야에서 전문가가 되고 싶습니다.
               </SubTitle>
             </Title>
           </Intro>
@@ -113,6 +113,7 @@ const Base = styled.div`
   padding: 2rem;
   position: relative;
   background-color: var(--about-bgc);
+  color: var(--about-color);
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -209,7 +210,6 @@ const SkillItemTitle = styled.div`
 
 const SkillItemContents = styled.li`
 display: flex;
-justify-content: center;
 padding: 5px 0;
 
 @media (min-width:768px) {

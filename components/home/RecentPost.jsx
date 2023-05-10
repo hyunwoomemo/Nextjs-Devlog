@@ -90,6 +90,7 @@ const Header = styled.header`
 
 const Title = styled.h1`
   font-size: 24px;
+  color: var(--main-text-color);
 
   @media (max-width: 768px) {
     font-size: 18px;

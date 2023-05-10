@@ -108,6 +108,7 @@ const Wrapper = styled.div`
 const Title = styled.h1`
   font-size: 20px;
   font-weight: bold;
+  color: var(--main-text-color);
   @media (max-width: 768px) {
     font-size: 12px;
     line-height: 14px;

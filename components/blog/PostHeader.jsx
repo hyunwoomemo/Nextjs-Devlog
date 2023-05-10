@@ -110,6 +110,7 @@ const Series = styled.div``;
 const Title = styled.h1`
   font-size: 32px;
   padding: 2rem 0;
+  color: var(--main-text-color);
 
   @media (max-width: 768px) {
     font-size: 24px;

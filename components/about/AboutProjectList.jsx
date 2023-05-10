@@ -221,7 +221,7 @@ const UrlItem = styled(Link)`
   width: 25px;
 
   &:first-of-type {
-    fill: var(--text-color);
+    fill: var(--main-text-color);
   }
 
   @media (min-width: 769px) {
