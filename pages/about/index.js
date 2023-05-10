@@ -112,6 +112,7 @@ export default About;
 const Base = styled.div`
   padding: 2rem;
   position: relative;
+  background-color: var(--about-bgc);
 
   @media (max-width: 768px) {
     padding: 1rem;

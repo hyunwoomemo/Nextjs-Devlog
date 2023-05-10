@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }) {
     const start = () => {
       setLoading(true);
       document.body.style.overflow = 'hidden';
-      setThemeMode(window.localStorage.getItem('theme'))
+      setThemeMode(window.localStorage.getItem('theme') | 'dark')
     };
     const end = (url) => {
       setLoading(false);

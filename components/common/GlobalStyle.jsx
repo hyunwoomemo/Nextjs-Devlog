@@ -35,6 +35,7 @@ const defaultStyle = css`
       --project-post-bgc: #ffffff;
       --border-bottom-color: rgba(0, 0, 0, 0.2);
       --post-bgc: #f4f4f4;
+      --about-bgc: #fff;
     }
     body[data-theme="dark"] {
       --primary-color: #347cc4;
@@ -56,6 +57,7 @@ const defaultStyle = css`
       --project-post-bgc: #262626;
       --border-bottom-color: rgba(255, 255, 255, 0.2);
       --post-bgc: #2b2b2b95;
+      --about-bgc: #1b1b1b;
     }
   }
 
