@@ -7,7 +7,6 @@ import { NextSeo } from "next-seo";
 import React, { useEffect, useState } from "react";
 
 const index = ({ posts, numPages, allPosts }) => {
-  console.log(allPosts);
   return (
     <>
       <NextSeo
