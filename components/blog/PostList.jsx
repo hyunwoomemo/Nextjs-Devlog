@@ -10,8 +10,6 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { CountFilterData, MakeFilterData } from "@/slices/FilterSlice";
 import Tab from "./Tab";
-import useIntersectionObserver from "@/hook/useIntersectionObserver";
-import { InView, useInView } from "react-intersection-observer";
 import { css } from "@emotion/react";
 
 const PostItem = ({ post }) => {
@@ -33,7 +31,7 @@ const PostItem = ({ post }) => {
     const options = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.6,
+      threshold: 0.2,
     };
 
     const observer = new IntersectionObserver((entries) => {
