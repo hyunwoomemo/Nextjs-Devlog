@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 import Animation from "./Animation";
 import Image from "next/image";
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 
 const Hero = () => {
   const [render, setRender] = useState(false);
@@ -11,6 +11,10 @@ const Hero = () => {
     setRender(true);
 
     return () => setRender(false);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "object") return;
   }, []);
 
   return (
@@ -25,9 +29,7 @@ const Hero = () => {
             </a>
           </Visitor>
         </Text>
-        <Lottie render={render ? "true" : "false"}>
-          <Animation />
-        </Lottie>
+        <canvas id="main_canvas"></canvas>
       </Wrapper>
     </Base>
   );
@@ -58,13 +60,20 @@ const Wrapper = styled.div`
   }
 `;
 
+const bounce = keyframes`
+ 0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+	40% {transform: translateY(-30px);}
+	60% {transform: translateY(-15px);}
+`;
+
 const Text = styled.div`
   margin-right: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 50%;
-  transform: translateX(-110%);
+  transform: translateY(-20%);
+  opacity: 0;
   transition: all 0.3s;
 
   @media (max-width: 768px) {
@@ -75,7 +84,8 @@ const Text = styled.div`
   ${({ render }) =>
     render === "true"
       ? css`
-          transform: translateX(0);
+          transform: translateY(0);
+          opacity: 1;
         `
       : css``}
 `;
