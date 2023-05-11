@@ -12,7 +12,7 @@ const Hero = () => {
           <H3>A technology blog for front-end developers that documents new knowledge on various topics.</H3>
           <Visitor>
             <a href="https://hits.seeyoufarm.com">
-              <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fhyunwoomemo.vercel.app&count_bg=%23347CC4&title_bg=%23064D93&icon=next-dot-js.svg&icon_color=%23FFFFFF&title=Devlog&edge_flat=false" />
+              <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fhyunwoomemo.vercel.app&count_bg=%23f1c959&title_bg=%23c0a047&icon=next-dot-js.svg&icon_color=%23FFFFFF&title=Devlog&edge_flat=false" />
             </a>
           </Visitor>
         </Text>
