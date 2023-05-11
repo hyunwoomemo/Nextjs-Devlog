@@ -34,7 +34,7 @@ const CodeSnipetList = ({ data, keyword }) => {
                   <Tags>
                     {tags?.map((tag) => {
                       let background;
-                      if (typeof window === "object" ? window.localStorage.getItem("theme") === "dark" : undefined) {
+                      if (typeof window === "object" ? window.localStorage.getItem("theme") !== "light" : undefined) {
                         background = darkThemeTagColor;
                       } else {
                         background = lightThemeTagColor;

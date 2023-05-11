@@ -22,8 +22,8 @@ export default function Footer() {
   }, [themeMode]);
 
   const handleTheme = () => {
-    setThemeMode(themeMode === "dark" ? "light" : "dark");
-    window.localStorage.setItem("theme", window.localStorage.getItem("theme") === "dark" ? "light" : "dark");
+    setThemeMode(themeMode === "light" ? "dark" : "light");
+    window.localStorage.setItem("theme", window.localStorage.getItem("theme") === "light" ? "dark" : "light");
   };
 
   const { filterOpen } = useSelector((state) => state.FilterSlice);
@@ -45,8 +45,8 @@ export default function Footer() {
           </Link>
           <Copyright>© 2023. hyunwoo.lee. All rights reserved</Copyright>
         </Left>
-        <ToggleBtn dark={currentTheme === "dark"} onClick={handleTheme}>
-          {currentTheme === "dark" ? <BsMoonFill /> : <BsFillSunFill />}
+        <ToggleBtn dark={currentTheme !== "light"} onClick={handleTheme}>
+          {currentTheme === "light" ? <BsMoonFill /> : <BsFillSunFill />}
         </ToggleBtn>
       </Wrapper>
     </Base>

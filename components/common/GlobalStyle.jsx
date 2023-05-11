@@ -16,31 +16,6 @@ const defaultStyle = css`
 
   :root {
     body {
-      --primary-color: #347cc4;
-      --main-text-color: #000;
-      --text-color: #212529;
-      --main-background: #e8e8e8;
-      --footer-background: #f2f2f2;
-      --dim-background: rgba(0, 0, 0, 0.5);
-      --project-item-background: #ececec;
-      --tag-background: #f2f2f2;
-      --code-bgc: #ececec;
-      --code-text: tomato;
-      --blockquote-bgc: #dddddd;
-      --post-text: #111111;
-      --toc-title-bgc: #cacaca;
-      --toc-bgc: #eeeeee;
-      --categoryItem-bgc: #eee;
-      --purple-color: #7c7cff;
-      --choiceCategory-bgc: #fff;
-      --project-post-bgc: #ffffff;
-      --border-bottom-color: rgba(0, 0, 0, 0.2);
-      --post-bgc: #f4f4f4;
-      --about-bgc: #fff;
-      --about-color: #000;
-      --box-bgc: #dddddd;
-    }
-    body[data-theme="dark"] {
       --primary-color: #f1c959;
       --main-text-color: #fff;
       --text-color: #ababab;
@@ -64,6 +39,31 @@ const defaultStyle = css`
       --about-bgc: #1b1b1b;
       --about-color: #fff;
       --box-bgc: #363636;
+    }
+    body[data-theme="light"] {
+      --primary-color: #347cc4;
+      --main-text-color: #000;
+      --text-color: #212529;
+      --main-background: #f3f3f3;
+      --footer-background: #f2f2f2;
+      --dim-background: rgba(0, 0, 0, 0.5);
+      --project-item-background: #ececec;
+      --tag-background: #f2f2f2;
+      --code-bgc: #ececec;
+      --code-text: tomato;
+      --blockquote-bgc: #dddddd;
+      --post-text: #111111;
+      --toc-title-bgc: #cacaca;
+      --toc-bgc: #eeeeee;
+      --categoryItem-bgc: #eee;
+      --purple-color: #7c7cff;
+      --choiceCategory-bgc: #fff;
+      --project-post-bgc: #ffffff;
+      --border-bottom-color: rgba(0, 0, 0, 0.2);
+      --post-bgc: #f4f4f4;
+      --about-bgc: #fff;
+      --about-color: #000;
+      --box-bgc: #dddddd;
     }
   }
 

@@ -1,13 +1,9 @@
-import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Portal from "../common/Portal";
-import AboutProjectItem from "./AboutProjectItem";
 import { selectId } from "@/slices/AboutSlice";
 
 // 프로젝트 날짜
