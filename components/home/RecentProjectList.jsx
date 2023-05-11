@@ -1,10 +1,13 @@
+import useIntersectionObserver from "@/hook/useIntersectionObserver";
 import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useRef } from "react";
 
 const RecentProjectList = ({ projects }) => {
+  const targetRef = useRef(null);
+  useIntersectionObserver(targetRef);
   return (
     <>
       <Base>
@@ -16,7 +19,7 @@ const RecentProjectList = ({ projects }) => {
           const id = post.id;
 
           return (
-            <Post href={`/projects/${id}`} key={post.id}>
+            <Post href={`/projects/${id}`} key={post.id} ref={targetRef}>
               <Wrapper>
                 <Title>{title}</Title>
                 <Summary>{summary}</Summary>

@@ -1,11 +1,14 @@
+import useIntersectionObserver from "@/hook/useIntersectionObserver";
 import { darkThemeTagColor, lightThemeTagColor } from "@/util/backgroundColor";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import Link from "next/link";
-import React from "react";
+import React, { useRef } from "react";
 
 const RecentPostsList = ({ data }) => {
   console.log(data);
+  const targetRef = useRef(null);
+  useIntersectionObserver(targetRef);
   return (
     <>
       <Base>
@@ -20,7 +23,7 @@ const RecentPostsList = ({ data }) => {
           const seriesName = post.properties.시리즈?.select?.name;
 
           return (
-            <Post href={`/blog/posts/${id}`} key={post.id}>
+            <Post href={`/blog/posts/${id}`} key={post.id} ref={targetRef}>
               <Wrapper>
                 {projectName || seriesName ? <SubTitle>{projectName || seriesName}</SubTitle> : undefined}
                 <Title>{title}</Title>

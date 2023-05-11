@@ -21,6 +21,14 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   const { themeMode, setThemeMode } = useContext(ThemeContext);
   const [currentTheme, setCurrentTheme] = useState("dark");
 
+  const [render, setRender] = useState(false);
+
+  useEffect(() => {
+    setRender(true);
+
+    return () => setRender(false);
+  }, []);
+
   useEffect(() => {
     if (typeof window !== "object") return;
     setCurrentTheme(window.localStorage.getItem("theme"));
@@ -122,7 +130,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   };
 
   return (
-    <Base>
+    <Base render={render ? "true" : "false"}>
       <Wrapper>
         {router.pathname !== "/" ? (
           <BackIcon onClick={() => window.history.back()} filter={filterOpen}>
@@ -210,6 +218,14 @@ const Base = styled.header`
   background-color: var(--main-background);
   z-index: 2;
   transition: transform 0.3s;
+  transform: translateY(-120%);
+
+  ${({ render }) =>
+    render === "true"
+      ? css`
+          transform: translateY(0);
+        `
+      : css``}
 
   @media (max-width: 768px) {
     padding: 1rem;
