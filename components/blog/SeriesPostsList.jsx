@@ -8,42 +8,44 @@ import { CountFilterData, MakeFilterData } from "@/slices/FilterSlice";
 const SeriesPostsList = ({ posts }) => {
   return (
     <Base>
-      {posts?.map((post, i) => {
-        const category = post.properties.category.select?.name;
-        const title = post.properties.Name.title[0].plain_text;
-        const summary = post.properties.summary.rich_text[0]?.plain_text;
-        const imgSrc = post.cover?.file?.url || post.cover?.external.url;
-        const tags = post.properties.tags.multi_select;
-        const id = post.id;
-        const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
-        const series = post.properties.시리즈?.select?.name;
+      {posts
+        ?.filter((v) => v.properties.미완료?.checkbox !== true)
+        ?.map((post, i) => {
+          const category = post.properties.category.select?.name;
+          const title = post.properties.Name.title[0].plain_text;
+          const summary = post.properties.summary.rich_text[0]?.plain_text;
+          const imgSrc = post.cover?.file?.url || post.cover?.external.url;
+          const tags = post.properties.tags.multi_select;
+          const id = post.id;
+          const createdDate = dayjs(new Date(post.created_time)).format("YYYY-MM-DD");
+          const series = post.properties.시리즈?.select?.name;
 
-        return (
-          <Post href={`/blog/posts/${id}`} key={post.id}>
-            <Wrapper>
-              <Title data-order={`${i + 1}. `}>{title}</Title>
-              <Summary>{summary}</Summary>
-              <CreatedDate>{createdDate}</CreatedDate>
-              <Tags>
-                {tags.map((tag) => {
-                  let background;
-                  if (typeof window === "object" ? window.localStorage.getItem("theme") !== "light" : undefined) {
-                    background = darkThemeTagColor;
-                  } else {
-                    background = lightThemeTagColor;
-                  }
-                  const tagColor = background[tag.color];
-                  return (
-                    <li key={tag.id} style={{ backgroundColor: tagColor }}>
-                      {tag.name}
-                    </li>
-                  );
-                })}
-              </Tags>
-            </Wrapper>
-          </Post>
-        );
-      })}
+          return (
+            <Post href={`/blog/posts/${id}`} key={post.id}>
+              <Wrapper>
+                <Title data-order={`${i + 1}. `}>{title}</Title>
+                <Summary>{summary}</Summary>
+                <CreatedDate>{createdDate}</CreatedDate>
+                <Tags>
+                  {tags.map((tag) => {
+                    let background;
+                    if (typeof window === "object" ? window.localStorage.getItem("theme") !== "light" : undefined) {
+                      background = darkThemeTagColor;
+                    } else {
+                      background = lightThemeTagColor;
+                    }
+                    const tagColor = background[tag.color];
+                    return (
+                      <li key={tag.id} style={{ backgroundColor: tagColor }}>
+                        {tag.name}
+                      </li>
+                    );
+                  })}
+                </Tags>
+              </Wrapper>
+            </Post>
+          );
+        })}
     </Base>
   );
 };
@@ -104,6 +106,7 @@ const Title = styled.h1`
   position: relative;
   align-self: flex-start;
   word-break: break-all;
+  color: var(--main-text-color);
 
   @media (min-width: 769px) {
     font-size: 20px;

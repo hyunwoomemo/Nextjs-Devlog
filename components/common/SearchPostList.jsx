@@ -236,6 +236,7 @@ const Title = styled.h1`
   position: relative;
   align-self: flex-start;
   word-break: break-all;
+  color: var(--main-text-color);
 
   @media (min-width: 769px) {
     line-height: 30px;

@@ -4,7 +4,6 @@ import { POST_DATABASE_ID, TOKEN } from "@/config";
 import { NextSeo } from "next-seo";
 
 const index = ({ series }) => {
-  console.log(series);
   return (
     <>
       <NextSeo
@@ -53,7 +52,7 @@ export async function getStaticProps() {
 
   const posts = data.results;
 
-  const series = posts.filter((v) => v.properties.시리즈?.select?.name);
+  const series = posts.filter((v) => v.properties.시리즈?.select?.name && v.properties.미완료.checkbox !== true);
 
   return {
     props: {

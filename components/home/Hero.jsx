@@ -29,7 +29,6 @@ const Hero = () => {
             </a>
           </Visitor>
         </Text>
-        <canvas id="main_canvas"></canvas>
       </Wrapper>
     </Base>
   );
@@ -60,21 +59,16 @@ const Wrapper = styled.div`
   }
 `;
 
-const bounce = keyframes`
- 0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-	40% {transform: translateY(-30px);}
-	60% {transform: translateY(-15px);}
-`;
-
 const Text = styled.div`
   margin-right: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 50%;
+  width: 100%;
   transform: translateY(-20%);
   opacity: 0;
   transition: all 0.3s;
+  position: relative;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -125,7 +119,10 @@ const H3 = styled.h3`
   }
 `;
 
-const Visitor = styled.div``;
+const Visitor = styled.div`
+  position: absolute;
+  top: 120%;
+`;
 
 const MoreBtn = styled.div`
   background-color: rgb(79 70 229);

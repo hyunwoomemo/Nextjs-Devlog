@@ -72,6 +72,7 @@ const Contents = styled.div`
 const Title = styled.h1`
   font-size: 16px;
   padding: 1rem 0;
+  color: var(--main-text-color);
 
   @media (min-width: 769px) {
     font-size: 18px;
