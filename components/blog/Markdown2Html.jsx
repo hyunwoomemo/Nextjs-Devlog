@@ -50,8 +50,8 @@ const Base = styled.div`
 
   p > code {
     padding: 3px 5px;
-    background-color: var(--code-bgc);
-    color: var(--code-text);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
     border-radius: 5px;
   }
 

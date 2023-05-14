@@ -52,9 +52,9 @@ const About = ({ skill, projects, experience, etc }) => {
             <Image src="/profile.png" alt="My Image" width={100} height={100} />
             <Title>
               안녕하세요, 이현우입니다.
-              <Front>Frontend Developer</Front>
+              <Front>Frontend Developer / Problem Solver</Front>
               <SubTitle>
-                한 번 사는 인생, 내가 좋아하고 관심있는 분야에서 전문가가 되고 싶습니다.
+                아름다운 인터페이스와 문제를 정의하고 해결하는 것을 좋아합니다.
               </SubTitle>
             </Title>
           </Intro>
