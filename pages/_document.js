@@ -8,6 +8,9 @@ export default function Document() {
       <Head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/icon-192x192.png"></link>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet"></link>
         <meta name="msapplication-TileColor" content="#000"></meta>
         <meta name='theme-color' content='#000'></meta>
         <meta name="google" content="notranslate"></meta>

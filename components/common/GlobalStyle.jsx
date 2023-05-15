@@ -211,7 +211,7 @@ const defaultStyle = css`
   }
 
   body {
-    font-family: "Arial Narrow", Arial, sans-serif;
+    font-family: "Jua", sans-serif;
     background-color: var(--main-background);
     -webkit-font-smoothing: antialiased;
     overflow-x: auto;
