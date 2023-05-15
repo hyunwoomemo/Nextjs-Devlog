@@ -7,7 +7,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/icon-192x192.png"></link>
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/icon-512x512.png"></link>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet"></link>
