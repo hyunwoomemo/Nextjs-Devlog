@@ -49,7 +49,7 @@ const Base = styled.div`
   }
 
   p > code {
-    padding: 3px 5px;
+    padding: 3px 8px;
     border: 1px solid var(--primary-color);
     color: var(--primary-color);
     border-radius: 5px;
