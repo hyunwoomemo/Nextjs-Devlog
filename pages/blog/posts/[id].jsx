@@ -2,7 +2,7 @@ import Layout from "@/components/common/Layout";
 import Markdown2Html from "@/components/blog/Markdown2Html";
 import { POST_DATABASE_ID, TOKEN } from "@/config";
 import { Client } from "@notionhq/client/build/src";
-import { NotionToMarkdown } from "notion-to-md/build";
+import { NotionToMarkdown } from "notion-to-md";
 import React, { useEffect, useState } from "react";
 import { unified } from "unified";
 import markdown from "remark-parse";
@@ -147,6 +147,9 @@ export async function getStaticProps({ params }) {
   const notion = new Client({
     auth: TOKEN,
     notionVersion: "2022-06-28",
+    config: {
+      separateChildPage: true, // default: false
+    },
   });
 
   const n2m = new NotionToMarkdown({ notionClient: notion });
