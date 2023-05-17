@@ -6,7 +6,6 @@ import Link from "next/link";
 import React, { useRef } from "react";
 
 const RecentPostsList = ({ data }) => {
-  console.log(data);
   const targetRef = useRef(null);
   useIntersectionObserver(targetRef);
   return (

@@ -161,9 +161,6 @@ export async function getStaticProps() {
       "Content-Type": "application/json",
       Authorization: `Bearer ${TOKEN}`,
     },
-    body: JSON.stringify({
-      page_size: 100,
-    }),
   };
 
   const snipetRes = await fetch(`https://api.notion.com/v1/databases/${CODESNIPET_DATABASE_ID}/query`, options);

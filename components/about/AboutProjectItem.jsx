@@ -13,11 +13,8 @@ const getImg = (data) => {
 
 const AboutProjectItem = ({ cancel, data }) => {
   const { projectId } = useSelector((state) => state.AboutSlice);
-  console.log(projectId);
   const selectedData = data.results.filter((v) => v.id === projectId);
   const imgLength = selectedData[0].properties.serviceImg.files.length;
-  console.log(selectedData);
-  console.log(selectedData[0].properties.serviceImg.files);
 
   useEffect(() => {
     if (typeof window !== "object") return;
@@ -37,7 +34,6 @@ const AboutProjectItem = ({ cancel, data }) => {
     if (typeof window !== "object") return;
 
     setWrapperWidth(document.querySelector("#wrapper").clientWidth);
-    console.log(wrapperWidth);
   });
 
   const handleLeft = () => {

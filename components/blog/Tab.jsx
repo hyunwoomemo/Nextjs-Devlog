@@ -8,7 +8,6 @@ const Tab = () => {
   const router = useRouter();
 
   const [active, setActive] = useState(1);
-  console.log(router.pathname.slice(router.pathname.lastIndexOf("/") + 1, router.pathname.length));
   const keyword = router.pathname.slice(router.pathname.lastIndexOf("/") + 1, router.pathname.length);
 
   useEffect(() => {

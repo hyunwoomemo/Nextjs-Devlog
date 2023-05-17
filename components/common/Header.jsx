@@ -6,16 +6,12 @@ import Link from "next/link";
 import ThemeContext from "@/context/ThemeContext";
 import { useRouter } from "next/router";
 import BackArrow from "@/public/back-arrow.svg";
-import ChoiceCategory from "../blog/ChoiceCategory";
 import { BsMoonFill, BsFillSunFill } from "react-icons/bs";
 import Filter from "../blog/Filter";
 import { useDispatch, useSelector } from "react-redux";
 import { choiceCategory, choiceTag, close, open } from "@/slices/FilterSlice";
-import { GrPowerReset } from "react-icons/gr";
-import { AiFillGithub } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
 
-const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
+const Header = ({ data, headerTitle, allPosts }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const { themeMode, setThemeMode } = useContext(ThemeContext);
@@ -36,8 +32,6 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   }, [themeMode]);
 
   const title = data?.filter((v) => v.id === router.query.id)[0]?.properties.Name.title[0].plain_text;
-
-  const categoryLength = data?.filter((v) => v.properties.category.select.name === choiceCt).length;
 
   const [scrollTop, setScrollTop] = useState(0);
 
@@ -65,8 +59,6 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   const handleClose = () => {
     setIsOpen(false);
   };
-
-  console.log(scrollTop);
 
   // 활성화 탭 스타일 적용
 
@@ -101,7 +93,7 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
   };
 
   // 포스트 필터 적용 버튼
-  const { selectedCategory, selectedTag, filterData, filterCount } = useSelector((state) => state.FilterSlice);
+  const { selectedCategory, selectedTag, filterCount } = useSelector((state) => state.FilterSlice);
   const handleFilterSave = () => {
     let query = {};
 
@@ -159,8 +151,6 @@ const Header = ({ data, choiceCt, headerTitle, allPosts }) => {
               headerTitle
             )}
           </Title>
-        ) : choiceCt ? (
-          <CategoryLink href="/blog/posts/categories">{`${choiceCt} (${categoryLength})`}</CategoryLink>
         ) : (
           <TitleLink href="/">Hyunwoomemo</TitleLink>
         )}

@@ -6,7 +6,6 @@ import React, { useState } from "react";
 
 const SeriesInPosts = ({ seriesPosts, seriesName }) => {
   const sortPosts = seriesPosts.sort((a, b) => new Date(a.created_time) - new Date(b.created_time));
-  console.log(sortPosts);
   const [show, setShow] = useState(false);
   const router = useRouter();
 

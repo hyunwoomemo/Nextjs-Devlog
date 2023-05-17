@@ -30,7 +30,6 @@ export const PdfExport = async (id) => {
 };
 
 function DownloadButton({ content }) {
-  console.log(content);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDownload = async () => {

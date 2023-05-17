@@ -6,16 +6,15 @@ import LoadingContext from "@/context/LoadingContext";
 import SearchContext from "@/context/SearchContext";
 import { useRouter } from "next/router";
 
-const Layout = ({ children, data, choiceCt, posts, headerTitle, allPosts }) => {
+const Layout = ({ children, data, headerTitle, allPosts }) => {
   const { loading } = useContext(LoadingContext);
   const { search } = useContext(SearchContext);
 
   const router = useRouter();
-  console.log(router.query);
 
   return (
     <Base loading={loading.toString()} search={search}>
-      <Header data={data} allPosts={allPosts} choiceCt={choiceCt} posts={posts} headerTitle={headerTitle} />
+      <Header data={data} allPosts={allPosts} headerTitle={headerTitle} />
       <Children>{children}</Children>
       <Footer />
     </Base>

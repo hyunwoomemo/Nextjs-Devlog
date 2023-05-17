@@ -16,7 +16,6 @@ export default function useIntersectionObserver(targetRef) {
         if (entry.isIntersecting) {
           target.style.opacity = 1;
           target.style.transitionDuration = `1s`;
-          console.log(entry.isIntersecting)
         } else {
           target.style.opacity = 0;
         }

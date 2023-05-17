@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 
 const AboutEtc = ({ data }) => {
-  console.log(data);
   return (
     <Base>
       <EtcWrapper>

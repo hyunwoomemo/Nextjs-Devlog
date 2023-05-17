@@ -195,12 +195,6 @@ const ChoicedFilter = styled.div`
         `}
 `;
 
-const ChoicedItem = styled.div`
-  padding: 6px 10px;
-  background-color: #c0e25a;
-  border-radius: 5px;
-`;
-
 const FilterSaveBtn = styled.div`
   display: flex;
   gap: 10px;
@@ -218,3 +212,36 @@ const FilterSaveBtn = styled.div`
 `;
 
 export default Filter;
+
+export async function getStaticProps() {
+  const options = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${TOKEN}`,
+    },
+    body: JSON.stringify({
+      page_size: 10,
+    }),
+  };
+
+  const snipetRes = await fetch(`https://api.notion.com/v1/databases/${CODESNIPET_DATABASE_ID}/query`, options);
+  const postsRes = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
+  const projectRes = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
+
+  const snipetData = await snipetRes.json();
+  const postsData = await postsRes.json();
+  const projectData = await projectRes.json();
+  const allPosts = [...snipetData.results, ...postsData.results, ...projectData.results];
+
+  // posts에서 project post 제외
+  const posts = postsData.results.filter((v) => v.properties.미완료.checkbox !== true);
+
+  const projects = projectData.results;
+
+  return {
+    props: { allPosts, posts, projects },
+  };
+}

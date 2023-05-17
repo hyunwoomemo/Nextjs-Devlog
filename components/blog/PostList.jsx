@@ -139,7 +139,6 @@ const PostList = ({ allPosts }) => {
     : categoryFilteredData;
 
   const filterData = tagFilteredData;
-  console.log(filterData);
 
   useEffect(() => {
     dispatch(MakeFilterData(filterData));

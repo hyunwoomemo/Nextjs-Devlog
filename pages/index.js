@@ -10,10 +10,8 @@ import { css } from '@emotion/react'
 import { NextSeo } from 'next-seo'
 
 
-export default function Home({ allPosts, posts, projects }) {
-  const slicePosts = posts.slice(0, 3)
+export default function Home({ posts, projects }) {
   const { search } = useContext(SearchContext);
-
 
   return (
     <>
@@ -35,9 +33,9 @@ export default function Home({ allPosts, posts, projects }) {
         }}
       />
       <Base search={search}>
-        <Layout allPosts={allPosts} posts={posts}>
+        <Layout>
           <Hero />
-          <RecentPost data={slicePosts} projects={projects} />
+          <RecentPost data={posts} projects={projects} />
         </Layout>
       </Base>
     </>
@@ -60,27 +58,23 @@ export async function getStaticProps() {
       "Content-Type": "application/json",
       Authorization: `Bearer ${TOKEN}`,
     },
-    body: JSON.stringify({
-      page_size: 100,
-    }),
   };
 
-  const snipetRes = await fetch(`https://api.notion.com/v1/databases/${CODESNIPET_DATABASE_ID}/query`, options);
+
   const postsRes = await fetch(`https://api.notion.com/v1/databases/${POST_DATABASE_ID}/query`, options);
   const projectRes = await fetch(`https://api.notion.com/v1/databases/${PROJECT_DATABASE_ID}/query`, options);
 
-  const snipetData = await snipetRes.json();
+
   const postsData = await postsRes.json();
   const projectData = await projectRes.json();
-  const allPosts = [...snipetData.results, ...postsData.results, ...projectData.results];
 
   // posts에서 project post 제외
-  const posts = postsData.results.filter((v) => v.properties.미완료.checkbox !== true);
+  const posts = postsData.results.filter((v) => v.properties.미완료.checkbox !== true).slice(0, 3);
 
   const projects = projectData.results;
 
   return {
-    props: { allPosts, posts, projects },
+    props: { posts, projects },
   };
 }
 

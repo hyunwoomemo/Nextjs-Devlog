@@ -65,7 +65,6 @@ const getUrl = (github, url) => {
 };
 
 const AboutProjectList = ({ data }) => {
-  console.log(data);
   const dispatch = useDispatch();
   const filterData = data.results.filter((v) => v.properties.상태.status.name === "Done");
 

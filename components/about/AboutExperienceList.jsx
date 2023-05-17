@@ -24,7 +24,6 @@ const getKeywords = (data) => {
 };
 
 const AboutExperienceList = ({ data }) => {
-  console.log(data);
   return (
     <Base>
       <ExperienceWrapper>

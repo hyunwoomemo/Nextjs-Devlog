@@ -21,7 +21,6 @@ const TagList = ({ posts }) => {
     }
   };
 
-  console.log(selectedTag);
   const tagData = selectedCategory
     ? posts
         ?.filter((post) => post.properties.category.select.name === selectedCategory)

@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 const ProjectListHeader = () => {
   const { displayStatus } = useSelector((state) => state.ProjectSlice);
   const dispatch = useDispatch();
-  console.log(displayStatus);
 
   const [active, setActive] = useState(1);
 
