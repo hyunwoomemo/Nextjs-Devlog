@@ -226,8 +226,6 @@ export const SSRGlobalStyle = createGlobalStyle`
       box-sizing: border-box;
       outline: none;
     }
-
-    opacity: 0;
   }
 
   * {
