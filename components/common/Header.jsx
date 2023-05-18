@@ -445,28 +445,4 @@ const ModalBody = styled.ul`
       : css``}
 `;
 
-const LinkItem = styled(Link)`
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-
-  @media (max-width: 768px) {
-    width: 20px;
-    height: 20px;
-  }
-
-  svg {
-    width: 100%;
-    height: 100%;
-    > g {
-      fill: var(--text-color);
-    }
-
-    > path {
-      fill: var(--text-color);
-    }
-  }
-`;
-
 export default Header;

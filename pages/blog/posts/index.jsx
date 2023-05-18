@@ -5,7 +5,6 @@ import { POST_DATABASE_ID, TOKEN } from "@/config";
 import styled from "@emotion/styled";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useRef, useState } from "react";
-import useIntersectionObserver from "@/hook/useIntersectionObserver";
 
 const index = ({ posts, numPages, allPosts }) => {
   return (

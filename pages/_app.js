@@ -1,9 +1,9 @@
 import GlobalStyle from '@/components/common/GlobalStyle'
+import { SSRGlobalStyle } from '@/styles/global.style.js'
 import Loading from '@/components/common/Loading'
 import LoadingContext from '@/context/LoadingContext'
 import SearchContext from '@/context/SearchContext'
 import ThemeContext from '@/context/ThemeContext'
-import '@/styles/globals.css'
 import '@/styles/modal.scss'
 import { CacheProvider } from '@emotion/react'
 import { cache } from '@emotion/css'
@@ -58,6 +58,7 @@ export default function App({ Component, pageProps }) {
         <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
           <LoadingContext.Provider value={{ loading }}>
             <SearchContext.Provider value={{ search, setSearch }}>
+              <SSRGlobalStyle />
               <GlobalStyle />
               <Component {...pageProps} />
               {loading ? <Loading /> : undefined}
