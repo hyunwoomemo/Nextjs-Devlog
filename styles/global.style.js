@@ -13,6 +13,16 @@ export const SSRGlobalStyle = createGlobalStyle`
    License: none (public domain)
 */
 
+@keyframes boxFade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
   :root {
     body {
       --primary-color: #f1c959;
@@ -207,6 +217,8 @@ export const SSRGlobalStyle = createGlobalStyle`
       width: 0;
       height: 0;
     }
+
+    animation: boxFade 2s;
   }
 
   body {
