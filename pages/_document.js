@@ -60,6 +60,7 @@ export default class MyDocument extends Document {
 
         </Head>
         <body>
+          <div id="portal"></div>
           <Main />
           <NextScript />
         </body>

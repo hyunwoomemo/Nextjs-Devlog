@@ -60,8 +60,8 @@ const Modal = ({ children, onClose, isOpen, selector = "#portal", position }) =>
   }, []);
 
   const Portal = (props) => {
-    if (typeof window === "object" && isCSR) {
-      return createPortal(props.children, document?.getElementById("portal"));
+    if (typeof window !== "undefined" && isCSR) {
+      return createPortal(props?.children, document?.getElementById("portal"));
     }
   };
 

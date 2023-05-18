@@ -247,6 +247,8 @@ const BackIcon = styled.div`
         `}
 
   > svg {
+    width: 20px;
+    height: 20px;
     path {
       fill: var(--text-color);
     }
