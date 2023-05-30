@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const ProjectList = ({ data }) => {
   const { displayStatus } = useSelector((state) => state.ProjectSlice);
-  const filterData = displayStatus !== "all" ? data.results.filter((v) => v.properties.상태.status.name?.toLowerCase() === displayStatus?.toLowerCase()) : data.results;
+  const filterData = displayStatus !== "all" ? data.filter((v) => v.properties.상태.status.name?.toLowerCase() === displayStatus?.toLowerCase()) : data;
   const calculatedPeriod = (start, end) => {
     const startDateStringArray = start.split("-");
     const endDateStringArray = end.split("-");

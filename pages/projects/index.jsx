@@ -5,7 +5,8 @@ import { TOKEN, PROJECT_DATABASE_ID, POST_DATABASE_ID } from "@/config";
 import styled from "@emotion/styled";
 import { NextSeo } from "next-seo";
 
-const index = ({ projects }) => {
+const index = ({ activeProjects }) => {
+  console.log(activeProjects);
   return (
     <>
       <NextSeo
@@ -27,7 +28,7 @@ const index = ({ projects }) => {
       />
       <Layout headerTitle="Projects">
         <ProjectListHeader />
-        <ProjectList data={projects} />
+        <ProjectList data={activeProjects} />
       </Layout>
     </>
   );
@@ -63,7 +64,9 @@ export async function getStaticProps() {
 
   const projects = await res.json();
 
+  const activeProjects = projects.results.filter((v) => v.properties.상태.status.name !== "Not started");
+
   return {
-    props: { projects },
+    props: { activeProjects },
   };
 }

@@ -13,7 +13,7 @@ const RecentPostsList = ({ data }) => {
       <Base>
         {data?.map((post) => {
           const category = post.properties.category.select?.name;
-          const title = post.properties.Name.title[0].plain_text;
+          const title = post.properties.Name.title[0]?.plain_text;
           const summary = post.properties.summary.rich_text[0]?.plain_text;
           const tags = post.properties.tags.multi_select;
           const id = post.id;

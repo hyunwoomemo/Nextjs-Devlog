@@ -15,9 +15,6 @@ const ProjectListHeader = () => {
       text: "all",
     },
     {
-      text: "not started",
-    },
-    {
       text: "in progress",
     },
     {
