@@ -10,7 +10,7 @@ import { css } from '@emotion/react'
 import { NextSeo } from 'next-seo'
 
 
-export default function Home({ posts, projects }) {
+export default function Home({ posts, activeProjects }) {
   const { search } = useContext(SearchContext);
 
   return (
@@ -35,7 +35,7 @@ export default function Home({ posts, projects }) {
       <Base search={search}>
         <Layout>
           <Hero />
-          <RecentPost data={posts} projects={projects} />
+          <RecentPost data={posts} projects={activeProjects} />
         </Layout>
       </Base>
     </>
@@ -71,10 +71,11 @@ export async function getStaticProps() {
   // posts에서 project post 제외
   const posts = postsData.results.filter((v) => v.properties.미완료.checkbox !== true).slice(0, 3);
 
-  const projects = projectData.results;
+  const activeProjects = projectData.results.filter((v) => v.properties.상태.status.name !== "Not started");
+
 
   return {
-    props: { posts, projects },
+    props: { posts, activeProjects },
   };
 }
 

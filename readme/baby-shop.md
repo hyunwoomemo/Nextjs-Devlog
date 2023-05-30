@@ -32,7 +32,7 @@
 
 ![image](https://github.com/hyunwoomemo/baby-ecommerce/assets/105469077/b6a960c6-ecab-4297-99b2-5cbab2b357cd)
 
-### 어드민-상품 리스트
+### 어드민-상품 등록 페이지
 
 ![image](https://github.com/hyunwoomemo/baby-ecommerce/assets/105469077/433f37cf-c654-410b-b47c-5ed6b5ac9fed)
 
